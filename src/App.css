@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primaryColor: #58b852;
+  --mainWhite: #ffffff;
+  --offWhite: #f7f7f7;
+  --mainBlack: #222;
+  --mainGrey: #ececec;
+  --mainText: ##707070;
+  --mainTransition: all 0.3s linear;
+  --mainSpacing: 3px;
+  --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
+  --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  /* color: #545871; */
+  background: var(--mainWhite);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#navItems{
+font-weight: Bold ;
+font-size : 20px ;
+font-family : Trebuchet MS;
+letter-spacing: 0px;
+color: #707070;
+opacity: 1;
+}
+Nav.Link {
+  color: var(--mainText);
+  text-decoration: none;
+}
+
+/**HERO***/
+.defaultHero {
+  background: url("./images/landing/bg@2x.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 5%;
+  width: 100%;
+  height: 700px;
+}
+.banner {
+  display: inline-block;
+  background: var(--mainWhite);
+  color: Trebuchet MS;
+  padding: 3rem 3rem;
+
+  text-align: center;
+  align-items: center;
+}
+.banner h1 {
+  font-size: 2.5rem;
+}
+.bannerBtn {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 1.25rem;
+}
+.btnBanner {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 576px) {
+  .banner {
+    padding: 2rem 3rem;
+  }
+  .banner h1 {
+    font-size: 3rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .banner {
+    padding: 2rem 6rem;
+  }
+  .banner h1 {
+    font-size: 4rem;
+  }
+}
+
+.cardTitle > h4 {
+  text-align: center;
+  font: Bold 60px/56px Henriette;
+  letter-spacing: 0px;
+  color: #545871;
+  opacity: 1;
+}
+.cardTitle > div p {
+  text-align: center;
+  font: Light 32px/43px Basic Sans;
+  letter-spacing: 0px;
+  color: #545871;
+  opacity: 1;
+}
+
+/*****Why SabiGift******/
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  opacity: 0.85;
+ 
+}
+.why {
+  max-width:500px;
+  margin: auto;
+  text-align: left;
+  vertical-align: middle;
+  letter-spacing: 1px;
+  font-size: 20px;
+  font-weight: light;
+  font-family: Basic Sans;
+  color: #545871;
+  opacity: 1;
+  padding: 45px;
+  align-items: center;
+}
+
+/*****HOW IT WORKS SECTION***********/
+#active{
+  background-color:#58B852
+}
+.stepIcon{
+  align-self: center;
+  padding: 10px;
+
+}
+.stepOutline {
+  margin-top: 15px;
+  background: #ffffff;
+  border: 1px solid #e6dbda;
+  padding-left: 10px;
+  padding-right: 10px;
+  opacity: 1;
+  max-height: 150px;
+  cursor: pointer;
+  /* max-width: 459px; */
+}
+#stepTitle {
+  align-self: center;
+  border-right: 1px solid #e6dbda;
+  color: #545871;
+}
+.stepTag{
+  font-weight: bold;
+  align-self: center;
+  padding: 10px;
+}
+
+@media screen and (min-width: 576px) {
+  .stepOutline {
+  
+    display: block;
+  }
+  
+}
+@media screen and (min-width: 992px) {
+  .stepOutline {
+    display: block;
+  } .stepOutline {
+    /* max-width: 459px; */
+    padding: 2rem 3rem;
+    display: block;
+  }
+}

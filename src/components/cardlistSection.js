@@ -13,11 +13,11 @@ function CardlistSection() {
     })
 
     return (
-        <section className='mt-5 mb-5' data-aos="fade-left">
+        <section className='mt-5 mb-5' >
              <div className=' container cardTitle'>
                 <h4>A whole new way to gift,</h4>
                 <h4>when it matters</h4>
-                <div assName='mt-5'>
+                <div assName='mt-5' data-aos="fade-left">
                     <p> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum</p>
                     <p> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem </p>
                     <p> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>

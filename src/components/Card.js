@@ -4,7 +4,7 @@ const Card = ({image,title,content}) => {
     return ( <div>
             <div class="card text-center">
                 <img class="card-img-top rounded center" src={image}style={{alignSelf:'center', width:'50px'}} alt="Card cap"/>
-                <div class="card-body">
+                <div class="card-body" style={{minHeight:'50px'}}>
                 <h5 class="card-title">{title}</h5>
                 <p class="card-text">{content}</p>
                 </div>

@@ -10,7 +10,7 @@
   --offWhite: #f7f7f7;
   --mainBlack: #222;
   --mainGrey: #ececec;
-  --mainText: ##707070;
+  --mainText: #707070;
   --mainTransition: all 0.3s linear;
   --mainSpacing: 3px;
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
@@ -41,18 +41,19 @@ Nav.Link {
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 5%;
+  /* top: 5%; */
   width: 100%;
-  height: 700px;
+  height: 600px;
 }
 .banner {
-  display: inline-block;
+  display: inline;
+  border: 1px solid red;
   background: var(--mainWhite);
   color: Trebuchet MS;
   padding: 3rem 3rem;
 
   text-align: center;
-  align-items: center;
+  /* align-items: center; */
 }
 .banner h1 {
   font-size: 2.5rem;
@@ -123,48 +124,166 @@ Nav.Link {
 
 /*****HOW IT WORKS SECTION***********/
 #active{
-  background-color:#58B852
+  background-color:var(--primaryColor)
 }
 .stepIcon{
-  align-self: center;
   padding: 10px;
 
 }
 .stepOutline {
+  flex-direction: row;
   margin-top: 15px;
   background: #ffffff;
   border: 1px solid #e6dbda;
-  padding-left: 10px;
-  padding-right: 10px;
+   padding: 10px; 
   opacity: 1;
   max-height: 150px;
   cursor: pointer;
-  /* max-width: 459px; */
 }
 #stepTitle {
-  align-self: center;
   border-right: 1px solid #e6dbda;
+  text-align: justify;
+  padding: 1rem;
   color: #545871;
+  font-size: large;
+}
+#title{
+  font-size: large;
+  font-weight: 500;
 }
 .stepTag{
   font-weight: bold;
-  align-self: center;
-  padding: 10px;
+ font-size: large;
 }
 
-@media screen and (min-width: 576px) {
+ /* @media screen and (max-width: 576px) {
   .stepOutline {
-  
-    display: block;
+    font-size: 1 rem;
+    flex-direction: column;
   }
-  
-}
+   */
+/* }  */
+/*
 @media screen and (min-width: 992px) {
   .stepOutline {
     display: block;
   } .stepOutline {
     /* max-width: 459px; */
-    padding: 2rem 3rem;
-    display: block;
+    /* padding: 2rem 3rem; */
+    /* display: block;
   }
+}  */
+
+
+/*****FIND REGISTRY*********/
+.leftside {
+  padding: 30px;
+  margin-top: 0px !important;
+  opacity: 1;
+  width: 576px;
+  text-align: center;
+  height: 901px;
+  justify-items: center;
+  height: 100vh;
+  
+
+}
+.ant-layout-sider{
+  background-color:var(--primaryColor) ;
+  justify-items: center;
+  margin-top: 0px !important;
+  
+}
+/* .ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
+  background: var(--offWhite);
+} */
+.homeicon {
+ width: 70px;
+ justify-content: center;
+ margin-bottom: 30px;
+}
+
+
+
+.rightSide {
+  background-color: #E2F3E1;
+  height: 80vh;
+  border-left-width: 43px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 1;
+  padding-left: 45px !important;
+  color: #888888 !important;
+  margin-top: 0px !important;
+}
+
+.event {
+  display: flex;
+  font-size: 1.7rem;
+  margin-top: 10px;
+  margin-left: 15px;
+}
+.eventType{
+  display: flex;
+  flex-direction: row;
+  width: 608px;
+  height: 151px;
+  background: #F7F7F7 !important;
+  
+  
+}
+.eventItem{
+  background: #F7F7F7;
+  opacity: 1;
+  padding: 20px;
+width: 152px;
+height: 151px;
+box-shadow: 0px 2px 5px #0000000F;
+border: 1px solid #DDDDDD;
+border-radius: 5px 0px 0px 4px;
+opacity: 1;
+}
+
+.btnBack{
+  margin-top: 72px;
+}
+
+/****SignUp****/
+.leftSignUp {
+width: 608px;
+height: 625px;
+background: url('./images/landing/Love-heart.png') center/cover no-repeat;
+background-color: rgb(114, 10, 10);
+opacity: 1;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 1;
+  color: #888888 !important;
+}
+.ant-layout-content{
+  font: Bold Arial;
+  letter-spacing: 0px;
+  color: #888888;
+  background: #E2F3E1 no-repeat padding-box;
+opacity: 1;
+text-align: justify;
+margin-top: 0px !important;
+}
+ 
+
+.rightSignUp{
+width: 688px;
+height: 82px;
+letter-spacing: var(--mainSpacing);
+text-align: left;
+opacity: 1;
+}
+ .ant-steps-item-title, .ant-steps-item-description {
+  color: white !important;
+}
+
+
+.ant-layout.ant-layout-has-sider > .ant-layout, .ant-layout.ant-layout-has-sider > .ant-layout-content {
+  padding-left: 80px;
+  padding-top: 55px;
 }

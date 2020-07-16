@@ -16,17 +16,52 @@
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
 }
-
+ 
 body {
   background: var(--mainWhite);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: trebuchet-ms, Tahoma, sans-serif !important;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: bold;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: henriette, sans-serif;
+  color: #888888;
+  opacity: 1 !important;
+}
+h1 {
+  font-size: 3em;
+  line-height: 1;
+  margin-bottom: 0.5em;
+}
+h2 {
+  font-size: 2em;
+  margin-bottom: 0.75em;
+}
+h3 {
+  font-size: 1.5em;
+  line-height: 1;
+  margin-bottom: 1em;
+}
+h4 {
+  font-size: 1.2em;
+  line-height: 1.25;
+  margin-bottom: 1.25em;
+}
+h5 {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 1.5em;
+}
+h6 {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 1.5em;
 }
 #navItems{
-font-weight: Bold ;
-font-size : 20px ;
-font-family : Trebuchet MS;
-letter-spacing: 0px;
 color: #707070;
+font-weight: bolder !important;
 opacity: 1;
 }
 Nav.Link {
@@ -83,7 +118,13 @@ Nav.Link {
     font-size: 4rem;
   }
 }
-
+.card-row{
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+#myCard > .card{
+  min-height: 350px !important;
+}
 .cardTitle > h4 {
   text-align: center;
   font: Bold 60px/56px Henriette;
@@ -101,20 +142,17 @@ Nav.Link {
 
 /*****Why SabiGift******/
 .img-fluid {
-  max-width: 100%;
+  /* max-width: 100%; */
   height: auto;
   opacity: 0.85;
  
 }
 .why {
-  max-width:500px;
+  max-width:600px;
   margin: auto;
+  margin-top: 25px;
   text-align: left;
-  vertical-align: middle;
-  letter-spacing: 1px;
-  font-size: 20px;
-  font-weight: light;
-  font-family: Basic Sans;
+  /* font-weight: light; */
   color: #545871;
   opacity: 1;
   padding: 45px;
@@ -155,13 +193,12 @@ Nav.Link {
  font-size: large;
 }
 
- /* @media screen and (max-width: 576px) {
+  /* @media screen and (man-width: 576px) {
   .stepOutline {
     font-size: 1 rem;
     flex-direction: column;
-  }
-   */
-/* }  */
+  }  
+}  
 /*
 @media screen and (min-width: 992px) {
   .stepOutline {
@@ -177,21 +214,14 @@ Nav.Link {
 /*****FIND REGISTRY*********/
 .leftside {
   padding: 30px;
-  margin-top: 0px !important;
   opacity: 1;
-  width: 576px;
   text-align: center;
   justify-items: center;
   height: 100vh;
-  
+  background-color:var(--primaryColor) ;
 
 }
-.ant-layout-sider{
-  background-color:var(--primaryColor) ;
-  justify-items: center;
-  margin-top: 0px !important;
-  
-}
+
 /* .ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
   background: var(--offWhite);
 } */
@@ -201,18 +231,24 @@ Nav.Link {
  margin-bottom: 30px;
 }
 
-
+rightside{
+  background-color: #ffffff;
+  padding: 25px;
+  margin: auto;
+  text-align: center;
+  opacity: 1;
+  color: #888888 ;
+}
 
 .rightSide {
-  background-color: #E2F3E1;
-  height: 100vh;
-  border-left-width: 43px;
+  background-color: #EEEEEE;
+  padding: 45px;
+  /* height: 100vh; */
+  /* border-left-width: 43px; */
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
   opacity: 1;
-  padding-left: 45px !important;
-  color: #888888 !important;
-  margin-top: 0px !important;
+  color: #888888 ;
 }
 
 .event {
@@ -224,14 +260,15 @@ Nav.Link {
 .eventType{
   display: flex;
   flex-direction: row;
+  margin: auto;
   width: 608px;
   height: 151px;
-  background: #F7F7F7 !important;
+  background: #F7F7F7 ;
   
   
 }
 .eventItem{
-  background: #F7F7F7;
+ 
   opacity: 1;
   padding: 20px;
 width: 152px;
@@ -243,56 +280,35 @@ opacity: 1;
 }
 
 .btnBack{
-  margin-top: 72px;
+  color: #AAAAAA;
 }
 
 /****SignUp****/
 .leftSignUp {
-width: 608px;
+padding-top: 40px;
 height: 100vh;
 background: url('./images/landing/birthday@2x.png') center/cover no-repeat;
-background-color: rgb(114, 10, 10);
+/* background-color: rgb(114, 10, 10); */
 opacity: 1;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  opacity: 1;
-  color: #888888 !important;
 }
-.ant-layout-content{
-  font: Bold Arial;
-  padding-left: 80px;
-  letter-spacing: 0px;
-  color: #888888;
-  background: #E2F3E1 no-repeat padding-box;
-opacity: 1;
-text-align: justify;
-margin-top: 0px !important;
-}
- 
 
 .rightSignUp{
-  background-color: #E2F3E1;
+  background-color: #ffffff;
   height: 100vh;
-  border-left-width: 43px;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
+  text-align: center; 
   opacity: 1;
-  padding-left: 45px !important;
+  padding-top: 100px;
+  margin: auto;
   color: #888888 !important;
-  margin-top: 0px !important;
 
-/* width: 688px;
-height: 82px;
-letter-spacing: var(--mainSpacing);
-text-align: left;
-opacity: 1; */
 }
  .ant-steps-item-title, .ant-steps-item-description {
   color: white !important;
 }
 
 
-.ant-layout.ant-layout-has-sider > .ant-layout, .ant-layout.ant-layout-has-sider > .ant-layout-content {
-  padding-left: 80px;
-  padding-top: 55px;
-}
+
+
+
+/*************Dashoard Navigation***********/

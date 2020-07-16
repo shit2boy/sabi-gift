@@ -4,17 +4,18 @@ import sabigift from "../images/landing/sabigift.png";
 import { Form, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Layout, Steps } from "antd";
+import { Container,Col,Row } from "react-bootstrap";
 
 const { Step } = Steps;
 
-const { Sider, Content } = Layout;
+// const { Sider, Content } = Layout;
 
 class SignUp extends Component {
   constructor() {
     super();
     this.state = {
       questions: [
-        "Yay, we love weddings \n First Off What's is your name?",
+        "Yay, Someone is ready to \n celebrate ! Let's quickly get you started.",
         "Who's your lucky spouse to be?",
         " \n when is your Special day?",
         "How many guests are you inviting?",
@@ -26,6 +27,7 @@ class SignUp extends Component {
       noOfGuests: 0,
       currentIndex: 0,
       formValue: "",
+      button : 'GET STARTED',
     };
   }
   mapValueAndNext = () => {
@@ -36,7 +38,7 @@ class SignUp extends Component {
 
     if (this.state.currentIndex > 3) {
         
-    this.setState({ currentIndex: currentIndex + 1 });
+    this.setState({ currentIndex: currentIndex + 1, button : 'Submit' });
       return;
     }
     
@@ -70,19 +72,17 @@ class SignUp extends Component {
 
   render() {
     return (
-      <Layout>
-        <Content style={{ padding: "0px" }}>
-          <Layout className="" style={{ padding: "0px 0" }}>
-            <Sider className="leftSignUp" width={400}>
-              <div className="">
-                <Link to="/">
+      <Container fluid >
+          <Row className="">
+            <Col className="leftSignUp" >
+                <Link className='mt-3' to="/">
                   <img
                     className="homeicon rounded-circle"
                     src={sabigift}
                     alt="SabiGift-Logo"
                   />
                 </Link>
-              </div>
+             
               <div>
                 <h4 className="text-white">WHY OUR SERVICES?</h4>
               </div>
@@ -113,14 +113,11 @@ class SignUp extends Component {
                   description="Lorem ipsum lorem sioe"
                 />
               </Steps>
-            </Sider>
-            <Content
-              className=""
-              style={{ padding: "0px 24px", minHeight: 280 }}
-            >
-              <div className="py-5 rightside">
+            </Col>
+            <Col xs md lg= {8} className="">
+              <div className="rightSignUp">
                 {this.state.currentIndex === 2 && (
-                  <div>
+                  <div id='title'>
                     {(
                       this.state.answers[0] +
                       " " +
@@ -143,12 +140,19 @@ class SignUp extends Component {
                           this.setState({ formValue: e.target.value })
                         }
                       />
-                      <button
-                        className="btn ml-4 btn-dark rounded-pill px-3"
+                       {this.state.currentIndex === 0 && <button
+                        className="btn btn-dark rounded-pill ml-4 px-3"
                         onClick={(e) => this.mapValueAndNext(e)}
                       >
                         GET STARTED
-                      </button>
+                      </button>}
+                      
+                      {this.state.currentIndex > 0 && <button
+                        className="btn btn-dark rounded-pill ml-4 px-3"
+                        onClick={(e) => this.mapValueAndNext(e)}
+                      >
+                        Next
+                      </button>}
                     </div>
                   </div>
                 )}
@@ -171,38 +175,29 @@ class SignUp extends Component {
                           this.setState({ formValue: e.target.value })
                         }
                       />
-                      <button
+                      {this.state.currentIndex === 0 && <button
                         className="btn btn-dark rounded-pill ml-4 px-3"
                         onClick={(e) => this.mapValueAndNext(e)}
                       >
                         GET STARTED
-                      </button>
+                      </button>}
+                      
+                      {this.state.currentIndex > 0 && <button
+                        className="btn btn-dark rounded-pill ml-4 px-3"
+                        onClick={(e) => this.mapValueAndNext(e)}
+                      >
+                        Next
+                      </button>}
                     </div>
                   </div>
                 )}
 
-                {this.state.currentIndex === 4 && 
+                {this.state.currentIndex === 4 && <Col xs md lg={8}>
                     <div>
                         <h2>Good News! You can create </h2>
-                        <h2> a free registry on SbiGifts.</h2>
+                        <h2> a free registry on SabiGifts.</h2>
                         <h2>Let's create your account</h2>
-                        {/* <div>
-                            <div>
-                                <label>Email address</label>
-                                <input type='text' placeholder='email'/>
-                            </div>      
-                            <div>
-                                <label>Password</label>
-                                <input type='password' placeholder='password'/>
-                            </div>      
-                            <div>
-                                <label>Confirm Password</label>
-                                <input type='password' placeholder='confirm Password'/>
-                            </div>      
-                            <div>
-                                <input type='submit' placeholder='name'/>
-                            </div>      
-                        </div> */}
+                        
                         <Form
                             name="normal_login"
                             className="login-form w-50"
@@ -273,22 +268,23 @@ class SignUp extends Component {
                             </Form>
                             <Link to='/about' className='btn btn-dark rounded-pill px-5'>Sign Up</Link>
                     </div>
+              </Col>
                 }
-
                 
-              </div>
-              <div>
-              {this.state.currentIndex < 4 && <div className=" d-flex justify-content-center">
-                  <button onClick={()=>this.goBack()} className="btn btn-light rounded-pill px-5">
+              <div className=''>
+              {this.state.currentIndex < 4 && <div style={{paddingTop:'40vh'}} >
+                  <button onClick={()=>this.goBack()} className=" btn btn-light rounded-pill px-5">
                     Back
                   </button>
-                  {/* <Link to='' className='btn btn-dark rounded-pill px-5'>Next</Link> */}
                 </div>}
+                
               </div>
-            </Content>
-          </Layout>
-        </Content>
-      </Layout>
+              </div>
+             
+              
+            </Col>
+          </Row>
+        </Container>
     );
   }
 }

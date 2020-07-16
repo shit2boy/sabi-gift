@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import {Form,Col} from 'react-bootstrap'
+import {Form,Col,Row, Container} from 'react-bootstrap'
 import ring from "../images/landing/ring.svg";
 import bmw from "../images/landing/bmw.png";
 import food from "../images/landing/food-and-restaurant.svg";
-import { Layout } from "antd";
+// import { Layout } from "antd";
 import { Steps } from "antd";
 // import Form from "antd/lib/form/Form";
 
 const { Step } = Steps;
 
-const { Sider, Content } = Layout;
+// const { Sider, Content } = Layout;
 
 export class About extends Component {
     constructor() {
@@ -35,10 +35,9 @@ next =() => {
 }
   render() {
     return (
-    //   <Layout>
-        <Content style={{ padding: "0px" }}>
-          <Layout className="" style={{ padding: "0px 0" }}>
-            <Sider className="leftside" width={400}>
+    <Container fluid>
+          <Row className="">
+            <Col className="leftside" >
               <div className="">
                 <Link to="/">
                   <img
@@ -54,13 +53,13 @@ next =() => {
                 <Step title="Select Gifts" />
                 <Step title="Confirm" />
               </Steps>
-            </Sider>
+            </Col>
 
-            {this.state.currentIndex === 0 && <Content className='mx-auto'>
+            {this.state.currentIndex === 0 && <Col xs md lg={8} className='rightSide' >
                 <h2 className=''>Hello! Please tell us a little </h2>
                 <h2> bit about Yourself</h2>
-                <div>
-                <Form className='w-75 '>
+                <div className=''>
+                <Form className='w-50 mx-auto '>
                     <Form.Row>
                     <Form.Group as={Col} controlId="formGridNmae">
                     <Form.Label>First Name</Form.Label>
@@ -108,17 +107,14 @@ next =() => {
                   Next
                 </button>
               </div>
-            </Content>}
+            </Col>}
 
 
 
 
 
-             {this.state.currentIndex === 1 && <Content
-              className=""
-              style={{ padding: "24px", minHeight: 280 }}
-            >
-              <div className=" mt-3 py-5 rightside">
+             {this.state.currentIndex === 1 && <Col xs md lg={8} className="py-3 rightSide" >
+              <div >
                 <h3 id="header">What are you most excited </h3>
                 <h3 id="header"> to register at Sibigifts?</h3>
 
@@ -167,12 +163,12 @@ next =() => {
                   Next
                 </button>
               </div>
-            </Content>}
+            </Col>}
 
-            {this.state.currentIndex === 2 && <Content className=' ' style={{ padding: '24px', minHeight: 280 }}>
-                        <div  className=' py-5 rightside'>
+            {this.state.currentIndex === 2 && <Col xs md lg={8} className='py-3 rightSide'>
+                        <div  >
                             <h3 id='header'>What are somethings you  </h3>
-                            <h3 id='header'> enjoy doing together</h3>
+                            <h3 > enjoy doing together</h3>
                         
                             <p className='py-4'>Select as many as you want</p>
                             <div className='eventType'>
@@ -219,7 +215,7 @@ next =() => {
                             </div>
                           
                         </div>
-                        <div className=" d-flex justify-content-around">
+                        <div className="mt-2 d-flex justify-content-around">
                             <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
                             Back
                             </button>
@@ -228,13 +224,13 @@ next =() => {
                             </button>
                         </div>
                
-                    </Content>}
-                     {this.state.currentIndex === 3 && <Content className=' ' style={{ padding: '', minHeight: 280 }}>
-                        <div  className=' py-5 rightside'>
-                            <h3 id='header'>That's all. You're done! </h3>
+                    </Col>}
+                     {this.state.currentIndex === 3 && <Col xs md lg={8} className='rightSide '>
+                        <div  className=' '>
+                            <h3 className='p-5'>That's all. You're done! </h3>
                         
                         </div>
-                        <div className=" d-flex justify-content-around">
+                        <div className=" d-flex justify-content-around" style={{paddingTop:'45vh'}}>
                             <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
                             Back
                             </button>
@@ -243,9 +239,9 @@ next =() => {
                             </button>
                         </div>
                
-                    </Content>} {this.state.currentIndex === 4 && <Content className=' ' style={{ padding: '24px', minHeight: 280 }}>
-                        <div  className=' py-5 rightside'>
-                            <h3 id='header'>Try adding few gifts </h3>
+                    </Col>} 
+                    {this.state.currentIndex === 4 && <Col xs md lg={8} className='py-3 rightside' >
+                        <h3 id='header'>Try adding few gifts </h3>
                             <p id='header'> you go wrong with this best sellers</p>
                             <div className='eventType'>
                                
@@ -310,9 +306,8 @@ next =() => {
                                     <p>Option 4</p>
                                 </div> 
                             </div>
-                            
-                        </div>
-                        <div className=" d-flex justify-content-around">
+                         
+                        <div className="d-flex justify-content-around">
                             <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
                             Back
                             </button>
@@ -321,11 +316,11 @@ next =() => {
                             </button>
                         </div>
                
-                    </Content>}
+                    </Col>}
             
-          </Layout>
-        </Content>
-    //   </Layout>
+          </Row>
+        </Container>
+   
     );
   }
 }

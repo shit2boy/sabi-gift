@@ -1,6 +1,6 @@
 import React,{Fragment,Suspense,lazy} from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-// import NavBar from "./components/NavigationBar";
+import Navbardashboard from "./components/NavbarDashboard";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FindRegistry from './pages/FindRegistry';
@@ -18,6 +18,7 @@ function App() {
                 {/* <NavBar /> */}
             <Router>
                 <Switch>
+                  <Route exact path='/Navbardashboard' component={Navbardashboard} />
                   <Route exact path='/Find' component={FindRegistry} />
                   <Route exact path='/' component={Home} />
                   <Route path='/createRegistry' component={CreateRegistry} />

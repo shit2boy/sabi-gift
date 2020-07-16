@@ -3,37 +3,38 @@ import {Link} from 'react-router-dom'
 import sabigift from '../images/landing/sabigift.png';
 import  ring from "../images/landing/ring.svg";
 import  food from "../images/landing/food-and-restaurant.svg";
-import { Layout } from 'antd';
+// import { Layout } from 'antd';
 import { Steps } from 'antd';
+import { Container, Row, Col } from "react-bootstrap";
 
 const { Step } = Steps;
 
-const { Sider, Content } = Layout;
+// const { Sider, Content } = Layout;
 
 
 export class CreateRegistry extends Component {
     render() {
         return (
-        <Content style={{ padding: '0px' }}>
+        <Container fluid >
 
-                <Layout className="" style={{ padding: '0px 0' }}>
-                    <Sider className="mt-4 leftside" width={400}>
+                <Row className="" >
+                    <Col className="leftside">
                         <div className="">
                             <Link to='/'><img className='homeicon rounded-circle' src={sabigift} alt='SabiGift-Logo'/></Link>
                         </div>
-                        <Steps className='px-5'  direction="vertical" current={1}>
+                        <Steps className=''  direction="vertical" current={1}>
                             <Step style={{ color: ' white' }} title="Select Event" />
                             <Step title="Event basics" />
                             <Step title="Select Gifts"  />
                             <Step title="Confirm" />
                         </Steps>
-                    </Sider>
-                    <Content className=' mt-3' style={{ padding: '24px', minHeight: 280 }}>
-                        <div  className=' mt-3 py-5 rightside'>
+                    </Col>
+                    <Col  xs md lg={8} className='rightside'>
+                        <div  className='p-4 '>
                             <h3 id='header'>First, Let's Make sure we </h3>
                             <h3 id='header'> support your events</h3>
                         
-                            <p className='py-4'>Select the Event</p>
+                            <p className='py-4'>Select the Event type</p>
                             <div className='eventType'>
                                 <Link to='/signUp'>
                                     <div className='eventItem'>
@@ -57,9 +58,8 @@ export class CreateRegistry extends Component {
                                 </div> 
                             </div>
                             <div className='p-3'>
-                                <p>Choose the category that matches your event. If your Event is not Listed, Kindly choose 
-                                    others for more options
-                                </p>
+                                <p>Choose the category that matches your event. If your Event is not Listed,
+                                     <br/>Kindly choose others for more options</p>
                             </div>
                         </div>
                             <div className=' d-flex justify-content-around'>
@@ -67,9 +67,9 @@ export class CreateRegistry extends Component {
                                 <Link to='/signUp' className='btn btn-dark rounded-pill px-5'>Next</Link>
                             </div>
                
-                    </Content>
-                </Layout>
-            </Content>
+                    </Col>
+                </Row>
+            </Container>
       
     ) }
  }

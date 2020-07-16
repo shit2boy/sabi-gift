@@ -12,9 +12,9 @@ const Howitworks = () => {
   });
   return (
     
-      <div className="container-fluid py-4 mt-4">
+      <div className="container-fluid mt-4">
         <div className="row">
-          <div className="col-6 offset-1" data-aos="fade-left">
+          <div className="col-sm-6 offset-1" data-aos="fade-left">
             <h4 className="mb-3 p-4">
               It's very easy to gift anyone - <br />
               How SabiGifts works
@@ -55,7 +55,7 @@ const Howitworks = () => {
                 <p>Guest</p>
               </div>
             </div>
-            <div className="d-flex stepOutline" data-aos="fade-in">
+            <div className="d-flex stepOutline mb-4" data-aos="fade-in">
               <div className="rounded stepIcon">
                 <FaHome size="60px" />
               </div>
@@ -77,6 +77,8 @@ const Howitworks = () => {
             <img className="img-fluid " src={Box5} alt="giftDisplay" />
           </div>
         </div>
+        <p className='pionter mt-3 container' style={{color:'#9597A6',textAlign:"left"}}>Want to know more? <span style={{color:'#545871'}}>Read more about our Services</span></p>
+
       </div>
     
   );

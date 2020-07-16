@@ -15,7 +15,7 @@ function NavigationBar() {
       <Nav.Link className="pv-2 ml-2 " href="/">HOME</Nav.Link>
       <Nav.Link className="pv-2 ml-2 " href="#">HOW IT WORKS</Nav.Link>
       <Nav.Link className="pv-2 ml-2 " href="/createRegistry">CREATE REGISTRY</Nav.Link>
-      <Nav.Link className="pv-3 ml-2 " href="/Find">FIND AN EVENT</Nav.Link>
+      <Nav.Link className="pv-3 ml-2 " href="/createRegistry">FIND AN EVENT</Nav.Link>
     </Nav>
  </Navbar.Collapse>
  <Nav className='ml-auto'><Nav.Link href="#"><img src={account} width='50px' alt='userImage'/></Nav.Link></Nav>

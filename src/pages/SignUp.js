@@ -93,22 +93,22 @@ class SignUp extends Component {
                   description="Lorem ipsum lorem sioe"
                 />
                 <Step
-                  style={{ color: " white" }}
+                 
                   title="Lorem ipsum lorem ipsum"
                   description="Lorem ipsum lorem sioe"
                 />
                 <Step
-                  style={{ color: " white" }}
+                 
                   title="Lorem ipsum lorem ipsum"
                   description="Lorem ipsum lorem sioe"
                 />
                 <Step
-                  style={{ color: " white" }}
+                  
                   title="Lorem ipsum lorem ipsum"
                   description="Lorem ipsum lorem sioe"
                 />
                 <Step
-                  style={{ color: " white" }}
+                 
                   title="Lorem ipsum lorem ipsum"
                   description="Lorem ipsum lorem sioe"
                 />

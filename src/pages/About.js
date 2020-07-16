@@ -83,7 +83,7 @@ next =() => {
                     <Form.Control type="text" placeholder="0000-0000-0000" />
                     </Form.Group>
                 </Form.Row>
-                <Form.Group as={Col} controlId="formGridAltPhone">
+                <Form.Group controlId="formGridAltPhone">
                     <Form.Label>Alt Phone</Form.Label>
                     <Form.Control type="text" placeholder="0000-0000-0000" />
                 </Form.Group>
@@ -124,22 +124,21 @@ next =() => {
 
                 <p className="py-4">Select the Event</p>
                 <div className="eventType">
-                  <Link to="/signUp">
+                 
                     <div className="eventItem">
                       <p>
                         <img src={ring} alt="weddingIcon" />{" "}
                       </p>
                       <p>Gifts</p>
                     </div>
-                  </Link>
-                  <Link to="/signUp">
+                 
                     <div className="eventItem">
                       <p>
                         <img src={food} alt="weddingIcon" />{" "}
                       </p>
                       <p>Cash Fund</p>
                     </div>
-                  </Link>
+                 
                   <div className="eventItem">
                     <p>
                       <img src={ring} alt="babyicon" />{" "}
@@ -177,18 +176,17 @@ next =() => {
                         
                             <p className='py-4'>Select as many as you want</p>
                             <div className='eventType'>
-                                <Link to='/signUp'>
+                                
                                     <div className='eventItem'>
                                         <p><img src={ring} alt='weddingIcon' /> </p>
                                         <p>Cooking</p>
                                     </div> 
-                                </Link>
-                                <Link to='/signUp'>
+                                
                                     <div className='eventItem'>
                                         <p> </p>
                                         <p>Baking</p>
                                     </div>    
-                                </Link> 
+                               
                                 <div className='eventItem'>
                                     <p> </p>
                                     <p>Friends over </p>
@@ -199,18 +197,17 @@ next =() => {
                                 </div> 
                             </div>
                             <div className='eventType'>
-                                <Link to='/signUp'>
+                               
                                     <div className='eventItem'>
                                         <p><img src={ring} alt='weddingIcon' /> </p>
                                         <p>Traveling</p>
                                     </div> 
-                                </Link>
-                                <Link to='/signUp'>
+                               
                                     <div className='eventItem'>
                                         <p><img src={food} alt='weddingIcon' /> </p>
                                         <p>Camping</p>
                                     </div>    
-                                </Link> 
+                               
                                 <div className='faded eventItem'>
                                     <p><img src={ring} alt='babyicon' /> </p>
                                     <p> Chilling</p>
@@ -251,18 +248,17 @@ next =() => {
                             <h3 id='header'>Try adding few gifts </h3>
                             <p id='header'> you go wrong with this best sellers</p>
                             <div className='eventType'>
-                                <Link to=''>
+                               
                                     <div className='eventItem'>
                                         <p><img src={bmw} alt='weddingIcon' /> </p>
                                         <p>Car</p>
                                     </div> 
-                                </Link>
-                                <Link to=''>
+                               
                                     <div className='eventItem'>
                                         <p> </p>
                                         <p>Option 2</p>
                                     </div>    
-                                </Link> 
+                               
                                 <div className='eventItem'>
                                     <p> </p>
                                     <p>Option 2 </p>
@@ -273,47 +269,45 @@ next =() => {
                                 </div> 
                             </div>
                             <div className='eventType'>
-                                <Link to=''>
-                                    <div className='eventItem'>
+                                
+                                    <div className=' bg-success eventItem'>
                                         <p><img src={bmw} alt='weddingIcon' /> </p>
                                         <p>Car</p>
                                     </div> 
-                                </Link>
-                                <Link to=''>
+                               
                                     <div className='eventItem'>
                                         <p> </p>
                                         <p>Option 2</p>
                                     </div>    
-                                </Link> 
+                               
                                 <div className='eventItem'>
                                     <p> </p>
-                                    <p>Option 2 </p>
+                                    <p>Option 3 </p>
                                 </div> 
                                 <div className='eventItem'>
                                     <p></p>
-                                    <p>Option 3</p>
+                                    <p>Option 4</p>
                                 </div> 
                             </div>
                             <div className='eventType'>
-                                <Link to=''>
-                                    <div className='eventItem'>
+                               
+                                    <div className='bg-success eventItem'>
                                         <p><img src={bmw} alt='weddingIcon' /> </p>
                                         <p>Car</p>
                                     </div> 
-                                </Link>
-                                <Link to=''>
+                               
                                     <div className='eventItem'>
                                         <p> </p>
                                         <p>Option 2</p>
                                     </div>    
-                                </Link> 
+                                 
                                 <div className='eventItem'>
                                     <p> </p>
-                                    <p>Option 2 </p>
+                                    <p>Option 3</p>
                                 </div> 
                                 <div className='eventItem'>
                                     <p></p>
-                                    <p>Option 3</p>
+                                    <p>Option 4</p>
                                 </div> 
                             </div>
                             

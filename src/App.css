@@ -251,8 +251,8 @@ opacity: 1;
 /****SignUp****/
 .leftSignUp {
 width: 608px;
-height: 625px;
-background: url('./images/landing/Love-heart.png') center/cover no-repeat;
+height: 900px;
+background: url('./images/landing/birthday@2x.png') center/cover no-repeat;
 background-color: rgb(114, 10, 10);
 opacity: 1;
   text-align: center;
@@ -272,6 +272,16 @@ margin-top: 0px !important;
  
 
 .rightSignUp{
+  background-color: #E2F3E1;
+  height: 80vh;
+  border-left-width: 43px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 1;
+  padding-left: 45px !important;
+  color: #888888 !important;
+  margin-top: 0px !important;
+
 width: 688px;
 height: 82px;
 letter-spacing: var(--mainSpacing);

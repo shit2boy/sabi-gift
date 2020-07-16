@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Layout, Steps } from "antd";
 
@@ -63,9 +63,9 @@ class SignUp extends Component {
         console.log(this.state.formValue)
     }
 
-    const onFinish = values => {
-        console.log('Received values of form: ', values);
-      };
+    // const onFinish = values => {
+    //     console.log('Received values of form: ', values);
+    //   };
   }
 
   render() {
@@ -119,7 +119,7 @@ class SignUp extends Component {
               style={{ padding: "0px 24px", minHeight: 280 }}
             >
               <div className="py-5 rightside">
-                {this.state.currentIndex == 2 && (
+                {this.state.currentIndex === 2 && (
                   <div>
                     {(
                       this.state.answers[0] +
@@ -152,7 +152,7 @@ class SignUp extends Component {
                     </div>
                   </div>
                 )}
-                {this.state.currentIndex != 2 && this.state.currentIndex != 4 && (
+                {this.state.currentIndex !== 2 && this.state.currentIndex !== 4 && (
                   <div>
                     {this.state.questions[this.state.currentIndex]
                       .split("\n")
@@ -181,7 +181,7 @@ class SignUp extends Component {
                   </div>
                 )}
 
-                {this.state.currentIndex == 4 && 
+                {this.state.currentIndex === 4 && 
                     <div>
                         <h2>Good News! You can create </h2>
                         <h2> a free registry on SbiGifts.</h2>
@@ -209,7 +209,7 @@ class SignUp extends Component {
                             initialValues={{
                                 remember: true,
                             }}
-                            onFinish={this.onFinish}
+                            
                             >
                             <Form.Item
                                 name="username"
@@ -259,9 +259,9 @@ class SignUp extends Component {
                                 <Checkbox>Remember me</Checkbox>
                                 </Form.Item>
 
-                                <a className="login-form-forgot" href="">
+                                <p className="login-form-forgot" >
                                 Forgot password
-                                </a>
+                                </p>
                             </Form.Item>
 
                             {/* <Form.Item>

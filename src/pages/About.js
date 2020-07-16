@@ -56,7 +56,7 @@ next =() => {
               </Steps>
             </Sider>
 
-            {this.state.currentIndex == 0 && <Content className='mx-auto'>
+            {this.state.currentIndex === 0 && <Content className='mx-auto'>
                 <h2 className=''>Hello! Please tell us a little </h2>
                 <h2> bit about Yourself</h2>
                 <div>
@@ -114,7 +114,7 @@ next =() => {
 
 
 
-             {this.state.currentIndex == 1 && <Content
+             {this.state.currentIndex === 1 && <Content
               className=""
               style={{ padding: "24px", minHeight: 280 }}
             >
@@ -170,7 +170,7 @@ next =() => {
               </div>
             </Content>}
 
-            {this.state.currentIndex == 2 && <Content className=' ' style={{ padding: '24px', minHeight: 280 }}>
+            {this.state.currentIndex === 2 && <Content className=' ' style={{ padding: '24px', minHeight: 280 }}>
                         <div  className=' py-5 rightside'>
                             <h3 id='header'>What are somethings you  </h3>
                             <h3 id='header'> enjoy doing together</h3>
@@ -232,7 +232,7 @@ next =() => {
                         </div>
                
                     </Content>}
-                     {this.state.currentIndex == 3 && <Content className=' ' style={{ padding: '', minHeight: 280 }}>
+                     {this.state.currentIndex === 3 && <Content className=' ' style={{ padding: '', minHeight: 280 }}>
                         <div  className=' py-5 rightside'>
                             <h3 id='header'>That's all. You're done! </h3>
                         
@@ -246,7 +246,7 @@ next =() => {
                             </button>
                         </div>
                
-                    </Content>} {this.state.currentIndex == 4 && <Content className=' ' style={{ padding: '24px', minHeight: 280 }}>
+                    </Content>} {this.state.currentIndex === 4 && <Content className=' ' style={{ padding: '24px', minHeight: 280 }}>
                         <div  className=' py-5 rightside'>
                             <h3 id='header'>Try adding few gifts </h3>
                             <p id='header'> you go wrong with this best sellers</p>

@@ -3,13 +3,11 @@ import {Link} from 'react-router-dom'
 import sabigift from '../images/landing/sabigift.png';
 import  ring from "../images/landing/ring.svg";
 import  food from "../images/landing/food-and-restaurant.svg";
-// import { Layout } from 'antd';
 import { Steps } from 'antd';
 import { Container, Row, Col } from "react-bootstrap";
 
 const { Step } = Steps;
 
-// const { Sider, Content } = Layout;
 
 
 export class CreateRegistry extends Component {

@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
 import { Form, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Layout, Steps } from "antd";
+import { Steps } from "antd";
 import { Container,Col,Row } from "react-bootstrap";
 
 const { Step } = Steps;
-
-// const { Sider, Content } = Layout;
 
 class SignUp extends Component {
   constructor() {

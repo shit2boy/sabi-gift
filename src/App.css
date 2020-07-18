@@ -20,14 +20,15 @@
 body {
   background: var(--mainWhite);
   font-family: trebuchet-ms, Tahoma, sans-serif !important;
-  font-size: 12px;
+  /* font-size: 12px; */
   line-height: 1.4;
   font-weight: bold;
 }
 
 h1,h2,h3,h4,h5,h6{
   font-family: henriette, sans-serif;
-  color: #888888;
+  color: #545871;
+  font-weight: bolder;
   opacity: 1 !important;
 }
 h1 {
@@ -59,6 +60,15 @@ h6 {
   font-weight: bold;
   margin-bottom: 1.5em;
 }
+.wordWrap {
+    word-wrap: break-word;      /* IE 5.5-7 */
+    white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
+    white-space: pre-wrap;      /* current browsers */
+    text-align:center;
+    margin:auto;
+}
+
+
 #navItems{
 color: #707070;
 font-weight: bolder !important;
@@ -71,7 +81,7 @@ Nav.Link {
 
 /**HERO***/
 .defaultHero {
-  background: url("./images/landing/bg@2x.png") center/cover no-repeat;
+  background: url("./images/landing/bg.png") center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,23 +91,19 @@ Nav.Link {
 }
 .banner {
   display: inline;
-  border: 1px solid red;
   background: var(--mainWhite);
   color: Trebuchet MS;
-  padding: 3rem 3rem;
-
+  padding: 3rem;
   text-align: center;
-  /* align-items: center; */
+
 }
 .banner h1 {
   font-size: 2.5rem;
 }
 .bannerBtn {
-  display: flex;
-  justify-content: space-between;
   border-radius: 1.25rem;
 }
-.btnBanner {
+.btnBannerContainer {
   display: flex;
   justify-content: space-between;
 }
@@ -142,21 +148,19 @@ Nav.Link {
 
 /*****Why SabiGift******/
 .img-fluid {
-  /* max-width: 100%; */
+  max-width: 100%; 
   height: auto;
   opacity: 0.85;
  
 }
 .why {
-  max-width:600px;
+  /* max-width:600px; */
   margin: auto;
   margin-top: 25px;
-  text-align: left;
-  /* font-weight: light; */
-  color: #545871;
+  text-align: justify;
   opacity: 1;
   padding: 45px;
-  align-items: center;
+  /* align-items: center; */
 }
 
 /*****HOW IT WORKS SECTION***********/
@@ -164,7 +168,10 @@ Nav.Link {
   background-color:var(--primaryColor)
 }
 .stepIcon{
-  padding: 10px;
+  /* padding: 10px; */
+  align-self:baseline;
+  background-color: #F7ECEB;
+  /* border-radius: 50px; */
 
 }
 .stepOutline {
@@ -184,10 +191,10 @@ Nav.Link {
   color: #545871;
   font-size: large;
 }
-#title{
+/* #title{
   font-size: large;
   font-weight: 500;
-}
+} */
 .stepTag{
   font-weight: bold;
  font-size: large;
@@ -232,7 +239,8 @@ Nav.Link {
 }
 
 rightside{
-  background-color: #ffffff;
+  background:#E2F3E1 ;
+  height: 100vh;
   padding: 25px;
   margin: auto;
   text-align: center;
@@ -243,9 +251,9 @@ rightside{
 .rightSide {
   background-color: #EEEEEE;
   padding: 45px;
-  /* height: 100vh; */
+  height: 100%;
   /* border-left-width: 43px; */
-  text-align: center;
+  /* text-align: center; */
   /* font-family: Arial, Helvetica, sans-serif; */
   opacity: 1;
   color: #888888 ;
@@ -311,4 +319,27 @@ opacity: 1;
 
 
 
-/*************Dashoard Navigation***********/
+/*************Dashoard Navigation sabiGift Store***********/
+.sidebarMenu{
+  display: block;
+ /* border-radius: 3.5rem; */
+ height: 900px;
+ background-color: #F9F9F9;
+border-radius: 64px;
+opacity: 1;
+}
+.sidear{
+  
+  box-shadow: 0px 2px 8px #00000022;
+border-radius: 8px;
+}
+.productCards{
+  box-shadow: 0px 2px 8px #00000022;
+border-radius: 8px;
+}
+#myCards{
+  box-shadow: 0px 20px 50px #D0D0D069;
+border: 1px solid #EFF0F0;
+border-radius: 25px;
+opacity: 1;
+}

@@ -28,11 +28,10 @@ export class CreateRegistry extends Component {
                         </Steps>
                     </Col>
                     <Col  xs md lg={8} className='rightside'>
-                        <div  className='p-4 '>
-                            <h3 id='header'>First, Let's Make sure we </h3>
-                            <h3 id='header'> support your events</h3>
+                        <div  className='w-75 p-5'>
+                            <h3 className='wordWrap p-4 text-justify'>First, Let's Make sure we support your events</h3>
                         
-                            <p className='py-4'>Select the Event type</p>
+                            <p className='p-4'>Select the Event type</p>
                             <div className='eventType'>
                                 <Link to='/signUp'>
                                     <div className='eventItem'>
@@ -55,15 +54,14 @@ export class CreateRegistry extends Component {
                                     <p>Not on list</p>
                                 </div> 
                             </div>
-                            <div className='p-3'>
-                                <p>Choose the category that matches your event. If your Event is not Listed,
-                                     <br/>Kindly choose others for more options</p>
+                            <div className='p-4 text-left'>
+                                <p className='wordWrap'>Choose the category that matches your event. If your Event is not Listed,Kindly choose others for more options</p>
                             </div>
-                        </div>
                             <div className=' d-flex justify-content-around'>
                                 <button to='' className='btn btn-light rounded-pill px-5'>Back</button>
                                 <Link to='/signUp' className='btn btn-dark rounded-pill px-5'>Next</Link>
                             </div>
+                        </div>
                
                     </Col>
                 </Row>

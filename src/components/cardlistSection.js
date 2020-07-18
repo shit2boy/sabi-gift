@@ -15,36 +15,44 @@ function CardlistSection() {
     return (
         <section className='mt-5 mb-5' >
              <div className=' container cardTitle'>
-                <h4>A whole new way to gift,</h4>
-                <h4>when it matters</h4>
-                <div className='mt-5' data-aos="fade-left">
-                    <p> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum</p>
-                    <p> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem </p>
-                    <p> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
+             <div className='wordWrap w-25 header'><h4>A whole new way to gift, when it matters</h4></div>
+                
+                <div className='wordWrap w-50 header mt-4' data-aos="fade-left">
+                     Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
+                     Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem Lorem ipsum Lorem ipsum 
+                     Lorem ipsum Lorem ipsum Lorem ipsum 
                 </div>
                <div className='row mt-4 card-row' data-aos="fade-left">
                     <div className='col-sm-3'>
                     <Card image={gift}
                             title='Easiet way'
                             content ='We take the guesswork out of registering with handy tools like our checklist and your registry advisor'
-                            />
+                            footerTitle ='GET STARTED'
+                            footDescription='Sign Up Free'
+                        />
                     </div>
                     <div className='col-sm'>
                     <Card image={present} 
                     title='Our Store has it all'
                     content ='We are the only place with classic and unique wedding gifts,giftcards and Honeymoon funds all in one'
+                    footerTitle ='GET STARTED'
+                    footDescription='Sign Up Free'
                     />
                     </div>
                     <div className='col-sm'>
                     <Card image={present} 
                     title='Smarter Exchanges'
                     content ='You can exchange gift before they ship to save ton of times (without guest finding out).'
+                    footerTitle ='GET STARTED'
+                    footDescription='Sign Up Free'
                     />
                     </div>
                     <div className='col-sm'>
                     <Card image={flat} 
                     title='Smarter Exchanges'
                     content ='You can exchange gift before they ship to save ton of times (without guest finding out).'
+                    footerTitle ='GET STARTED'
+                    footDescription='Sign Up Free'
                     />
                     </div>
 

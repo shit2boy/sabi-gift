@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = ({image,title,content}) => {
+const Card = ({image,title,content,footerTitle,footDescription}) => {
     return ( <div className='mt-4' id="myCard">
             <div class="card text-center">
                 <div><img class="card-img-top rounded-circle center" src={image} style={{backgroundColor: '#58b852', width:'50px'}} alt="Card cap"/></div>
@@ -9,8 +9,8 @@ const Card = ({image,title,content}) => {
                 <p class="card-text">{content}</p>
                 </div>
                 <div class="card-footer">
-                <h6 class="pointer">Get Started</h6>
-                <small class="text-center pointer">Sign Up Free</small>
+                <h6 class="pointer">{footerTitle}</h6>
+                <small class="text-center pointer">{footDescription}</small>
                 </div>
             </div>
         </div>

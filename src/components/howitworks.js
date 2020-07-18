@@ -1,8 +1,8 @@
 import React from "react";
 import Box5 from "../images/landing/box5.png";
-import { FaAllergies } from "react-icons/fa";
-import { FcPlus } from "react-icons/fc";
+import { FaRegHandPaper } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
+import { GrAddCircle } from "react-icons/gr";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -15,13 +15,13 @@ const Howitworks = () => {
       <div className="container-fluid mt-4">
         <div className="row">
           <div className="col-sm-6 offset-1" data-aos="fade-left">
-            <h4 className="mb-3 p-4">
+            <h3 className="mb-3 p-4">
               It's very easy to gift anyone - <br />
               How SabiGifts works
-            </h4>
+            </h3>
             <div className="d-flex stepOutline" id="active">
-              <div className="stepIcon">
-               <FcPlus size="60px" />
+              <div className="rounded-circle stepIcon">
+               <GrAddCircle color=' #EBD0CE' size="50px" />
               </div>
               <div id="stepTitle">
                 <p className="text-white id='title'">Add Wedding Gifts</p>
@@ -40,12 +40,12 @@ const Howitworks = () => {
               </div>
             </div>
             <div className="d-flex stepOutline">
-              <div className="stepIcon">
-                <FaAllergies size="60px" />
+              <div className="rounded-circle stepIcon">
+                < FaRegHandPaper color=' #EBD0CE' size="45px" />
               </div>
               <div id="stepTitle">
-                <p id='title'> Guests Buy You Gifts</p>
-                <p style={{ color: "#9597A6", opacity: "1" }}>
+                <p> Guests Buy You Gifts</p>
+                <p >
                   Receive them stress-free and choose when they ship.
                    You can exchange any before they ship, too.
                 </p>
@@ -56,12 +56,12 @@ const Howitworks = () => {
               </div>
             </div>
             <div className="d-flex stepOutline mb-4" data-aos="fade-in">
-              <div className="rounded stepIcon">
-                <FaHome size="60px" />
+              <div className="rounded-circle stepIcon">
+                <FaHome  color=' #EBD0CE' size="50px" />
               </div>
               <div id="stepTitle">
-                <p id='title'>Enjoy Newlywed Life </p>
-                <p style={{ color: "#9597A6", opacity: "1" }}>
+                <p >Enjoy Newlywed Life </p>
+                <p>
                   Use your gifts, spend your cash, and don’t forget about
                    your 20% post-wedding discount.
                 </p>

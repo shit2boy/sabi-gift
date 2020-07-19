@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Card, Row, Col } from "react-bootstrap";
+import {Card, Row, Col } from "react-bootstrap";
 import AvailableItems from "./AvailableItems";
 import DashboardNav from "./DashboardNav";
 import Avatars from '../images/Sabi-storepage/Avatars.png'
@@ -9,13 +9,13 @@ import {BsFolder,BsAlarm,BsBell} from "react-icons/bs";
 import Product from "./Product";
 
 
-export class NavbarDashboard extends Component {
+export class Dashboard extends Component {
   render() {
 
     // const { Search } = Input;
 
     return (
-      <Container fluid>
+      <div className='container-fluid'>
         <DashboardNav />
         <Row>
           {/* <Col xs lg="1" className='bg-info'> of side</Col> */}
@@ -125,9 +125,9 @@ export class NavbarDashboard extends Component {
             </div>
           </Col>
         </Row>
-      </Container>
+      </div >
     );
   }
 }
 
-export default NavbarDashboard;
+export default Dashboard;

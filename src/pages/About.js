@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import {Form,Col,Row, Container} from 'react-bootstrap'
+import {Form,Col} from 'react-bootstrap'
 import ring from "../images/landing/ring.svg";
 import bmw from "../images/landing/bmw.png";
 import food from "../images/landing/food-and-restaurant.svg";
-// import { Layout } from "antd";
 import { Steps } from "antd";
 // import Form from "antd/lib/form/Form";
 
 const { Step } = Steps;
 
-// const { Sider, Content } = Layout;
+
 
 export class About extends Component {
     constructor() {
@@ -35,9 +34,9 @@ next =() => {
 }
   render() {
     return (
-    <Container fluid>
-          <Row className="">
-            <Col className="leftside" >
+    <div className='container-fluid'>
+          <div className="row">
+            <div className=" col-4 leftside" >
               <div className="">
                 <Link to="/">
                   <img
@@ -53,73 +52,70 @@ next =() => {
                 <Step title="Select Gifts" />
                 <Step title="Confirm" />
               </Steps>
-            </Col>
+            </div>
 
-            {this.state.currentIndex === 0 && <Col xs md lg={8} className='rightSide' >
-                <h2 className=''>Hello! Please tell us a little </h2>
-                <h2> bit about Yourself</h2>
-                <div className=''>
-                <Form className='w-50 mx-auto '>
-                    <Form.Row>
-                    <Form.Group as={Col} controlId="formGridNmae">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control type="text" placeholder="Jimi" />
-                    </Form.Group>
+            {this.state.currentIndex === 0 && <div className='col-8 rightSide' >
+                <div className='py-5 ml-5'>
+                <h2 className=''>Hello! Please tell us a little <br/> bit about Yourself.</h2>
+                  <Form className='w-75'>
+                      <Form.Row>
+                        <Form.Group as={Col} controlId="formGridNmae">
+                          <Form.Label>First Name</Form.Label>
+                          <Form.Control type="text" placeholder="Jimi" />
+                        </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridLastname">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control type="text" placeholder="Fola" />
-                    </Form.Group>
-                </Form.Row>
-                <Form.Row>
-                    <Form.Group as={Col} controlId="formGridPhone">
-                    <Form.Label>Phone</Form.Label>
-                    <Form.Control type='text' placeholder="0000 0000-0000" />
-                    </Form.Group>
+                      <Form.Group as={Col} controlId="formGridLastname">
+                      <Form.Label>Last Name</Form.Label>
+                      <Form.Control type="text" placeholder="Fola" />
+                      </Form.Group>
+                      </Form.Row>
+                      <Form.Row>
+                      <Form.Group as={Col} controlId="formGridPhone">
+                      <Form.Label>Phone</Form.Label>
+                      <Form.Control type='text' placeholder="0000 0000-0000" />
+                      </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridAltPhone">
-                    <Form.Label>Alt Phone</Form.Label>
-                    <Form.Control type="text" placeholder="0000-0000-0000" />
-                    </Form.Group>
-                </Form.Row>
-                <Form.Group controlId="formGridAltPhone">
-                    <Form.Label>Alt Phone</Form.Label>
-                    <Form.Control type="text" placeholder="0000-0000-0000" />
-                </Form.Group>
-                <Form.Row>
-                    <Form.Group as={Col} controlId="formGridCity">
-                    <Form.Label>City</Form.Label>
-                    <Form.Control type='text' placeholder="Lekki" />
-                    </Form.Group>
+                      <Form.Group as={Col} controlId="formGridAltPhone">
+                      <Form.Label>Alt Phone</Form.Label>
+                      <Form.Control type="text" placeholder="0000-0000-0000" />
+                      </Form.Group>
+                  </Form.Row>
+                  <Form.Group controlId="formGridAltPhone">
+                      <Form.Label>Street addresss</Form.Label>
+                      <Form.Control type="text" placeholder="14b wole Ariyo street" />
+                  </Form.Group>
+                  <Form.Row>
+                      <Form.Group as={Col} controlId="formGridCity">
+                      <Form.Label>City</Form.Label>
+                      <Form.Control type='text' placeholder="Lekki" />
+                      </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridAltPhone">
-                    <Form.Label>State</Form.Label>
-                    <Form.Control type="text" placeholder="State" />
-                    </Form.Group>
-                </Form.Row>
-            </Form>
+                      <Form.Group as={Col} controlId="formGridAltPhone">
+                      <Form.Label>State</Form.Label>
+                      <Form.Control type="text" placeholder="State" />
+                      </Form.Group>
+                  </Form.Row>
+                </Form>
                 </div>
-                <div className=" d-flex justify-content-around">
-                <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
+                <div className=" d-flex justify-content-around" style={{background:'#ffffff',height:'70px'}}>
+                <button type="button" onClick={this.back} className="btn btn-light rounded-pill px-5">
                   Back
                 </button>
-                <button to="" onClick={this.next} className="btn btn-dark rounded-pill px-5">
+                <button type="button" onClick={this.next} className="btn btn-dark rounded-pill px-5">
                   Next
                 </button>
               </div>
-            </Col>}
+            </div>}
 
 
 
 
 
-             {this.state.currentIndex === 1 && <Col xs md lg={8} className="py-3 rightSide" >
-              <div >
-                <h3 id="header">What are you most excited </h3>
-                <h3 id="header"> to register at Sibigifts?</h3>
-
-                <p className="py-4">Select the Event</p>
-                <div className="eventType">
+             {this.state.currentIndex === 1 && <div className="col-8 rightSide" >
+              <div className='py-5 ml-5'>
+                <h2 id="header">What are you most excited <br/>to register at Sibigifts?</h2>
+                  <p className="py-4">Select the Event</p>
+                  <div className="eventType">
                  
                     <div className="eventItem">
                       <p>
@@ -163,12 +159,12 @@ next =() => {
                   Next
                 </button>
               </div>
-            </Col>}
+            </div>}
 
-            {this.state.currentIndex === 2 && <Col xs md lg={8} className='py-3 rightSide'>
-                        <div  >
-                            <h3 id='header'>What are somethings you  </h3>
-                            <h3 > enjoy doing together</h3>
+            {this.state.currentIndex === 2 && <div className=' col-8 py-3 rightSide'>
+                        <div className='py-5 ml-5' >
+                            <h2 id='header'>What are somethings you  <br/>
+                            enjoy doing together</h2>
                         
                             <p className='py-4'>Select as many as you want</p>
                             <div className='eventType'>
@@ -224,13 +220,13 @@ next =() => {
                             </button>
                         </div>
                
-                    </Col>}
-                     {this.state.currentIndex === 3 && <Col xs md lg={8} className='rightSide '>
-                        <div  className=' '>
-                            <h3 className='p-5'>That's all. You're done! </h3>
+                    </div>}
+                     {this.state.currentIndex === 3 && <div className='col-8 rightSide '>
+                        <div  className='py-5 ml-5  h-50'>
+                            <h2 className='tet-center'>That's all. You're done! </h2>
                         
                         </div>
-                        <div className=" d-flex justify-content-around" style={{paddingTop:'45vh'}}>
+                        <div className=" d-flex justify-content-around" style={{paddingTop:'25vh'}}>
                             <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
                             Back
                             </button>
@@ -239,23 +235,20 @@ next =() => {
                             </button>
                         </div>
                
-                    </Col>} 
-                    {this.state.currentIndex === 4 && <Col xs md lg={8} className='py-3 rightside' >
-                        <h3 id='header'>Try adding few gifts </h3>
-                            <p id='header'> you go wrong with this best sellers</p>
+                    </div>} 
+                    {this.state.currentIndex === 4 && <div className='col-8 rightSide' >
+                        <div className='py-5 ml-5'>
+                        <h2 id='header'>Try adding few gifts <br/>you go wrong with this best sellers</h2>
                             <div className='eventType'>
-                               
-                                    <div className='eventItem'>
-                                        <p><img src={bmw} alt='weddingIcon' /> </p>
-                                        <p>Car</p>
-                                    </div> 
-                               
-                                    <div className='eventItem'>
-                                        <p> </p>
-                                        <p>Option 2</p>
-                                    </div>    
-                               
-                                <div className='eventItem'>
+                               <div className='eventItem'>
+                                  <p><img src={bmw} alt='weddingIcon' /> </p>
+                                  <p>Car</p>
+                                </div> 
+                               <div className='eventItem'>
+                                    <p> </p>
+                                    <p>Option 2</p>
+                                </div> 
+                                 <div className='eventItem'>
                                     <p> </p>
                                     <p>Option 2 </p>
                                 </div> 
@@ -306,6 +299,7 @@ next =() => {
                                     <p>Option 4</p>
                                 </div> 
                             </div>
+                        </div>
                          
                         <div className="d-flex justify-content-around">
                             <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
@@ -316,10 +310,10 @@ next =() => {
                             </button>
                         </div>
                
-                    </Col>}
+                    </div>}
             
-          </Row>
-        </Container>
+          </div>
+        </div>
    
     );
   }

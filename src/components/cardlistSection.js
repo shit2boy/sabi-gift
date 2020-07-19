@@ -15,12 +15,13 @@ function CardlistSection() {
     return (
         <section className='mt-5 mb-5' >
              <div className=' container cardTitle'>
-             <div className='wordWrap w-25 header'><h4>A whole new way to gift, when it matters</h4></div>
+             <div className='header text-center'><h2>A whole new way to gift, <br/>when it matters</h2></div>
                 
-                <div className='wordWrap w-50 header mt-4' data-aos="fade-left">
-                     Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
-                     Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem Lorem ipsum Lorem ipsum 
-                     Lorem ipsum Lorem ipsum Lorem ipsum 
+                <div className='text-center mt-4' data-aos="fade-left">
+                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum <br/>
+                            Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem<br/>
+                                Lorem ipsum Lorem ipsum Lorem Lorem ipsum Lorem 
+                    </p>
                 </div>
                <div className='row mt-4 card-row' data-aos="fade-left">
                     <div className='col-sm-3'>

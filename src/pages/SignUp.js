@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import { Form, Input, Checkbox } from 'antd';
+import { Form,Steps  } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Steps } from "antd";
-import { Container,Col,Row } from "react-bootstrap";
+import { Input,Checkbox } from "antd";
+// import { Col} from "react-bootstrap";
 
 const { Step } = Steps;
 
@@ -70,9 +70,9 @@ class SignUp extends Component {
 
   render() {
     return (
-      <Container fluid >
-          <Row className="">
-            <Col className="leftSignUp" >
+      <div className='container-fluid'>
+          <div className="row">
+            <div className=" col-4 leftSignUp" >
                 <Link className='mt-3' to="/">
                   <img
                     className="homeicon rounded-circle"
@@ -111,9 +111,9 @@ class SignUp extends Component {
                   description="Lorem ipsum lorem sioe"
                 />
               </Steps>
-            </Col>
-            <Col xs md lg= {8} className="">
-              <div className="rightSignUp">
+            </div>
+            <div className="col-8 rightSignUp">
+              <div className="py-5 ml-5">
                 {this.state.currentIndex === 2 && (
                   <div id='title'>
                     {(
@@ -124,7 +124,7 @@ class SignUp extends Component {
                     )
                       .split("\n")
                       .map((text, index) => (
-                        <h4>{text}</h4>
+                        <h2>{text}</h2>
                       ))}
                     <div className="mt-4">
                       <input
@@ -159,7 +159,7 @@ class SignUp extends Component {
                     {this.state.questions[this.state.currentIndex]
                       .split("\n")
                       .map((text, index) => (
-                        <h4>{text}</h4>
+                        <h2>{text}</h2>
                       ))}
                     <div className="mt-4">
                       <input
@@ -190,15 +190,15 @@ class SignUp extends Component {
                   </div>
                 )}
 
-                {this.state.currentIndex === 4 && <Col xs md lg={8}>
-                    <div>
-                        <h2>Good News! You can create </h2>
-                        <h2> a free registry on SabiGifts.</h2>
-                        <h2>Let's create your account</h2>
-                        
-                        <Form
+                {this.state.currentIndex === 4 && <div className='col-8'>
+                    <div className='' >
+                        <h2>Good News! You can create <br/>
+                            a free registry on SabiGifts.<br/>
+                            Let's create your account</h2>
+
+                             <Form
                             name="normal_login"
-                            className="login-form w-50"
+                            className="login-form ml-5 w-50"
                             initialValues={{
                                 remember: true,
                             }}
@@ -255,7 +255,7 @@ class SignUp extends Component {
                                 <p className="login-form-forgot" >
                                 Forgot password
                                 </p>
-                            </Form.Item>
+                            </Form.Item> 
 
                             {/* <Form.Item>
                                 <Button type="primary" htmlType="submit" className="login-form-button">
@@ -264,9 +264,30 @@ class SignUp extends Component {
                                 Or <Link href="">register now!</Link>
                             </Form.Item> */}
                             </Form>
+
+
+                            {/* <Form className=''>
+                                <Form.Row>
+                                  <Form.Group  controlId="formGridNmae">
+                                    <Form.Label>Email Address</Form.Label>
+                                    <Form.Control type="text" placeholder="Jimi" />
+                                  </Form.Group>
+                                </Form.Row>
+                                <Form.Row>
+                                  <Form.Group as={Col} controlId="formGridLastname">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" placeholder="********" />
+                                  </Form.Group>
+                                  <Form.Group as={Col} controlId="formGridPhone">
+                                    <Form.Label>Confirm Password</Form.Label>
+                                    <Form.Control type='password' placeholder="*********" />
+                                  </Form.Group>
+                                </Form.Row>
+                              </Form> */}
+
                             <Link to='/about' className='btn btn-dark rounded-pill px-5'>Sign Up</Link>
                     </div>
-              </Col>
+              </div>
                 }
                 
               <div className=''>
@@ -280,9 +301,9 @@ class SignUp extends Component {
               </div>
              
               
-            </Col>
-          </Row>
-        </Container>
+            </div>
+          </div>
+        </div>
     );
   }
 }

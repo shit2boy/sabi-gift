@@ -17,7 +17,8 @@ export class CreateRegistry extends Component {
 
                 <Row className="" >
                     <Col className="leftside">
-                        <div className="">
+                        <div  className="">
+                        <div>
                             <Link to='/'><img className='homeicon rounded-circle' src={sabigift} alt='SabiGift-Logo'/></Link>
                         </div>
                         <Steps className=''  direction="vertical" current={1}>
@@ -26,12 +27,13 @@ export class CreateRegistry extends Component {
                             <Step title="Select Gifts"  />
                             <Step title="Confirm" />
                         </Steps>
+                        </div>
                     </Col>
                     <Col  xs md lg={8} className='rightside'>
                         <div  className='w-75 p-5'>
-                            <h3 className='wordWrap p-4 text-justify'>First, Let's Make sure we support your events</h3>
+                            <h3 className=' px-4 text-justify'>First, Let's Make sure we <br/>support your events</h3>
                         
-                            <p className='p-4'>Select the Event type</p>
+                            <p className='py-4 text-left'>Select the Event type</p>
                             <div className='eventType'>
                                 <Link to='/signUp'>
                                     <div className='eventItem'>

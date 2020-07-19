@@ -8,6 +8,7 @@ const { Search } = Input;
 
 let productStyle= {
     width : '14rem',
+    minHeight: '18rem',
 boxShadow: '0px 2px 8px #00000022',
 borderRadius: '8px',
 opacity: '1',
@@ -23,7 +24,7 @@ export class Product extends Component {
         return (
             <div className=''>
                  <div className='d-flex'>
-                      <div className='col-10'><Search placeholder="Search here" onSearch={value => console.log(value)} enterButton /></div>
+                      <div className='col-9'><Search placeholder="Search here" onSearch={value => console.log(value)} enterButton /></div>
                       <div className=''>
                         <select value='Default'>
                             <option>item</option>
@@ -43,10 +44,10 @@ export class Product extends Component {
                         <Card.Body>
                             <Card.Img className="center" alt="items" src={item.imgUrl} />
                         </Card.Body>
-                        <Card.Footer className=' m-0 d-flex justify-content-between'>
+                        <div className='text-mute my-1 d-flex justify-content-between'>
                             <button type='button' className='btn '>Wishlist</button>
                             <button type='button'className='btn btn-primary' >Add to cart</button>
-                        </Card.Footer>
+                        </div>
                         </Card>
                     ))}
                 </div>

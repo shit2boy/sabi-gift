@@ -26,12 +26,12 @@ body {
 }
 
 h1,h2,h3,h4,h5,h6{
-  font-family: henriette, sans-serif;
+  font-family: trebuchet-ms, Tahoma, sans-serif !important;
   color: #545871;
   font-weight: bolder;
   opacity: 1 !important;
 }
-h1 {
+/* h1 {
   font-size: 3em;
   line-height: 1;
   margin-bottom: 0.5em;
@@ -51,7 +51,7 @@ h4 {
   margin-bottom: 1.25em;
 }
 h5 {
-  font-size: 1em;
+  /* font-size: 1em; 
   font-weight: bold;
   margin-bottom: 1.5em;
 }
@@ -59,14 +59,14 @@ h6 {
   font-size: 1em;
   font-weight: bold;
   margin-bottom: 1.5em;
-}
-.wordWrap {
-    word-wrap: break-word;      /* IE 5.5-7 */
-    white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
-    white-space: pre-wrap;      /* current browsers */
+} */
+/* .wordWrap {
+    word-wrap: break-word;     
+    white-space: -moz-pre-wrap; 
+    white-space: pre-wrap;      
     text-align:center;
     margin:auto;
-}
+} */
 
 
 #navItems{
@@ -170,7 +170,7 @@ Nav.Link {
 .stepIcon{
   /* padding: 10px; */
   align-self:baseline;
-  background-color: #F7ECEB;
+  background: #F7ECEB;
   /* border-radius: 50px; */
 
 }
@@ -191,10 +191,7 @@ Nav.Link {
   color: #545871;
   font-size: large;
 }
-/* #title{
-  font-size: large;
-  font-weight: 500;
-} */
+
 .stepTag{
   font-weight: bold;
  font-size: large;
@@ -220,27 +217,24 @@ Nav.Link {
 
 /*****FIND REGISTRY*********/
 .leftside {
-  padding: 30px;
+  padding: 40px;
   opacity: 1;
   text-align: center;
-  justify-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color:var(--primaryColor) ;
 
 }
 
-/* .ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
-  background: var(--offWhite);
-} */
+
 .homeicon {
  width: 70px;
  justify-content: center;
  margin-bottom: 30px;
 }
 
-rightside{
+.rightside{
   background:#E2F3E1 ;
-  height: 100vh;
+  min-height: 100vh;
   padding: 25px;
   margin: auto;
   text-align: center;
@@ -249,12 +243,9 @@ rightside{
 }
 
 .rightSide {
-  background-color: #EEEEEE;
+  background: #E2F3E1;
   padding: 45px;
-  height: 100%;
-  /* border-left-width: 43px; */
-  /* text-align: center; */
-  /* font-family: Arial, Helvetica, sans-serif; */
+  min-height: 100vh;
   opacity: 1;
   color: #888888 ;
 }
@@ -268,7 +259,8 @@ rightside{
 .eventType{
   display: flex;
   flex-direction: row;
-  margin: auto;
+  overflow: hidden;
+  /* margin: auto; */
   width: 608px;
   height: 151px;
   background: #F7F7F7 ;
@@ -276,15 +268,13 @@ rightside{
   
 }
 .eventItem{
- 
-  opacity: 1;
   padding: 20px;
-width: 152px;
-height: 151px;
-box-shadow: 0px 2px 5px #0000000F;
-border: 1px solid #DDDDDD;
-border-radius: 5px 0px 0px 4px;
-opacity: 1;
+  width: 152px;
+  height: 151px;
+  box-shadow: 0px 2px 5px #0000000F;
+  border: 1px solid #DDDDDD;
+  border-radius: 5px 0px 0px 4px;
+  opacity: 1;
 }
 
 .btnBack{
@@ -328,7 +318,7 @@ opacity: 1;
 border-radius: 64px;
 opacity: 1;
 }
-.sidear{
+.availableItem{
   
   box-shadow: 0px 2px 8px #00000022;
 border-radius: 8px;
@@ -342,4 +332,20 @@ border-radius: 8px;
 border: 1px solid #EFF0F0;
 border-radius: 25px;
 opacity: 1;
+}
+
+
+/* *********Event Type******** */
+
+.birthday{
+  border: 1px solid var(--mainText);
+background: transparent url('images/Sabi-storepage/happy-birthday-in-different-languages.png') 0% 0% no-repeat;
+/* border-radius: 78px; */
+opacity: 1;
+display: flex;
+  align-items: center;
+  justify-content: center;
+  /* top: 5%; */
+  width: 100%;
+  height: 600px;
 }

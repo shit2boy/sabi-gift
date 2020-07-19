@@ -7,6 +7,8 @@ import FindRegistry from './pages/FindRegistry';
 import CreateRegistry from './pages/CreateRegistry';
 import SignUp from './pages/SignUp';
 import About from './pages/About';
+import GiftTracker from './components/GiftTracker';
+import EventType from './pages/EventType';
 
 const  Home = lazy(()=> import('./pages/Home'));
 
@@ -24,6 +26,8 @@ function App() {
                   <Route path='/createRegistry' component={CreateRegistry} />
                   <Route path='/signUp' component={SignUp} />
                   <Route path='/about' component={About} />
+                  <Route path='/giftTracker' component={GiftTracker} />
+                  <Route path='/eventType' component={EventType} />
                   {/* <Route component={Error} /> */}
                
                 </Switch>

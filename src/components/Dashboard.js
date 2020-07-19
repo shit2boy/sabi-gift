@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import {Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import AvailableItems from "./AvailableItems";
 import DashboardNav from "./DashboardNav";
 import Avatars from '../images/Sabi-storepage/Avatars.png'
 import { imgCardlist,checkList } from "./imageData";
+import { GiReceiveMoney } from "react-icons/gi";
 import { GrHome, GrFolder,GrBarChart } from "react-icons/gr";
-import {BsFolder,BsAlarm,BsBell} from "react-icons/bs";
+import {BsFolder,BsGift,BsAlarm,BsBell} from "react-icons/bs";
 import Product from "./Product";
+import RegistryBar from "./ProgressBar";
 
 
 export class Dashboard extends Component {
@@ -54,16 +56,20 @@ export class Dashboard extends Component {
                 <p>Welcome Jimi,</p>
                 <p><strong>1 JANUARY, 2002</strong></p>
               </div>
-              <div className="bg-info d-flex">
+              <div className="b d-flex">
                 <div>
                   <div>
                     <p><strong>Cash Gift</strong></p>
+                    <small>Value of Cash gifts</small>
+                    <GiReceiveMoney size='30px'  color='#E6E6E6'/>
                   </div>
                   <div>
                     <p>Gift Received</p>
+                    <small>Number of received</small>
+                    <BsGift size='30px' color='#E6E6E6'/>
                   </div>
                 </div>
-                <div>graph</div>
+                <div><RegistryBar number={15}/></div>
               </div>
               {/* <div className="bg-success">sss</div> */}
             </div>
@@ -107,7 +113,7 @@ export class Dashboard extends Component {
             <div className="mt-5 py-5 ">
               <h5 className="mb-5 ">Add items to your Registry</h5>
               <Row>
-                <Col xs md={3} lg={3} className="22 sidear ">
+                <Col xs md={3} lg={3} className="availableItem">
                   <p>Filter</p>
                   <div className='row'>
                     <div className='mx-auto'>
@@ -116,10 +122,8 @@ export class Dashboard extends Component {
                   </div>
                   
                 </Col>
-                <Col xs md={9} lg={9} classname=" 22">
+                <Col xs md={9} lg={9} classname="">
                   <Product/>
-                 
-                 
                 </Col>
               </Row>
             </div>

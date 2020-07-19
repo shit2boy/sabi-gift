@@ -1,9 +1,8 @@
 import React from 'react'
-import Banner from './Banner'
 
-export default function Hero({hero}) {
+export default function Hero({hero,children}) {
     return <header className={hero}>
-        <Banner/>
+        {children}
     </header>
 }
 Hero.defaultProps = {

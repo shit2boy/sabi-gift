@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Nav,Navbar, NavDropdown } from 'react-bootstrap';
 import sabigift from '../images/landing/sabigift.png'
+import image from '../images/Sabi-storepage/image.png'
 
 
 
@@ -19,17 +20,17 @@ export class DashboardNav extends Component {
                             <Nav.Link href="#">Dashboard</Nav.Link>
                             <Nav.Link href="#">Manage Regisrty</Nav.Link>
                             <Nav.Link href="#">Checklist</Nav.Link>
-                            <Nav.Link href="#">Gift Tracker</Nav.Link>
+                            <Nav.Link href="/giftTracker">Gift Tracker</Nav.Link>
                            
                             </Nav>
                             <Nav>
                             <Nav.Link href="#deets">
-                                <p>Jimi & Johanna's registry</p>
+                                <span className='row'>Jimi & Johanna's registry</span>
                                 <small>setting</small>
                                 <small>Preview</small>
                             </Nav.Link>
                             <Nav.Link eventKey={2} href="#memes">
-                            <Navbar.Brand href="/"><img className='rounded-circle shadow' width='70px' src={sabigift} alt='logo' /></Navbar.Brand>
+                            <Navbar.Brand href="/"><img className='rounded-circle shadow' width='70px' src={image} alt='logo' /></Navbar.Brand>
                             </Nav.Link>
                             <NavDropdown title="" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

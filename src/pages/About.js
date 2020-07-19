@@ -97,7 +97,7 @@ next =() => {
                   </Form.Row>
                 </Form>
                 </div>
-                <div className=" d-flex justify-content-around" style={{background:'#ffffff',height:'70px'}}>
+                <div className=" d-flex justify-content-around" style={{background:'#ffffff'}}>
                 <button type="button" onClick={this.back} className="btn btn-light rounded-pill px-5">
                   Back
                 </button>

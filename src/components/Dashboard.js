@@ -10,6 +10,8 @@ import {BsFolder,BsGift,BsAlarm,BsBell} from "react-icons/bs";
 import Product from "./Product";
 import RegistryBar from "./ProgressBar";
 import NextSteps from "./NextSteps";
+import { Tooltip } from 'antd';
+
 
 
 export class Dashboard extends Component {
@@ -25,23 +27,28 @@ export class Dashboard extends Component {
           <Col xs={1} md={1} lg={1} className="ml-4 justify-content-center sidebarMenu">
             <div classname='mt-4'>
                 <div className='mt-3 text-center'>
-                    <BsBell/>
+                <Tooltip placement="left" title='notification'>
+                  <BsBell/>
+                </Tooltip>
                 </div>
             <div className=' ml-2 mb-4'>
                 <img src={Avatars} width='35px' alt='userImage'/>
             </div>
             <div className='ml-2'>
                 <div className='py-4'>
+                <Tooltip placement="left" title='overview' color='geekblue'>
                 <GrHome size='30px'/>
+                  </Tooltip>
                 </div>
                 <div className='py-4'>
-                    <BsAlarm size='30px'/>
+                  <Tooltip placement="left" title='manage registry'><BsAlarm size='30px'/></Tooltip>
                 </div>
                 <div className='py-4'>
-                    <GrFolder size='30px'/>
+                  <Tooltip placement="left" title='checklist'><GrFolder size='30px'/></Tooltip>
                 </div>
                 <div className='py-4'>
-                    <GrBarChart size='30px'/>
+                  <Tooltip placement="left" title='Track Gift'><GrBarChart size='30px'/></Tooltip>
+                    
                 </div>
                 <div className='py-4'>
                     <BsFolder size='30px'/>
@@ -93,22 +100,7 @@ export class Dashboard extends Component {
               <h5 className="mt-4 py-4 ">Next steps to take</h5>
 
               <NextSteps/>
-              {/* <div className="row justify-content-around ">
-                {imgCardlist.map((item) => (
-                  <Card id='myCards' className='shadow' style={{ width: "12rem" }}>
-                    <Card.Body>
-                      <img className="center" alt="items" src={item.imageUrl} />
-                    </Card.Body>
-                    <Card.Text>
-                      <h6 class="ml-1">{item.id + 1}</h6>
-                      <small class="ml-1">
-                        Add item to Gift registry{" "}
-                        <span className="text-center">+</span>
-                      </small>
-                    </Card.Text>
-                  </Card>
-                ))}
-              </div> */}
+           
             </div>
             <div className="mt-5 py-5">
               <h5 className='mb-5'>Your Registry Checklist</h5>

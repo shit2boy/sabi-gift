@@ -18,14 +18,14 @@ export class DashboardNav extends Component {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mr-auto">
-                            <Nav.Link href="#">Dashboard</Nav.Link>
+                            <Nav.Link href="/Dashboard">Dashboard</Nav.Link>
                             <Nav.Link href="#">Manage Regisrty</Nav.Link>
-                            <Nav.Link href="#">Checklist</Nav.Link>
+                            <Nav.Link href="/checklist">Checklist</Nav.Link>
                             <Nav.Link href="/giftTracker">Gift Tracker</Nav.Link>
                            
                             </Nav>
                             <Nav>
-                            <Nav.Link href="#deets">
+                            <Nav.Link href="#">
                                 <span className='row'>Jimi & Johanna's registry</span>
                                 <span className='mr-2'><img src={settingIcon} alt='icon'></img><small>setting</small></span>
                                 <span><img src={previewIcon} alt='icon'></img><small>Preview</small></span>

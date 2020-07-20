@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {storeProduct} from '../storeProduct'
 import 'antd/dist/antd.css';
-import { Radio } from 'antd';
+import { Radio,Rate } from 'antd';
 import Slider from './Slider'
 
 
@@ -68,6 +68,29 @@ export class AvailableItems extends Component {
                     </Radio>
                 )}
               </Radio.Group>
+              <hr/>
+              <p>Rating</p>
+              <div className='d-flex justify-content-between'>
+                <Rate allowHalf defaultValue={4.5} />
+                <p>8500</p>
+              </div>
+              <div className='d-flex justify-content-between'>
+                <Rate allowHalf defaultValue={3.} />
+                <p> 3250 </p>
+              </div>
+              <div className='d-flex justify-content-between'>
+                <Rate allowHalf defaultValue={2.5} />
+                <p>1120 </p>
+              </div>
+              <div className='d-flex justify-content-between'>
+                <Rate allowHalf defaultValue={2.} />
+                <p>3320 </p>
+              </div>
+              <div className='d-flex justify-content-between'>
+                <Rate allowHalf defaultValue={3.5} />
+                <p>5452</p>
+              </div>
+              
 
             </div>
         )

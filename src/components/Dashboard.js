@@ -3,12 +3,13 @@ import { Card, Row, Col } from "react-bootstrap";
 import AvailableItems from "./AvailableItems";
 import DashboardNav from "./DashboardNav";
 import Avatars from '../images/Sabi-storepage/Avatars.png'
-import { imgCardlist,checkList } from "./imageData";
+import { checkList } from "./imageData";
 import { GiReceiveMoney } from "react-icons/gi";
 import { GrHome, GrFolder,GrBarChart } from "react-icons/gr";
 import {BsFolder,BsGift,BsAlarm,BsBell} from "react-icons/bs";
 import Product from "./Product";
 import RegistryBar from "./ProgressBar";
+import NextSteps from "./NextSteps";
 
 
 export class Dashboard extends Component {
@@ -19,8 +20,8 @@ export class Dashboard extends Component {
     return (
       <div className='container-fluid'>
         <DashboardNav />
-        <Row>
-          {/* <Col xs lg="1" className='bg-info'> of side</Col> */}
+        <hr className='mt-0 mb-0'/>
+        <Row className='mt-4'>
           <Col xs={1} md={1} lg={1} className="ml-4 justify-content-center sidebarMenu">
             <div classname='mt-4'>
                 <div className='mt-3 text-center'>
@@ -50,32 +51,49 @@ export class Dashboard extends Component {
            
           </Col>
           <Col className=" content">
-            <div>hdg</div>
-            <div className="1  row justify-content-around">
-              <div className="py-5 text-left">
-                <p>Welcome Jimi,</p>
-                <p><strong>1 JANUARY, 2002</strong></p>
-              </div>
-              <div className="b d-flex">
-                <div>
-                  <div>
-                    <p><strong>Cash Gift</strong></p>
-                    <small>Value of Cash gifts</small>
-                    <GiReceiveMoney size='30px'  color='#E6E6E6'/>
-                  </div>
-                  <div>
-                    <p>Gift Received</p>
-                    <small>Number of received</small>
-                    <BsGift size='30px' color='#E6E6E6'/>
-                  </div>
+            <div className="row justify-content-around">
+                <div className="py-5 text-left" style={{width: '500px',border: '1px solid',height:'150px'}}>
+                  <p className='text-right'>Welcome Jimi,</p>
+                  <p className='text-right'><strong>1 JANUARY, 2002</strong></p>
                 </div>
-                <div><RegistryBar number={15}/></div>
+                <div className="d-flex justify-content-between" >
+                <div className='px-4' style={{width:'350px'}}>
+                  <div className='d-flex justify-content-between align-items-center cashGift mb-3'>
+                    <div className='p-3'>
+                      <span className='d-block'><strong>Cash Gift</strong></span>
+                      <small>Value of Cash gifts</small>
+                    </div>
+                    <div className='d-flex align-items-center p-3'>
+                        <GiReceiveMoney size='30px'  color='#E6E6E6'/>
+                        <div className='ml-3 align-items-center'>
+                        <span class="badge badge-pill badge-success">cash</span>
+                          <p>200,000</p>
+                        </div>
+                    </div>
+                  </div>
+                  <div className='d-flex justify-content-between align-items-center giftReceived'>
+                    <div className='p-3'>
+                      <span className='d-block'><strong>Gift Received</strong></span>
+                      <small>Number of received</small>
+                    </div>
+                    <div className='d-flex align-items-center p-3'>
+                        <BsGift size='30px' color='#E6E6E6'/>
+                        <div className='ml-3 align-items-center'>
+                        <span class="badge badge-pill badge-primary">Gifts</span>
+                          <p>400,000</p>
+                        </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                <RegistryBar number={5}/>
               </div>
-              {/* <div className="bg-success">sss</div> */}
             </div>
             <div className="2  ">
               <h5 className="mt-4 py-4 ">Next steps to take</h5>
-              <div className="row justify-content-around ">
+
+              <NextSteps/>
+              {/* <div className="row justify-content-around ">
                 {imgCardlist.map((item) => (
                   <Card id='myCards' className='shadow' style={{ width: "12rem" }}>
                     <Card.Body>
@@ -90,7 +108,7 @@ export class Dashboard extends Component {
                     </Card.Text>
                   </Card>
                 ))}
-              </div>
+              </div> */}
             </div>
             <div className="mt-5 py-5">
               <h5 className='mb-5'>Your Registry Checklist</h5>

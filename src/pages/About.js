@@ -238,7 +238,8 @@ next =() => {
                     </div>} 
                     {this.state.currentIndex === 4 && <div className='col-8 rightSide' >
                         <div className='py-5 ml-5'>
-                        <h2 id='header'>Try adding few gifts <br/>you go wrong with this best sellers</h2>
+                        <h2 id='header'>Try adding few gifts </h2>
+                            <p>you can't go wrong with this best sellers</p>
                             <div className='eventType'>
                                <div className='eventItem'>
                                   <p><img src={bmw} alt='weddingIcon' /> </p>

@@ -21,8 +21,8 @@ body {
   background: var(--mainWhite);
   font-family: trebuchet-ms, Tahoma, sans-serif !important;
   /* font-size: 12px; */
-  line-height: 1.4;
-  font-weight: bold;
+  /* line-height: 1.4; */
+  /* font-weight: bold; */
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -186,7 +186,7 @@ Nav.Link {
 }
 #stepTitle {
   border-right: 1px solid #e6dbda;
-  text-align: justify;
+  text-align: left;
   padding: 1rem;
   color: #545871;
   font-size: large;
@@ -318,6 +318,68 @@ opacity: 1;
 border-radius: 64px;
 opacity: 1;
 }
+
+.cashGift{
+  padding: '25px';
+  color: #222222;
+  border: 1px solid #CBCBCB;
+  border-radius: 5px;
+  opacity: 1;
+}
+
+.giftReceived{
+  box-shadow: 0px 15px 30px #00000017;
+  color: #222222;
+  border: 1px solid #CBCBCB;
+  border-radius: 5px;
+  opacity: 1;
+}
+
+.stepsCard{
+  background: transparent url('images/Sabi-storepage/Gift.svg');
+  background-position: center; 
+  background-repeat: no-repeat;
+  opacity: 1;
+  height: 125px;
+
+}
+.stepsCard2{
+  background: transparent url('images/Sabi-storepage/couple2.svg');
+  background-position: center; 
+  background-repeat: no-repeat;
+  opacity: 1;
+  height: 125px;
+
+}
+.stepsCard3{
+  background: transparent url('images/Sabi-storepage/drinks.svg');
+  background-position: center; 
+  background-repeat: no-repeat;
+  opacity: 1;
+  height: 125px;
+
+}
+.stepsCard4{
+  background: transparent url('images/Sabi-storepage/businessFinance.svg');
+  background-position: center; 
+  background-repeat: no-repeat;
+  opacity: 1;
+  height: 125px;
+
+}
+.stepsCard5{
+  background: transparent url('images/Sabi-storepage/monitor.svg');
+  background-position: center; 
+  background-repeat: no-repeat;
+  opacity: 1;
+  height: 125px;
+
+}
+.cardFooter{
+  opacity: 1;
+  border-top: 0px !important;
+  background: #FFFFFF !important;
+}
 .availableItem{
   
   box-shadow: 0px 2px 8px #00000022;
@@ -345,6 +407,7 @@ opacity: 1;
 display: flex;
   align-items: center;
   justify-content: center;
+  object-fit: fill;
   /* top: 5%; */
   width: 100%;
   height: 600px;

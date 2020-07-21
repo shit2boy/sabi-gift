@@ -7,6 +7,8 @@ import monitor from '../images/Sabi-storepage/monitor.svg'
 //checklistImages
 import kitchen from '../images/Sabi-storepage/kitchen.png'
 import laptop from '../images/Sabi-storepage/laptop.png'
+import smartwatch from '../images/Sabi-storepage/smartwatch.jpg'
+import watchphone from '../images/Sabi-storepage/watchphone.jpg'
 
 
 export const imgCardlist =[
@@ -81,133 +83,146 @@ export const ProductItems =[
     {
         id:1,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:2,
-        name:'Laptop',
-        imgUrl: laptop
+        name:'Apple Smart Watch',
+        imgUrl: smartwatch,
+        price : '#13.999',
+        info: 'Apple Watch Series 4 GPS',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Apple Watch Series 4 GPS',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: watchphone,
+        price: '#15,000',
+        info: 'Apple Watch Series 4 GPS',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
     {
         id:3,
         name:'Laptop',
-        imgUrl: laptop
+        imgUrl: laptop,
+        price: '#250,000',
+        info: 'Lenovo Pro 512GB SSD',
+        comment: 'Redesigned from scratch and completely revised.'
 
     },
-    {
-        id:3,
-        name:'Laptop',
-        imgUrl: laptop
-
-    },
-    {
-        id:3,
-        name:'Laptop',
-        imgUrl: laptop
-
-    },
-    {
-        id:3,
-        name:'Laptop',
-        imgUrl: laptop
-
-    },
-    {
-        id:3,
-        name:'Laptop',
-        imgUrl: laptop
-
-    },
-    {
-        id:3,
-        name:'Laptop',
-        imgUrl: laptop
-
-    },
-    {
-        id:3,
-        name:'Laptop',
-        imgUrl: laptop
-
-    },
+   
 ]

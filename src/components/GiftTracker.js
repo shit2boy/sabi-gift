@@ -3,7 +3,7 @@ import laptop from "../images/Sabi-storepage/laptop.png";
 import Button from './Button'
 import Avatars from '../images/Sabi-storepage/Avatars.png'
 
-import { GrHome, GrFolder,GrBarChart } from "react-icons/gr";
+import { GrHome, GrFolder,GrBarChart,GrFavorite } from "react-icons/gr";
 import {BsFolder,BsAlarm,BsBell} from "react-icons/bs";
 import { Tooltip } from 'antd';
 import DashboardNav from './DashboardNav';
@@ -69,7 +69,7 @@ export class GiftTracker extends Component {
                     </div>
                     <div className='py-4'>
                       <div><Button  name='SEND NOW'></Button></div> 
-                      <div><Button style={{background:'white'}} name='Convert to credit'></Button></div> 
+                      <div><Button style={{background:'white'}} name='Convert to credit'><GrFavorite/></Button></div> 
                     </div>
                 </div> 
             

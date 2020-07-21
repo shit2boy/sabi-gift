@@ -7,8 +7,8 @@ import { Card } from "react-bootstrap";
 const { Search } = Input;
 
 let productStyle= {
-    width : '14rem',
-    minHeight: '18rem',
+    width : '20rem',
+    // minHeight: '10rem',
 boxShadow: '0px 2px 8px #00000022',
 borderRadius: '8px',
 opacity: '1',
@@ -41,10 +41,13 @@ export class Product extends Component {
                     <div className='row'>
                     {ProductItems.map((item) => (
                         <Card id='productCards' className='m-3 col-sm-3' style={ productStyle}>
+                        <Card.Img className="center" alt="items" src={item.imgUrl} />
+                        <span className='d-block ml-auto'>{item.price}</span>
                         <Card.Body>
-                            <Card.Img className="center" alt="items" src={item.imgUrl} />
+                            <small className='d-block'>{item.info}</small>
+                            <small>{item.comment}</small>
                         </Card.Body>
-                        <div className='text-mute my-1 d-flex justify-content-between'>
+                        <div className='footer my-1 d-flex justify-content-between'>
                             <button type='button' className='btn '>Wishlist</button>
                             <button type='button'className='btn btn-primary' >Add to cart</button>
                         </div>

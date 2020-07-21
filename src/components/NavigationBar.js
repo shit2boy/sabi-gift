@@ -18,7 +18,7 @@ function NavigationBar() {
       <Nav.Link className="pv-3 ml-2 " href="/createRegistry">FIND AN EVENT</Nav.Link>
     </Nav>
  </Navbar.Collapse>
- <Nav className='ml-auto'><Nav.Link href="#"><img src={account} width='50px' alt='userImage'/></Nav.Link></Nav>
+ <Nav className='ml-auto'><Nav.Link href="/Dashboard"><img src={account} width='50px' alt='userImage'/></Nav.Link></Nav>
 </Navbar>
     )
 }

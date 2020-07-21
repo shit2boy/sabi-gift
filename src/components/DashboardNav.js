@@ -14,7 +14,7 @@ export class DashboardNav extends Component {
     render() {
         return (
                 <Navbar collapseOnSelect expand="lg" bg="white" style={style} >
-                        <Navbar.Brand href="/"><img src={sabigift} alt='logo' width='70px' /></Navbar.Brand>
+                        <Navbar.Brand href="/Dashboard"><img src={sabigift} alt='logo' width='70px' /></Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mr-auto">
@@ -31,14 +31,13 @@ export class DashboardNav extends Component {
                                 <span><img src={previewIcon} alt='icon'></img><small>Preview</small></span>
                             </Nav.Link>
                             <Nav.Link eventKey={2} href="#memes">
-                            <Navbar.Brand href="/"><img className='rounded-circle shadow' width='70px' src={image} alt='logo' /></Navbar.Brand>
+                            <Navbar.Brand href="/Dashboard"><img className='rounded-circle shadow' width='70px' src={image} alt='logo' /></Navbar.Brand>
                             </Nav.Link>
                             <NavDropdown title="" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                                <NavDropdown.Item href="#">Edit Profile</NavDropdown.Item>
+                                <NavDropdown.Item href="#">Contact Support</NavDropdown.Item>
+                                <NavDropdown.Item href="#">Knowledge Base</NavDropdown.Item>
+                                
                             </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>

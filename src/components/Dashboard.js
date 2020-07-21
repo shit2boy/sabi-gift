@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import { Card, Row, Col } from "react-bootstrap";
+import {Row, Col } from "react-bootstrap";
 import AvailableItems from "./AvailableItems";
 import DashboardNav from "./DashboardNav";
-import Avatars from '../images/Sabi-storepage/Avatars.png'
-import { checkList } from "./imageData";
 import { GiReceiveMoney } from "react-icons/gi";
-import { GrHome, GrFolder,GrBarChart } from "react-icons/gr";
-import {BsFolder,BsGift,BsAlarm,BsBell} from "react-icons/bs";
+import {BsGift} from "react-icons/bs";
 import Product from "./Product";
 import RegistryBar from "./ProgressBar";
 import NextSteps from "./NextSteps";
-import { Tooltip } from 'antd';
+import SideBar from "./SideBar";
+import CheckList from "./CheckList";
 
 
 
@@ -25,37 +23,7 @@ export class Dashboard extends Component {
         <hr className='mt-0 mb-0'/>
         <Row className='mt-4'>
           <Col xs={1} md={1} lg={1} className="ml-4 justify-content-center sidebarMenu">
-            <div classname='mt-4'>
-                <div className='mt-3 text-center'>
-                <Tooltip placement="left" title='notification'>
-                  <BsBell/>
-                </Tooltip>
-                </div>
-            <div className=' ml-2 mb-4'>
-                <img src={Avatars} width='35px' alt='userImage'/>
-            </div>
-            <div className='ml-2'>
-                <div className='py-4'>
-                <Tooltip placement="left" title='overview' color='geekblue'>
-                <GrHome size='30px'/>
-                  </Tooltip>
-                </div>
-                <div className='py-4'>
-                  <Tooltip placement="left" title='manage registry'><BsAlarm size='30px'/></Tooltip>
-                </div>
-                <div className='py-4'>
-                  <Tooltip placement="left" title='checklist'><GrFolder size='30px'/></Tooltip>
-                </div>
-                <div className='py-4'>
-                  <Tooltip placement="left" title='Track Gift'><GrBarChart size='30px'/></Tooltip>
-                    
-                </div>
-                <div className='py-4'>
-                    <BsFolder size='30px'/>
-                </div>
-            </div>
-            </div>
-           
+            <SideBar/>
           </Col>
           <Col className=" content">
             <div className="row justify-content-around">
@@ -105,19 +73,7 @@ export class Dashboard extends Component {
             <div className="mt-5 py-5">
               <h5 className='mb-5'>Your Registry Checklist</h5>
               <div className="row justify-content-around">
-              {checkList.map((item) => (
-                  <Card id='myCards' style={{ width: "8rem" }}>
-                    <Card.Body>
-                      <Card.Img className="center rounded-circle" alt="items" src={item.imageUrl} />
-                    </Card.Body>
-                    <Card.Text>
-                        <h6 class="p-1">{item.name}</h6>
-                      <small class="p-1">
-                          +
-                      </small>
-                    </Card.Text>
-                  </Card>
-                ))}
+                <CheckList/>
               </div>
             </div>
             <div className="mt-5 py-5 ">

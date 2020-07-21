@@ -9,6 +9,8 @@ import SignUp from './pages/SignUp';
 import About from './pages/About';
 import GiftTracker from './components/GiftTracker';
 import EventType from './pages/EventType';
+import ManageRegistry from './pages/ManageRegistry';
+import CheckoutForm from './pages/CheckoutForm';
 
 const  Home = lazy(()=> import('./pages/Home'));
 
@@ -26,8 +28,10 @@ function App() {
                   <Route path='/createRegistry' component={CreateRegistry} />
                   <Route path='/signUp' component={SignUp} />
                   <Route path='/about' component={About} />
+                  <Route path='/manageregistry' component={ManageRegistry} />
                   <Route path='/giftTracker' component={GiftTracker} />
                   <Route path='/eventType' component={EventType} />
+                  <Route path='/checkout' component={CheckoutForm} />
                   {/* <Route component={Error} /> */}
                
                 </Switch>

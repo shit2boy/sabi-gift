@@ -24,31 +24,3 @@ function NavigationBar() {
 }
 
 export default NavigationBar
-
-
-
-// <div class="navbar-wrapper">
-// <div class="container">
-//     <div class="navbar navbar-static-top" role="navigation">
-//     <div class="container full-width">
-//     <div class="navbar-header">
-//           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-//             <span class="sr-only">Toggle navigation</span>
-//             <span class="icon-bar"></span>
-//             <span class="icon-bar"></span>
-//             <span class="icon-bar"></span>
-//           </button>
-//         <a class="navbar-brand" href="#"></a>
-//      </div>
-//      <div class="navbar-collapse collapse">
-//         <ul class="nav navbar-nav navbar-right">
-//             <li class="active"><a href="#home_page">HOME</a></li>
-//             <li><a href="#about_page">HOW IT WORKS</a></li>
-//             <li><a href="#portfolio_page">CREATE REGISTRY</a></li>
-//             <li><a href="#contact_page">FIND AN EVENT</a></li>
-//         </ul>
-//      </div>
-//      </div>
-//      </div>
-// </div>
-// </div>

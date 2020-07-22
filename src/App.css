@@ -92,7 +92,6 @@ Nav.Link {
 .banner {
   display: inline;
   background: var(--mainWhite);
-  color: Trebuchet MS;
   padding: 3rem;
   text-align: center;
 
@@ -397,26 +396,31 @@ opacity: 1;
 }
 /************MANAGE REGISTRY *************/
 .manageReg{
-  background:transparent url('images/Sabi-storepage/manageReg.png');
-  background-position: center; 
-  background-repeat: no-repeat;
-  width:'100%';
-  height:'auto';
+  background-image:  url('images/Sabi-storepage/manageReg.png');
+  background-position: center !important;
+  background-size: cover;
+  background-repeat: no-repeat !important;
+  width: 100% !important;
+  height: 20%;
+  object-fit: contain;
+
 }
 
 
 /* *********Event Type******** */
 
 .birthday{
-  border: 1px solid var(--mainText);
-background: transparent url('images/Sabi-storepage/happy-birthday-in-different-languages.png') 0% 0% no-repeat;
-/* border-radius: 78px; */
-opacity: 1;
+  /* border: 1px solid var(--mainText); */
+background: transparent url('images/Sabi-storepage/happy-birthday-in-different-languages.png');
+border-radius: 70px;
 display: flex;
   align-items: center;
   justify-content: center;
-  object-fit: fill;
-  /* top: 5%; */
-  width: 100%;
-  height: 600px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: contain;
+    margin: auto;
+    opacity: 1;
+    height: 500px;
 }

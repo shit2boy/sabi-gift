@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Nav,Navbar, NavDropdown } from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 import sabigift from '../images/landing/sabigift.png'
 import image from '../images/Sabi-storepage/image.png'
 import settingIcon from '../images/Sabi-storepage/settingIcon.svg'
@@ -27,8 +28,8 @@ export class DashboardNav extends Component {
                             <Nav>
                             <Nav.Link href="#">
                                 <span className='row'>Jimi & Johanna's registry</span>
-                                <span className='mr-2'><img src={settingIcon} alt='icon'></img><small>setting</small></span>
-                                <span><img src={previewIcon} alt='icon'></img><small>Preview</small></span>
+                                <span className='mr-2'><Link to='/checkout'><img src={settingIcon} alt='icon'></img><small>setting</small></Link></span> 
+                                <Link to='/eventType'><span><img src={previewIcon} alt='icon'></img><small>Preview</small></span></Link>
                             </Nav.Link>
                             <Nav.Link eventKey={2} href="#memes">
                             <Navbar.Brand href="/Dashboard"><img className='rounded-circle shadow' width='70px' src={image} alt='logo' /></Navbar.Brand>

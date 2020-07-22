@@ -1,9 +1,21 @@
-import React from 'react'
-import {Modal} from "react-bootstrap";
+import React, {useState} from 'react'
+import {Modal,Form,Col} from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 
 function ModalFindEvent(props) {
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  }
+
     return (
       <Modal
         {...props}
@@ -17,18 +29,23 @@ function ModalFindEvent(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-                <form className='container h-25'>
-                    <div class="form-group row" style={{borderRadius: '15px'}} >
-                        <div class="col-sm-10 mx-auto">
-                            <input type="email" class="form-control" id="findEvent" placeholder="Victor's Birthday"/>
-                        </div>
+               
+                   <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                      <Form.Row>
+                      <Form.Group as={Col} controlId="Fname">
+                        <Form.Control
+                          required
+                          type="text"
+                          placeholder="Victor's Birthday"
+                          />
+                          <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group as={Col} md={2} controlId="btn">
                         <button type="submit" class="btn p-1" style={{backgroundColor:'#6F64F8',width: '90px'}}>Find</button>
-                    </div> 
-                </form>
+                      </Form.Group>
+                      </Form.Row>
+                    </Form>
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer> */}
       </Modal>
     );
   }

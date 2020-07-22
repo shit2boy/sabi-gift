@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
 import {  Steps } from "antd";
-// import { UserOutlined, LockOutlined } from '@ant-design/icons';
-// import { Input,Checkbox } from "antd";
 import { Col,Form,Row} from "react-bootstrap";
-
+// import axios from 'axios';
 const { Step } = Steps;
 
 class SignUp extends Component {
@@ -203,7 +201,7 @@ class SignUp extends Component {
                 <div className="col-8">
                   <div className="">
                     <h2>
-                      Good News! You can create <br />a free registry on
+                      Good News! You can create <br/>a free registry on
                       SabiGifts.
                     </h2>
                     <h2>Let's create your account.</h2>
@@ -214,7 +212,6 @@ class SignUp extends Component {
                           <Form.Label>Email Address</Form.Label>
                           <Form.Control type="text" placeholder="Enter Email Address" />
                         </Form.Group>
-
                       </Form.Row>
                       <Form.Row>
                         <Form.Group as={Col} controlId="formGridPassword">

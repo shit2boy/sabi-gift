@@ -9,13 +9,13 @@ import { Card} from "react-bootstrap";
         return (
             <>
               {checkList.map((item) => (
-                  <Card id='myCards' style={{ width: "8rem" }}>
+                  <Card key={item.id} id='myCards' style={{ width: "8rem" }}>
                     <Card.Body>
                       <Card.Img className="center rounded-circle" alt="items" src={item.imageUrl} />
                     </Card.Body>
                     <Card.Text>
-                        <h6 class="p-1">{item.name}</h6>
-                      <small class="p-1">
+                        <small className="p-1">{item.name}</small>
+                      <small className="p-1">
                           +
                       </small>
                     </Card.Text>

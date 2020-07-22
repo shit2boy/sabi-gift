@@ -27,8 +27,8 @@ export class Product extends Component {
                  <div className='d-flex'>
                       <div className='col-9'><Search placeholder="Search here" onSearch={value => console.log(value)} enterButton /></div>
                       <div className=''>
-                        <select value='Default'>
-                            <option>item</option>
+                        <select>
+                            <option>Default</option>
                             <option>item</option>
                             <option>item</option>
                         </select>
@@ -41,17 +41,21 @@ export class Product extends Component {
                     </div>
                     <div className='row'>
                     {ProductItems.map((item) => (
-                        <div id='productCards' className='card m-2 col-sm-3' style={ productStyle}>
+                        <div key={item.index} id='productCards' className='card m-2 col-sm-3' style={ productStyle}>
                         <Card.Img className="center" alt="items" src={item.imgUrl} />
                         <span className='d-block ml-auto'>{item.price}</span>
                         <Card.Body>
                             <small className='d-block'>{item.info}</small>
                             <small>{item.comment}</small>
                         </Card.Body>
-                        <div className='d-flex'>
+                        {!this.props.showWishList && <div className='d-flex'>
                             <p type='button' className='mb-0 p-2'style={{background:'#ededed',width:'95px',color :'#2c2c2c'}}><GrFavorite/> Wishlist</p>
                             <p type='button'className='mb-0 p-2'style={{background:'#6F64F8',width:'100px', borderBottomRightRadius:'8px'}}>Add to cart</p>
-                        </div> 
+                        </div> }
+                        
+                        {this.props.showWishList && <div className='d-flex'>
+                            <p type='button'className='mb-0 p-2 text-center'style={{background:'#6F64F8',width:'200px', borderBottomRightRadius:'8px'}}>Add to cart</p>
+                        </div> }
                         </div>
                     ))}
                 </div>

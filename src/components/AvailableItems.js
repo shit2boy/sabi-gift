@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {storeProduct} from '../storeProduct'
+import {Button } from "react-bootstrap";
 import 'antd/dist/antd.css';
 import { Radio,Rate } from 'antd';
 import Slider from './Slider'
@@ -53,7 +54,7 @@ export class AvailableItems extends Component {
               <p>Category</p>
               <Radio.Group  onChange={this.onChange} value={value}>
                   { storeProduct.map(item =>
-                    <Radio  style={radioStyle} value={item.id}>
+                    <Radio key={item.id}  style={radioStyle} value={item.id}>
                         {item.name}
                         {/* <div>{item.numberAvailable}</div> */}
                     </Radio>
@@ -64,7 +65,7 @@ export class AvailableItems extends Component {
                   { storeProduct.map(item =>
                     <Radio  style={radioStyle} value={item.id}>
                         {item.name}
-                        {/* <div>{item.numberAvailable}</div> */}
+                       
                     </Radio>
                 )}
               </Radio.Group>
@@ -89,6 +90,9 @@ export class AvailableItems extends Component {
               <div className='d-flex justify-content-between'>
                 <Rate allowHalf defaultValue={3.5} />
                 <p>5452</p>
+              </div>
+              <div className='text-center'>
+                <Button className='P-2' type='button' style={{background: '#6F64F8',color:'#ffffff',borderRadius:'8px'}}>CLEAR ALL FILTERS</Button>
               </div>
               
 

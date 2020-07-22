@@ -8,7 +8,7 @@ import Product from "./Product";
 import RegistryBar from "./ProgressBar";
 import NextSteps from "./NextSteps";
 import SideBar from "./SideBar";
-import CheckList from "./CheckList";
+import CheckList from "./AddcheckList";
 
 
 
@@ -89,7 +89,7 @@ export class Dashboard extends Component {
                   
                 </Col>
                 <Col xs md={9} lg={9} classname="">
-                  <Product/>
+                  <Product showWishList={false}/>
                 </Col>
               </Row>
             </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Input } from 'antd';
 import { ProductItems } from "./imageData";
 import { GrFavorite } from "react-icons/gr";
+import { BsFillGridFill,BsListUl } from "react-icons/bs";
 import { Card } from "react-bootstrap";
 
 
@@ -27,15 +28,15 @@ export class Product extends Component {
                  <div className='d-flex'>
                       <div className='col-9'><Search placeholder="Search here" onSearch={value => console.log(value)} enterButton /></div>
                       <div className=''>
-                        <select>
+                        <select className='p-1'>
                             <option>Default</option>
                             <option>item</option>
                             <option>item</option>
                         </select>
                         </div>
                         <div>
-                            <span>tray</span>
-                            <span>list</span>
+                            <span><BsFillGridFill/></span>
+                            <span><BsListUl/></span>
                         </div>
                       
                     </div>

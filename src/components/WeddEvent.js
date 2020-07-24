@@ -285,12 +285,16 @@ export default class getstarted extends Component {
                           />
                         </Form.Group>
                       </Form.Row>
+                      <Form.Group id="formGridCheckbox">
+                        <Form.Check type="checkbox" label="I have read the Privacy Policy and agree to the Terms of Service." />
+                      </Form.Group>
+
                     </Form>
                   </div>
                 )}
               </div>
               <div className="text-center">
-                <Button
+                {this.state.currentIndex >= 0 && this.state.currentIndex <= 3 && (<Button
                   type="submit"
                   onClick={() => this.goBack()}
                   className="px-5 btn-outline-dark"
@@ -301,7 +305,21 @@ export default class getstarted extends Component {
                   }}
                 >
                   BACK
-                </Button>
+                </Button>)}
+                {this.state.currentIndex === 4 && ( <div className=' d-flex justify-content-around'>
+                    <span>Already a member? Log in</span>
+                    <Button
+                  type="submit"
+                //   onClick={() => this.goBack()}
+                  className="px-5 btn-outline-dark"
+                  style={{
+                    background: "#ffffff",
+                    border: "2px solid #DDDDDD",
+                    borderRadius: "50px",
+                  }}
+                >
+                  SIGN UP
+                </Button> </div>)}
               </div>
             </div>
           </div>

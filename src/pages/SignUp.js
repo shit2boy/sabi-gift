@@ -225,6 +225,8 @@ class SignUp extends Component {
                           />
                         </Form.Group>
                       </Form.Row>
+                        <Form.Check type="checkbox" label="I have read the Privacy Policy and agree to the Terms of Service." />
+                          
                       
                     </Form> 
 

@@ -4,10 +4,9 @@ import { FindEvent } from './Modal'
 const Banner = () => {
     return (
         <div className='banner '>
-            <h1 >Gift Registry</h1>
-            <h1>made ease</h1>
-            <div className='btnBannerContainer'>
-                <Link to='/createRegistry' className='text-white text-decoration-none p-2 bg-success bannerBtn'>Create a registry</Link>
+            <h1 className='mt-0' >Gift Registry<br/>made ease</h1>
+            <div className='d-flex justify-content-between mt-4'>
+                <Link to='/createRegistry' className='text-white text-decoration-none py-2 px-4 bg-success bannerBtn'>Create a registry</Link>
                 {/* <Link href='/Find' className='text-white bg-success p-2 bannerBtn'>Find an Event</Link> */}
                 <FindEvent/>
             </div>

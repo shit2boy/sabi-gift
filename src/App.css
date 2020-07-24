@@ -84,7 +84,7 @@ Nav.Link {
 
 /**HERO***/
 .defaultHero {
-  background: url("./images/landing/bg.png") center/cover no-repeat;
+  background: url("./images/landing/hero.jpg") center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,10 +106,7 @@ Nav.Link {
   border-radius: 1.25rem;
   text-decoration: none;
 }
-.btnBannerContainer {
-  display: flex;
-  justify-content: space-between;
-}
+
 
 @media screen and (min-width: 576px) {
   .banner {

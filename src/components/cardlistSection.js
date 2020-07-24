@@ -17,16 +17,16 @@ function CardlistSection() {
              <div className=' container cardTitle'>
              <div className='header text-center'><h2>A whole new way to gift, <br/>when it matters</h2></div>
                 
-                <div className='text-center mt-4' data-aos="fade-left">
+                <div className='text-center mt-5' data-aos="fade-left">
                     <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum <br/>
                             Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem<br/>
                                 Lorem ipsum Lorem ipsum Lorem Lorem ipsum Lorem 
                     </p>
                 </div>
-               <div className='row mt-4 card-row' data-aos="fade-left">
+               <div className='row mt-5 card-row' data-aos="fade-left">
                     <div className='col-sm-3'>
                     <Card image={gift}
-                            title='Easiet way'
+                            title='Easiest way'
                             content ='We take the guesswork out of registering with handy tools like our checklist and your registry advisor'
                             footerTitle ='GET STARTED'
                             footDescription='Sign Up Free'

@@ -27,7 +27,7 @@ body {
 
 h1,h2,h3,h4,h5,h6{
   font-family: trebuchet-ms, Tahoma, sans-serif !important;
-  color: #545871;
+  color: #545871 !important;
   font-weight: bolder;
   opacity: 1 !important;
 }
@@ -67,7 +67,10 @@ h6 {
     text-align:center;
     margin:auto;
 } */
-
+.text-link {
+  color: inherit !important;
+  text-decoration: inherit !important;
+}
 
 #navItems{
 color: #707070;
@@ -101,6 +104,7 @@ Nav.Link {
 }
 .bannerBtn {
   border-radius: 1.25rem;
+  text-decoration: none;
 }
 .btnBannerContainer {
   display: flex;
@@ -153,13 +157,10 @@ Nav.Link {
  
 }
 .why {
-  /* max-width:600px; */
-  margin: auto;
-  margin-top: 25px;
-  text-align: justify;
   opacity: 1;
-  padding: 45px;
-  /* align-items: center; */
+  padding: 80px;
+  height:auto;
+  margin-top: 10%;
 }
 
 /*****HOW IT WORKS SECTION***********/
@@ -168,7 +169,7 @@ Nav.Link {
 }
 .stepIcon{
   /* padding: 10px; */
-  align-self:baseline;
+  align-self:center;
   background: #F7ECEB;
   /* border-radius: 50px; */
 
@@ -184,8 +185,7 @@ Nav.Link {
   cursor: pointer;
 }
 #stepTitle {
-  border-right: 1px solid #e6dbda;
-  text-align: left;
+  /* text-align: left; */
   padding: 1rem;
   color: #545871;
   font-size: large;
@@ -193,6 +193,9 @@ Nav.Link {
 
 .stepTag{
   font-weight: bold;
+  border-left: 1px solid #e6dbda;
+
+  padding: 20px;
  font-size: large;
 }
 
@@ -229,6 +232,10 @@ Nav.Link {
  width: 70px;
  justify-content: center;
  margin-bottom: 30px;
+}
+
+.ant-steps-item-process .ant-steps-item-icon {
+  background: #707070;
 }
 
 .rightside{
@@ -282,21 +289,15 @@ Nav.Link {
 
 /****SignUp****/
 .leftSignUp {
-padding-top: 40px;
 height: 100vh;
 background: url('./images/landing/birthday@2x.png') center/cover no-repeat;
-/* background-color: rgb(114, 10, 10); */
 opacity: 1;
-  text-align: center;
 }
 
 .rightSignUp{
   background-color: #ffffff;
   height: 100vh;
-  text-align: center; 
   opacity: 1;
-  padding-top: 100px;
-  margin: auto;
   color: #888888 !important;
 
 }

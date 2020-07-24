@@ -35,13 +35,13 @@ export class CreateRegistry extends Component {
                         
                             <p className='py-4 text-left'>Select the Event type</p>
                             <div className='eventType'>
-                                <Link to='/signUp'>
+                                <Link to='/getstarted' className='text-link'>
                                     <div className='eventItem'>
                                         <p><img src={ring} alt='weddingIcon' /> </p>
                                         <p>Wedding</p>
                                     </div> 
                                 </Link>
-                                <Link to='/signUp'>
+                                <Link to='/signUp' className='text-link'>
                                     <div className='eventItem'>
                                         <p><img src={food} alt='weddingIcon' /> </p>
                                         <p>Birthday</p>
@@ -61,7 +61,7 @@ export class CreateRegistry extends Component {
                             </div>
                             <div className=' d-flex justify-content-around'>
                                 <button to='' className='btn btn-light rounded-pill px-5'>Back</button>
-                                <Link to='/signUp' className='btn btn-dark rounded-pill px-5'>Next</Link>
+                                <Link to='/signUp' className='text-link btn btn-dark rounded-pill px-5'>Next</Link>
                             </div>
                         </div>
                

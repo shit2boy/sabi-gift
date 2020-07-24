@@ -36,7 +36,7 @@ export class Product extends Component {
                         </div>
                         <div>
                             <span><BsFillGridFill/></span>
-                            <span><BsListUl/></span>
+                            <span className='ml-1'><BsListUl/></span>
                         </div>
                       
                     </div>

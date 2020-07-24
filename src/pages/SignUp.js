@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
 import {  Steps } from "antd";
-import { Col,Form,Row} from "react-bootstrap";
+import { Col,Form} from "react-bootstrap";
 // import axios from 'axios';
 const { Step } = Steps;
 
@@ -12,18 +12,15 @@ class SignUp extends Component {
     this.state = {
       questions: [
         "Yay, Someone is ready to \n celebrate ! Let's quickly get you started.",
-        "Who's your lucky spouse to be?",
-        " \n when is your Special day?",
-        "How many guests are you inviting?",
+        "Hello John, when is your \n birthday celebration \n coimng up?",
+        " About how many guests are \n you inviting ?",
       ],
-      answers: ["", "", "", ""],
+      answers: ["", "", "", ],
       firstOff: "",
-      luckySpouse: "",
       specialDay: "",
       noOfGuests: 0,
       currentIndex: 0,
       formValue: "",
-      button: "GET STARTED",
     };
   }
   mapValueAndNext = () => {
@@ -32,8 +29,8 @@ class SignUp extends Component {
     let value = this.state.formValue;
     let currentIndex = this.state.currentIndex;
 
-    if (this.state.currentIndex > 3) {
-      this.setState({ currentIndex: currentIndex + 1, button: "Submit" });
+    if (this.state.currentIndex > 2) {
+      this.setState({ currentIndex: currentIndex + 1, });
       return;
     }
 
@@ -56,7 +53,7 @@ class SignUp extends Component {
       return;
     }
 
-    if (this.state.currentIndex <= 4) {
+    if (this.state.currentIndex <= 3) {
       this.setState({ currentIndex: this.state.currentIndex - 1 });
       this.setState({ formValue: formValue });
       console.log(this.state.formValue);
@@ -71,50 +68,49 @@ class SignUp extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className=" col-4 leftSignUp">
-            <Link className="mt-3" to="/">
-              <img
-                className="homeicon rounded-circle"
-                src={sabigift}
-                alt="SabiGift-Logo"
-              />
-            </Link>
-
-            <div>
-              <h4 className="text-white">WHY OUR SERVICES?</h4>
-            </div>
-            <Steps
-              className="px-5 text-white text-center"
-              direction="vertical"
-              current={1}
-            >
-              <Step
-                color=" white"
-                title="Lorem ipsum lorem ipsum"
-                description="Lorem ipsum lorem sioe"
-              />
-              <Step
-                title="Lorem ipsum lorem ipsum"
-                description="Lorem ipsum lorem sioe"
-              />
-              <Step
-                title="Lorem ipsum lorem ipsum"
-                description="Lorem ipsum lorem sioe"
-              />
-              <Step
-                title="Lorem ipsum lorem ipsum"
-                description="Lorem ipsum lorem sioe"
-              />
-              <Step
-                title="Lorem ipsum lorem ipsum"
-                description="Lorem ipsum lorem sioe"
-              />
-            </Steps>
+          <div className=" col-4 d-flex align-items-center justify-content-center leftSignUp">
+            <div className='mt-5'>
+                <Link to="/">
+                  <img
+                    className="homeicon rounded-circle"
+                    src={sabigift}
+                    alt="SabiGift-Logo"
+                  />
+                </Link>
+                <h4 className="text-white">WHY OUR SERVICES?</h4>
+                <Steps
+                className="text-white"
+                direction="vertical"
+                current={1}
+                >
+                <Step
+                  color=" white"
+                  title="Lorem ipsum lorem ipsum"
+                  description="Lorem ipsum lorem sioe"
+                />
+                <Step
+                  title="Lorem ipsum lorem ipsum"
+                  description="Lorem ipsum lorem sioe"
+                />
+                <Step
+                  title="Lorem ipsum lorem ipsum"
+                  description="Lorem ipsum lorem sioe"
+                />
+                <Step
+                  title="Lorem ipsum lorem ipsum"
+                  description="Lorem ipsum lorem sioe"
+                />
+                <Step
+                  title="Lorem ipsum lorem ipsum"
+                  description="Lorem ipsum lorem sioe"
+                />
+              </Steps>
+              </div>
           </div>
-          <div className="col-8 rightSignUp">
-            <div className="py-5 ml-5">
+          <div className="col-8 d-flex align-items-center justify-content-center rightSignUp">
+            <div className="">
               {this.state.currentIndex === 2 && (
-                <div id="title">
+                <div >
                   {(
                     this.state.answers[0] +
                     " " +
@@ -125,7 +121,7 @@ class SignUp extends Component {
                     .map((text, index) => (
                       <h2>{text}</h2>
                     ))}
-                  <div className="mt-4">
+                  <div className="">
                     <input
                       className="p-2"
                       type="date"
@@ -157,14 +153,14 @@ class SignUp extends Component {
                   </div>
                 </div>
               )}
-              {this.state.currentIndex !== 2 && this.state.currentIndex !== 4 && (
+              {this.state.currentIndex !== 2 && this.state.currentIndex !== 3 && (
                 <div>
                   {this.state.questions[this.state.currentIndex]
                     .split("\n")
                     .map((text, index) => (
                       <h2>{text}</h2>
                     ))}
-                  <div className="mt-4">
+                  <div className="">
                     <input
                       className="p-2"
                       type="text"
@@ -197,8 +193,8 @@ class SignUp extends Component {
                 </div>
               )}
 
-              {this.state.currentIndex === 4 && 
-                <div className="col-8">
+              {this.state.currentIndex === 3 && 
+                <div className="mt-5">
                   <div className="">
                     <h2>
                       Good News! You can create <br/>a free registry on
@@ -206,20 +202,23 @@ class SignUp extends Component {
                     </h2>
                     <h2>Let's create your account.</h2>
 
-                     <Form className="center">
+                     <Form className="">
                       <Form.Row>
-                        <Form.Group as={Row} controlId="formGridNmae">
+                        <Form.Group as={Col} controlId="formEmail">
                           <Form.Label>Email Address</Form.Label>
-                          <Form.Control type="text" placeholder="Enter Email Address" />
+                          <Form.Control type="email" placeholder="Enter Email Address" />
+                          <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                         </Form.Group>
                       </Form.Row>
                       <Form.Row>
                         <Form.Group as={Col} controlId="formGridPassword">
                           <Form.Label>Password</Form.Label>
                           <Form.Control type="password" placeholder="*******" />
+                          <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridConfirm">
                           <Form.Label>Confirm Password</Form.Label>
+                          <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                           <Form.Control
                             type="password"
                             placeholder="*********"
@@ -231,7 +230,7 @@ class SignUp extends Component {
 
                     <Link
                       to="/about"
-                      className="btn btn-dark rounded-pill px-5"
+                      className=" text-link btn btn-dark rounded-pill px-5"
                     >
                       Sign Up
                     </Link>

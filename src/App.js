@@ -12,6 +12,7 @@ import EventType from './pages/EventType';
 import ManageRegistry from './pages/ManageRegistry';
 import CheckoutForm from './pages/CheckoutForm';
 import RegistryChecklist from './pages/ChecklistPage';
+import getstarted from './components/WeddEvent';
 
 const  Home = lazy(()=> import('./pages/Home'));
 
@@ -34,6 +35,7 @@ function App() {
                   <Route path='/giftTracker' component={GiftTracker} />
                   <Route path='/eventType' component={EventType} />
                   <Route path='/checkout' component={CheckoutForm} />
+                  <Route path='/getstarted' component={getstarted} />
                   {/* <Route component={()=>} /> */}
                
                 </Switch>

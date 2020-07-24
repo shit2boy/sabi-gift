@@ -19,16 +19,16 @@ const Howitworks = () => {
               It's very easy to gift anyone - <br />
               How SabiGifts works
             </h3>
-            <div className="d-flex stepOutline" id="active">
+            <div className="d-flex justify-content-around stepOutline" id="active">
               <div className="rounded-circle stepIcon">
-               <GrAddCircle color=' #EBD0CE' size="50px" />
+               <GrAddCircle color='#EBD0CE' size="40px" />
               </div>
               <div id="stepTitle">
                 <p className="text-white id='title'">Add Wedding Gifts</p>
-                <p>
+                <small className='d-block'>
                   Register for anything, from plates to airline gift cards,
-                  cash,even gifts from other stores.
-                </p>
+                  cash,<br/>even gifts from other stores.
+                </small>
               </div>
               <div className=" text-center p-2 stepTag">
                 <p> 1</p>
@@ -39,35 +39,35 @@ const Howitworks = () => {
                 </p>
               </div>
             </div>
-            <div className="d-flex stepOutline">
+            <div className="d-flex justify-content-around stepOutline">
               <div className="rounded-circle stepIcon">
-                < FaRegHandPaper color=' #EBD0CE' size="45px" />
+                < FaRegHandPaper color=' #EBD0CE' size="35px" />
               </div>
               <div id="stepTitle">
                 <p> Guests Buy You Gifts</p>
-                <p >
-                  Receive them stress-free and choose when they ship.
+                <small className='d-block' >
+                  Receive them stress-free and choose when they ship.<br/>
                    You can exchange any before they ship, too.
-                </p>
+                </small>
               </div>
               <div className="text-center p-2 stepTag">
                 <p>2</p>
                 <p>Guest</p>
               </div>
             </div>
-            <div className="d-flex stepOutline mb-4" data-aos="fade-in">
+            <div className="d-flex stepOutline justify-content-around mb-4" data-aos="fade-in">
               <div className="rounded-circle stepIcon">
-                <FaHome  color=' #EBD0CE' size="50px" />
+                <FaHome  color=' #EBD0CE' size="40px" />
               </div>
               <div id="stepTitle">
                 <p >Enjoy Newlywed Life </p>
-                <p>
-                  Use your gifts, spend your cash, and don’t forget about
+                <small className='d-block'>
+                  Use your gifts, spend your cash, and don’t forget about <br/>
                    your 20% post-wedding discount.
-                </p>
+                </small>
               </div>
               <div className="text-center p-2 stepTag">
-                <p>3</p>
+                <strong>3</strong>
                 <p>Enjoy</p>
               </div>
             </div>

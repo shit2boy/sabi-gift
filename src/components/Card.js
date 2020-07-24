@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Card = ({image,title,content,footerTitle,footDescription}) => {
     return ( <div className='mt-4' id="myCard">
@@ -9,7 +10,7 @@ const Card = ({image,title,content,footerTitle,footDescription}) => {
                 <p class="card-text">{content}</p>
                 </div>
                 <div class="card-footer">
-                <h6 class="pointer">{footerTitle}</h6>
+                <h6 class="pointer"><Link className='text-link' to='/createRegistry'> {footerTitle}</Link></h6>
                 <small class="text-center pointer">{footDescription}</small>
                 </div>
             </div>

@@ -11,7 +11,7 @@ export class SideBar extends Component {
     return (
       <div>
         <div className="mt-3 text-center">
-          <Tooltip placement="left" title="notification">
+          <Tooltip placement="left" title="notification" color="#5F619F">
             <BsBell />
           </Tooltip>
         </div>
@@ -20,22 +20,22 @@ export class SideBar extends Component {
         </div>
         <div className="ml-2">
           <div className="py-4">
-            <Tooltip placement="left" title="overview" color="geekblue">
+            <Tooltip placement="left" title="overview" color="#5F619F">
               <GrHome size="30px" />
             </Tooltip>
           </div>
           <div className="py-4">
-            <Tooltip placement="left" title="manage registry">
+            <Tooltip placement="left" title="manage registry" color="#5F619F">
               <BsAlarm size="30px" />
             </Tooltip>
           </div>
           <div className="py-4">
-            <Tooltip placement="left" title="checklist">
+            <Tooltip placement="left" title="checklist" color="#5F619F">
               <GrFolder size="30px" />
             </Tooltip>
           </div>
           <div className="py-4">
-            <Tooltip placement="left" title="Track Gift">
+            <Tooltip placement="left" title="Track Gift" color="#5F619F">
               <GrBarChart size="30px" />
             </Tooltip>
           </div>

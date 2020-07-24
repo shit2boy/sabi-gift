@@ -55,7 +55,7 @@ function ModalFindEvent(props) {
   
     return (
       <>
-        <Link className='text-white bg-success p-2 bannerBtn' onClick={() => setModalShow(true)}>
+        <Link className='text-white text-link bg-success p-2 bannerBtn' onClick={() => setModalShow(true)}>
             Find an Event
         </Link>
   

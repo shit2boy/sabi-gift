@@ -6,7 +6,8 @@ import ring from "../images/landing/ring.svg";
 import bmw from "../images/landing/bmw.png";
 import food from "../images/landing/food-and-restaurant.svg";
 import { Steps } from "antd";
-// import Form from "antd/lib/form/Form";
+import axios from "axios";
+import util from "../util/util";
 
 const { Step } = Steps;
 
@@ -16,9 +17,44 @@ export class About extends Component {
     constructor() {
         super();
         this.state = {
-            currentIndex : 0
+          formField : { },
+            currentIndex : 0,
+            isValidated : false
         }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    handleChange(e) {
+      let formField = this.state.formField;
+      formField[e.target.name] = e.target.value;
+      this.setState({
+        formField,
+      });
+    }
+      handleSubmit(event) {
+        event.preventDefault();
+        const formField = new FormData();
+        
+        axios.post(`${util.API_BASE_URL}accounts/register/`, formField);
+        this.setState({formField: ''})
+      }
+    //    const handleSubmit = (event) => {
+    //     if (formField.checkValidity() === false) {
+    //       event.preventDefault();
+    //       event.stopPropagation();
+    //     } else{
+    //       const formField = new FormData();
+    
+    //       axios (`${util.API_BASE_URL}accounts/register/`, {
+    //         method: 'POST',
+    //         body: formField,
+    //       });
+    //     }
+    
+    //     this.setState({isValidated : false});
+    //   }
+    // }
 
 back = () => {
     if (this.state.currentIndex <=0) {
@@ -57,42 +93,47 @@ next =() => {
             {this.state.currentIndex === 0 && <div className='col-8 rightSide' >
                 <div className='py-5 ml-5'>
                 <h2 className=''>Hello! Please tell us a little <br/> bit about Yourself.</h2>
-                  <Form className='w-75'>
+                  <Form noValidate onSubmit={this.handleSubmit} className='w-75'>
                       <Form.Row>
-                        <Form.Group as={Col} controlId="formGridNmae">
+                        <Form.Group as={Col} controlId="formGridName">
                           <Form.Label>First Name</Form.Label>
-                          <Form.Control type="text" placeholder="Jimi" />
+                          <Form.Control onChange ={this.handleChange} type="text" name='firstName' placeholder="Jimi" />
                         </Form.Group>
 
-                      <Form.Group as={Col} controlId="formGridLastname">
+                      <Form.Group as={Col} controlId="formName">
                       <Form.Label>Last Name</Form.Label>
-                      <Form.Control type="text" placeholder="Fola" />
+                      <Form.Control onChange ={this.handleChange} type="text" name='lastName' placeholder="Fola" />
+                        <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                       </Form.Group>
                       </Form.Row>
                       <Form.Row>
-                      <Form.Group as={Col} controlId="formGridPhone">
+                      <Form.Group as={Col} controlId="Phone">
                       <Form.Label>Phone</Form.Label>
-                      <Form.Control type='text' placeholder="0000 0000-0000" />
+                        <Form.Control onChange ={this.handleChange} type='tel' name='Phone' placeholder="0000 0000-0000" />
+                      <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                       </Form.Group>
 
-                      <Form.Group as={Col} controlId="formGridAltPhone">
+                      <Form.Group as={Col} controlId="AltPhone">
                       <Form.Label>Alt Phone</Form.Label>
-                      <Form.Control type="text" placeholder="0000-0000-0000" />
+                        <Form.Control onChange ={this.handleChange} type="tel" name='AltPhone' placeholder="0000-0000-0000" />
                       </Form.Group>
                   </Form.Row>
-                  <Form.Group controlId="formGridAltPhone">
+                  <Form.Group controlId="Address">
                       <Form.Label>Street addresss</Form.Label>
-                      <Form.Control type="text" placeholder="14b wole Ariyo street" />
+                        <Form.Control onChange ={this.handleChange} type="text" name='address' placeholder="14b wole Ariyo street" />
+                      <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                   </Form.Group>
                   <Form.Row>
-                      <Form.Group as={Col} controlId="formGridCity">
+                      <Form.Group as={Col} controlId="City">
                       <Form.Label>City</Form.Label>
-                      <Form.Control type='text' placeholder="Lekki" />
+                        <Form.Control onChange ={this.handleChange} type='text' name='city' placeholder="Lekki" />
+                      <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                       </Form.Group>
 
-                      <Form.Group as={Col} controlId="formGridAltPhone">
+                      <Form.Group as={Col} controlId="State">
                       <Form.Label>State</Form.Label>
-                      <Form.Control type="text" placeholder="State" />
+                        <Form.Control onChange ={this.handleChange} type="text" name='state' placeholder="State" />
+                      <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                       </Form.Group>
                   </Form.Row>
                 </Form>

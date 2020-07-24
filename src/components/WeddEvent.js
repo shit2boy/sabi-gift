@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import { Steps } from "antd";
+import { Steps,DatePicker } from "antd";
 import { Form, Button, Col } from "react-bootstrap";
 
 const { Step } = Steps;
@@ -75,7 +75,7 @@ export default class getstarted extends Component {
           <div className="row">
             <div
               className="col-4 d-flex align-items-center justify-content-center"
-              style={{ background: "rgb(114, 10, 10)", height: "100vh" }}
+              style={{ background: "rgb(114, 10, 10)", height: "100vh",opacity:'1' }}
             >
               <div className="mt-5">
                 <Link className="" to="/">
@@ -138,11 +138,7 @@ export default class getstarted extends Component {
                     {/* <h2>Yay, we love weddings! <br/>First off ... what's your name?</h2> */}
                     <div className="mt-4">
                       <form>
-                        <input
-                          className="p-2"
-                          type="date"
-                          placeholder="Enter Name"
-                        />
+                        <DatePicker/>
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
@@ -286,40 +282,47 @@ export default class getstarted extends Component {
                         </Form.Group>
                       </Form.Row>
                       <Form.Group id="formGridCheckbox">
-                        <Form.Check type="checkbox" label="I have read the Privacy Policy and agree to the Terms of Service." />
+                        <Form.Check
+                          type="checkbox"
+                          label="I have read the Privacy Policy and agree to the Terms of Service."
+                        />
                       </Form.Group>
-
                     </Form>
                   </div>
                 )}
               </div>
               <div className="text-center">
-                {this.state.currentIndex >= 0 && this.state.currentIndex <= 3 && (<Button
-                  type="submit"
-                  onClick={() => this.goBack()}
-                  className="px-5 btn-outline-dark"
-                  style={{
-                    background: "#ffffff",
-                    border: "2px solid #DDDDDD",
-                    borderRadius: "50px",
-                  }}
-                >
-                  BACK
-                </Button>)}
-                {this.state.currentIndex === 4 && ( <div className=' d-flex justify-content-around'>
+                {this.state.currentIndex >= 0 && this.state.currentIndex <= 3 && (
+                  <Button
+                    type="submit"
+                    onClick={() => this.goBack()}
+                    className="px-5 btn-outline-dark"
+                    style={{
+                      background: "#ffffff",
+                      border: "2px solid #DDDDDD",
+                      borderRadius: "50px",
+                    }}
+                  >
+                    BACK
+                  </Button>
+                )}
+                {this.state.currentIndex === 4 && (
+                  <div className=" d-flex justify-content-around">
                     <span>Already a member? Log in</span>
                     <Button
-                  type="submit"
-                //   onClick={() => this.goBack()}
-                  className="px-5 btn-outline-dark"
-                  style={{
-                    background: "#ffffff",
-                    border: "2px solid #DDDDDD",
-                    borderRadius: "50px",
-                  }}
-                >
-                  SIGN UP
-                </Button> </div>)}
+                      type="submit"
+                      //   onClick={() => this.goBack()}
+                      className="px-5 btn-outline-dark"
+                      style={{
+                        background: "#AAAAAA",
+                        border: "2px solid #DDDDDD",
+                        borderRadius: "50px",
+                      }}
+                    >
+                      SIGN UP
+                    </Button>{" "}
+                  </div>
+                )}
               </div>
             </div>
           </div>

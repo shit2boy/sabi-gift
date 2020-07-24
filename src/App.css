@@ -289,18 +289,9 @@ Nav.Link {
 
 /****SignUp****/
 .leftSignUp {
-height: 100vh;
 background: url('./images/landing/birthday@2x.png') center/cover no-repeat;
-opacity: 1;
 }
 
-.rightSignUp{
-  background-color: #ffffff;
-  height: 100vh;
-  opacity: 1;
-  color: #888888 !important;
-
-}
  .ant-steps-item-title, .ant-steps-item-description {
   color: white !important;
 }

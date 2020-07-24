@@ -28,8 +28,8 @@ export class DashboardNav extends Component {
                             <Nav>
                             <Nav.Link href="#">
                                 <span className='row'>Jimi & Johanna's registry</span>
-                                <span className='mr-2'><Link to='/checkout'><img src={settingIcon} alt='icon'></img><small>setting</small></Link></span> 
-                                <Link to='/eventType'><span><img src={previewIcon} alt='icon'></img><small>Preview</small></span></Link>
+                                <span className='mr-2'><Link className='text-link' to='/checkout'><img src={settingIcon} alt='icon'></img><small>setting</small></Link></span> 
+                                <Link className='text-link' to='/eventType'><span><img src={previewIcon} alt='icon'></img><small>Preview</small></span></Link>
                             </Nav.Link>
                             <Nav.Link eventKey={2} href="#memes">
                             <Navbar.Brand href="/Dashboard"><img className='rounded-circle shadow' width='70px' src={image} alt='logo' /></Navbar.Brand>

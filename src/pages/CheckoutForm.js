@@ -47,7 +47,7 @@ const CheckoutForm = () => {
                             </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                            <Form.Group as={Col}  controlId="Lname">
+                            <Form.Group as={Col}  controlId="phone">
                                 <Form.Label>Phone</Form.Label>
                                 <Form.Control
                                 required

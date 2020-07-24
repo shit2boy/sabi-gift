@@ -41,7 +41,7 @@ function ModalFindEvent(props) {
                           <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group as={Col} md={2} controlId="btn">
-                        <button type="submit" class="btn p-1" style={{backgroundColor:'#6F64F8',width: '90px'}}>Find</button>
+                        <button type="submit" class="btn p-1" style={{backgroundColor:'#58B852',width: '90px'}}>Find</button>
                       </Form.Group>
                       </Form.Row>
                     </Form>

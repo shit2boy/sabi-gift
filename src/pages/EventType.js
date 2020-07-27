@@ -21,7 +21,7 @@ function EventType() {
                 </div>
                 <div className='container mt-5 '>
                     <div className='row'>
-                        <div className='col-3 availableItem'>
+                        <div className='col-3 d-none d-lg-flex availableItem'>
                            <AvailableItems/>
                         </div>
                         <div className='mx-auto col-8'>

@@ -74,7 +74,7 @@ export default class getstarted extends Component {
         <div className="container-fluid">
           <div className="row">
             <div
-              className="col-4 d-flex align-items-center justify-content-center"
+              className="col-4 d-none d-lg-flex align-items-center justify-content-center"
               style={{ background: "rgb(114, 10, 10)", height: "100vh",opacity:'1' }}
             >
               <div className="mt-5">

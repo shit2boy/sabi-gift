@@ -215,6 +215,7 @@ Nav.Link {
   background: #E2F3E1;
   opacity: 1;
   color: #888888 ;
+  padding-left: 30px;
 }
 
 .event {

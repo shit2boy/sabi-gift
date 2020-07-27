@@ -85,7 +85,7 @@ export class CreateRegistry extends Component {
                 </div>
                    <div className='row'>
                    <div className="col bg-white  d-flex justify-content-between align-items-center" style={{height:'90px'}} >
-                       <button to="" className="btn border-1 rounded-pill px-5" style={{background:'#ffffff'}}>
+                       <button to="" className="btn rounded-pill px-5" style={{background:'#ffffff'}}>
                             Back
                         </button>
                         <Link

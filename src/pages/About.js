@@ -103,7 +103,7 @@ next =() => {
 
             {this.state.currentIndex === 0 && <div className='col rightSide' >
                 <div className='row'>
-                    <div className="col d-flex justify-content-center" style={{minHeight:'80vh',marginTop:'35px'}}>
+                    <div className="col d-flex justify-content-center" style={{minHeight:'85vh',marginTop:'35px'}}>
                         <div>
                         <h2 className=''>Hello! Please tell us a little <br/> bit about Yourself.</h2>
                         <Form noValidate onSubmit={this.handleSubmit} className='w-75'>
@@ -153,8 +153,8 @@ next =() => {
                         </div>
                     </div>
                 </div>
-                <div className='row' style={{height:'60px'}}>
-                  <div className="col bg-white d-flex justify-content-around" style={{background:'#ffffff'}}>
+                <div className='row'>
+                  <div className="col bg-white d-flex justify-content-around" style={{background:'#ffffff',height:'60px'}}>
                     <button type="button" onClick={this.back} className="btn btn-light rounded-pill px-5">
                       Back
                     </button>
@@ -170,72 +170,79 @@ next =() => {
 
 
              {this.state.currentIndex === 1 && <div className="col rightSide" >
-              <div className='py-5 ml-5'>
-                <h2 id="header">What are you most excited <br/>to register at Sibigifts?</h2>
-                  <p className="py-4">Select the Event</p>
-                  <div className="d-flex">
-                 
-                    <div className="eventItem">
+                <div className='row'>
+                    <div className='col d-flex justify-content-center' style={{minHeight:'85vh',padding:'40px'}}>
+                    <div className=''>
+                      <h2>What are you most excited <br/>to register at Sibigifts?</h2>
+                      <p className="py-4">Select the Event</p>
+                      <div className="d-flex">
+                        <div className="eventItem">
+                          <p>
+                            <img src={ring} alt="weddingIcon" />{" "}
+                          </p>
+                          <p>Gifts</p>
+                        </div>
+                    
+                        <div className="eventItem">
+                          <p>
+                            <img src={food} alt="weddingIcon" />{" "}
+                          </p>
+                          <p>Cash Fund</p>
+                        </div>
+                    
+                      <div className="eventItem">
+                        <p>
+                          <img src={ring} alt="babyicon" />{" "}
+                        </p>
+                        <p>Gift & Cash </p>
+                      </div>
+                      <div className="eventItem">
+                        <p>
+                          <img src={ring} alt="undefine" />{" "}
+                        </p>
+                        <p>Mostly cash</p>
+                      </div>
+                      </div>
+                      <div className="p-3">
                       <p>
-                        <img src={ring} alt="weddingIcon" />{" "}
+                        Choose the category that matches your event. 
                       </p>
-                      <p>Gifts</p>
-                    </div>
-                 
-                    <div className="eventItem">
-                      <p>
-                        <img src={food} alt="weddingIcon" />{" "}
-                      </p>
-                      <p>Cash Fund</p>
-                    </div>
-                 
-                  <div className="eventItem">
-                    <p>
-                      <img src={ring} alt="babyicon" />{" "}
-                    </p>
-                    <p>Gift & Cash </p>
-                  </div>
-                  <div className="eventItem">
-                    <p>
-                      <img src={ring} alt="undefine" />{" "}
-                    </p>
-                    <p>Mostly cash</p>
-                  </div>
-                </div>
-                <div className="p-3">
-                  <p>
-                    Choose the category that matches your event. If your Event
-                    is not Listed, Kindly choose others for more options
-                  </p>
+                      </div>
                 </div>
               </div>
-              <div className=" d-flex justify-content-around">
-                <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
-                  Back
-                </button>
-                <button to="" onClick={this.next} className="btn btn-dark rounded-pill px-5">
-                  Next
-                </button>
-              </div>
+
+            </div>
+                <div className='row'>
+                <div  className="col bg-white d-flex justify-content-between align-items-center" style={{height:'100px'}}>
+                    {/* <div className=" d-flex justify-content-around"> */}
+                    <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
+                      Back
+                    </button>
+                    <button to="" onClick={this.next} className="btn btn-dark rounded-pill px-5">
+                      Next
+                    </button>
+                    {/* </div> */}
+                </div>
+                </div>
             </div>}
 
-            {this.state.currentIndex === 2 && <div className=' col py-3 rightSide'>
-                        <div className='py-5 ml-5' >
-                            <h2 id='header'>What are somethings you  <br/>
-                            enjoy doing together</h2>
+            {this.state.currentIndex === 2 && <div className=' col py-3 rightSide' >
+                        <div className='row'>
+                            <div className='col d-flex justify-content-center' style={{minHeight:'90vh',padding:'40px'}}>
+                            <div className='' >
+                            <h2 id='header'>What are somethings you  <br/> enjoy doing together</h2>
                         
                             <p className='py-4'>Select as many as you want</p>
-                            <div className='d-flex'>
-                                
-                                    <div className='eventItem'>
-                                        <p><img src={ring} alt='weddingIcon' /> </p>
-                                        <p>Cooking</p>
-                                    </div> 
-                                
-                                    <div className='eventItem'>
-                                        <p> </p>
-                                        <p>Baking</p>
-                                    </div>    
+                            <div className='d-flex mb-2'>
+                                <div className='eventItem'>
+                                    <p><img src={ring} alt='weddingIcon' /> </p>
+                                    <p>Cooking</p>
+                                </div> 
+                            
+                                <div className='eventItem'>
+                                    <p> </p>
+                                    <p>Baking</p>
+                                </div>    
                                
                                 <div className='eventItem'>
                                     <p> </p>
@@ -267,9 +274,11 @@ next =() => {
                                     <p>Playing with</p>
                                 </div> 
                             </div>
-                          
-                        </div>
-                        <div className="mt-2 d-flex justify-content-around">
+                          </div>
+                          </div>
+                      </div>
+                       <div className='row'>
+                       <div className="col bg-white d-flex justify-content-between align-items-center" style={{height:'100px'}}>
                             <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
                             Back
                             </button>
@@ -277,7 +286,7 @@ next =() => {
                             Next
                             </button>
                         </div>
-               
+                      </div>
                     </div>}
                      {this.state.currentIndex === 3 && <div className='col rightSide '>
                         <div  className='row'>

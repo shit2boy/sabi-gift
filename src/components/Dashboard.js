@@ -27,9 +27,9 @@ export class Dashboard extends Component {
           </Col>
           <Col className=" content">
             <div className="row justify-content-around">
-                <div className="py-5 text-left" style={{width: '500px',border: '1px solid',height:'150px'}}>
-                  <p className='text-right'>Welcome Jimi,</p>
-                  <p className='text-right'><strong>1 JANUARY, 2002</strong></p>
+                <div className="py-5 text-left backgrndImg" style={{width: '500px',height:'150px'}}>
+                  <p className='text-right text-white'>Welcome Jimi,</p>
+                  <p className='text-right text-white'><strong>1 JANUARY, 2002</strong></p>
                 </div>
                 <div className="d-flex justify-content-between" >
                 <div className='px-4' style={{width:'350px'}}>

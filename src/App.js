@@ -13,6 +13,8 @@ import ManageRegistry from './pages/ManageRegistry';
 import CheckoutForm from './pages/CheckoutForm';
 import RegistryChecklist from './pages/ChecklistPage';
 import getstarted from './components/WeddEvent';
+import Login from './pages/Login';
+import ResetPassword from './components/ResetPassword';
 
 const  Home = lazy(()=> import('./pages/Home'));
 
@@ -36,6 +38,8 @@ function App() {
                   <Route path='/eventType' component={EventType} />
                   <Route path='/checkout' component={CheckoutForm} />
                   <Route path='/getstarted' component={getstarted} />
+                  <Route path='/sign in' component={Login} />
+                  <Route path='/Passwordreset' component={ResetPassword} />
                   {/* <Route component={()=>} /> */}
                
                 </Switch>

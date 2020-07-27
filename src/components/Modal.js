@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import {Modal,Form,Col} from "react-bootstrap";
-import { Link } from 'react-router-dom';
 
 
 function ModalFindEvent(props) {
@@ -55,9 +54,9 @@ function ModalFindEvent(props) {
   
     return (
       <>
-        <Link className='text-white text-decoration-none bg-success px-4 py-2 bannerBtn' onClick={() => setModalShow(true)}>
+        <button className='text-white border-0 bg-success px-4 py-2 bannerBtn' onClick={() => setModalShow(true)}>
             Find an Event
-        </Link>
+        </button>
   
         <ModalFindEvent
           show={modalShow}

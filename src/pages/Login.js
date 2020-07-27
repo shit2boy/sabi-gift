@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Button,Form,Modal } from 'react-bootstrap';
-import account from '../images/landing/account.svg'
+import account from '../images/landing/account.svg';
+import {Link} from 'react-router-dom'
+import axios from "axios";
+import util from "../util/util";
 
 
  class Login extends Component {
@@ -21,16 +24,24 @@ import account from '../images/landing/account.svg'
             this.setState({
                 [event.target.name]: event.target.value
             })
+            console.log(event.target.value);
         }
 
         onSubmit(event){
-            const form = event.currentTarget;
-            if (form.checkValidity() === false) {
+            const SignInDetails = event.currentTarget;
+            if (SignInDetails.checkValidity() === false) {
               event.preventDefault();
               event.stopPropagation();
             }
-        
-            this.setState({Validated: true});
+            axios.post(`${util.API_BASE_URL}accounts/register/`, SignInDetails, 
+            { 'content-type': 'multipart/form-data' })
+            .then(response => {
+              console.log(response);
+            })
+            .catch(error => {
+              console.log(error);
+          });
+            
           };
 
         setModalHide = () => {
@@ -38,7 +49,7 @@ import account from '../images/landing/account.svg'
           };
         
           setModalShow = () => {
-            this.setState({ modalShow: true ,modalTitle: "Please Login here."});
+            this.setState({ modalShow: true ,modalTitle: "Log in to Sabigifts."});
           };
     render() {
         return (<div>
@@ -53,10 +64,10 @@ import account from '../images/landing/account.svg'
             show={this.state.modalShow}
             onHide={() => this.setModalHide(false)}
           >
-            <Modal.Header className="tc" closeButton>
-              {/* <Modal.Title id="contained-modal-title-vcenter" className="tc"> */}
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter" className="text-center">
                 {this.state.modalTitle}
-              {/* </Modal.Title> */}
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body className=" ">
             <Form noValidate onSubmit ={this.onSubmit}>
@@ -64,7 +75,6 @@ import account from '../images/landing/account.svg'
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" name="email" placeholder="Enter email" required />
                     <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
-
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
@@ -73,11 +83,11 @@ import account from '../images/landing/account.svg'
                     <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                 </Form.Group>
                 <Button className="w-100" variant="success" type="submit" style={{background:'#58B852', color:'#ffffff'}}>
-                    Login
+                    Log In
                 </Button>
                 <div className='text-center mt-4'>
-                    <small className='d-block'>Forgot your password? Reset your password</small>
-                    <small style={{color:'#223564',opacity:'1'}}> Don’t have an account? Sign up</small>
+                    <span className='d-block'>Forgot your password? <Link className='text-link' style={{color:'#223564'}} to='/Passwordreset'>Reset your password</Link></span>
+                    <span style={{color:'#223564',opacity:'1'}}> Don’t have an account? <Link className='text-link' style={{color:'#223564'}} to='/createRegistry'>Sign up</Link></span>
                 </div>
                 <small style={{color:'#223564',opacity:'1'}}>This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</small>
             </Form>

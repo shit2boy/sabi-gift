@@ -11,6 +11,24 @@ const { Step } = Steps;
 
 
 export class CreateRegistry extends Component {
+    constructor(props){
+        super(props)
+    //    this.textContent = React.createRef();
+        this.state={
+            eventType :'',
+        }
+    }
+
+    handleEvent = e => {
+        // console.log('asd ' + e);
+        // e.preventDefault();
+        this.setState({ eventType: e})
+        let type = this.state.eventType
+        console.log(type)
+      };
+    eventType=()=>{
+
+    }
     render() {
         return (
           <div className="container-fluid">
@@ -45,34 +63,30 @@ export class CreateRegistry extends Component {
 
                       <p className="py-4">Select the Event type</p>
                       <div className="d-flex">
-                            <Link to="/getstarted" className="text-link">
-                                <div className="eventItem">
-                                    <p>
+                                <button  className="eventItem">
+                                   
                                     <img src={ring} alt="weddingIcon" />{" "}
-                                    </p>
-                                    <p>Wedding</p>
-                                </div>
-                            </Link>
-                            <Link to="/signUp" className="text-link">
-                                <div className="eventItem">
+                                   
+                                    <p onClick={()=>this.handleEvent("Wedding")}>Wedding</p>
+                                </button>
+                                <button type='button' onClick={()=>this.handleEvent("Birthday")} className="eventItem">
                                     <p>
                                     <img src={food} alt="weddingIcon" />{" "}
                                     </p>
                                     <p>Birthday</p>
-                                </div>
-                            </Link>
-                                <div className="eventItem">
-                                    <p>
+                                </button>
+                                <button onClick={()=>this.handleEvent("Baby Shower")} className="eventItem">
+                                   
                                         <img src={ring} alt="babyicon" />{" "}
-                                    </p>
+                                  
                                     <p>Baby Shower</p>
-                                </div>
-                            <div className="eventItem">
-                                <p>
+                                </button>
+                            <button onClick={()=>this.handleEvent("Not on list")} className="eventItem">
+                                
                                     <img src={ring} alt="undefine" />{" "}
-                                </p>
+                               
                                 <p>Not on list</p>
-                            </div>
+                            </button>
                       </div>
                         <p className="py-4">
                           Choose the category that matches your event. If your<br/>
@@ -88,12 +102,20 @@ export class CreateRegistry extends Component {
                        <button to="" className="btn rounded-pill px-5" style={{background:'#ffffff'}}>
                             Back
                         </button>
-                        <Link
-                        to="/signUp"
+                        { this.state.eventType ==='Wedding' && (<Link
+                        to="/getstarted"
                         className=" text-link btn btn-dark rounded-pill px-5"
                         >
                             Next
-                        </Link>
+                        </Link>)}
+                        {this.state.eventType ==='Birthday'&&(
+                            <Link
+                            to="/signUp"
+                            className=" text-link btn btn-dark rounded-pill px-5"
+                            >
+                                Next
+                            </Link>)
+                        }
                     </div>
                    </div>
               </div>

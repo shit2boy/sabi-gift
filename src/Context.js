@@ -1,15 +1,29 @@
 import React, { Component } from 'react'
 
-const ProductContext = React.createContext();
+const StateContext = React.createContext();
 
 class ProductProvider extends Component {
+    state = {
+        formField : {},
+
+    }
+    changeHandler = (e)=>{
+    let formField = this.state.formField;
+      formField[e.target.name] = e.target.value;
+      this.setState({
+        formField,
+      });
+      console.log(formField)
+    }
     render() {
         return (
-            <ProductContext.Provider value='tehe data'>
+            <StateContext.Provider 
+            value={{...this.state,
+            changeHandler : this.changeHandler}}>
                 {this.props.children}
-            </ProductContext.Provider>
+            </StateContext.Provider>
         )
     }
 }
-const ProductConsumer = ProductContext.Consumer;
+const ProductConsumer = StateContext.Consumer;
 export {ProductProvider, ProductConsumer}

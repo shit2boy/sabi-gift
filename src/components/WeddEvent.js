@@ -23,10 +23,29 @@ export default class getstarted extends Component {
       noOfGuests: 0,
       currentIndex: 0,
       formValue: "",
+      eventDate : '',
+      formField : {},
       button: "GET STARTED",
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.dateChange = this.dateChange.bind(this);
+
   }
-  mapValueAndNext = () => {
+  handleChange(e) {
+    e.preventDefault();
+    let formField = this.state.formField;
+    formField[e.target.name] = e.target.value;
+    this.setState({
+      formField,
+    });
+    console.log(formField)
+  }
+   dateChange(date, dateString) {
+    this.setState({eventDate: dateString});
+    console.log(date, dateString);}
+
+  mapValueAndNext = (e) => {
+    e.preventDefault();
     console.log(this.state.formValue);
     console.log(this.state.currentIndex);
     let value = this.state.formValue;
@@ -133,12 +152,13 @@ export default class getstarted extends Component {
                     )
                       .split("\n")
                       .map((text, index) => (
-                        <h2>{text}</h2>
+                        <h2 key={index}>{text}</h2>
                       ))}
                     {/* <h2>Yay, we love weddings! <br/>First off ... what's your name?</h2> */}
                     <div className="mt-4">
                       <form>
-                        <DatePicker/>
+                          
+                        <DatePicker onChange={this.dateChange}/>
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
@@ -168,7 +188,7 @@ export default class getstarted extends Component {
                     {this.state.questions[this.state.currentIndex]
                       .split("\n")
                       .map((text, index) => (
-                        <h2>{text}</h2>
+                        <h2 key={index}>{text}</h2>
                       ))}
                     {/* <h2>Yay, we love weddings! <br/>First off ... what's your name?</h2> */}
                     <div className="mt-4">
@@ -176,7 +196,11 @@ export default class getstarted extends Component {
                         <input
                           className="p-2"
                           type="text"
+                          value={this.state.formValue}
+                          onChange={(e) =>
+                            this.setState({ formValue: e.target.value })}
                           placeholder="Enter Name"
+                          required
                         />
                         {this.state.currentIndex === 0 && (
                           <Button
@@ -207,7 +231,7 @@ export default class getstarted extends Component {
                     {this.state.questions[this.state.currentIndex]
                       .split("\n")
                       .map((text, index) => (
-                        <h2>{text}</h2>
+                        <h2 key={index}>{text}</h2>
                       ))}
                     {/* <h2>Yay, we love weddings! <br/>First off ... what's your name?</h2> */}
                     <div className="mt-4">
@@ -215,7 +239,11 @@ export default class getstarted extends Component {
                         <input
                           className="p-2"
                           type="text"
-                          placeholder="Enter Name"
+                          value={this.state.formValue}
+                          onChange={(e) =>
+                            this.setState({ formValue: e.target.value })}
+                          placeholder="Enter Number of Guest"
+                          required
                         />
                         {this.state.currentIndex === 0 && (
                           <Button
@@ -254,8 +282,11 @@ export default class getstarted extends Component {
                         <Form.Group as={Col} controlId="formEmail">
                           <Form.Label>Email Address</Form.Label>
                           <Form.Control
+                            name='email'
                             type="email"
+                          onChange={this.handleChange}
                             placeholder="Enter Email Address"
+                            required
                           />
                           <Form.Control.Feedback type="invalid">
                             Empty
@@ -265,7 +296,11 @@ export default class getstarted extends Component {
                       <Form.Row>
                         <Form.Group as={Col} controlId="formGridPassword">
                           <Form.Label>Password</Form.Label>
-                          <Form.Control type="password" placeholder="*******" />
+                          <Form.Control
+                            name='password'
+                          onChange={this.handleChange}
+                          type="password" placeholder="*******" />
+                          required
                           <Form.Control.Feedback type="invalid">
                             Empty
                           </Form.Control.Feedback>
@@ -276,8 +311,11 @@ export default class getstarted extends Component {
                             Empty
                           </Form.Control.Feedback>
                           <Form.Control
+                            name='confirm'
+                            onChange={this.handleChange}
                             type="password"
                             placeholder="*********"
+                            required
                           />
                         </Form.Group>
                       </Form.Row>
@@ -285,6 +323,7 @@ export default class getstarted extends Component {
                         <Form.Check
                           type="checkbox"
                           label="I have read the Privacy Policy and agree to the Terms of Service."
+                          required
                         />
                       </Form.Group>
                     </Form>
@@ -309,7 +348,8 @@ export default class getstarted extends Component {
                 {this.state.currentIndex === 4 && (
                   <div className=" d-flex justify-content-around">
                     <span>Already a member? Log in</span>
-                    <Button
+                    <Link
+                    to='/about'
                       type="submit"
                       //   onClick={() => this.goBack()}
                       className="px-5 btn-outline-dark"
@@ -320,7 +360,7 @@ export default class getstarted extends Component {
                       }}
                     >
                       SIGN UP
-                    </Button>{" "}
+                    </Link>
                   </div>
                 )}
               </div>

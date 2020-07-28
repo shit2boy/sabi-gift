@@ -12,14 +12,14 @@ export class RegistryChecklist extends Component {
                 <DashboardNav/>
                 <hr className='mt-0'/>
                 <div className='row mt-3'>
-                    <div className='col-1 sidebarMenu'>
+                    <div className='col-1 d-none d-lg-block sidebarMenu'>
                         <SideBar/>
                     </div>
                     <div className='col ml-5'>
                     <h1> Registry Checklist</h1>
                     <p>This is where you manage your registry items.</p>
                     <div className='row mt-5'>
-                        <div className=' col-3 availableItem'>
+                        <div className=' col-3 d-none d-md-block d-lg-block availableItem'>
                            <AvailableItems />
                         </div>
                         <div className='col'>

@@ -50,12 +50,12 @@ export class Product extends Component {
                             <small>{item.comment}</small>
                         </Card.Body>
                         {!this.props.showWishList && <div className='d-flex'>
-                            <p type='button' className='mb-0 p-2'style={{background:'#ededed',width:'95px',color :'#2c2c2c'}}><GrFavorite/> Wishlist</p>
-                            <p type='button'className='mb-0 p-2'style={{background:'#6F64F8',width:'100px', borderBottomRightRadius:'8px'}}>Add to cart</p>
+                            <p type='button' className='mb-0 p-2'style={{background:'#ededed',mniWidth:'95px',color :'#2c2c2c'}}><GrFavorite/> Wishlist</p>
+                            <p type='button'className='mb-0 p-2'style={{background:'#6F64F8',mniWidth:'100px', borderBottomRightRadius:'8px'}}>Add to cart</p>
                         </div> }
                         
                         {this.props.showWishList && <div className='d-flex'>
-                            <p type='button'className='mb-0 p-2 text-center'style={{background:'#6F64F8',width:'200px', borderBottomRightRadius:'8px'}}>Add to cart</p>
+                            <p type='button'className='mb-0 p-2 text-center'style={{background:'#6F64F8',mniWidth:'200px', borderBottomRightRadius:'8px'}}>Add to cart</p>
                         </div> }
                         </div>
                     ))}

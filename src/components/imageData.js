@@ -9,33 +9,35 @@ import kitchen from '../images/Sabi-storepage/kitchen.png'
 import laptop from '../images/Sabi-storepage/laptop.png'
 import smartwatch from '../images/Sabi-storepage/smartwatch.jpg'
 import watchphone from '../images/Sabi-storepage/watchphone.jpg'
+import add from '../images/Sabi-storepage/Addicon.jpg'
+
 
 
 export const imgCardlist =[
     {
         id : 0,
-        itemNmae : "gift",
+        itemName : "gift",
         imageUrl: gift
        
     },
     {
         id : 1,
-        itemNmae : "couple2",
+        itemName : "couple2",
         imageUrl: couple2
     },
     {
         id : 2,
-        itemNmae : "drinks",
+        itemName : "drinks",
         imageUrl: drinks
     },
     {
         id : 3,
-        itemNmae : "businessFinance",
+        itemName : "businessFinance",
         imageUrl: businessFinance
     },
     {
         id : 4,
-        itemNmae : "monitor",
+        itemName : "monitor",
         imageUrl: monitor
     },
 ]
@@ -43,38 +45,38 @@ export const imgCardlist =[
 export const checkList=[
     {
         id : 1,
-        itemNmae : "kitchen Appliances",
+        Name : "kitchen Appliances",
         imageUrl: kitchen
     },
     {
         id : 2,
-        itemNmae : "kitchen Appliances",
+        Name : "kitchen Appliances",
         imageUrl: kitchen
     },
     {
         id : 3,
-        itemNmae : "kitchen Appliances",
+        Name : "kitchen Appliances",
         imageUrl: kitchen
     },
     {
         id : 4,
-        itemNmae : "kitchen Appliances",
+        Name : "Dining Essentials",
         imageUrl: kitchen
     },
     {
         id : 5,
-        itemNmae : "Dining Essentials",
-        imageUrl: 'kitchen'
+        itemName : "Dining Essentials",
+        imageUrl: add
     },
     {
         id : 6,
-        itemNmae : "addedItem",
-        imageUrl: '+'
+        itemName : "addedItem",
+        imageUrl: add
     },
     {
         id : 7,
-        itemNmae : "addedItem",
-        imageUrl: '+'
+        itemName : "addedItem",
+        imageUrl: add
     },
   
 ]
@@ -108,7 +110,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:4,
         name:'Laptop',
         imgUrl: watchphone,
         price: '#15,000',
@@ -117,7 +119,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:5,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -126,7 +128,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:6,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -135,7 +137,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:7,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -144,7 +146,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:8,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -153,7 +155,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:9,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -162,7 +164,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:10,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -171,7 +173,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:11,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -180,7 +182,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:12,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -189,7 +191,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:13,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -198,7 +200,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:14,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -207,7 +209,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:15,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',
@@ -216,7 +218,7 @@ export const ProductItems =[
 
     },
     {
-        id:3,
+        id:16,
         name:'Laptop',
         imgUrl: laptop,
         price: '#250,000',

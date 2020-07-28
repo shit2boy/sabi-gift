@@ -33,11 +33,12 @@ export class About extends Component {
       });
       console.log(formField)
     }
-      handleSubmit(event) {
+
+        handleSubmit(event) {
         event.preventDefault();
         const formValue = new FormData(this.state.formField);
         axios.post(`${util.API_BASE_URL}accounts/register/`, formValue, 
-          { 'content-type': 'multipart/form-data' })
+          { 'content-type': 'application/json' })
         .then(response => {
             console.log(response);
         })

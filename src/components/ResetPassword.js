@@ -1,16 +1,62 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Button,Form, } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import { Redirect, Link } from "react-router-dom";
+import Axios from 'axios'
+import util from "../util/util";
 
 
 
-const ResetPassword = () => {
-    return (
-        <div className='container'>
+
+ export const ResetPassword = () => {
+
+
+    const [validated, setValidated] = useState(false);
+    const [data, setData] = useState();
+    const [redirect, setRedirect] = useState(false)
+
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData({ ...data, [name]: value });
+      };
+
+    const handleReset=()=>{
+        Axios.post(`${util.API_BASE_URL}accounts/reset-password/`, { ...data })
+        .then(res => {
+        //   ToastsStore.success(res.data.message)
+          setRedirect(true)
+        })
+        .catch(err => {
+          console.log( err.response.data);
+         
+         })
+    }
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+        }
+
+        setValidated(true);
+
+        handleReset();
+    };
+
+
+    const renderRedirect = () => {
+        if (redirect) {
+            return <Redirect to='./'/>
+        }
+    }
+
+    return (<div className='container'>
             <div  className='d-flex justify-content-center align-items-center' style={{height:'500px'}}>
                 <div className='p-5 shadow'>
                     <h3 className='text-center'><strong>Reset your Password </strong></h3>
-                    <Form noValidate>
+                    <Form noValidate validated={validated} onSubmit={handleSubmit}  onChange={handleChange}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" name="email" placeholder="Enter email" required />
@@ -31,5 +77,3 @@ const ResetPassword = () => {
         </div>
     )
 }
-
-export default ResetPassword

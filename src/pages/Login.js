@@ -28,6 +28,11 @@ import util from "../util/util";
           });
           // console.log(loginField)
         }
+        componentDidMount(){
+          if (localStorage.getItem('token')!=null){
+            this.props.history.push('/')
+          }
+        }
 
         onSubmit(event){
           event.preventDefault();
@@ -41,20 +46,24 @@ import util from "../util/util";
               "Content-Type": "application/json",
             },
           })
-            // .then(response =>response.json())
             . then(data=> {
               if (data.status === 200){
-                window.localStorage.setItem('token_id', data.tokenId);
-                this.props.history.push({pathname:"/Dashboard",});
+                // console.log(data);
+                window.localStorage.setItem('token_id', data.data.token);
+                window.localStorage.setItem('username', data.data.username);
+                window.localStorage.setItem('first_name', data.data.first_name);
+                window.localStorage.setItem('last_name', data.data.last_name);
+                // console.log(data.data.token);
+                // this.props.history.push({pathname:"/Dashboard",});
+                window.location.href='/dashboard'
                 console.log('successfully login');
               }
-              // window.localStorage.setItem('token_id', response.tokenId);
-              // console.dir((response));
-              // alert('Login Successful')
-              // this.props.history.push({pathname:"/Dashboard",});
+
             })
             .catch(error => {
               console.log(error);
+              this.props.history.replace('/');
+                window.location.href='/'
               alert('Invalid email or password');
           });
           this.setState({[event.target.name] : ''});

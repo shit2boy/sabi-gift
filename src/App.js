@@ -14,7 +14,7 @@ import CheckoutForm from './pages/CheckoutForm';
 import RegistryChecklist from './pages/ChecklistPage';
 import getstarted from './components/WeddEvent';
 import Login from './pages/Login';
-import ResetPassword from './components/ResetPassword';
+import {ResetPassword} from './components/ResetPassword';
 
 const  Home = lazy(()=> import('./pages/Home'));
 

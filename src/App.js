@@ -26,7 +26,8 @@ function App() {
                 {/* <NavBar /> */}
             <Router>
                 <Switch>
-                  <Route  render={Props =>{ return <Dashboard {...Props} />}} />
+                {/* render={Props =>{ return <Dashboard {...Props} />}} */}
+                  <Route  exact path='/Dashboard' component={Dashboard} />
                   <Route exact path='/Find' component={FindRegistry} />
                   <Route exact path='/' component={Home} />
                   <Route path='/createRegistry' component={CreateRegistry} />

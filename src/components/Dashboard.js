@@ -41,7 +41,7 @@ export class Dashboard extends Component {
                     <div className='d-flex align-items-center p-3'>
                         <GiReceiveMoney size='30px'  color='#E6E6E6'/>
                         <div className='ml-3 align-items-center'>
-                        <span class="badge badge-pill badge-success">cash</span>
+                        <span className="badge badge-pill badge-success">cash</span>
                           <p>200,000</p>
                         </div>
                     </div>
@@ -88,7 +88,7 @@ export class Dashboard extends Component {
                   </div>
                   
                 </Col>
-                <Col xs md={9} lg={9} classname="">
+                <Col xs md={9} lg={9}>
                   <Product showWishList={false}/>
                 </Col>
               </Row>

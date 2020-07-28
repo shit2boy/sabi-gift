@@ -57,9 +57,7 @@ import util from "../util/util";
               console.log(error);
               alert('Invalid email or password');
           });
-          this.setState({
-            SignInDetails:''
-          });
+          this.setState({[event.target.name] : ''});
             
           };
 

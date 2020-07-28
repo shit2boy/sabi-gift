@@ -31,7 +31,7 @@ export class About extends Component {
       this.setState({
         formField,
       });
-      // console.log(formField)
+      console.log(formField)
     }
       handleSubmit(event) {
         event.preventDefault();

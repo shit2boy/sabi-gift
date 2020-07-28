@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button,Form,Modal } from 'react-bootstrap';
 import account from '../images/landing/account.svg';
-import {Link} from 'react-router-dom'
+import {Link, } from 'react-router-dom'
 import axios from "axios";
 import util from "../util/util";
 
@@ -10,36 +10,55 @@ import util from "../util/util";
      constructor(props){
          super(props)
          this.state={
-             username : "",
-             password : [],
+             field : {},
+            //  password : [],
              modalShow: false,
              modalTitle: "",
              validated : false,
          }
-         this.onChange = this.onChange.bind(this);
+         this.changeHandler = this.changeHandler.bind(this);
          this.onSubmit = this.onSubmit.bind(this);
         //  this.setModalShow = this.setModalShow.bind(this);
      }
-        onChange(event){
-            this.setState({
-                [event.target.name]: event.target.value
-            })
-            console.log(event.target.value);
+        changeHandler(e){
+          let loginField = this.state.field;
+          loginField[e.target.name] = e.target.value;
+          this.setState({
+            loginField,
+          });
+          // console.log(loginField)
         }
 
         onSubmit(event){
-            const SignInDetails = event.currentTarget;
-            if (SignInDetails.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            axios.post(`${util.API_BASE_URL}accounts/register/`, SignInDetails, 
-            { 'content-type': 'multipart/form-data' })
-            .then(response => {
-              console.log(response);
+          event.preventDefault();
+            const SignInDetails = this.state.field;
+            // if (SignInDetails.checkValidity() === false) {
+            //   event.stopPropagation();
+            //   console.log(SignInDetails);
+            // }
+            axios.post(`${util.API_BASE_URL}accounts/login/`, SignInDetails,{ 
+            'headers': {
+              "Content-Type": "application/json",
+            },
+          })
+            // .then(response =>response.json())
+            . then(data=> {
+              if (data.status === 200){
+                window.localStorage.setItem('token_id', data.tokenId);
+                this.props.history.push({pathname:"/Dashboard",});
+                console.log('successfully login');
+              }
+              // window.localStorage.setItem('token_id', response.tokenId);
+              // console.dir((response));
+              // alert('Login Successful')
+              // this.props.history.push({pathname:"/Dashboard",});
             })
             .catch(error => {
               console.log(error);
+              alert('Invalid email or password');
+          });
+          this.setState({
+            SignInDetails:''
           });
             
           };
@@ -57,7 +76,6 @@ import util from "../util/util";
               this.setModalShow(true)} src={account} width='50px' alt='userImage' className='pointer'/>
            
             <Modal
-            closeButton
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered
@@ -73,13 +91,13 @@ import util from "../util/util";
             <Form noValidate onSubmit ={this.onSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" name="email" placeholder="Enter email" required />
+                    <Form.Control type="email" name="email" onChange={this.changeHandler} placeholder="Enter email" required />
                     <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name="password" placeholder="Password" />
+                    <Form.Control type="password" name="password" onChange={this.changeHandler} placeholder="Password" />
                     <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                 </Form.Group>
                 <Button className="w-100" variant="success" type="submit" style={{background:'#58B852', color:'#ffffff'}}>

@@ -9,7 +9,7 @@ function EventType() {
         <div>
             <div classname='container-fluid'>
                 <div class='mb-4'>
-                    <a href='/Dashboard'> <img src={sabigift} alt='logo' width='75px' /> </a>
+                    <a href='/Dashboard'> <img src={sabigift} alt='logo' width='75px'/> </a>
                 </div>
                 <div class='mb-5'>
                     <Hero hero='birthday'>

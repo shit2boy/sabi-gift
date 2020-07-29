@@ -46,11 +46,11 @@ import util from "../util/util";
     };
 
 
-    const renderRedirect = () => {
-        if (redirect) {
-            return <Redirect to='./'/>
-        }
-    }
+    // const renderRedirect = () => {
+    //     if (redirect) {
+    //         return <Redirect to='./'/>
+    //     }
+    // }
 
     return (<div className='container'>
             <div  className='d-flex justify-content-center align-items-center' style={{height:'500px'}}>

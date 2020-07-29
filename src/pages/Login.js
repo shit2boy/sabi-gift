@@ -62,9 +62,9 @@ import util from "../util/util";
             })
             .catch(error => {
               console.log(error);
-              this.props.history.replace('/');
-                window.location.href='/'
               alert('Invalid email or password');
+              // this.props.history.replace('/');
+                // window.location.href='/'
           });
           this.setState({[event.target.name] : ''});
             

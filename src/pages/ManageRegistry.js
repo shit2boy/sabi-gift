@@ -33,31 +33,31 @@ export class ManageRegistry extends Component {
                                 <CheckList/>
                             </div>
                         <h2 className='mt-5'>Add items to your registry</h2>
-                        <div className='row mt-4'>
+                        <div className='row' style={{marginTop:'40px'}}>
                             <div className='col-2'>
                                 <div className=' '>
-                                    <Card id=''style={{ width: "8rem" }}>
+                                    <Card id=''style={{ width: "8rem",background:'#6668A3' }}>
                                         <Card.Body>
-                                        <Card.Img className="center rounded-circle" alt="items" src={kitchen} />
+                                        <Card.Img className="center rounded-circle" alt="items" src={kitchen} width='60px' />
                                         </Card.Body>
                                         <Card.Text className='text-center'>
                                             <small className="p-1">kitchen Appliances</small>
                                             <strong className="p-1">
-                                                +
+                                                10
                                             </strong>
                                         </Card.Text>
                                     </Card>
                                 </div>
 
                             </div>
-                            <div className='col' style={{width:'350px',height:'400px', border:'1px solid #CBCBCB' }}>
+                            <div className='col-10 mb-5' style={{width:'300px',height:'300px', border:'1px solid #CBCBCB',borderRadius: '25px',opacity: '1' }}>
                                 <div className='d-flex justify-content-around'>
                                 {manageRegistry.map((item, index) => (
                                         <div className='row'>
-                                            <div className=' m-4'>
-                                                <Card id='myCards' key={index} style={{ width: "10rem" }}>
+                                            <div className='m-3'>
+                                                <Card id='myCards' key={index} style={{ width: "10rem",cursor:'pointer' }}>
                                                     <Card.Body className=''>
-                                                    <Card.Img className="center rounded-circle" alt="items" src={item.imageUrl} />
+                                                    <Card.Img className="center rounded-circle" alt="items" width='45px' src={item.imageUrl} />
                                                     </Card.Body>
                                                     <Card.Text>
                                                         <small className="p-1"></small>

@@ -20,7 +20,7 @@ export class DashboardNav extends Component {
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mr-auto">
                             <Nav.Link href="/Dashboard">Dashboard</Nav.Link>
-                            <Nav.Link href="#">Manage Regisrty</Nav.Link>
+                            <Nav.Link href="/manageregistry">Manage Regisrty</Nav.Link>
                             <Nav.Link href="/checklist">Checklist</Nav.Link>
                             <Nav.Link href="/giftTracker">Gift Tracker</Nav.Link>
                            

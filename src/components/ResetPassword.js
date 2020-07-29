@@ -12,7 +12,7 @@ import util from "../util/util";
 
     const [validated, setValidated] = useState(false);
     const [data, setData] = useState();
-    const [redirect, setRedirect] = useState(false)
+    // const [redirect, setRedirect] = useState(false)
 
 
 
@@ -25,7 +25,7 @@ import util from "../util/util";
         Axios.post(`${util.API_BASE_URL}accounts/reset-password/`, { ...data })
         .then(res => {
         //   ToastsStore.success(res.data.message)
-          setRedirect(true)
+        //   setRedirect(true)
         })
         .catch(err => {
           console.log( err.response.data);

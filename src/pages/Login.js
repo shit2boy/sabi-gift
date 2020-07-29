@@ -50,11 +50,7 @@ import util from "../util/util";
               if (data.status === 200){
                 // console.log(data);
                 window.localStorage.setItem('token_id', data.data.token);
-                window.localStorage.setItem('username', data.data.username);
-                window.localStorage.setItem('first_name', data.data.first_name);
-                window.localStorage.setItem('last_name', data.data.last_name);
-                // console.log(data.data.token);
-                // this.props.history.push({pathname:"/Dashboard",});
+                window.localStorage.setItem('username', data.config.data.email);
                 window.location.href='/dashboard'
                 console.log('successfully login');
               }
@@ -63,8 +59,6 @@ import util from "../util/util";
             .catch(error => {
               console.log(error);
               alert('Invalid email or password');
-              // this.props.history.replace('/');
-                // window.location.href='/'
           });
           this.setState({[event.target.name] : ''});
             

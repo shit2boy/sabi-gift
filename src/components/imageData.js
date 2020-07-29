@@ -81,6 +81,49 @@ export const checkList=[
   
 ]
 
+
+export const manageRegistry =[
+    {
+        id : 1,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 2,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 3,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 4,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+//     {
+//         id : 5,
+//         itemName : "addedItem",
+//         imageUrl: add
+//     },
+//     {
+//         id : 6,
+//         itemName : "addedItem",
+//         imageUrl: add
+//     },
+//     {
+//         id : 7,
+//         itemName : "addedItem",
+//         imageUrl: add
+//     },
+//     {
+//         id : 8,
+//         itemName : "addedItem",
+//         imageUrl: add
+//     },
+ ]
 export const ProductItems =[
     {
         id:1,

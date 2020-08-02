@@ -60,7 +60,7 @@ import util from "../util/util";
               console.log(error);
               alert('Invalid email or password');
           });
-          this.setState({[event.target.name] : ''});
+          this.setState({loginField : '',field :''});
             
           };
 

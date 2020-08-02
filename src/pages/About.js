@@ -14,8 +14,8 @@ const { Step } = Steps;
 
 
 export class About extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
           formField : { },
             currentIndex : 0,
@@ -37,6 +37,7 @@ export class About extends Component {
         handleSubmit(event) {
         event.preventDefault();
         const formValue = new FormData(this.state.formField);
+        console.log(this.props.answers, this.props.formField)
         axios.post(`${util.API_BASE_URL}accounts/register/`, formValue, 
           { 'content-type': 'application/json' })
         .then(response => {

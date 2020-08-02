@@ -33,6 +33,7 @@ function App() {
                   <Route path='/createRegistry' component={CreateRegistry} />
                   <Route path='/signUp' component={SignUp} />
                   <Route path='/about' component={About} />
+                  {/* <Route path='/about' render={() => <About formData={formField} register={answers} />} /> */}
                   <Route path='/checklist' component={RegistryChecklist} />
                   <Route path='/manageregistry' component={ManageRegistry} />
                   <Route path='/giftTracker' component={GiftTracker} />

@@ -4,7 +4,6 @@ import sabigift from '../images/landing/sabigift.png';
 import  ring from "../images/landing/ring.svg";
 import  food from "../images/landing/food-and-restaurant.svg";
 import { Steps } from 'antd';
-// import { Container, Row, div } from "react-bootstrap";
 
 const { Step } = Steps;
 

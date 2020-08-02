@@ -1,95 +1,97 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import { Steps,DatePicker } from "antd";
+import { Steps } from "antd";
 import { Form, Button, Col } from "react-bootstrap";
+import { ProductConsumer } from "../Context";
 
 const { Step } = Steps;
 
 export default class getstarted extends Component {
-  constructor() {
-    super();
-    this.state = {
-      questions: [
-        "Yay, we love weddings! \n First off ... what's your name?",
-        "Who's your lucky spouse to be?",
-        " \n when is your Special day?",
-        "How many guests are you inviting?",
-      ],
-      answers: ["", "", "", ""],
-      firstOff: "",
-      luckySpouse: "",
-      specialDay: "",
-      noOfGuests: 0,
-      currentIndex: 0,
-      formValue: "",
-      eventDate : '',
-      formField : {},
-      button: "GET STARTED",
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.dateChange = this.dateChange.bind(this);
+  // constructor() {
+    // super();
+    // this.state = {
+      // wedingwedingweddingQuestions: [
+      //   "Yay, we love weddings! \n First off ... what's your name?",
+      //   "Who's your lucky spouse to be?",
+      //   "Hey \n when is your Special day?",
+      //   "How many guests are you inviting?",
+      // ],
+      // weddinganswers: ["", "", "", ""],
+      // firstOff: "",
+      // luckySpouse: "",
+      // specialDay: "",
+      // noOfGuests: 0,
+      // weddingcurrentIndex: 0,
+      // weddingformValue: "",
+      // eventDate : '',
+      // formField : {},
+    // };
+    // this.handleChange = this.handleChange.bind(this);
+    // this.dateChange = this.dateChange.bind(this);
 
-  }
-  handleChange(e) {
-    e.preventDefault();
-    let formField = this.state.formField;
-    formField[e.target.name] = e.target.value;
-    this.setState({
-      formField,
-    });
-    console.log(formField)
-  }
-   dateChange(date, dateString) {
-    this.setState({eventDate: dateString});
-    console.log(date, dateString);}
+  // }
+  // handleChange(e) {
+  //   e.preventDefault();
+  //   let formField = this.state.formField;
+  //   formField[e.target.name] = e.target.value;
+  //   this.setState({
+  //     formField,
+  //   });
+  //   console.log(formField)
+  // }
+  //  dateChange(date, dateString) {
+  //   this.setState({eventDate: dateString});
+  //   console.log(date, dateString);}
 
-  mapValueAndNext = (e) => {
-    e.preventDefault();
-    console.log(this.state.formValue);
-    console.log(this.state.currentIndex);
-    let value = this.state.formValue;
-    let currentIndex = this.state.currentIndex;
+  // mapEventValueAndNext = (e) => {
+  //   e.preventDefault();
+  //   console.log(this.state.weddingformValue);
+  //   console.log(this.state.weddingcurrentIndex);
+  //   let value = this.state.weddingformValue;
+  //   let weddingcurrentIndex = this.state.weddingcurrentIndex;
 
-    if (this.state.currentIndex > 3) {
-      this.setState({ currentIndex: currentIndex + 1, button: "Submit" });
-      return;
-    }
+  //   if (this.state.weddingcurrentIndex > 3) {
+  //     this.setState({ weddingcurrentIndex: weddingcurrentIndex + 1});
+  //     return;
+  //   }
 
-    let answers = this.state.answers;
-    answers[currentIndex] = value;
-    this.setState({ answers: answers });
-    console.dir(this.state);
-    this.setState({ currentIndex: currentIndex + 1 });
-    this.setState({ formValue: this.state.answers[currentIndex + 1] });
+  //   let weddinganswers = this.state.weddinganswers;
+  //   weddinganswers[weddingcurrentIndex] = value;
+  //   this.setState({ weddinganswers: weddinganswers });
+  //   // console.dir(this.state);
+  //   console.log(weddinganswers);
+  //   this.setState({ weddingcurrentIndex: weddingcurrentIndex + 1 });
+  //   this.setState({ weddingformValue: this.state.weddinganswers[weddingcurrentIndex + 1] });
 
-    console.log("current index" + this.state.currentIndex);
-  };
+  //   console.log("current index" + this.state.weddingcurrentIndex);
+  // };
 
-  goBack = () => {
-    console.log(this.state);
-    console.log("current index " + this.state.currentIndex);
-    console.log(
-      "current index " + this.state.answers[this.state.currentIndex - 1]
-    );
-    let formValue = this.state.answers[this.state.currentIndex - 1];
-    if (this.state.currentIndex <= 0) {
-      return;
-    }
+  // goBackbtn = () => {
+  //   // // console.log(this.state);
+  //   // console.log("current index " + this.state.weddingcurrentIndex);
+  //   // console.log(
+  //   //   "current index " + this.state.weddinganswers[this.state.weddingcurrentIndex - 1]
+  //   // );
+  //   let weddingformValue = this.state.weddinganswers[this.state.weddingcurrentIndex - 1];
+  //   if (this.state.weddingcurrentIndex <= 0) {
+  //     return;
+  //   }
 
-    if (this.state.currentIndex <= 4) {
-      this.setState({ currentIndex: this.state.currentIndex - 1 });
-      this.setState({ formValue: formValue });
-      console.log(this.state.formValue);
-    }
+  //   if (this.state.weddingcurrentIndex <= 4) {
+  //     this.setState({ weddingcurrentIndex: this.state.weddingcurrentIndex - 1 });
+  //     this.setState({ weddingformValue: weddingformValue });
+  //     console.log(this.state.weddingformValue);
+  //   }
 
     // const onFinish = values => {
     //     console.log('Received values of form: ', values);
     //   };
-  };
+  
   render() {
     return (
-      <>
+      <ProductConsumer>
+        {value=>(
         <div className="container-fluid">
           <div className="row">
             <div
@@ -142,13 +144,13 @@ export default class getstarted extends Component {
                   fontFamily: "arial",
                 }}
               >
-                {this.state.currentIndex === 2 && (
+                {value.weddingcurrentIndex === 2 && (
                   <div>
-                    {(
-                      this.state.answers[0] +
-                      " " +
-                      this.state.answers[1] +
-                      this.state.questions[2]
+                    {( 
+                      value.weddinganswers[0] +" " +
+                      "and " +
+                      value.weddinganswers[1] +
+                      value.weddingQuestions[2]
                     )
                       .split("\n")
                       .map((text, index) => (
@@ -157,23 +159,29 @@ export default class getstarted extends Component {
                     {/* <h2>Yay, we love weddings! <br/>First off ... what's your name?</h2> */}
                     <div className="mt-4">
                       <form>
-                          
-                        <DatePicker onChange={this.dateChange}/>
-                        {this.state.currentIndex === 0 && (
+                      <input
+                          className="p-2"
+                          type="text"
+                          onChange={(e) => value.weddingHandleChange(e)}
+                          placeholder="yyyy-mm-dd"
+                          required
+                        />
+                        {/* <DatePicker onChange={this.dateChange}/> */}
+                        {value.weddingcurrentIndex === 0 && (
                           <Button
                             type="submit"
                             className="p-2 rounded-pill btn-outline-light"
-                            onClick={(e) => this.mapValueAndNext(e)}
+                            onClick={(e) => value.mapEventValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
                             GET STARTED
                           </Button>
                         )}
-                        {this.state.currentIndex > 0 && (
+                        {value.weddingcurrentIndex > 0 && (
                           <Button
                             type="submit"
                             className="px-4 rounded-pill btn-outline-light"
-                            onClick={(e) => this.mapValueAndNext(e)}
+                            onClick={(e) => value.mapEventValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
                             Next
@@ -183,9 +191,9 @@ export default class getstarted extends Component {
                     </div>
                   </div>
                 )}
-                {this.state.currentIndex !== 2 && this.state.currentIndex < 3 && (
+                {value.weddingcurrentIndex !== 2 && value.weddingcurrentIndex < 3 && (
                   <div>
-                    {this.state.questions[this.state.currentIndex]
+                    {value.weddingQuestions[value.weddingcurrentIndex]
                       .split("\n")
                       .map((text, index) => (
                         <h2 key={index}>{text}</h2>
@@ -196,27 +204,25 @@ export default class getstarted extends Component {
                         <input
                           className="p-2"
                           type="text"
-                          value={this.state.formValue}
-                          onChange={(e) =>
-                            this.setState({ formValue: e.target.value })}
+                          onChange={(e) => value.weddingHandleChange(e)}
                           placeholder="Enter Name"
                           required
                         />
-                        {this.state.currentIndex === 0 && (
+                        {value.weddingcurrentIndex === 0 && (
                           <Button
                             type="submit"
                             className="p-2 rounded-pill btn-outline-light"
-                            onClick={(e) => this.mapValueAndNext(e)}
+                            onClick={(e) => value.mapEventValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
                             GET STARTED
                           </Button>
                         )}
-                        {this.state.currentIndex > 0 && (
+                        {value.weddingcurrentIndex > 0 && (
                           <Button
                             type="submit"
                             className="px-4 rounded-pill btn-outline-light"
-                            onClick={(e) => this.mapValueAndNext(e)}
+                            onClick={(e) => value.mapEventValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
                             Next
@@ -226,9 +232,9 @@ export default class getstarted extends Component {
                     </div>
                   </div>
                 )}
-                {this.state.currentIndex === 3 && (
+                {value.weddingcurrentIndex === 3 && (
                   <div>
-                    {this.state.questions[this.state.currentIndex]
+                    {value.weddingQuestions[value.weddingcurrentIndex]
                       .split("\n")
                       .map((text, index) => (
                         <h2 key={index}>{text}</h2>
@@ -239,27 +245,26 @@ export default class getstarted extends Component {
                         <input
                           className="p-2"
                           type="text"
-                          value={this.state.formValue}
-                          onChange={(e) =>
-                            this.setState({ formValue: e.target.value })}
+                          name='expectedGuest'
+                          onChange={(e) => value.weddingHandleChange(e)}
                           placeholder="Enter Number of Guest"
                           required
                         />
-                        {this.state.currentIndex === 0 && (
+                        {value.weddingcurrentIndex === 0 && (
                           <Button
                             type="submit"
                             className="p-2 rounded-pill btn-outline-light"
-                            onClick={(e) => this.mapValueAndNext(e)}
+                            onClick={(e) => value.mapEventValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
                             GET STARTED
                           </Button>
                         )}
-                        {this.state.currentIndex > 0 && (
+                        {value.weddingcurrentIndex > 0 && (
                           <Button
                             type="submit"
                             className="px-4 rounded-pill btn-outline-light"
-                            onClick={(e) => this.mapValueAndNext(e)}
+                            onClick={(e) => value.mapEventValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
                             Next
@@ -269,7 +274,7 @@ export default class getstarted extends Component {
                     </div>
                   </div>
                 )}
-                {this.state.currentIndex === 4 && (
+                {value.weddingcurrentIndex === 4 && (
                   <div className="">
                     <h2>
                       Good News! You can create <br />a free registry on
@@ -284,7 +289,7 @@ export default class getstarted extends Component {
                           <Form.Control
                             name='email'
                             type="email"
-                          onChange={this.handleChange}
+                            onChange={(e) => value.handlerChange(e)}
                             placeholder="Enter Email Address"
                             required
                           />
@@ -298,7 +303,7 @@ export default class getstarted extends Component {
                           <Form.Label>Password</Form.Label>
                           <Form.Control
                             name='password'
-                          onChange={this.handleChange}
+                            onChange={(e) => value.handlerChange(e)}
                           type="password" placeholder="*******" />
                           required
                           <Form.Control.Feedback type="invalid">
@@ -312,7 +317,7 @@ export default class getstarted extends Component {
                           </Form.Control.Feedback>
                           <Form.Control
                             name='confirm'
-                            onChange={this.handleChange}
+                            onChange={(e) => value.handlerChange(e)}
                             type="password"
                             placeholder="*********"
                             required
@@ -331,10 +336,10 @@ export default class getstarted extends Component {
                 )}
               </div>
               <div className="text-center">
-                {this.state.currentIndex >= 0 && this.state.currentIndex <= 3 && (
+                {value.weddingcurrentIndex >= 0 && value.weddingcurrentIndex <= 3 && (
                   <Button
                     type="submit"
-                    onClick={() => this.goBack()}
+                    onClick={() =>value.goBackbtn()}
                     className="px-5 btn-outline-dark"
                     style={{
                       background: "#ffffff",
@@ -345,14 +350,14 @@ export default class getstarted extends Component {
                     BACK
                   </Button>
                 )}
-                {this.state.currentIndex === 4 && (
+                {value.weddingcurrentIndex === 4 && (
                   <div className=" d-flex justify-content-around">
                     <span>Already a member? Log in</span>
                     <Link
                     to='/about'
                       type="submit"
-                      //   onClick={() => this.goBack()}
-                      className="px-5 btn-outline-dark"
+                      //   onClick={() => this.goBackbtn()}
+                      className="px-5 py-3 btn-outline-dark"
                       style={{
                         background: "#AAAAAA",
                         border: "2px solid #DDDDDD",
@@ -366,8 +371,8 @@ export default class getstarted extends Component {
               </div>
             </div>
           </div>
-        </div>
-      </>
+        </div>)}
+      </ProductConsumer>
     );
   }
 }

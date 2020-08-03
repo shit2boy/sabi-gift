@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Input } from 'antd';
-import { ProductItems } from "./imageData";
 import { GrFavorite } from "react-icons/gr";
 import { BsFillGridFill,BsListUl } from "react-icons/bs";
 import { Card } from "react-bootstrap";
+import {StateContext} from "../Context"
+// import { propTypes } from 'prop-types';
 
 
 const { Search } = Input;
@@ -19,8 +20,10 @@ overflow: 'hidden',
 
 
 export class Product extends Component {
-   state={
-       Product : [],
+  static contextType = StateContext
+   
+    state={
+       Products : [],
    }
     render() {
         return (
@@ -41,7 +44,7 @@ export class Product extends Component {
                       
                     </div>
                     <div className='row'>
-                    {ProductItems.map((item) => (
+                    {this.context.Products.map((item) => (
                         <div key={item.index} id='productCards' className='card m-2 col-sm-3' style={ productStyle}>
                         <Card.Img className="center" alt="items" src={item.imgUrl} />
                         <span className='d-block ml-auto'>{item.price}</span>
@@ -67,3 +70,13 @@ export class Product extends Component {
 }
 
 export default Product
+
+// Product.protoTypes = {
+//     product:propTypes.shape({
+//         id:propTypes.number,
+//         imgUrl:propTypes.string,
+//         price:propTypes.string,info: propTypes.string,
+//         inCart:propTypes.bool
+
+//     }).isRequired
+// }

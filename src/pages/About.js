@@ -6,6 +6,7 @@ import ring from "../images/landing/ring.svg";
 import bmw from "../images/landing/bmw.png";
 import food from "../images/landing/food-and-restaurant.svg";
 import { Steps } from "antd";
+import {StateContext} from "../Context"
 import axios from "axios";
 import util from "../util/util";
 
@@ -14,11 +15,13 @@ const { Step } = Steps;
 
 
 export class About extends Component {
+  static contextType = StateContext
     constructor(props) {
         super(props);
         this.state = {
           formField : { },
             currentIndex : 0,
+            signUpResponse:{successful:false, message:''},
             isValidated : false
         }
         this.handleChange = this.handleChange.bind(this);
@@ -31,24 +34,46 @@ export class About extends Component {
       this.setState({
         formField,
       });
-      console.log(formField)
+      // console.log(formField)
     }
 
         handleSubmit(event) {
         event.preventDefault();
-        const formValue = new FormData(this.state.formField);
-        console.log(this.props.answers, this.props.formField)
-        axios.post(`${util.API_BASE_URL}accounts/register/`, formValue, 
-          { 'content-type': 'application/json' })
+        let formField = this.state.formField;
+        const newUserInfo = new FormData();
+        newUserInfo.append('username', this.context.weddinganswers[0]);
+        newUserInfo.append('username', this.context.answers[0]);
+        newUserInfo.append('email', this.context.formField['email']);
+        newUserInfo.append('first_name', formField['firstName']);
+        newUserInfo.append('last_name', formField['lastName']);
+        newUserInfo.append('password', this.context.formField['password']);
+        newUserInfo.append('mobile', formField['Phone']);
+        newUserInfo.append('street', formField['address']);
+        newUserInfo.append('lga', formField['city']);
+        newUserInfo.append('city', formField['city']);
+        newUserInfo.append('gender', undefined);
+        newUserInfo.append('event_type', this.context.eventType);
+        newUserInfo.append('event_date', this.context.answers[1]);
+        newUserInfo.append('event_date', this.context.weddinganswers[2]);
+        newUserInfo.append('no_of_guest', this.context.weddinganswers[3]);
+        newUserInfo.append('no_of_guest', this.context.answers[2]);
+        newUserInfo.append('spouse_name', this.context.weddinganswers[1]);
+        newUserInfo.append('photo', '');
+        
+
+        axios.post(`${util.API_BASE_URL}accounts/register/`, newUserInfo, 
+          { 'content-type': 'multipart/form-data' })
         .then(response => {
-            console.log(response);
+          if (response.status === 200)
+            alert(response);
+            this.setState({currentIndex : this.state.currentIndex + 1, signUpResponse : {successful:true, message:'Registry Successful'}})
+           
         })
         .catch(error => {
-            console.log(error);
+            console.dir(error);
+            alert("Not successful, Check all Input fields")
         });
-      //   this.setState({formField: ''})
-        // axios.post(`${util.API_BASE_URL}accounts/register/`, formField);
-        // this.setState({formField: ''})
+      
       }
     //    const handleSubmit = (event) => {
     //     if (formField.checkValidity() === false) {
@@ -160,7 +185,7 @@ next =() => {
                     <button type="button" onClick={this.back} className="btn btn-light rounded-pill px-5">
                       Back
                     </button>
-                    <button type="submit" onClick={this.next} className="btn btn-dark rounded-pill px-5">
+                    <button type="submit" onClick={this.handleSubmit} className="btn btn-dark rounded-pill px-5">
                       Next
                     </button>
                   </div>

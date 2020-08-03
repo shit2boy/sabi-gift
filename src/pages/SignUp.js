@@ -11,7 +11,6 @@ export default class getstarted extends Component {
   constructor(props) {
         super(props);
         this.state = {
-          formInfo: {},
           formField : {},
          
       }

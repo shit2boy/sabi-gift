@@ -19,7 +19,7 @@ export class Dashboard extends Component {
 
     return (
       <div className='container-fluid'>
-        <DashboardNav />
+        <DashboardNav/>
         <hr className='mt-0 mb-0'/>
         <Row className='mt-4'>
           <Col xs={1} md={1} lg={1} className="ml-4 justify-content-center sidebarMenu">

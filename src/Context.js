@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { ProductItems } from "./components/imageData";
 
 const StateContext = React.createContext();
 
@@ -6,6 +7,7 @@ class ProductProvider extends Component {
   constructor(){
     super()
     this.state = {
+      Products : ProductItems,
       weddingQuestions: [
         "Yay, we love weddings! \n First off ... what's your name?",
         "Who's your lucky spouse to be?",
@@ -19,7 +21,7 @@ class ProductProvider extends Component {
       expectedGuests: 0,
       weddingcurrentIndex: 0,
       weddingformValue: "",
-      eventDate : '',
+      eventType : '',
       formField : {},
         questions: [
             "Yay, Someone is ready to \n celebrate ! Let's quickly get you started.",
@@ -38,9 +40,9 @@ class ProductProvider extends Component {
           let formField = this.state.formField;
           formField[e.target.name] = e.target.value;
           this.setState({
-            formField,
+            formField, 
           });
-          console.log(formField)
+          // console.log(formField)
         }
 
         weddingHandleChange= (e) =>{
@@ -49,9 +51,15 @@ class ProductProvider extends Component {
         }
         birthdayHandleChange= (e) =>{
           this.setState({formValue: e.target.value })
-          console.log(this.state.formValue);
+          // console.log(this.state.formValue);
         }
     
+        handleEventType = e => {
+          this.setState({ eventType: e})
+          // let type = this.state.eventType
+          // console.log(type)
+        };
+
     mapValueAndNext = () => {
         console.log(this.state.formValue);
         console.log(this.state.currentIndex);
@@ -67,7 +75,7 @@ class ProductProvider extends Component {
         answers[currentIndex] = value;
         this.setState({ answers: answers });
         // console.dir(this.state);
-        console.log(answers);
+        // console.log(answers);
         this.setState({ currentIndex: currentIndex + 1 });
         this.setState({ formValue: this.state.answers[currentIndex + 1] });
       };
@@ -104,7 +112,7 @@ class ProductProvider extends Component {
         weddinganswers[weddingcurrentIndex] = value;
         this.setState({ weddinganswers: weddinganswers });
         // console.dir(this.state);
-        console.log(weddinganswers);
+        // console.log(weddinganswers);
         this.setState({ weddingcurrentIndex: weddingcurrentIndex + 1 });
         this.setState({ weddingformValue: this.state.weddinganswers[weddingcurrentIndex + 1] });
       };
@@ -126,6 +134,13 @@ class ProductProvider extends Component {
           console.log(this.state.weddingformValue);
         }
     }
+
+      addToCart =()=>{
+        console.log('tocart');
+      }
+      wishlist =()=>{
+        console.log('wishlist');
+      }
     
 
 
@@ -141,6 +156,9 @@ class ProductProvider extends Component {
             weddingHandleChange : this.weddingHandleChange,
             birthdayHandleChange : this.birthdayHandleChange,
             handlerChange : this.handlerChange,
+            handleEventType : this.handleEventType,
+            addToCart : this.addToCart,
+            wishist : this.wishlist
             }}>
                 {this.props.children}
             </StateContext.Provider>

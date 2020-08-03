@@ -34,8 +34,8 @@ import util from "../util/util";
           }
         }
 
-        onSubmit(event){
-          event.preventDefault();
+        onSubmit(e){
+          e.preventDefault();
             const SignInDetails = this.state.field;
             // if (SignInDetails.checkValidity() === false) {
             //   event.stopPropagation();
@@ -44,8 +44,8 @@ import util from "../util/util";
             axios.post(`${util.API_BASE_URL}accounts/login/`, SignInDetails,{ 
             'headers': {
               "Content-Type": "application/json",
-            },
-          })
+              },
+            })
             . then(data=> {
               if (data.status === 200){
                 // console.log(data);
@@ -54,13 +54,13 @@ import util from "../util/util";
                 window.location.href='/dashboard'
                 console.log('successfully login');
               }
-
+              
             })
             .catch(error => {
               console.log(error);
               alert('Invalid email or password');
-          });
-          this.setState({loginField : '',field :''});
+            });
+            this.setState({[e.target.name] : '',field :''});
             
           };
 

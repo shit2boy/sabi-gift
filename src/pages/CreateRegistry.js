@@ -4,6 +4,8 @@ import sabigift from '../images/landing/sabigift.png';
 import  ring from "../images/landing/ring.svg";
 import  food from "../images/landing/food-and-restaurant.svg";
 import { Steps } from 'antd';
+import {ProductConsumer} from '../Context'
+
 
 const { Step } = Steps;
 
@@ -18,18 +20,16 @@ export class CreateRegistry extends Component {
         }
     }
 
-    handleEvent = e => {
-        // console.log('asd ' + e);
-        // e.preventDefault();
-        this.setState({ eventType: e})
-        let type = this.state.eventType
-        console.log(type)
-      };
-    eventType=()=>{
+    // handleEvent = e => {
+    //     this.setState({ eventType: e})
+    //     let type = this.state.eventType
+    //     console.log(type)
+    //   };
 
-    }
+
     render() {
-        return (
+        return (<ProductConsumer>
+          {value=>(
           <div className="container-fluid">
             <div className="row">
               <div className=" col-4 d-none d-lg-flex justify-content-center leftside">
@@ -66,21 +66,21 @@ export class CreateRegistry extends Component {
                                    
                                     <img src={ring} alt="weddingIcon" />{" "}
                                    
-                                    <p onClick={()=>this.handleEvent("Wedding")}>Wedding</p>
+                                    <p onClick={()=>value.handleEventType("Wedding")}>Wedding</p>
                                 </button>
-                                <button type='button' onClick={()=>this.handleEvent("Birthday")} className="eventItem">
+                                <button type='button' onClick={()=>value.handleEventType("Birthday")} className="eventItem">
                                     <p>
                                     <img src={food} alt="weddingIcon" />{" "}
                                     </p>
                                     <p>Birthday</p>
                                 </button>
-                                <button onClick={()=>this.handleEvent("Baby Shower")} className="eventItem">
+                                <button onClick={()=>value.handleEventType("Baby Shower")} className="eventItem">
                                    
                                         <img src={ring} alt="babyicon" />{" "}
                                   
                                     <p>Baby Shower</p>
                                 </button>
-                            <button onClick={()=>this.handleEvent("Not on list")} className="eventItem">
+                            <button onClick={()=>value.handleEventType("Not on list")} className="eventItem">
                                 
                                     <img src={ring} alt="undefine" />{" "}
                                
@@ -101,13 +101,13 @@ export class CreateRegistry extends Component {
                        <button to="" className="btn rounded-pill px-5" style={{background:'#ffffff'}}>
                             Back
                         </button>
-                        { this.state.eventType ==='Wedding' && (<Link
+                        { value.eventType ==='Wedding' && (<Link
                         to="/getstarted"
                         className=" text-link btn btn-dark rounded-pill px-5"
                         >
                             Next
                         </Link>)}
-                        {this.state.eventType ==='Birthday'&&(
+                        {value.eventType ==='Birthday'&&(
                             <Link
                             to="/signUp"
                             className=" text-link btn btn-dark rounded-pill px-5"
@@ -119,8 +119,10 @@ export class CreateRegistry extends Component {
                    </div>
               </div>
             </div>
-          </div>
-        ); }
+          </div>)}
+          </ProductConsumer>
+        ); 
+        }
  }
 
  export default CreateRegistry

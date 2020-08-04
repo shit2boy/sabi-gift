@@ -129,144 +129,192 @@ export const ProductItems =[
         id:1,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:2,
         name:'Apple Smart Watch',
         imgUrl: smartwatch,
-        price : '#13.999',
+        price : '13.999',
         info: 'Apple Watch Series 4 GPS',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:3,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Apple Watch Series 4 GPS',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:4,
         name:'Laptop',
         imgUrl: watchphone,
-        price: '#15,000',
+        price: '15,000',
         info: 'Apple Watch Series 4 GPS',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:5,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:6,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:7,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:8,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:9,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '200,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:10,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:11,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:12,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:13,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:14,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:15,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
     {
         id:16,
         name:'Laptop',
         imgUrl: laptop,
-        price: '#250,000',
+        price: '250,000',
         info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.'
+        comment: 'Redesigned from scratch and completely revised.',
+        inCart: false,
+        count: 0,
+        total : 0,
 
     },
    

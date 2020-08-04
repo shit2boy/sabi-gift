@@ -17,40 +17,40 @@ export class NextSteps extends Component {
                   <Card.Title className='ml-2'><BsBell/></Card.Title>
                     <Card.Body className='stepsCard'></Card.Body>
                     <Card.Footer className='cardFooter'>
-                      <strong class="ml-1">1</strong>
-                      <img class="ml-1 d-block" src={Add} alt='step1' /> <span className="text-right">+</span>
+                      <strong className="ml-1">1</strong>
+                      <img className="ml-1 d-block" src={Add} alt='step1' /> <span className="text-right">+</span>
                     </Card.Footer>
                   </Card>
                   <Card id='myCards' className='shadow ' style={{ width: "12rem" }}>
                   <Card.Title className='ml-2'><BsBell/></Card.Title>
                     <Card.Body className='stepsCard2'></Card.Body>
                     <Card.Footer className='cardFooter'>
-                      <strong class="ml-1">2</strong>
-                      <img class="ml-1 d-block" src={addItem} alt='step2' /> <span className="text-right">+</span>
+                      <strong className="ml-1">2</strong>
+                      <img className="ml-1 d-block" src={addItem} alt='step2' /> <span className="text-right">+</span>
                     </Card.Footer>
                   </Card>
                   <Card id='myCards' className='shadow ' style={{ width: "12rem" }}>
                   <Card.Title className='ml-2'><BsBell/></Card.Title>
                     <Card.Body className='stepsCard3'></Card.Body>
                     <Card.Footer className='cardFooter'>
-                      <strong class="ml-1">3 </strong>
-                      <img class="ml-1 d-block" src={invite} alt='step3' /> <span className="text-right">+</span>
+                      <strong className="ml-1">3 </strong>
+                      <img className="ml-1 d-block" src={invite} alt='step3' /> <span className="text-right">+</span>
                     </Card.Footer>
                   </Card>
                   <Card id='myCards' className='shadow ' style={{ width: "12rem" }}>
                       <Card.Title className='ml-2'><BsBell/></Card.Title>
                     <Card.Body className='stepsCard4'></Card.Body>
                     <Card.Footer className='cardFooter'>
-                      <strong class="ml-1">4</strong>
-                      <img class="ml-1 d-block" src={manage} alt='step4' /> <span className="text-right">+</span>
+                      <strong className="ml-1">4</strong>
+                      <img className="ml-1 d-block" src={manage} alt='step4' /> <span className="text-right">+</span>
                     </Card.Footer>
                   </Card>
                   <Card id='myCards' className='shadow ' style={{ width: "12rem" }}>
                   <Card.Title className='ml-2'><BsBell/></Card.Title>
                     <Card.Body className='stepsCard5'></Card.Body>
                     <Card.Footer className='cardFooter'>
-                      <strong class="ml-1">5 </strong>
-                      <img class="ml-1 d-block" src={setup} alt='step5'/> <span className="text-right">+</span>
+                      <strong className="ml-1">5 </strong>
+                      <img className="ml-1 d-block" src={setup} alt='step5'/> <span className="text-right">+</span>
                     </Card.Footer>
                   </Card>
               </div>

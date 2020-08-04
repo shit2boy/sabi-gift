@@ -54,7 +54,7 @@ export class Dashboard extends Component {
                     <div className='d-flex align-items-center p-3'>
                         <BsGift size='30px' color='#E6E6E6'/>
                         <div className='ml-3 align-items-center'>
-                        <span class="badge badge-pill badge-primary">Gifts</span>
+                        <span className="badge badge-pill badge-primary">Gifts</span>
                           <p>400,000</p>
                         </div>
                     </div>

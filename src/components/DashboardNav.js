@@ -27,7 +27,7 @@ export class DashboardNav extends Component {
                             </Nav>
                             <Nav>
                             <Nav.Link href="#">
-                                <span className='row'>Jimi & Johanna's registry</span>
+                                <span className='row'> {window.localStorage.name}'s registry</span>
                                 <span className='mr-2'><Link className='text-link' to='/checkout'><img src={settingIcon} alt='icon'></img><small>setting</small></Link></span> 
                                 <Link className='text-link' to='/eventType'><span><img src={previewIcon} alt='icon'></img><small>Preview</small></span></Link>
                             </Nav.Link>

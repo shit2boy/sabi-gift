@@ -10,29 +10,21 @@ import util from "../util/util";
      constructor(props){
          super(props)
          this.state={
-             field : {},
-            //  password : [],
+             name : '',
+             pasword : '',
              modalShow: false,
              modalTitle: "",
              validated : false,
+             errorMessage : '',
          }
          this.changeHandler = this.changeHandler.bind(this);
          this.onSubmit = this.onSubmit.bind(this);
         //  this.setModalShow = this.setModalShow.bind(this);
      }
         changeHandler(e){
-          let loginField = this.state.field;
-          loginField[e.target.name] = e.target.value;
-          this.setState({
-            loginField,
-          });
-          // console.log(loginField)
+        this.setState({ [e.target.name] : e.target.value});
         }
-        componentDidMount(){
-          if (localStorage.getItem('token')!=null){
-            this.props.history.push('/')
-          }
-        }
+        
 
         onSubmit(e){
           e.preventDefault();
@@ -50,18 +42,18 @@ import util from "../util/util";
               if (data.status === 200){
                 // console.log(data);
                 window.localStorage.setItem('token_id', data.data.token);
-                window.localStorage.setItem('username', data.config.data.email);
+                window.localStorage.setItem('username', data.data.email);
                 window.location.href='/dashboard'
-                console.log('successfully login');
+                // console.log('successfully login');
               }
               
             })
             .catch(error => {
-              console.log(error);
-              alert('Invalid email or password');
-            });
-            this.setState({[e.target.name] : '',field :''});
+              // console.log(error.message);
+              this.setState({errorMessage: error.message});
             
+            });
+          
           };
 
         setModalHide = () => {
@@ -104,6 +96,7 @@ import util from "../util/util";
                 <Button className="w-100" variant="success" type="submit" style={{background:'#58B852', color:'#ffffff'}}>
                     Log In
                 </Button>
+                { this.state.errorMessage && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p> }
                 <div className='text-center mt-4'>
                     <span className='d-block'>Forgot your password? <Link className='text-link' style={{color:'#223564'}} to='/Passwordreset'>Reset your password</Link></span>
                     <span style={{color:'#223564',opacity:'1'}}> Don’t have an account? <Link className='text-link' style={{color:'#223564'}} to='/createRegistry'>Sign up</Link></span>

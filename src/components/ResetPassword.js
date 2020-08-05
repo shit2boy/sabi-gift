@@ -11,7 +11,7 @@ import util from "../util/util";
 
 
     const [validated, setValidated] = useState(false);
-    const [data, setData] = useState();
+    const [data, setData] = useState('');
     // const [redirect, setRedirect] = useState(false)
 
 
@@ -26,9 +26,10 @@ import util from "../util/util";
         .then(res => {
         //   ToastsStore.success(res.data.message)
         //   setRedirect(true)
+        console.log(res);
         })
         .catch(err => {
-          console.log( err.response.data);
+          console.log( err);
          
          })
     }
@@ -45,12 +46,6 @@ import util from "../util/util";
         handleReset();
     };
 
-
-    // const renderRedirect = () => {
-    //     if (redirect) {
-    //         return <Redirect to='./'/>
-    //     }
-    // }
 
     return (<div className='container'>
             <div  className='d-flex justify-content-center align-items-center' style={{height:'500px'}}>

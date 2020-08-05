@@ -22,10 +22,14 @@ export class About extends Component {
           formField : { },
             currentIndex : 0,
             signUpResponse:{successful:false, message:''},
-            isValidated : false
+            isValidated : false,
+            registryType : [],
+            errorMessage : '',
+            selectedRegistryType : '',
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRegistryType = this.handleRegistryType.bind(this);
     }
 
     handleChange(e) {
@@ -37,6 +41,54 @@ export class About extends Component {
       // console.log(formField)
     }
 
+          // componentDidMount() {
+      //   axios
+      //     .get(`${util.API_BASE_URL}registry-types/`, {
+      //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      //     })
+      //     .then((res) => {
+      //       // console.log(res.data);
+      //       if (res.data !== undefined) {
+      //          this.setState({registryType : res.data});
+      //       }
+      //     })
+      //     .catch((err) => {
+      //       // console.log(err);
+      //       
+      //     });
+      // }
+
+
+
+      validateForm() {
+        let formField = this.state.formField;
+        let errors = {};
+        let formIsValid = true;
+      if (!formField["firstName"]) {
+        formIsValid = false;
+        errors["firstName"] = "Cannot be empty";
+      }
+      if (!formField["lastName"]) {
+        formIsValid = false;
+        errors["lastName"] = "Cannot be empty";
+      }
+      if (!formField["address"]) {
+        formIsValid = false;
+        errors["address"] = "Cannot be empty";
+      }
+      if (!formField["street"]) {
+        formIsValid = false;
+        errors["street"] = "Cannot be empty";
+      }
+      if (!formField["city"]) {
+        formIsValid = false;
+        errors["city"] = "Cannot be empty";
+      }
+      this.setState({ errorMessage: errors });
+      return formIsValid;
+    }
+
+     
         handleSubmit(event) {
         event.preventDefault();
         let formField = this.state.formField;
@@ -53,7 +105,7 @@ export class About extends Component {
         
 
         axios.put(`${util.API_BASE_URL}accounts/profile/`, newUserInfo, 
-          {headers:{ Authorization: localStorage.getItem('token_id')} })
+          {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
         .then(response => {
           if (response.status === 200)
             alert(response);
@@ -62,19 +114,21 @@ export class About extends Component {
         })
         .catch(error => {
             console.dir(error);
-            alert("Not successful, Check all Input fields")
+            this.setState({errorMessage: error.message});
+
+            // alert("Not successful, Check all Input fields")
+            
         });
       
       }
         handleRegistryType(event) {
         event.preventDefault();
-        let formField = this.state.formField;
-        const registryType = 'selectedValue';       
-        
-        
-
-        axios.put(`${util.API_BASE_URL}accounts/profile/`, registryType, 
-          {headers:{ Authorization: localStorage.getItem('token_id')} })
+        // const registryType = 'selectedValue'; 
+        this.setState({ selectedRegistryType: event})
+        let type = this.state.selectedRegistryType
+        console.log(type)
+        axios.put(`${util.API_BASE_URL}registry-types/${type}/`, type, 
+          {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
         .then(response => {
           if (response.status === 200)
             alert(response);
@@ -83,11 +137,13 @@ export class About extends Component {
         })
         .catch(error => {
             console.dir(error);
-            alert("Not successful, Check all Input fields")
+
         });
       
       }
-    //    const handleSubmit = (event) => {
+
+      
+    //    const handleValidation = (event) => {
     //     if (formField.checkValidity() === false) {
     //       event.preventDefault();
     //       event.stopPropagation();
@@ -150,12 +206,13 @@ next =() => {
                               <Form.Group as={Col} controlId="formGridName">
                                 <Form.Label>First Name</Form.Label>
                                 <Form.Control onChange ={this.handleChange} type="text" name='firstName' placeholder="Jimi" />
+                                <span style={{ color: "red" }}>{this.state.errorMessage["firstName"]} </span>
                               </Form.Group>
 
                             <Form.Group as={Col} controlId="formName">
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control onChange ={this.handleChange} type="text" name='lastName' placeholder="Fola" />
-                              <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
+                            <span style={{ color: "red" }}>{this.state.errorMessage["lastName"]} </span>
                             </Form.Group>
                             </Form.Row>
                             <Form.Row>
@@ -188,6 +245,7 @@ next =() => {
                             <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
+                        { this.state.errorMessage && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p>}
                       </Form>
                         </div>
                     </div>
@@ -209,8 +267,16 @@ next =() => {
                     <div className='col d-flex justify-content-center' style={{minHeight:'85vh',padding:'40px'}}>
                     <div className=''>
                       <h2>What are you most excited <br/>to register at Sibigifts?</h2>
-                      <p className="py-4">Select the Event</p>
+                      <p className="py-4">Select the gift types</p>
                       <div className="d-flex">
+                        {/* {registryType.map(type=>
+                          <div key={index} className="eventItem">
+                            <p>
+                              <img src={type.image} alt="weddingIcon" />{" "}
+                            </p>
+                            <p>{type.name}</p>
+                          </div>
+                        )} */}
                         <div className="eventItem">
                           <p>
                             <img src={ring} alt="weddingIcon" />{" "}
@@ -222,7 +288,7 @@ next =() => {
                           <p>
                             <img src={food} alt="weddingIcon" />{" "}
                           </p>
-                          <p>Cash Fund</p>
+                          <p>Cash Funds</p>
                         </div>
                     
                       <div className="eventItem">

@@ -29,10 +29,6 @@ class ProductProvider extends Component {
           console.log(type)
         };
 
-   
-    
-    
-
     getItemId = (id) =>{
       const product = this.state.products.find(item => item.id ===id);
       return product
@@ -40,10 +36,10 @@ class ProductProvider extends Component {
 
     handleItemDetails = (id) => {
       const product = this.getItemId(id);
-      // console.log(product);
-      // this.setState(()=>{
-      //  console.log(product);
-      // })
+      console.log(product);
+      this.setState(()=>{
+       console.log(product);
+      })
     }
 
       addToCart =(id)=>{

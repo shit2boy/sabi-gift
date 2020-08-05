@@ -4,7 +4,7 @@ import { GrFavorite } from "react-icons/gr";
 import { BsFillGridFill,BsListUl } from "react-icons/bs";
 import { Card } from "react-bootstrap";
 import {StateContext} from "../Context"
-import AddItem from "./AddItem";
+// import AddItem from "./AddItem";
 // import { propTypes } from 'prop-types';
 
 
@@ -48,14 +48,14 @@ export class Product extends Component {
                     {this.context.products.map((item) => (
                         <div key={item.id} id='productCards' className='card m-2 col-sm-3' onClick={(id)=>this.context.handleItemDetails(id)} style={ productStyle}>
                         <Card.Img className="center" alt="items" src={item.imgUrl} />
-                        <span className='d-block ml-auto'>{item.price}</span>
+                        <span className='d-block ml-auto'>#{item.price}</span>
                         <Card.Body>
                             <small className='d-block'>{item.info}</small>
                             <small>{item.comment}</small>
                         </Card.Body>
                         {!this.props.showWishList && <div className='d-flex'>
                             <p type='button' className='mb-0 p-2'style={{background:'#ededed',mniWidth:'95px',color :'#2c2c2c'}}><GrFavorite/> Wishlist</p>
-                            <AddItem><p type='button'className='mb-0 p-2'style={{background:'#6F64F8',mniWidth:'100px', borderBottomRightRadius:'8px'}}>Add to cart</p></AddItem>
+                            <p type='button'className='mb-0 p-2'style={{background:'#6F64F8',mniWidth:'100px', borderBottomRightRadius:'8px'}}>Add to cart</p>
                         </div> }
                         
                         {this.props.showWishList && <div className='d-flex'>

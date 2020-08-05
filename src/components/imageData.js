@@ -10,6 +10,10 @@ import laptop from '../images/Sabi-storepage/laptop.png'
 import smartwatch from '../images/Sabi-storepage/smartwatch.jpg'
 import watchphone from '../images/Sabi-storepage/watchphone.jpg'
 import add from '../images/Sabi-storepage/Addicon.jpg'
+import DeepFryer from '../images/Sabi-storepage/DeepFryer.jpg'
+import phone from '../images/Sabi-storepage/phone.jpg'
+import Samsung from '../images/Sabi-storepage/Samsung.jpg'
+import ledTv from '../images/Sabi-storepage/tv.jpg'
 
 
 
@@ -188,10 +192,10 @@ export const ProductItems =[
     {
         id:6,
         name:'Laptop',
-        imgUrl: laptop,
-        price: '250,000',
-        info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.',
+        imgUrl: DeepFryer,
+        price: '7,000',
+        info: 'Deep Fryer',
+        comment: 'Generic Manual Deep Fryer.',
         inCart: false,
         count: 0,
         total : 0,
@@ -200,10 +204,10 @@ export const ProductItems =[
     {
         id:7,
         name:'Laptop',
-        imgUrl: laptop,
+        imgUrl: phone,
         price: '250,000',
-        info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.',
+        info: ' Phone',
+        comment: 'Samsung Smart Phone.',
         inCart: false,
         count: 0,
         total : 0,
@@ -212,10 +216,10 @@ export const ProductItems =[
     {
         id:8,
         name:'Laptop',
-        imgUrl: laptop,
+        imgUrl: Samsung,
         price: '250,000',
-        info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.',
+        info: 'Samsung Mini Bud',
+        comment: 'Samsung True Wireless Mini Bud.',
         inCart: false,
         count: 0,
         total : 0,
@@ -224,10 +228,10 @@ export const ProductItems =[
     {
         id:9,
         name:'Laptop',
-        imgUrl: laptop,
+        imgUrl: ledTv,
         price: '200,000',
-        info: 'Lenovo Pro 512GB SSD',
-        comment: 'Redesigned from scratch and completely revised.',
+        info: 'LG 32 Inches TV',
+        comment: 'LG 32 Inches TV + Wall Bracket .',
         inCart: false,
         count: 0,
         total : 0,

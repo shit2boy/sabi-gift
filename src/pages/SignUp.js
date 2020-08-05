@@ -26,7 +26,8 @@ export default class getstarted extends Component {
           email : '',
           password:'',
           confirm :'',
-          signUpResponse:{successful:false, message:''},
+          errorMessage : '',
+          signUpResponse:{successful:false,},
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,18 +52,18 @@ export default class getstarted extends Component {
         let answers = this.state.answers;
         answers[currentIndex] = value;
         this.setState({ answers: answers });
-        console.dir(this.state);
-        console.log(answers);
+        // console.dir(this.state);
+        // console.log(answers);
         this.setState({ currentIndex: currentIndex + 1 });
         this.setState({ formValue: this.state.answers[currentIndex + 1] });
       };
     
       goBack = () => {
-        console.log(this.state);
-        console.log("current index " + this.state.currentIndex);
-        console.log(
-          "current index " + this.state.answers[this.state.currentIndex - 1]
-        );
+        // console.log(this.state);
+        // console.log("current index " + this.state.currentIndex);
+        // console.log(
+        //   "current index " + this.state.answers[this.state.currentIndex - 1]
+        // );
         let formValue = this.state.answers[this.state.currentIndex - 1];
         if (this.state.currentIndex <= 0) {
           return;
@@ -96,13 +97,15 @@ export default class getstarted extends Component {
         { 'content-type': 'multipart/form-data' })
       .then(response => {
         if (response.status === 200)
-          alert(response);
+          // alert(response);
           this.setState({currentIndex: this.state.currentIndex + 1, signUpResponse : {successful:true, message:'Registry Successful'}})
          
       })
       .catch(error => {
-          console.dir(error);
-          alert("Not successful, Check all Input fields")
+          // console.dir(error);
+          this.setState({errorMessage: error.message});
+
+          // alert("Not successful, Check all Input fields")
       });
       }
   render() {
@@ -295,6 +298,7 @@ export default class getstarted extends Component {
                           label="I have read the Privacy Policy and agree to the Terms of Service."
                         />
                       </Form.Group>
+                      { this.state.errorMessage && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p> }
                     </Form>
                   </div>
                 )}

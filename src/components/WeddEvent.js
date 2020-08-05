@@ -47,8 +47,8 @@ export default class getstarted extends Component {
 
   mapValueAndNext = (e) => {
     e.preventDefault();
-    console.log(this.state.formValue);
-    console.log(this.state.currentIndex);
+    // console.log(this.state.formValue);
+    // console.log(this.state.currentIndex);
     let value = this.state.formValue;
     let currentIndex = this.state.currentIndex;
 
@@ -61,7 +61,7 @@ export default class getstarted extends Component {
     answers[currentIndex] = value;
     this.setState({ answers: answers });
     // console.dir(this.state);
-    console.log(answers);
+    // console.log(answers);
     this.setState({ currentIndex: currentIndex + 1 });
     this.setState({ formValue: this.state.answers[currentIndex + 1] });
 
@@ -171,8 +171,8 @@ export default class getstarted extends Component {
               >
                 {this.state.currentIndex === 2 && (
                   <div>
-                    {("Hey" +
-                      this.state.answers[0] +
+                    {("Hey " +
+                      this.state.answers[0] + " " +
                       "and " +
                       this.state.answers[1] +
                       this.state.questions[2]

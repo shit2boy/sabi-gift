@@ -44,7 +44,8 @@ export default class getstarted extends Component {
   }
    dateChange(date, dateString) {
     this.setState({eventDate: dateString});
-    console.log(date, dateString);}
+    // console.log(date, dateString);
+  }
 
   mapValueAndNext = (e) => {
     e.preventDefault();

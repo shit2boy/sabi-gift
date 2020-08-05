@@ -12,7 +12,7 @@ import util from "../util/util";
 
     const [validated, setValidated] = useState(false);
     const [data, setData] = useState('');
-    // const [redirect, setRedirect] = useState(false)
+    // const [responseMessage, setresponseMessage] = useState('');
 
 
 
@@ -25,9 +25,10 @@ import util from "../util/util";
         Axios.post(`${util.API_BASE_URL}accounts/send-reset-password-link/`, { ...data },
         {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
         .then(res => {
-        //   ToastsStore.success(res.data.message)
-        //   setRedirect(true)
-        console.log(res);
+            // console.log(res.data.detail);
+            if (res.status===200) {
+              alert('Reset Password link sent')  
+            }
         })
         .catch(err => {
           console.log( err);
@@ -36,6 +37,7 @@ import util from "../util/util";
     }
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
         event.preventDefault();
@@ -58,7 +60,6 @@ import util from "../util/util";
                             <Form.Control type="email" name="email" placeholder="Enter email" required />
                             <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                         </Form.Group>
-                        
                         <Button className="w-100 mt-3" variant="success" type="submit" style={{background:'#58B852', color:'#ffffff'}}>
                             Log In
                         </Button>

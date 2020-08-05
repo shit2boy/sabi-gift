@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import { Steps } from "antd";
+import { Steps,DatePicker } from "antd";
 import { Form, Button, Col } from "react-bootstrap";
 import axios from "axios";
 import util from "../util/util";
@@ -30,20 +30,21 @@ export default class getstarted extends Component {
       email : '',
       password:'',
       confirm :'',
+      errorMessage : '',
       signUpResponse:{successful:false, message:''},
       isValidated : false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.dateChange = this.dateChange.bind(this);
+    this.dateChange = this.dateChange.bind(this);
 
   }
   handleChange(e) {
     this.setState({ [e.target.name] : e.target.value});
   }
-  //  dateChange(date, dateString) {
-  //   this.setState({eventDate: dateString});
-  //   console.log(date, dateString);}
+   dateChange(date, dateString) {
+    this.setState({eventDate: dateString});
+    console.log(date, dateString);}
 
   mapValueAndNext = (e) => {
     e.preventDefault();
@@ -65,7 +66,7 @@ export default class getstarted extends Component {
     this.setState({ currentIndex: currentIndex + 1 });
     this.setState({ formValue: this.state.answers[currentIndex + 1] });
 
-    console.log("current index" + this.state.currentIndex);
+    // console.log("current index" + this.state.currentIndex);
   };
 
   goBack = () => {
@@ -82,7 +83,7 @@ export default class getstarted extends Component {
     if (this.state.currentIndex <= 4) {
       this.setState({ currentIndex: this.state.currentIndex - 1 });
       this.setState({ formValue: formValue });
-      console.log(this.state.formValue);
+      // console.log(this.state.formValue);
     }
 
   };
@@ -95,7 +96,7 @@ export default class getstarted extends Component {
     newUserInfo.append('password', this.state.password);
     newUserInfo.append('gender', undefined);
     newUserInfo.append('event_type', 'wedding');
-    newUserInfo.append('event_date', this.state.answers[2]);
+    newUserInfo.append('event_date', this.state.eventDate);
     newUserInfo.append('no_of_guest', this.state.answers[3]);
     newUserInfo.append('spouse_name', this.state.answers[1]);
     newUserInfo.append('photo', '');
@@ -104,14 +105,14 @@ export default class getstarted extends Component {
     { 'content-type': 'multipart/form-data' })
   .then(response => {
     if (response.status === 200)
-      alert(response);
+      // alert(response);
       this.setState({currentIndex: this.state.currentIndex + 1, signUpResponse : {successful:true, message:'Registry Successful'}})
      
   })
   .catch(error => {
-      console.dir(error);
-      alert("Not successful, Check all Input fields")
-  });
+      // console.dir(error);
+      this.setState({errorMessage: error.message});
+    });
   }
 
   render() {
@@ -181,10 +182,9 @@ export default class getstarted extends Component {
                       .map((text, index) => (
                         <h2 key={index}>{text}</h2>
                       ))}
-                    {/* <h2>Yay, we love weddings! <br/>First off ... what's your name?</h2> */}
                     <div className="mt-4">
                       <form>
-                      <input
+                      {/* <input
                           className="p-2"
                           type="text"
                           value={this.state.formValue}
@@ -192,8 +192,8 @@ export default class getstarted extends Component {
                             this.setState({ formValue: e.target.value })}
                           placeholder="yyyy-mm-dd"
                           required
-                        />
-                        {/* <DatePicker onChange={this.dateChange}/> */}
+                        /> */}
+                        <DatePicker onChange={this.dateChange}/>
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
@@ -361,6 +361,7 @@ export default class getstarted extends Component {
                           required
                         />
                       </Form.Group>
+                      { this.state.errorMessage && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p> }
                     </Form>
                   </div>
                 )}

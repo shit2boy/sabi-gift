@@ -22,7 +22,8 @@ import util from "../util/util";
       };
 
     const handleReset=()=>{
-        Axios.post(`${util.API_BASE_URL}accounts/reset-password/`, { ...data })
+        Axios.post(`${util.API_BASE_URL}accounts/send-reset-password-link/`, { ...data },
+        {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
         .then(res => {
         //   ToastsStore.success(res.data.message)
         //   setRedirect(true)

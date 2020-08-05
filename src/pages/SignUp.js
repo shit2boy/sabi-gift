@@ -76,10 +76,6 @@ export default class getstarted extends Component {
         }
 
         
-    
-        // const onFinish = values => {
-        //     console.log('Received values of form: ', values);
-        //   };
       };
       handleSubmit(event) {
         event.preventDefault();

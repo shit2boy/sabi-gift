@@ -19,7 +19,7 @@ export class Dashboard extends Component {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data !== undefined) {
           window.localStorage.setItem("name", res.data.first_name);
           window.localStorage.setItem("image", res.data.photo);
@@ -31,7 +31,7 @@ export class Dashboard extends Component {
         window.localStorage.removeItem("name");
         window.localStorage.removeItem("image");
         window.localStorage.removeItem("username");
-        window.location.replace = "/";
+        window.location.href = "/";
       });
   }
 

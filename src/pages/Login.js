@@ -23,17 +23,19 @@ import util from "../util/util";
      }
         changeHandler(e){
         this.setState({ [e.target.name] : e.target.value});
+        // console.log(this.state.email);
         }
         
 
         onSubmit(e){
           e.preventDefault();
-            const SignInDetails = this.state.field;
+            // const SignInDetails = this.state.field;
             // if (SignInDetails.checkValidity() === false) {
             //   event.stopPropagation();
             //   console.log(SignInDetails);
             // }
-            axios.post(`${util.API_BASE_URL}accounts/login/`, SignInDetails,{ 
+            const {email,password} = this.state
+            axios.post(`${util.API_BASE_URL}accounts/login/`, {email, password},{ 
             'headers': {
               "Content-Type": "application/json",
               },
@@ -49,8 +51,8 @@ import util from "../util/util";
               
             })
             .catch(error => {
-              // console.log(error.message);
-              this.setState({errorMessage: error.message});
+              console.log(error);
+              this.setState({errorMessage:'Email or Password invalid'});
             
             });
           

@@ -24,9 +24,9 @@ class ProductProvider extends Component {
        
   }
         handleEventType = e => {
-          this.setState({ eventType: e})
-          let type = this.state.eventType
-          console.log(type)
+          this.setState({ eventType: e.target.innerText})
+          // let type = this.state.eventType
+          // console.log(this.state.eventType)
         };
 
     getItemId = (id) =>{

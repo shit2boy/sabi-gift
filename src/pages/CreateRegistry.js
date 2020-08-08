@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom'
 import sabigift from '../images/landing/sabigift.png';
 import  ring from "../images/landing/ring.svg";
-import  food from "../images/landing/food-and-restaurant.svg";
 import { Steps } from 'antd';
-import {ProductConsumer} from '../Context'
+import {ProductConsumer} from '../Context';
+import axios from "axios";
+import util from "../util/util";
 
 
 const { Step } = Steps;
@@ -14,11 +15,32 @@ const { Step } = Steps;
 export class CreateRegistry extends Component {
     constructor(props){
         super(props)
-    //    this.textContent = React.createRef();
-        this.state={
+          this.state={
             eventType :'',
+            eventTypeList : [],
         }
     }
+      
+       componentDidMount() {
+        axios
+          .get(`${util.API_BASE_URL}event-types/`, { 'content-type': 'multipart/form-data' },
+          )
+          .then((res) => {
+            console.log(res.data);
+            if (res.data !== undefined) {
+              // const typeList = res.data
+              let data = res.data;
+              for (let i=0;i<data.length;i++) {
+                data[i].image = data[i].image.replace("image/upload/","");
+              }
+               this.setState({eventTypeList : data});
+            }
+          })
+          .catch((err) => {
+            // console.log(err);
+            
+          });
+      }
 
     // handleEvent = e => {
     //     this.setState({ eventType: e})
@@ -53,7 +75,7 @@ export class CreateRegistry extends Component {
               </div>
               <div className="col rightside">
                 <div className='row'>
-                  <div  className="col d-flex justify-content-center" style={{minHeight:'80vh',marginTop:'35px'}}>
+                  <div  className="col offset-1 justify-content-center" style={{minHeight:'80vh',marginTop:'35px'}}>
                     <div>
                       <h3 className="">
                         First, Let's Make sure we <br />
@@ -61,31 +83,21 @@ export class CreateRegistry extends Component {
                       </h3>
 
                       <p className="py-4">Select the Event type</p>
-                      <div className="d-flex">
-                                <button  className="eventItem">
+                      <div className="row col-10">
+                          {this.state.eventTypeList.map(type=>
+                              <button key={type.id} className="eventItem">
+                                      <img src={type.image} alt={type.name} />
                                    
-                                    <img src={ring} alt="weddingIcon" />{" "}
-                                   
-                                    <p onClick={()=>value.handleEventType("Wedding")}>Wedding</p>
-                                </button>
-                                <button type='button' onClick={()=>value.handleEventType("Birthday")} className="eventItem">
-                                    <p>
-                                    <img src={food} alt="weddingIcon" />{" "}
-                                    </p>
-                                    <p>Birthday</p>
-                                </button>
-                                <button onClick={()=>value.handleEventType("Baby Shower")} className="eventItem">
-                                   
-                                        <img src={ring} alt="babyicon" />{" "}
-                                  
-                                    <p>Baby Shower</p>
-                                </button>
-                            <button onClick={()=>value.handleEventType("Not on list")} className="eventItem">
+                              <p onClick={(e)=>value.handleEventType(e)}>{type.name}</p>
+                              </button>
+                              )}
+                               
+                            <button onClick={(e)=>value.handleEventType(e)} className="eventItem">
                                 
                                     <img src={ring} alt="undefine" />{" "}
                                
                                 <p>Not on list</p>
-                            </button>
+                            </button> 
                       </div>
                         <p className="py-4">
                           Choose the category that matches your event. If your<br/>

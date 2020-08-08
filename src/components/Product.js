@@ -3,7 +3,9 @@ import { Input } from 'antd';
 import { GrFavorite } from "react-icons/gr";
 import { BsFillGridFill,BsListUl } from "react-icons/bs";
 import { Card } from "react-bootstrap";
-import {StateContext} from "../Context"
+// import {StateContext} from "../Context"
+import axios from "axios";
+import util from "../util/util";
 // import AddItem from "./AddItem";
 // import { propTypes } from 'prop-types';
 
@@ -21,11 +23,33 @@ overflow: 'hidden',
 
 
 export class Product extends Component {
-  static contextType = StateContext
+//   static contextType = StateContext;
    
     state={
        Products : [],
    }
+
+        componentDidMount() {
+            axios
+            .get(`${util.API_BASE_URL}registries/`, {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
+
+            .then((res) => {
+                console.log(res.data);
+                if (res.data !== undefined) {
+                let data = res.data;
+                for (let i=0;i<data.length;i++) {
+                    data[i].picture = data[i].picture.replace("image/upload/","");
+                }
+                this.setState({Products : data});
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                
+            });
+        }
+
+
     render() {
         return (
             <div className=''>
@@ -45,12 +69,12 @@ export class Product extends Component {
                       
                     </div>
                     <div className='row'>
-                    {this.context.products.map((item) => (
+                    {this.state.Products.map((item) => (
                         <div key={item.id} id='productCards' className='card m-2 col-sm-3' onClick={(id)=>this.context.handleItemDetails(id)} style={ productStyle}>
-                        <Card.Img className="center" alt="items" src={item.imgUrl} />
+                        <Card.Img className="center" alt="items" src={item.picture} />
                         <span className='d-block ml-auto'>#{item.price}</span>
                         <Card.Body>
-                            <small className='d-block'>{item.info}</small>
+                            <small className='d-block'>{item.description}</small>
                             <small>{item.comment}</small>
                         </Card.Body>
                         {!this.props.showWishList && <div className='d-flex'>
@@ -73,11 +97,10 @@ export class Product extends Component {
 export default Product
 
 // Product.protoTypes = {
-//     product:propTypes.shape({
+//     product:propTypes.Object({
 //         id:propTypes.number,
-//         imgUrl:propTypes.string,
+//         picture:propTypes.string,
 //         price:propTypes.string,info: propTypes.string,
-//         inCart:propTypes.bool
 
 //     }).isRequired
 // }

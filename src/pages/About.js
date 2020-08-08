@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
 import {Form,Col} from 'react-bootstrap'
-import ring from "../images/landing/ring.svg";
 import bmw from "../images/landing/bmw.png";
-import food from "../images/landing/food-and-restaurant.svg";
 import { Steps } from "antd";
 import {StateContext} from "../Context"
 import axios from "axios";
@@ -26,10 +24,11 @@ export class About extends Component {
             registryType : [],
             errorMessage : '',
             selectedRegistryType : '',
+            registryCategories : [],
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleRegistryType = this.handleRegistryType.bind(this);
+        // this.handleRegistryType = this.handleRegistryType.bind(this);
     }
 
     handleChange(e) {
@@ -93,7 +92,7 @@ export class About extends Component {
         event.preventDefault();
         let formField = this.state.formField;
         const newUserInfo = new FormData();       
-        newUserInfo.append('email', formField['email']);
+        // newUserInfo.append('email', formField['email']);
         newUserInfo.append('first_name', formField['firstName']);
         newUserInfo.append('last_name', formField['lastName']);
         newUserInfo.append('mobile', formField['Phone']);
@@ -104,44 +103,53 @@ export class About extends Component {
         newUserInfo.append('photo', '');
         
 
-        axios.put(`${util.API_BASE_URL}accounts/profile/`, newUserInfo, 
+        axios.patch(`${util.API_BASE_URL}accounts/profile/`, newUserInfo, 
           {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
         .then(response => {
           if (response.status === 200)
-            alert(response);
+            alert(response.data);
             this.setState({currentIndex : this.state.currentIndex + 1, signUpResponse : {successful:true, message:'Registry Successful'}})
            
         })
         .catch(error => {
             console.dir(error);
-            this.setState({errorMessage: error.message});
+            this.setState({errorMessage: error.response.data.first_name});
 
             // alert("Not successful, Check all Input fields")
             
         });
       
       }
-        handleRegistryType(event) {
-        event.preventDefault();
-        // const registryType = 'selectedValue'; 
-        this.setState({ selectedRegistryType: event})
-        let type = this.state.selectedRegistryType
-        console.log(type)
-        axios.put(`${util.API_BASE_URL}registry-types/${type}/`, type, 
-          {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
-        .then(response => {
-          if (response.status === 200)
-            alert(response);
-            this.setState({currentIndex : this.state.currentIndex + 1, signUpResponse : {successful:true, message:'Registry Successful'}})
-           
-        })
-        .catch(error => {
-            console.dir(error);
-
-        });
-      
-      }
-
+        componentDidMount(event){
+            // event.preventDefault();
+            // const registryType = 'selectedValue'; 
+            this.setState({ selectedRegistryType: event})
+            let type = this.state.selectedRegistryType
+            console.log(type)
+            axios.get(`${util.API_BASE_URL}categories/`, `${util.API_BASE_URL}registry-types/`,
+              {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
+            .then(response => {
+              if (response.status === 200)
+              this.setState({registryCategories : response.data});
+               
+            })
+            .catch(error => {
+                console.dir(error);
+    
+            });
+            axios.get(`${util.API_BASE_URL}registry-types/`,
+              {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
+            .then(response => {
+              if (response.status === 200)
+              this.setState({registryType : response.data});
+               
+            })
+            .catch(error => {
+                console.dir(error);
+    
+            });
+          
+          }
       
     //    const handleValidation = (event) => {
     //     if (formField.checkValidity() === false) {
@@ -198,7 +206,7 @@ next =() => {
 
             {this.state.currentIndex === 0 && <div className='col rightSide' >
                 <div className='row'>
-                    <div className="col d-flex justify-content-center" style={{minHeight:'85vh',marginTop:'35px'}}>
+                    <div className="col offset-1 justify-content-center" style={{minHeight:'85vh',marginTop:'35px'}}>
                         <div>
                         <h2 className=''>Hello! Please tell us a little <br/> bit about Yourself.</h2>
                         <Form noValidate onSubmit={this.handleSubmit} className='w-75'>
@@ -206,13 +214,13 @@ next =() => {
                               <Form.Group as={Col} controlId="formGridName">
                                 <Form.Label>First Name</Form.Label>
                                 <Form.Control onChange ={this.handleChange} type="text" name='firstName' placeholder="Jimi" />
-                                <span style={{ color: "red" }}>{this.state.errorMessage["firstName"]} </span>
+                                {/* <span style={{ color: "red" }}>{this.state.errorMessage["firstName"]} </span> */}
                               </Form.Group>
 
                             <Form.Group as={Col} controlId="formName">
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control onChange ={this.handleChange} type="text" name='lastName' placeholder="Fola" />
-                            <span style={{ color: "red" }}>{this.state.errorMessage["lastName"]} </span>
+                            {/* <span style={{ color: "red" }}>{this.state.errorMessage["lastName"]} </span> */}
                             </Form.Group>
                             </Form.Row>
                             <Form.Row>
@@ -264,45 +272,20 @@ next =() => {
 
              {this.state.currentIndex === 1 && <div className="col rightSide" >
                 <div className='row'>
-                    <div className='col d-flex justify-content-center' style={{minHeight:'85vh',padding:'40px'}}>
+                    <div className='col offset-1 justify-content-center' style={{minHeight:'85vh',padding:'40px'}}>
                     <div className=''>
                       <h2>What are you most excited <br/>to register at Sibigifts?</h2>
                       <p className="py-4">Select the gift types</p>
-                      <div className="d-flex">
-                        {/* {registryType.map(type=>
-                          <div key={index} className="eventItem">
+                      <div className="col-10 row">
+                        {this.state.registryType.map(type=>
+                          <div key={type.id} className="eventItem">
                             <p>
-                              <img src={type.image} alt="weddingIcon" />{" "}
+                              <img src={type.image} alt={type.name} />{" "}
                             </p>
                             <p>{type.name}</p>
                           </div>
-                        )} */}
-                        <div className="eventItem">
-                          <p>
-                            <img src={ring} alt="weddingIcon" />{" "}
-                          </p>
-                          <p>Gifts</p>
-                        </div>
-                    
-                        <div className="eventItem">
-                          <p>
-                            <img src={food} alt="weddingIcon" />{" "}
-                          </p>
-                          <p>Cash Funds</p>
-                        </div>
-                    
-                      <div className="eventItem">
-                        <p>
-                          <img src={ring} alt="babyicon" />{" "}
-                        </p>
-                        <p>Gift & Cash </p>
-                      </div>
-                      <div className="eventItem">
-                        <p>
-                          <img src={ring} alt="undefine" />{" "}
-                        </p>
-                        <p>Mostly cash</p>
-                      </div>
+                        )}  
+                          
                       </div>
                       <div className="p-3">
                       <p>
@@ -329,51 +312,21 @@ next =() => {
 
             {this.state.currentIndex === 2 && <div className=' col py-3 rightSide' >
                         <div className='row'>
-                            <div className='col d-flex justify-content-center' style={{minHeight:'90vh',padding:'40px'}}>
+                            <div className='col offset-1 justify-content-center' style={{minHeight:'90vh',padding:'40px'}}>
                             <div className='' >
                             <h2 id='header'>What are somethings you  <br/> enjoy doing together</h2>
                         
                             <p className='py-4'>Select as many as you want</p>
-                            <div className='d-flex mb-2'>
-                                <div className='eventItem'>
-                                    <p><img src={ring} alt='weddingIcon' /> </p>
-                                    <p>Cooking</p>
-                                </div> 
-                            
-                                <div className='eventItem'>
-                                    <p> </p>
-                                    <p>Baking</p>
-                                </div>    
+                            <div className='row col-10 mb-2'>
+
+                                {this.state.registryCategories.map(category=>
+                                  <div className='eventItem'>
+                                  <p className='tetx-center'><img src={category.image} alt='weddingIcon' /> </p>
+                                  <p>{category.name}</p>
+                              </div> 
+                              )}
+
                                
-                                <div className='eventItem'>
-                                    <p> </p>
-                                    <p>Friends over </p>
-                                </div> 
-                                <div className='eventItem'>
-                                    <p></p>
-                                    <p>Spa</p>
-                                </div> 
-                            </div>
-                            <div className='d-flex'>
-                               
-                                    <div className='eventItem'>
-                                        <p><img src={ring} alt='weddingIcon' /> </p>
-                                        <p>Traveling</p>
-                                    </div> 
-                               
-                                    <div className='eventItem'>
-                                        <p><img src={food} alt='weddingIcon' /> </p>
-                                        <p>Camping</p>
-                                    </div>    
-                               
-                                <div className='faded eventItem'>
-                                    <p><img src={ring} alt='babyicon' /> </p>
-                                    <p> Chilling</p>
-                                </div> 
-                                <div className=' faded eventItem'>
-                                    <p><img src={ring} alt='undefine' /> </p>
-                                    <p>Playing with</p>
-                                </div> 
                             </div>
                           </div>
                           </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import { Steps } from "antd";
+import { Steps,DatePicker } from "antd";
 import { Form, Button, Col } from "react-bootstrap";
 import axios from "axios";
 import util from "../util/util";
@@ -14,7 +14,7 @@ export default class getstarted extends Component {
         this.state = {
           questions: [
             "Yay, Someone is ready to \n celebrate ! Let's quickly get you started.",
-            "Hello, when is your \n birthday celebration \n coimng up?",
+            " when is your \n birthday celebration \n coimng up?",
             " About how many guests are \n you inviting ?",
           ],
           answers: ["", "", "", ],
@@ -26,21 +26,28 @@ export default class getstarted extends Component {
           email : '',
           password:'',
           confirm :'',
-          errorMessage : '',
+          eventDate:'',
+          error : '',
+          errorMessage : [],
           signUpResponse:{successful:false,},
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.dateChange = this.dateChange.bind(this);
+        this.dateChange = this.dateChange.bind(this);
     
       }
       handleChange(e) {
         this.setState({ [e.target.name] : e.target.value});
       }
 
+      dateChange(date, dateString) {
+        this.setState({eventDate: dateString});
+        console.log(date, dateString);
+      }
+
       mapValueAndNext = () => {
-        console.log(this.state.formValue);
-        console.log(this.state.currentIndex);
+        // console.log(this.state.formValue);
+        // console.log(this.state.currentIndex);
         let value = this.state.formValue;
         let currentIndex = this.state.currentIndex;
     
@@ -83,9 +90,8 @@ export default class getstarted extends Component {
         newUserInfo.append('first_name', this.state.answers[0]);
         newUserInfo.append('email', this.state.email);
         newUserInfo.append('password', this.state.password);
-        newUserInfo.append('gender', undefined);
         newUserInfo.append('event_type', 'Birthday');
-        newUserInfo.append('event_date', this.state.answers[1]);
+        newUserInfo.append('event_date', this.state.eventDate);
         newUserInfo.append('no_of_guest', this.state.answers[2]);
         newUserInfo.append('photo', '');
 
@@ -93,17 +99,23 @@ export default class getstarted extends Component {
         { 'content-type': 'multipart/form-data' })
       .then(response => {
         if (response.status === 200)
-          // alert(response);
+            // console.log(response);
           this.setState({currentIndex: this.state.currentIndex + 1, signUpResponse : {successful:true, message:'Registry Successful'}})
-         
+        
       })
-      .catch(error => {
-          // console.dir(error);
-          this.setState({errorMessage: error.message});
+      .catch(res => {
+          // console.dir( res.data);
+          // for (let error in res) {
+          //   let value = res[error].data;
+          //   console.log( value);
 
-          // alert("Not successful, Check all Input fields")
+          // }
+          this.setState({errorMessage: 'Email already exist or Password is too common'});
+
       });
       }
+
+
   render() {
     return (
       <>
@@ -159,24 +171,23 @@ export default class getstarted extends Component {
                   fontFamily: "arial",
                 }}
               >
-                {this.state.currentIndex === 2 && (
+                {this.state.currentIndex === 1 && (
                   <div>
-                    {this.state.questions[this.state.currentIndex]
+
+                    {("Hello, " +
+                      this.state.answers[0] + 
+                      this.state.questions[1]
+                    )
                       .split("\n")
                       .map((text, index) => (
                         <h2 key={index}>{text}</h2>
-                      ))}
-                    {/* <h2>Yay, we love weddings! <br/>First off ... what's your name?</h2> */}
+                      ))}         
+                  
                     <div className="mt-4">
                       <form>
-                        <input
-                        value={this.state.formValue}
-                        onChange={(e) =>
-                          this.setState({ formValue: e.target.value })}
-                          className="p-2"
-                          type="text"
-                          placeholder="Number of guest"
-                        />
+
+                      <DatePicker required onChange={this.dateChange}/>
+                       
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
@@ -201,14 +212,14 @@ export default class getstarted extends Component {
                     </div>
                   </div>
                 )}
-                {this.state.currentIndex !== 2 && this.state.currentIndex !== 3 && (
+                { this.state.currentIndex === 0 && (
                   <div>
                     {this.state.questions[this.state.currentIndex]
                       .split("\n")
                       .map((text, index) => (
                         <h2 key={index}>{text}</h2>
                       ))}
-                    {/* <h2>Yay, we love weddings! <br/>First off ... what's your name?</h2> */}
+                   
                     <div className="mt-4">
                       <form>
                         <input
@@ -217,6 +228,7 @@ export default class getstarted extends Component {
                           this.setState({ formValue: e.target.value })}
                           className="p-2"
                           type="text"
+                          required
                           placeholder="Enter Name"
                         />
                         {this.state.currentIndex === 0 && (
@@ -243,8 +255,50 @@ export default class getstarted extends Component {
                     </div>
                   </div>
                 )}
+                { this.state.currentIndex === 2 && (
+                  <div>
+                    {this.state.questions[this.state.currentIndex]
+                      .split("\n")
+                      .map((text, index) => (
+                        <h2 key={index}>{text}</h2>
+                      ))}
+
+                    <div className="mt-4">
+                      <form>
+                        <input
+                        value={this.state.formValue}
+                        onChange={(e) =>
+                          this.setState({ formValue: e.target.value })}
+                          className="p-2"
+                          type="text"
+                          placeholder="Number of Guest"
+                        />
+                        {this.state.currentIndex === 0 && (
+                          <Button
+                            type="submit"
+                            className="p-2 rounded-pill btn-outline-light"
+                            onClick={(e) => this.mapValueAndNext(e)}
+                            style={{ background: "#AAAAAA" }}
+                          >
+                            GET STARTED
+                          </Button>
+                        )}
+                        {this.state.currentIndex > 0 && (
+                          <Button
+                            type="submit"
+                            className="px-4 rounded-pill btn-outline-light"
+                            onClick={(e) => this.mapValueAndNext(e)}
+                            style={{ background: "#AAAAAA" }}
+                          >
+                            Next
+                          </Button>
+                        )}
+                      </form>
+                    </div>
+                  </div>
+                )}
                 
-                {this.state.currentIndex === 3 && (
+                { this.state.currentIndex ===3 &&  (
                   <div className="">
                     <h2>
                       Good News! You can create <br />a free registry on
@@ -320,7 +374,6 @@ export default class getstarted extends Component {
                     <Button
                       type="submit"
                       onClick={this.handleSubmit}
-                      //   onClick={() => this.goBack()}
                       className="px-5 btn-outline-dark"
                       style={{
                         background: "#AAAAAA",

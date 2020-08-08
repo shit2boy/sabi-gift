@@ -95,7 +95,6 @@ export default class getstarted extends Component {
     newUserInfo.append('first_name', this.state.answers[0]);
     newUserInfo.append('email', this.state.email);
     newUserInfo.append('password', this.state.password);
-    newUserInfo.append('gender', undefined);
     newUserInfo.append('event_type', 'wedding');
     newUserInfo.append('event_date', this.state.eventDate);
     newUserInfo.append('no_of_guest', this.state.answers[3]);
@@ -106,12 +105,12 @@ export default class getstarted extends Component {
     { 'content-type': 'multipart/form-data' })
   .then(response => {
     if (response.status === 200)
-      // alert(response);
-      this.setState({currentIndex: this.state.currentIndex + 1, signUpResponse : {successful:true, message:'Registry Successful'}})
+    this.setState({currentIndex: this.state.currentIndex + 1,errorMessage: response.message, signUpResponse : {successful:true, message:'Registry Successful'}})
      
   })
   .catch(error => {
-      // console.dir(error);
+    // let data = error.response.data[0] ;
+      console.dir(error);
       this.setState({errorMessage: error.message});
     });
   }
@@ -185,15 +184,6 @@ export default class getstarted extends Component {
                       ))}
                     <div className="mt-4">
                       <form>
-                      {/* <input
-                          className="p-2"
-                          type="text"
-                          value={this.state.formValue}
-                          onChange={(e) =>
-                            this.setState({ formValue: e.target.value })}
-                          placeholder="yyyy-mm-dd"
-                          required
-                        /> */}
                         <DatePicker onChange={this.dateChange}/>
                         {this.state.currentIndex === 0 && (
                           <Button
@@ -335,8 +325,7 @@ export default class getstarted extends Component {
                           <Form.Control
                             name='password'
                           onChange={this.handleChange}
-                          type="password" placeholder="*******" />
-                          required
+                          type="password" required placeholder="*******" />
                           <Form.Control.Feedback type="invalid">
                             Empty
                           </Form.Control.Feedback>
@@ -386,10 +375,8 @@ export default class getstarted extends Component {
                   <div className=" d-flex justify-content-around">
                     <span>Already a member? Log in</span>
                     <Button
-                    // to='/about'
                       type="submit"
                       onClick={this.handleSubmit}
-                      //   onClick={() => this.goBack()}
                       className="px-5 btn-outline-dark"
                       style={{
                         background: "#AAAAAA",

@@ -78,8 +78,9 @@ export class Product extends Component {
                     {this.state.Products.map((item) => (
                         <Card key={item.id} className='productCards  col-sm-3 m-3'  >
                         <div><img className="card-img center" alt="items" src={item.picture} /></div>
-                        <p className='card-img-overlay text-danger text-left'>20%</p>
+                        <p className='card-img-overlay text-danger text-left mt-0 ml-0'></p>
                         <span className='d-block ml-auto'>#{item.price}</span>
+                        {/* <span className='d-block mr-auto'>#{item.discount_price}</span> */}
                         <Card.Body style={{minHeight:'50px',padding:'5px'}}>
                             <strong className='d-block' style={{textOverflow: 'ellipsis'}}>{item.name}</strong>
                             <small>{item.description}</small>

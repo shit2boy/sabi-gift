@@ -67,8 +67,10 @@ import util from "../util/util";
           };
     render() {
         return (<div>
-            <img onClick={() =>
-              this.setModalShow(true)} src={account} width='50px' alt='userImage' className='pointer'/>
+            {this.props.home && <img onClick={() =>
+              this.setModalShow(true)} src={account} width='50px' alt='userImage' className='pointer'/>}
+            {this.props.signup && <p className='d-inline' onClick={() =>
+              this.setModalShow(true)}  style={{cursor:'pointer'}}>Log in </p>}
            
             <Modal
             size="md"

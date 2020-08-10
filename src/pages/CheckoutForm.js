@@ -2,30 +2,54 @@ import React, {useState }from "react";
 import { Form, Col,Table } from "react-bootstrap";
 import sabigift from '../images/landing/sabigift.png'
 import { Link } from "react-router-dom";
+import axios from "axios";
+import util from "../util/util";
 
 const CheckoutForm = () => {
   const [validated, setValidated] = useState(false);
+  const [data, setData] = useState();
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value });
+    // console.log(data);
+  };
+
+  const handlePost = () => {
+    axios.post(`${util.API_BASE_URL}/orders/`, { ...data })
+    .then(res => {
+        console.log(res.data);
+    })
+    .catch(err => {
+      console.log(err.response.data);
+    
+     })
+  }
   const handleSubmit = (event) => {
     const form = event.currentTarget;
+    event.preventDefault();
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
     }
 
     setValidated(true);
-  };
+    handlePost();
+  }
 
   return (
         <>
             <div className=' container-fluid'>
-                <Link to='/Dashboard' className='mt-3'>
-                    <img src={sabigift} width='70px' alt='logo' /> 
-                </Link>
-                    <div className='ml-4 mb-4'><h3>Check out</h3></div>
-                   <div className='row justify-content-center'>
-                      <div className='col-7 mx-auto p-3' style={{border:'1px solid #707070',borderRadius:'30px'}}>
-                        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                <div className='row'>
+                    <Link to='/Dashboard' className='mt-3'>
+                        <img src={sabigift} width='70px' alt='logo' /> 
+                    </Link>
+                </div>
+                    <div className='row col'>
+                        <h3>Check out</h3>
+                    </div>
+                    <div className='row justify-content-center'>
+                    <div className='col-7 mx-auto p-3' style={{border:'1px solid #707070',borderRadius:'30px'}}>
+                        <Form noValidate validated={validated} onSubmit={handleSubmit} onChange={handleChange}>
                             <Form.Row>
                             <Form.Group as={Col} controlId="Fname">
                                 <Form.Label>First name</Form.Label>
@@ -37,7 +61,7 @@ const CheckoutForm = () => {
                                 <Form.Control.Feedback type='invalid'>Empty</Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Col}  controlId="Lname">
-                                <Form.Label>Last name</Form.Label>
+                                <Form.Label>Lastname</Form.Label>
                                 <Form.Control
                                 required
                                 type="text"
@@ -126,7 +150,7 @@ const CheckoutForm = () => {
                             </tr>
                         </tbody>
                     </Table>
-                        <div className='text-center'><p type='submit' className='p-3' style={{background:'#6F66F8', width:'200px', color:'#FFFFFF'}}>Place Order</p> </div>
+                        <div className='text-center'><span type='button' className='p-3 orderBtn' >Place Order</span> </div>
                     </div>
                 </div>
                    

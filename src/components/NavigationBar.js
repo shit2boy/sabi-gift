@@ -26,7 +26,7 @@ export class NavigationBar extends Component {
           </Nav>
         </Navbar.Collapse>
         <Nav className="ml-auto">
-          <Login />
+          <Login home={true} />
         </Nav>
       </Navbar>
     );

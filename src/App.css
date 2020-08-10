@@ -385,3 +385,14 @@ display: flex;
     opacity: 1;
     height: 500px;
 }
+
+/*******************Checkout Form page **********************/
+.orderBtn{
+  background: #6F66F8;
+   width: 200px; 
+   color: #FFFFFF;
+   transition: 0.3s;
+}
+.orderBtn:hover{
+  background-color:#130e5e;
+}

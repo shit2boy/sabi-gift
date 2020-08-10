@@ -1,20 +1,25 @@
 import React, { Component } from 'react'
-import smartwatch from '../images/Sabi-storepage/smartwatch.jpg'
+// import smartwatch from '../images/Sabi-storepage/smartwatch.jpg'
 import { GrFavorite } from "react-icons/gr";
 import { Modal } from 'react-bootstrap';
-
+import util from "../util/util";
+import axios from "axios";
 import { Rate } from 'antd';
 
 
 
 
-export class AddItem extends Component {
-    constructor(){
-        super()
+class AddItem extends Component {
+    constructor(props){
+        super(props)
         this.state = {
             modalShow: false,
+            product : '',
+            quantity : [],
+            addedToCart : false
         }
-       
+       this.addToCart =this.addToCart.bind(this);
+       this.handleChange =this.handleChange.bind(this);
     }
     setModalHide = () => {
         this.setState({ modalShow: false,  });
@@ -23,13 +28,40 @@ export class AddItem extends Component {
       setModalShow = () => {
         this.setState({ modalShow: true });
       };
+      handleChange(e){
+        this.setState({ [e.target.name] : e.target.value});
+
+      }
+      addToCart(){
+          const { product, quantity} = this.state
+              this.setState( {product : this.props.productId,
+              quantity : this.state.quantity,})
+
+        axios.post(`${util.API_BASE_URL}carts/`, {product, quantity},{
+            headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+          })
+            . then(res=> {
+              if (res.status === 200){
+                console.log(res);
+                this.setState({addedToCart : true})
+               
+                // console.log('successfully ');
+              }
+              
+            })
+            .catch(error => {
+              console.log(error);  
+              console.log(product);
+
+            });
+      }
     
     render() {
         return (
                 <>
-                <p onClick={() =>this.setModalShow(true)} className='pointer'></p>
+                <span onClick={() =>this.setModalShow(true)} className='pointer'>{this.props.button}</span>
                 <Modal
-            size="md"
+            size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={this.state.modalShow}
@@ -40,32 +72,35 @@ export class AddItem extends Component {
             <Modal.Body className=" ">
             <div className='container'>
                 <div className='row justify-content-center'>
-                    <div className='col d-flex justify-content-center ' style={{maxheight : '400px'}}>
+                    <div className='col'>
                         <div className='mt-4 shadow'>
-                            <img src={smartwatch} alt='apple-watch'/>
+                            <img src={this.props.image} width='100px'className="card-img center" alt='apple-watch'/>
                         </div>
 
                     </div>
-                    <div className='col d-flex justify-content-center' style={{maxheight : '400px'}}>
+                    <div className='col justify-content-center' >
                         <div  className='mt-4'>
                             <Rate allowHalf defaultValue={4.5} /> <span>1 customer review</span> 
-                            <h3>Water resistant black coloured Apple watch</h3>
-                            <span className='d-block' style={{color:'#59CF1F'}}>In Stock</span>
-                            <div className='d-flex justify-content-between align-items-center mt-4 p-2' style={{width:'400px', border: '2px solid #E2E2E2',borderRadius: '15px',opacity: '1'}}>
-                                <p>₦130,099</p>
+                            {/* <h3>Water resistant black coloured Apple watch</h3> */}
+                            <h3>{this.props.info}</h3>
+                            {this.props.inStock && <span className='d-block' style={{color:'#59CF1F'}}>In Stock</span>}
+                            {!this.props.inStock && <span className='d-block text-muted'>Out of Stock</span>}
+                            <div className='d-flex justify-content-between align-items-center mt-4 p-2' style={{border: '2px solid #E2E2E2',borderRadius: '15px',opacity: '1'}}>
+                                {/* <p>₦130,099</p> */}
+                                <p>#{this.props.price}</p>
                                 <div >
-                                    <select className='p-2 mr-1' value="1">
+                                    <select onChange={this.handleChange} className='p-2 mr-1' name='quantity'>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
                                         <option>4</option>
                                     </select>
-                                    <input className='p-2 btn-primary' type= 'button'  value='Add to Cart' style={{background:'#6F64F8',borderRadius: '15px', opacity: '1'}}/>
+                                    <input className='p-2 btn-primary' type= 'button' onClick={this.addToCart}  value='Add to Cart' style={{background:'#6F64F8',borderRadius:'15px', opacity:'1'}}/>
                                 </div>
                                 <GrFavorite size='35'/>
                             </div>
                             <div className='mt-5'>
-                                <p>Delivery:  <span classNme='ml-4'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum soci...</span></p>
+                                <p>Delivery:  <span className='ml-1'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum soci...</span></p>
                             </div>
                         </div>
                     </div>

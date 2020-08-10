@@ -6,7 +6,7 @@ import { Card } from "react-bootstrap";
 // import {StateContext} from "../Context"
 import axios from "axios";
 import util from "../util/util";
-// import AddItem from "./AddItem";
+import AddItem from "./AddItem";
 // import { propTypes } from 'prop-types';
 
 
@@ -36,7 +36,7 @@ export class Product extends Component {
             .get(`${util.API_BASE_URL}registries/`, {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
 
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data !== undefined) {
                 let data = res.data;
                 for (let i=0;i<data.length;i++) {
@@ -76,7 +76,7 @@ export class Product extends Component {
                     <div className='row'>
                     {/* onClick={(id)=>this.context.handleItemDetails(id)} */}
                     {this.state.Products.map((item) => (
-                        <Card key={item.id} className='productCards  col-sm-3 m-3'  >
+                            <Card key={item.id} className='productCards  col-sm-3 m-3'  >
                         <div><img className="card-img center" alt="items" src={item.picture} /></div>
                         <p className='card-img-overlay text-danger text-left mt-0 ml-0'></p>
                         <span className='d-block ml-auto'>#{item.price}</span>
@@ -88,12 +88,15 @@ export class Product extends Component {
                         <div></div>
                         {!this.props.showWishList && <div className='col p-0 mb-0'>
                             <span type='button' className='col-6 p-2'style={{background:'#ededed',color :'#2c2c2c'}}><GrFavorite/> Wishlist</span>
-                            <span type='button'className='col-6 p-2'style={{background:'#6F64F8',borderBottomRightRadius:'8px'}}>Add to cart</span>
-                        </div> }
+                            <AddItem productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='col-6 p-2'style={{background:'#6F64F8',borderBottomRightRadius:'8px'}}>Add to cart</span>}/>
+                    </div> }
                         
                         {this.props.showWishList && <div className=' col-12 p-0 mb-0'>
-                            <span type='button'className='p-2 col text-center'style={{background:'#6F64F8', borderBottomRightRadius:'8px'}}>Add to cart</span>
+                            <AddItem productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-2 col text-center'style={{background:'#6F64F8', borderBottomRightRadius:'8px'}}>Add to cart</span>}/>
+                            
+                            
                         </div> }
+                       
                         </Card>
                     ))}
                 </div>

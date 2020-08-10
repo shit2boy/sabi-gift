@@ -119,7 +119,7 @@ export class CreateRegistry extends Component {
                         >
                             Next
                         </Link>)}
-                        {value.eventType ==='Birthday'&&(
+                        {value.eventType ==='Birthday'&& (
                             <Link
                             to="/signUp"
                             className=" text-link btn btn-dark rounded-pill px-5"

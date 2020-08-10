@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
 import { Steps,DatePicker } from "antd";
 import { Form, Button, Col } from "react-bootstrap";
+import Login from './Login'
 import axios from "axios";
 import util from "../util/util";
 
@@ -370,14 +371,14 @@ export default class getstarted extends Component {
                 )}
                 {this.state.currentIndex === 3 && (
                   <div className=" d-flex justify-content-around">
-                    <span>Already a member? Log in</span>
+                    <p>Already a member?<Login signup={true}/></p>
                     <Button
                       type="submit"
                       onClick={this.handleSubmit}
                       className="px-5 btn-outline-dark"
                       style={{
                         background: "#AAAAAA",
-                        border: "2px solid #DDDDDD",
+                        border: "1px solid #DDDDDD",
                         borderRadius: "50px",
                       }}
                     >

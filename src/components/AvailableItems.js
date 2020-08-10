@@ -68,10 +68,10 @@ export class AvailableItems extends Component {
               </Radio.Group>
               </div>
               <p>Brand</p>
-              <div clasName='row col-10'>
+              <div className='row col-10'>
               <Radio.Group  onChange={this.onChange} value={value}>
                   { storeProduct.map(item =>
-                    <Radio  style={radioStyle} value={item.id}>
+                    <Radio key={item.id}  style={radioStyle} value={item.id}>
                         {item.name}
                        
                     </Radio>

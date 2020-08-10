@@ -5,6 +5,7 @@ function RegistryBar() {
     return (
         <div>
           <ProgressBar
+            className='d-none d-lg-block'
             radius={65}
             progress={50}
             rotate={90}

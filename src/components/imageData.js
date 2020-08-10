@@ -65,7 +65,7 @@ export const checkList=[
     {
         id : 4,
         Name : "Dining Essentials",
-        imageUrl: kitchen
+        imageUrl: kitchen,
     },
     {
         id : 5,
@@ -79,6 +79,11 @@ export const checkList=[
     },
     {
         id : 7,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 8,
         itemName : "addedItem",
         imageUrl: add
     },
@@ -107,26 +112,48 @@ export const manageRegistry =[
         itemName : "addedItem",
         imageUrl: add
     },
-//     {
-//         id : 5,
-//         itemName : "addedItem",
-//         imageUrl: add
-//     },
-//     {
-//         id : 6,
-//         itemName : "addedItem",
-//         imageUrl: add
-//     },
-//     {
-//         id : 7,
-//         itemName : "addedItem",
-//         imageUrl: add
-//     },
-//     {
-//         id : 8,
-//         itemName : "addedItem",
-//         imageUrl: add
-//     },
+    {
+        id : 5,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 6,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 7,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 8,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 9,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 10,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 11,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+    {
+        id : 12,
+        itemName : "addedItem",
+        imageUrl: add
+    },
+   
+
  ]
 export const ProductItems =[
     {

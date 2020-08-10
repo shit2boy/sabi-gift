@@ -12,14 +12,16 @@ import util from "../util/util";
 
 const { Search } = Input;
 
-let productStyle= {
-    width : '20rem',
+// let productStyle= {
+    // width : '8rem',
     // minHeight: '10rem',
-boxShadow: '0px 2px 8px #00000022',
-borderRadius: '8px',
-opacity: '1',
-overflow: 'hidden',
-}
+    // paddingLeft : '0px',
+    // paddingRight : '0px',
+    // boxShadow: '0px 1px 8px #00000022',
+    // borderRadius: '8px',
+    // opacity: '1',
+    // overflow: 'hidden',
+// }
 
 
 export class Product extends Component {
@@ -52,40 +54,46 @@ export class Product extends Component {
 
     render() {
         return (
-            <div className=''>
-                 <div className='d-flex'>
-                      <div className='col-9'><Search placeholder="Search here" onSearch={value => console.log(value)} enterButton /></div>
-                      <div className=''>
-                        <select className='p-1'>
-                            <option>Default</option>
-                            <option>item</option>
-                            <option>item</option>
-                        </select>
-                        </div>
-                        <div>
-                            <span><BsFillGridFill/></span>
-                            <span className='ml-1'><BsListUl/></span>
-                        </div>
-                      
+            <div className='container-fluid'>
+                <div className='row mb-1'>
+                    <div className='col-8'>
+                        <small>7,618 results found in 5ms</small>
                     </div>
+                    <div className='col-2 d-none d-lg-block'>
+                    <select className='p-1'>
+                        <option>Default</option>
+                        <option>item</option>
+                        <option>item</option>
+                    </select>
+                       <span><BsFillGridFill/></span>
+                        <span className=''><BsListUl/></span>
+                    </div>
+                </div>
+                <div className='row mb-2'>
+                      <div className='col-sm-10'><Search placeholder="Search here" onSearch={value => console.log(value)} /></div>
+                     
+                </div>
                     <div className='row'>
+                    {/* onClick={(id)=>this.context.handleItemDetails(id)} */}
                     {this.state.Products.map((item) => (
-                        <div key={item.id} id='productCards' className='card m-2 col-sm-3' onClick={(id)=>this.context.handleItemDetails(id)} style={ productStyle}>
-                        <Card.Img className="center" alt="items" src={item.picture} />
+                        <Card key={item.id} className='productCards  col-sm-3 m-3'  >
+                        <div><img className="card-img center" alt="items" src={item.picture} /></div>
+                        <p className='card-img-overlay text-danger text-left'>20%</p>
                         <span className='d-block ml-auto'>#{item.price}</span>
-                        <Card.Body>
-                            <small className='d-block'>{item.description}</small>
-                            <small>{item.comment}</small>
+                        <Card.Body style={{minHeight:'50px',padding:'5px'}}>
+                            <strong className='d-block' style={{textOverflow: 'ellipsis'}}>{item.name}</strong>
+                            <small>{item.description}</small>
                         </Card.Body>
-                        {!this.props.showWishList && <div className='d-flex'>
-                            <p type='button' className='mb-0 p-2'style={{background:'#ededed',mniWidth:'95px',color :'#2c2c2c'}}><GrFavorite/> Wishlist</p>
-                            <p type='button'className='mb-0 p-2'style={{background:'#6F64F8',mniWidth:'100px', borderBottomRightRadius:'8px'}}>Add to cart</p>
+                        <div></div>
+                        {!this.props.showWishList && <div className='col p-0 mb-0'>
+                            <span type='button' className='col-6 p-2'style={{background:'#ededed',color :'#2c2c2c'}}><GrFavorite/> Wishlist</span>
+                            <span type='button'className='col-6 p-2'style={{background:'#6F64F8',borderBottomRightRadius:'8px'}}>Add to cart</span>
                         </div> }
                         
-                        {this.props.showWishList && <div className='d-flex'>
-                            <p type='button'className='mb-0 p-2 text-center'style={{background:'#6F64F8',mniWidth:'200px', borderBottomRightRadius:'8px'}}>Add to cart</p>
+                        {this.props.showWishList && <div className=' col-12 p-0 mb-0'>
+                            <span type='button'className='p-2 col text-center'style={{background:'#6F64F8', borderBottomRightRadius:'8px'}}>Add to cart</span>
                         </div> }
-                        </div>
+                        </Card>
                     ))}
                 </div>
 

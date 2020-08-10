@@ -12,60 +12,115 @@ export class ManageRegistry extends Component {
         return (
             <div className='container-fluid'>
                 <DashboardNav/>
-                <hr/>
-                <div className='row'>
-                    <div className='col-1 sidebarMenu'>
+                <div className='row mt-5'>
+                    <div className='col-1 d-none d-lg-block'>
                         <SideBar/>
                     </div>
-                    <div className='col'>
-                        <h1>Manage Registry</h1>
-                        <p>This is where you manage your registry items.</p>
-                        <div className='mx-auto text-center o-1' style={{width:'900px',height:'150px',border:'1px solid'}}>
-                            <h6 className='py-2'>YOUR REGISTRY URL</h6>
-                            <p>www.sabigifts.ng/registry/jimi2020</p>
+                    <div className='col ml-3'>
+                        <div className='row '>
+                            <div classNmae='col-12'>
+                            <h1><strong>Manage Registry</strong></h1>
+                            <p>This is where you manage your registry items.</p>
+                            </div>
                         </div>
-                        <div className='manageReg text-center  mt-3'>
-                            <h2 className='py-5 text-white'>Jimi & Joanna</h2>
-                            <h5 className='text-white'>February 10, 2020 (14 days left)</h5>
+                        <div className='row mt-5 '>
+                            <div className='col-12 text-center' style={{height :'130px', border:'1px solid'}}>
+                                <h6 className='py-2'>YOUR REGISTRY URL</h6>
+                                <p>www.sabigifts.ng/registry/jimi2020</p>
+                            </div>
+                       
+                            <div className='manageReg text-center mt-4' style={{borderRadius:'25px', height:'250px'}}>
+                                <h2 className='py-3 text-white'>Jimi & Joanna</h2>
+                                <h5 className='py-4 text-white'>February 10, 2020 (14 days left)</h5>
+                            </div>
                         </div>
-                        <h2 className='mt-3'>Your Registry Checklist</h2>
-                            <div className="mt-4 row justify-content-around">
+                       <div classNmae=' row col' style={{marginTop:'25px'}}>
+                       <h5>Your Registry Checklist</h5>
+                       </div>
+                        <div className='mt-4 row'>
+                            <div className="col">
                                 <CheckList/>
                             </div>
-                        <h2 className='mt-5'>Add items to your registry</h2>
+                        </div>
+                            
+                        <h5 className='mt-4'>Add items to your registry</h5>
                         <div className='row' style={{marginTop:'40px'}}>
-                            <div className='col-2'>
-                                <div className=' '>
-                                    <Card id=''style={{ width: "8rem",background:'#6668A3' }}>
+                            <div className='col-sm-2'>
+                                    <Card id=''style={{ width: "8rem", borderRadius : '25px',background:'#6668A3',boxShadow: '0px 30px 60px #BA2F4F41'}}>
                                         <Card.Body>
                                         <Card.Img className="center rounded-circle" alt="items" src={kitchen} width='60px' />
                                         </Card.Body>
                                         <Card.Text className='text-center'>
-                                            <small className="p-1">kitchen Appliances</small>
-                                            <strong className="p-1">
-                                                10
-                                            </strong>
+                                            <small className="p-1">kitchen Essentials</small>
+                                            <strong className="d-block p-1">10</strong>
                                         </Card.Text>
                                     </Card>
+                            </div>
+                            <div className='col mb-5' style={{ border:'1px solid #CBCBCB',borderRadius: '25px',opacity: '1' }}>
+                                <div className='row'>
+                                {manageRegistry.map((item, index) => (
+                                    <div className='m-3'>
+                                            <Card id='myCards' key={index} style={{ width:"8rem",cursor:'pointer',border :'1px dotted' }}>
+                                                <Card.Body className=''>
+                                                <Card.Img className="center rounded-circle" alt="items" width='40px' src={item.imageUrl} />
+                                                </Card.Body>
+                                            </Card>
+                                    </div>
+                                ))} 
                                 </div>
 
                             </div>
-                            <div className='col-10 mb-5' style={{width:'300px',height:'300px', border:'1px solid #CBCBCB',borderRadius: '25px',opacity: '1' }}>
-                                <div className='d-flex justify-content-around'>
+                        </div>
+                        
+                        <div className='row' style={{marginTop:'40px'}}>
+                            <div className='col-sm-2'>
+                                    <Card id=''style={{ width: "8rem", borderRadius : '25px',background:'#6668A3',boxShadow: '0px 30px 60px #BA2F4F41'}}>
+                                        <Card.Body>
+                                        <Card.Img className="center rounded-circle" alt="items" src={kitchen} width='60px' />
+                                        </Card.Body>
+                                        <Card.Text className='text-center'>
+                                            <small className="p-1">kitchen Essentials</small>
+                                            <strong className="d-block p-1">10</strong>
+                                        </Card.Text>
+                                    </Card>
+                            </div>
+                            <div className='col mb-5' style={{ border:'1px solid #CBCBCB',borderRadius: '25px',opacity: '1' }}>
+                                <div className='row'>
                                 {manageRegistry.map((item, index) => (
-                                        <div className='row'>
-                                            <div className='m-3'>
-                                                <Card id='myCards' key={index} style={{ width: "10rem",cursor:'pointer' }}>
-                                                    <Card.Body className=''>
-                                                    <Card.Img className="center rounded-circle" alt="items" width='45px' src={item.imageUrl} />
-                                                    </Card.Body>
-                                                    <Card.Text>
-                                                        <small className="p-1"></small>
-                                                        <strong className="p-1"></strong>
-                                                    </Card.Text>
-                                                </Card>
-                                            </div>
-                                        </div>
+                                    <div className='m-3'>
+                                            <Card id='myCards' key={index} style={{ width:"8rem",cursor:'pointer',border :'1px dashed' }}>
+                                                <Card.Body className=''>
+                                                <Card.Img className="center rounded-circle" alt="items" width='40px' src={item.imageUrl} />
+                                                </Card.Body>
+                                            </Card>
+                                    </div>
+                                ))} 
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className='row' style={{marginTop:'40px'}}>
+                            <div className='col-sm-2'>
+                                    <Card id=''style={{ width: "8rem", borderRadius : '25px',background:'#6668A3',boxShadow: '0px 30px 60px #BA2F4F41'}}>
+                                        <Card.Body>
+                                        <Card.Img className="center rounded-circle" alt="items" src={kitchen} width='60px' />
+                                        </Card.Body>
+                                        <Card.Text className='text-center'>
+                                            <small className="p-1">kitchen Essentials</small>
+                                            <strong className="d-block p-1">10</strong>
+                                        </Card.Text>
+                                    </Card>
+                            </div>
+                            <div className='col mb-5' style={{ border:'1px solid #CBCBCB',borderRadius: '25px',opacity: '1' }}>
+                                <div className='row'>
+                                {manageRegistry.map((item, index) => (
+                                    <div className='m-3'>
+                                            <Card id='myCards' key={index} style={{ width:"8rem",cursor:'pointer',border :'1px dashed' }}>
+                                                <Card.Body className=''>
+                                                <Card.Img className="center rounded-circle" alt="items" width='40px' src={item.imageUrl} />
+                                                </Card.Body>
+                                            </Card>
+                                    </div>
                                 ))} 
                                 </div>
 

@@ -12,7 +12,21 @@ import CheckList from "./AddcheckList";
 import axios from "axios";
 import util from "../util/util";
 
+
+
+
+const date = new Date();
+const formatDate = {day: 'numeric', year: 'numeric',  month: 'long' };
+
+// console.log(date.toLocaleDateString(undefined, options));
 export class Dashboard extends Component {
+    
+  state = {
+      date : date.toLocaleDateString(undefined, formatDate),
+    }
+
+
+
   componentDidMount() {
     axios
       .get(`${util.API_BASE_URL}accounts/profile/`, {
@@ -39,31 +53,31 @@ export class Dashboard extends Component {
     return (
       <div className="container-fluid">
         <DashboardNav />
-        <hr className="mt-0 mb-0" />
+        {/* <hr className="mt-0 mb-0" /> */}
         <Row className="mt-4">
           <Col
             xs={1}
             md={1}
             lg={1}
-            className="ml-4 justify-content-center sidebarMenu"
+            className=" d-none d-lg-block "
           >
             <SideBar />
           </Col>
           <Col className=" content">
-            <div className="row justify-content-around">
+            <div className="row justify-content-center">
               <div
-                className="py-5 text-left backgrndImg"
-                style={{ width: "500px", height: "150px" }}
+                className="col-sm-5 text-left backgrndImg"
+                style={{ width: "400px", height: "125px",borderRadius :'10px' }}
               >
                 <p className="text-right text-white">
                   Welcome {window.localStorage.name},
                 </p>
                 <p className="text-right">
-                  <strong>1 JANUARY, 2002</strong>
+                  <strong>{this.state.date}</strong>
                 </p>
               </div>
-              <div className="d-flex justify-content-between">
-                <div className="px-4" style={{ width: "350px" }}>
+              <div className="col-sm-4 offset-1 ">
+                <div className="">
                   <div className="d-flex justify-content-between align-items-center cashGift mb-3">
                     <div className="p-3">
                       <span className="d-block">
@@ -99,24 +113,24 @@ export class Dashboard extends Component {
                     </div>
                   </div>
                 </div>
-                <RegistryBar number={5} />
               </div>
+                <RegistryBar number={5} />
             </div>
-            <div className="2  ">
+            <div>
               <h5 className="mt-4 py-4 ">Next steps to take</h5>
 
               <NextSteps />
             </div>
             <div className="mt-5 py-5">
-              <h5 className="mb-5">Your Registry Checklist</h5>
+              <h5 className="">Your Registry Checklist</h5>
               <div className="row justify-content-around">
                 <CheckList />
               </div>
             </div>
-            <div className="mt-5 py-5 ">
+            <div className="mt-3 py-5 ">
               <h5 className="mb-5 ">Add items to your Registry</h5>
               <Row>
-                <Col xs md={3} lg={3} className="availableItem">
+                <Col xs md={3} lg={3} className="availableItem d-none d-lg-inline-block">
                   <p>Filter</p>
                   <div className="row">
                     <div className="mx-auto">

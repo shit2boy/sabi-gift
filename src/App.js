@@ -23,18 +23,15 @@ const  Home = lazy(()=> import('./pages/Home'));
 function App() {
   return (
     <Fragment>
-             <Suspense fallback={<div className="spinner"><h3>Loading...</h3></div>} >
-                {/* <NavBar /> */}
+             <Suspense fallback={<div className="spinner center"><h3>Loading...</h3></div>} >
             <Router>
                 <Switch>
-                {/* render={Props =>{ return <Dashboard {...Props} />}} */}
                   <Route  exact path='/Dashboard' component={Dashboard} />
                   <Route exact path='/Find' component={FindRegistry} />
                   <Route exact path='/' component={Home} />
                   <Route path='/createRegistry' component={CreateRegistry} />
                   <Route path='/signUp' component={SignUp} />
                   <Route path='/about' component={About} />
-                  {/* <Route path='/about' render={() => <About formData={formField} register={answers} />} /> */}
                   <Route path='/checklist' component={RegistryChecklist} />
                   <Route path='/manageregistry' component={ManageRegistry} />
                   <Route path='/giftTracker' component={GiftTracker} />
@@ -48,7 +45,6 @@ function App() {
                
                 </Switch>
             </Router>
-                {/* <Footer /> */}
             </Suspense>
         </Fragment>
   

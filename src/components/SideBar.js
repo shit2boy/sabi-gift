@@ -9,38 +9,38 @@ import { Tooltip } from "antd";
 export class SideBar extends Component {
   render() {
     return (
-      <div>
+      <div className='sidebarMenu'>
         <div className="mt-3 text-center">
           <Tooltip placement="left" title="notification" color="#5F619F">
             <BsBell />
           </Tooltip>
         </div>
-        <div className=" ml-2 mb-4">
+        <div className="text-center mb-4">
           <img src={Avatars} width="35px" alt="userImage" />
         </div>
-        <div className="ml-2">
-          <div className="py-4">
+        <div className="text-center">
+          <div className="py-4 o">
             <Tooltip placement="left" title="overview" color="#5F619F">
-              <GrHome size="30px" />
+              <GrHome size="25px" />
             </Tooltip>
           </div>
           <div className="py-4">
             <Tooltip placement="left" title="manage registry" color="#5F619F">
-              <BsAlarm size="30px" />
+              <BsAlarm size="25px" />
             </Tooltip>
           </div>
           <div className="py-4">
             <Tooltip placement="left" title="checklist" color="#5F619F">
-              <GrFolder size="30px" />
+              <GrFolder size="25px" />
             </Tooltip>
           </div>
           <div className="py-4">
             <Tooltip placement="left" title="Track Gift" color="#5F619F">
-              <GrBarChart size="30px" />
+              <GrBarChart size="25px" />
             </Tooltip>
           </div>
           <div className="py-4">
-            <BsFolder size="30px" />
+            <BsFolder size="25px" />
           </div>
         </div>
       </div>

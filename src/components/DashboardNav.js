@@ -9,6 +9,7 @@ import previewIcon from '../images/Sabi-storepage/previewIcon.svg'
 
 
 let style={
+    borderBottom : '1px solid #dddddd'
 }
 
 export class DashboardNav extends Component {

@@ -31,8 +31,10 @@ export class AvailableItems extends Component {
           const { value } = this.state;
 
         return (
-            <div className=''>
-              <p>Multi Range</p>
+            <>
+            <div className=' container'>
+                  <p>Multi Range</p>
+              <div className='row col-10'>
               <Radio.Group>
                 <Radio style={radioStyle} value={1}>
                   ₦1000 
@@ -50,8 +52,12 @@ export class AvailableItems extends Component {
                     All 
                 </Radio>
               </Radio.Group>
+              </div>
+              <div className='row col-10'>
                 <Slider/>
+              </div>
               <p>Category</p>
+              <div className='row col-10'>
               <Radio.Group  onChange={this.onChange} value={value}>
                   { storeProduct.map(item =>
                     <Radio key={item.id}  style={radioStyle} value={item.id}>
@@ -60,7 +66,9 @@ export class AvailableItems extends Component {
                     </Radio>
                 )}
               </Radio.Group>
+              </div>
               <p>Brand</p>
+              <div clasName='row col-10'>
               <Radio.Group  onChange={this.onChange} value={value}>
                   { storeProduct.map(item =>
                     <Radio  style={radioStyle} value={item.id}>
@@ -69,34 +77,37 @@ export class AvailableItems extends Component {
                     </Radio>
                 )}
               </Radio.Group>
+              </div>
               <hr/>
+              
               <p>Rating</p>
-              <div className='d-flex justify-content-between'>
-                <Rate allowHalf defaultValue={4.5} />
-                <p>8500</p>
+              <div className='row col-10'>
+              <div className='row'>
+                <Rate className='col' allowHalf defaultValue={4.5} />
+                <span className='col-1'>8500</span>
               </div>
-              <div className='d-flex justify-content-between'>
-                <Rate allowHalf defaultValue={3.} />
-                <p> 3250 </p>
+              <div className='row'>
+                <Rate  className='col' allowHalf defaultValue={3.} />
+                <span  className='col-1'> 3250 </span>
               </div>
-              <div className='d-flex justify-content-between'>
-                <Rate allowHalf defaultValue={2.5} />
-                <p>1120 </p>
+              <div className='row'>
+                <Rate  className='col' allowHalf defaultValue={2.5} />
+                <span  className='col-1'>1120 </span>
               </div>
-              <div className='d-flex justify-content-between'>
-                <Rate allowHalf defaultValue={2.} />
-                <p>3320 </p>
+              <div className='row'>
+                <Rate className='col' allowHalf defaultValue={2.} />
+                <span className='col-1'>3320 </span>
               </div>
-              <div className='d-flex justify-content-between'>
-                <Rate allowHalf defaultValue={3.5} />
-                <p>5452</p>
+              <div className='row'>
+                <Rate className='col' allowHalf defaultValue={3.5} />
+                <span className='col-1'>5452</span>
               </div>
-              <div className='text-center'>
+             </div>
+            </div>
+             <div className='text-center mt-2'>
                 <Button className='P-2' type='button' style={{background: '#6F64F8',color:'#ffffff',borderRadius:'8px'}}>CLEAR ALL FILTERS</Button>
               </div>
-              
-
-            </div>
+            </>
         )
     }
 }

@@ -10,9 +10,9 @@ export class RegistryChecklist extends Component {
         return (
             <div className='container-fluid'>
                 <DashboardNav/>
-                <hr className='mt-0'/>
+                {/* <hr className='mt-0'/> */}
                 <div className='row mt-3'>
-                    <div className='col-1 d-none d-lg-block sidebarMenu'>
+                    <div className='col-1 d-none d-lg-block'>
                         <SideBar/>
                     </div>
                     <div className='col ml-5'>

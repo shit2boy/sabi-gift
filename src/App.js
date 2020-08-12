@@ -31,7 +31,7 @@ function App() {
                   <Route exact path='/Find' component={FindRegistry} />
                   <Route exact path='/' component={Home} />
                   <Route path='/createRegistry' component={CreateRegistry} />
-                  <Route path='/abt' component={Aboout} />
+                  <Route path='/about?user_id=32&timestamp=1597237480&signature=T_skE_gRrm3KyYxlHVBferGseTA' component={Aboout} />
                   <Route path='/signUp' component={SignUp} />
                   <Route path='/about' component={About} />
                   <Route path='/checklist' component={RegistryChecklist} />

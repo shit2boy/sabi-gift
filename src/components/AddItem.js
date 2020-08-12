@@ -89,12 +89,14 @@ class AddItem extends Component {
                                 <p>#{this.props.price}</p>
                                 <div >
                                     <select onChange={this.handleChange} className='p-2 mr-1' name='quantity'>
+                                        <option>0</option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
                                         <option>4</option>
                                     </select>
-                                    <input className='p-2 btn-primary' type= 'button' onClick={this.addToCart}  value='Add to Cart' style={{background:'#6F64F8',borderRadius:'15px', opacity:'1',border : 'none'}}/>
+                                    {!this.state.addedToCart && <input className='p-2 btn-primary' type= 'button' onClick={this.addToCart}  value='Add to Cart' style={{background:'#6F64F8',borderRadius:'15px', opacity:'1',border : 'none'}}/>}
+                                    {this.state.addedToCart && <input className='p-2 btn-primary' disabled type= 'button' onClick={this.addToCart}  value='Add to Cart' style={{background:'#dddddd',borderRadius:'15px', opacity:'1',border : 'none'}}/>}
                                 </div>
                                 <GrFavorite size='35'/>
                             </div>

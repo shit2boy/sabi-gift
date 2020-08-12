@@ -66,7 +66,7 @@ import util from "../util/util";
             this.setState({ modalShow: true ,modalTitle: "Log in to Sabigifts."});
           };
     render() {
-        return (<div>
+        return (<>
             {this.props.home && <img onClick={() =>
               this.setModalShow(true)} src={account} width='50px' alt='userImage' className='pointer'/>}
             {this.props.signup && <p className='d-inline' onClick={() =>
@@ -110,7 +110,7 @@ import util from "../util/util";
             </Modal.Body>
             
           </Modal>
-        </div>
+        </>
         )
     }
 }

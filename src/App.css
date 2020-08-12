@@ -188,7 +188,7 @@ Nav.Link {
 /*****FIND REGISTRY*********/
 .leftside {
   opacity: 1;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color:var(--primaryColor) ;
 
 }
@@ -206,7 +206,8 @@ Nav.Link {
 
 .rightside{
   background:#E2F3E1 ;
-  width: 100%;
+  /* width: 100%; */
+  /* height: 100vh; */
   opacity: 1;
   color: #888888 ;
 }

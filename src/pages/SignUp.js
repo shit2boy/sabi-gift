@@ -29,6 +29,7 @@ export default class getstarted extends Component {
           confirm :'',
           eventDate:'',
           error : '',
+          message : '',
           errorMessage : [],
           signUpResponse:{successful:false,},
         };
@@ -99,19 +100,28 @@ export default class getstarted extends Component {
         axios.post(`${util.API_BASE_URL}accounts/register/`, newUserInfo, 
         { 'content-type': 'multipart/form-data' })
       .then(response => {
-        if (response.status === 200)
-            // console.log(response);
-          this.setState({currentIndex: this.state.currentIndex + 1, signUpResponse : {successful:true, message:'Registry Successful'}})
+        if (response.status === 200 || response.status === 201){
+            console.log(response.statusText);
+
+            alert('A verification Mail sent to your email')
+          this.setState({
+            message : `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`})
+          // currentIndex: this.state.currentIndex + 1, 
+          console.log(this.state.message);}
         
       })
-      .catch(res => {
-          // console.dir( res.data);
-          // for (let error in res) {
-          //   let value = res[error].data;
-          //   console.log( value);
+      .catch(error => {
+          console.dir( error);
+          if ( error.response.data.Error !==undefined) {
+            this.setState({errorMessage: error.response.data.Error});  
+          } else{
+            this.setState({errorMessage: error.response.data.password});  
+            
+          }
 
-          // }
-          this.setState({errorMessage: 'Email already exist or Password is too common'});
+          console.log(error.response.data.Error);
+          console.log(error.response.data.password);
+          
 
       });
       }
@@ -350,11 +360,12 @@ export default class getstarted extends Component {
                         />
                       </Form.Group>
                       { this.state.errorMessage && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p> }
+                      { this.state.message && <p style={{color:'green',textAlign :'center'}}>{ this.state.message } </p> }
                     </Form>
                   </div>
                 )}
               </div>
-              <div className="text-center">
+              <div className="">
                 {this.state.currentIndex >= 0 && this.state.currentIndex <= 2 && (
                   <Button
                     type="submit"
@@ -370,10 +381,9 @@ export default class getstarted extends Component {
                   </Button>
                 )}
                 {this.state.currentIndex === 3 && (
-                  <div className=" d-flex justify-content-around">
-                    <p>Already a member?<Login signup={true}/></p>
+                  <div className=" d-flex justify-content-between">
+                    <p>Already a member?<Login signup={<span>Log in</span>}/></p>
                     <Button
-                      type="submit"
                       onClick={this.handleSubmit}
                       className="px-5 btn-outline-dark"
                       style={{
@@ -383,7 +393,7 @@ export default class getstarted extends Component {
                       }}
                     >
                       SIGN UP
-                    </Button>{" "}
+                    </Button>
                   </div>
                 )}
               </div>

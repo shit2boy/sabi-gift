@@ -1,6 +1,25 @@
 import React, { Component } from 'react'
+import axios from "axios";
+import util from "../util/util";
 
 export class FindEvent extends Component {
+    constructor(){
+        super()
+        this.state={
+            result : [],
+        }
+    }
+        async componentDidMount(){
+            try {
+                    
+               
+                // filterResult= ()=> {
+               let res= await axios.get (`${util.API_BASE_URL}events/`,{ 'content-type': 'multipart/form-data' })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    
     render() {
         return (
             <div>

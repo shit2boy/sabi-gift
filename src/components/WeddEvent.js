@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
 import { Steps,DatePicker } from "antd";
 import { Form, Button, Col } from "react-bootstrap";
+import Login from '../pages/Login'
+
 import axios from "axios";
 import util from "../util/util";
 
@@ -30,8 +32,9 @@ export default class getstarted extends Component {
       email : '',
       password:'',
       confirm :'',
+      successfulMessage : '',
       errorMessage : '',
-      signUpResponse:{successful:false, message:''},
+      signUpResponse:{successful:false},
       isValidated : false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -102,17 +105,30 @@ export default class getstarted extends Component {
     newUserInfo.append('photo', '');
 
     axios.post(`${util.API_BASE_URL}accounts/register/`, newUserInfo, 
-    { 'content-type': 'multipart/form-data' })
-  .then(response => {
-    if (response.status === 200)
-    this.setState({currentIndex: this.state.currentIndex + 1,errorMessage: response.message, signUpResponse : {successful:true, message:'Registry Successful'}})
-     
-  })
-  .catch(error => {
-    // let data = error.response.data[0] ;
-      console.dir(error);
-      this.setState({errorMessage: error.message});
-    });
+        { 'content-type': 'multipart/form-data' })
+      .then(response => {
+        if (response.status === 201 || response.status === 200)
+            console.log(response.statusText);
+            console.log(response);
+
+          this.setState({currentIndex: this.state.currentIndex + 1, successfulMessage:'A verification Mail sent to your email '})
+          // currentIndex: this.state.currentIndex + 1, 
+        
+      })
+      .catch(error => {
+          console.dir( error);
+          if ( error.response.data.Error !== undefined) {
+            this.setState({errorMessage: error.response.data.Error});  
+          } else{
+            this.setState({errorMessage: error.response.data.password});  
+            
+          }
+
+          console.log(error.response.data.Error);
+          console.log(error.response.data.password);
+          
+
+      });
   }
 
   render() {
@@ -352,6 +368,8 @@ export default class getstarted extends Component {
                         />
                       </Form.Group>
                       { this.state.errorMessage && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p> }
+                      {/* { !this.state.errorMessage && <p style={{color:'red',textAlign :'center'}}>A verification mail sent to your Email.  </p> } */}
+                      { this.state.successfulMessage && <p style={{color:'green',textAlign :'center'}}>{ this.state.successfulMessage } </p> }
                     </Form>
                   </div>
                 )}
@@ -373,7 +391,7 @@ export default class getstarted extends Component {
                 )}
                 {this.state.currentIndex === 4 && (
                   <div className=" d-flex justify-content-around">
-                    <span>Already a member? Log in</span>
+                     <p>Already a member?<Login signup={<span>Log in</span>}/></p>
                     <Button
                       type="submit"
                       onClick={this.handleSubmit}

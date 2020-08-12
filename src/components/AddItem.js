@@ -14,7 +14,7 @@ class AddItem extends Component {
         super(props)
         this.state = {
             modalShow: false,
-            product : '',
+            product : this.props.productId,
             quantity : [],
             addedToCart : false
         }
@@ -33,10 +33,9 @@ class AddItem extends Component {
 
       }
       addToCart(){
-          const { product, quantity} = this.state
-              this.setState( {product : this.props.productId,
+              this.setState( {
               quantity : this.state.quantity,})
-
+          const { product, quantity} = this.state
         axios.post(`${util.API_BASE_URL}carts/`, {product, quantity},{
             headers: { Authorization: "Token " + localStorage.getItem("token_id") },
           })
@@ -95,7 +94,7 @@ class AddItem extends Component {
                                         <option>3</option>
                                         <option>4</option>
                                     </select>
-                                    <input className='p-2 btn-primary' type= 'button' onClick={this.addToCart}  value='Add to Cart' style={{background:'#6F64F8',borderRadius:'15px', opacity:'1'}}/>
+                                    <input className='p-2 btn-primary' type= 'button' onClick={this.addToCart}  value='Add to Cart' style={{background:'#6F64F8',borderRadius:'15px', opacity:'1',border : 'none'}}/>
                                 </div>
                                 <GrFavorite size='35'/>
                             </div>

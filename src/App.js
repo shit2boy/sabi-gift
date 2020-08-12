@@ -16,6 +16,7 @@ import getstarted from './components/WeddEvent';
 import Login from './pages/Login';
 import {ResetPassword} from './components/ResetPassword';
 import AddItem from './components/AddItem';
+import Aboout from './pages/aboout';
 
 const  Home = lazy(()=> import('./pages/Home'));
 
@@ -30,6 +31,7 @@ function App() {
                   <Route exact path='/Find' component={FindRegistry} />
                   <Route exact path='/' component={Home} />
                   <Route path='/createRegistry' component={CreateRegistry} />
+                  <Route path='/abt' component={Aboout} />
                   <Route path='/signUp' component={SignUp} />
                   <Route path='/about' component={About} />
                   <Route path='/checklist' component={RegistryChecklist} />

@@ -107,7 +107,8 @@ export class About extends Component {
           {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
         .then(response => {
           if (response.status === 200)
-            alert(response.data);
+          // console.log(response);
+            alert(response.statusText);
             this.setState({currentIndex : this.state.currentIndex + 1, signUpResponse : {successful:true, message:'Registry Successful'}})
            
         })
@@ -126,7 +127,7 @@ export class About extends Component {
             this.setState({ selectedRegistryType: event})
             let type = this.state.selectedRegistryType
             console.log(type)
-            axios.get(`${util.API_BASE_URL}categories/`, `${util.API_BASE_URL}registry-types/`,
+            axios.get(`${util.API_BASE_URL}categories/`,
               {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
             .then(response => {
               if (response.status === 200)
@@ -140,8 +141,15 @@ export class About extends Component {
             axios.get(`${util.API_BASE_URL}registry-types/`,
               {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
             .then(response => {
-              if (response.status === 200)
-              this.setState({registryType : response.data});
+              if (response.status === 200){
+              let data = response.data;
+              for (let i=0;i<data.length;i++) {
+                data[i].image = data[i].image.replace("image/upload/","");
+               this.setState({registryType : data});
+
+              }
+              }
+              
                
             })
             .catch(error => {
@@ -185,7 +193,8 @@ next =() => {
     <div className='container-fluid'>
           <div className="row">
             <div className=" col-4 d-none d-lg-flex justify-content-center  leftside" >
-              <div className="mt-5">
+                <div className='mt-5'>
+                <div className="row">
                 <div >
                   <Link to="/">
                     <img
@@ -195,13 +204,17 @@ next =() => {
                     />
                   </Link>
                 </div>
-                <Steps className="px-5" direction="vertical" current={this.state.currentIndex}>
+                <Steps className="" direction="vertical" current={this.state.currentIndex}>
                   <Step title="Your Profile" />
                   <Step title="Event basics" />
                   <Step title="Select Gifts" />
                   <Step title="Confirm" />
                 </Steps>
               </div>
+                <div className='row'>
+                  <Link to='/'>Save and log out</Link>
+                </div>
+                </div>
             </div>
 
             {this.state.currentIndex === 0 && <div className='col rightSide' >
@@ -258,8 +271,8 @@ next =() => {
                         </div>
                     </div>
                 </div>
-                <div className='row'>
-                  <div className="col bg-white d-flex justify-content-around" style={{background:'#ffffff',height:'60px'}}>
+                <div className='row p-4' style={{background:'#ffffff'}}>
+                  <div className="col bg-white d-flex justify-content-between" >
                     <button type="button" onClick={this.back} className="btn btn-light rounded-pill px-5">
                       Back
                     </button>
@@ -279,9 +292,9 @@ next =() => {
                       <div className="col-10 row">
                         {this.state.registryType.map(type=>
                           <div key={type.id} className="eventItem">
-                            <p>
-                              <img src={type.image} alt={type.name} />{" "}
-                            </p>
+                            <div className='text-center'>
+                              <img src={type.image} alt={type.name} width='70px' />{" "}
+                            </div>
                             <p>{type.name}</p>
                           </div>
                         )}  
@@ -320,8 +333,9 @@ next =() => {
                             <div className='row col-10 mb-2'>
 
                                 {this.state.registryCategories.map(category=>
-                                  <div className='eventItem'>
-                                  <p className='tetx-center'><img src={category.image} alt='weddingIcon' /> </p>
+                                  <div key={category.id} className='eventItem'>
+                                    <p></p>
+                                  {/* <div className='text-center'><img src={category.image} alt='weddingIcon' /> </div> */}
                                   <p>{category.name}</p>
                               </div> 
                               )}

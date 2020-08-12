@@ -107,11 +107,14 @@ export default class getstarted extends Component {
     axios.post(`${util.API_BASE_URL}accounts/register/`, newUserInfo, 
         { 'content-type': 'multipart/form-data' })
       .then(response => {
-        if (response.status === 201 || response.status === 200)
+        if (response.status === 201 || response.status === 200){
             console.log(response.statusText);
             console.log(response);
+            this.setState({
+              message : `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`})
 
           this.setState({currentIndex: this.state.currentIndex + 1, successfulMessage:'A verification Mail sent to your email '})
+        }
           // currentIndex: this.state.currentIndex + 1, 
         
       })

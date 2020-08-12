@@ -10,7 +10,7 @@ import { Card} from "react-bootstrap";
             < div className='container-fluid'>
               <div className='row'>
                 {checkList.map((item) => (
-                    <Card key={item.id} id='myCards' className='col-sm-1 m-3' style={{ width: "8rem"}}>
+                    <Card key={item.id} id='myCards' className='col-sm-1 m-3' style={{ width: "8rem",cursor:'pointer'}}>
                       <Card.Body>
                         <Card.Img className="center rounded-circle" alt="items" src={item.imageUrl} />
                       </Card.Body>

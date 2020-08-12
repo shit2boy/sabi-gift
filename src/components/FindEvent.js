@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import axios from "axios";
-import util from "../util/util";
-
+// import axios from "axios";
+// import util from "../util/util";
 export class FindEvent extends Component {
     constructor(){
         super()
@@ -14,7 +13,7 @@ export class FindEvent extends Component {
                     
                
                 // filterResult= ()=> {
-               let res= await axios.get (`${util.API_BASE_URL}events/`,{ 'content-type': 'multipart/form-data' })
+            //    let res= await axios.get (`${util.API_BASE_URL}events/`,{ 'content-type': 'multipart/form-data' })
             } catch (error) {
                 console.log(error)
             }

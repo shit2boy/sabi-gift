@@ -103,11 +103,12 @@ export default class getstarted extends Component {
         if (response.status === 200 || response.status === 201){
             console.log(response.statusText);
 
-            alert('A verification Mail sent to your email')
+            // alert('A verification Mail sent to your email')
           this.setState({
             message : `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`})
           // currentIndex: this.state.currentIndex + 1, 
-          console.log(this.state.message);}
+          // console.log(this.state.message);
+        }
         
       })
       .catch(error => {
@@ -325,7 +326,7 @@ export default class getstarted extends Component {
                           name='email'
                             type="email"
                             onChange={this.handleChange}
-                            placeholder="Enter Email Address"
+                            placeholder=" Email Address"
                           />
                           <Form.Control.Feedback type="invalid">
                             Empty
@@ -365,7 +366,7 @@ export default class getstarted extends Component {
                   </div>
                 )}
               </div>
-              <div className="">
+              <div className="text-center">
                 {this.state.currentIndex >= 0 && this.state.currentIndex <= 2 && (
                   <Button
                     type="submit"

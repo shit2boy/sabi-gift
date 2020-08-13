@@ -23,7 +23,7 @@ export default class ActivateAcoount extends Component {
             e.preventDefault();
             const {user_id, timestamp, signature} = this.state;
                 axios.post(`${util.API_BASE_URL}accounts/verify-registration/`, {user_id, timestamp,signature},{ 
-                    'headers': {
+                    headers: {
                       "Content-Type": "application/json",
                       },
                     })

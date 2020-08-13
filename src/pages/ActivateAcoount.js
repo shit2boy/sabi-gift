@@ -61,7 +61,7 @@ export default class ActivateAcoount extends Component {
         this.state = {
             user_id : '',
             timestamp : '',
-            signature : '',
+            signature : ''
         }
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -76,6 +76,7 @@ export default class ActivateAcoount extends Component {
                       },
                     })
                     . then(data=> {
+                        console.log(data);
                       if (data.status === 200){
                         // console.log(data);
                         window.localStorage.setItem('token_id', data.data.token);
@@ -95,6 +96,7 @@ export default class ActivateAcoount extends Component {
 
             componentDidMount(){
                 const query = new URLSearchParams(window.location.search)
+                console.log(window.location.search);
                 const user_id = query.get("user_id");
                 const timestamp = query.get("timestamp");
                 const signature =query.get("signature");
@@ -113,21 +115,21 @@ export default class ActivateAcoount extends Component {
     render() {
         return (
             <div className='container'>
-            <Form noValidate onSubmit ={this.onSubmit}>
+            <Form noValidate>
                  <Form.Group controlId="formBasicEmail">
                     <Form.Label>User Id</Form.Label>
-                     <Form.Control type="text" name="email" value={this.state.user_id} placeholder="Enter user Id" required />
+                     <Form.Control type="text" name="email" value={this.state.user_id} readOnly placeholder="Enter user Id" required />
                  </Form.Group>
 
                  <Form.Group controlId="formBasicPassword">
                      <Form.Label>Timestamp</Form.Label>
-                     <Form.Control type="text" name="password" value={this.state.timestamp} placeholder="Timestamp" />
+                     <Form.Control type="text" name="password" value={this.state.timestamp} readOnly placeholder="Timestamp" />
                  </Form.Group>
                  <Form.Group controlId="formBasicPassword">
                      <Form.Label>Signature</Form.Label>
-                     <Form.Control type="text" name="password" value={this.state.signature} placeholder="Signature" />
+                     <Form.Control type="text" name="password" value={this.state.signature} readOnly placeholder="Signature" />
                  </Form.Group>
-                 <Button className="w-100" variant="success" type="submit" style={{background:'#58B852', color:'#ffffff'}}>
+                 <Button className="w-100" variant="success" onClick={this.onSubmit} type="submit" style={{background:'#58B852', color:'#ffffff'}}>
                      Verify me
                  </Button>
                 
@@ -137,4 +139,3 @@ export default class ActivateAcoount extends Component {
         )
     }
 }
-

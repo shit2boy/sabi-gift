@@ -25,9 +25,6 @@ export class About extends Component {
             errorMessage : '',
             selectedRegistryType : '',
             registryCategories : [],
-            user_id : '',
-            timestamp : '',
-            signature : '',
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -125,20 +122,6 @@ export class About extends Component {
       
       }
         componentDidMount(event){
-
-          const query = new URLSearchParams(window.location.search)
-          const user_id = query.get("user_id");
-          const timestamp = query.get("timestamp");
-          const signature =query.get("signature");
-          if (user_id) {
-              this.setState({user_id : user_id})
-          }
-          if (timestamp) {
-              this.setState({timestamp : timestamp})
-          }
-          if (signature) {
-              this.setState({signature : signature})
-          }
             
             this.setState({ selectedRegistryType: event})
             let type = this.state.selectedRegistryType

@@ -115,7 +115,8 @@ export default class ActivateAcoount extends Component {
     render() {
         return (
             <div className='container'>
-            <Form noValidate>
+                <div className='mt-5'>
+                <Form noValidate>
                  <Form.Group controlId="formBasicEmail">
                     <Form.Label>User Id</Form.Label>
                      <Form.Control type="text" name="email" value={this.state.user_id} readOnly placeholder="Enter user Id" required />
@@ -134,6 +135,7 @@ export default class ActivateAcoount extends Component {
                  </Button>
                 
              </Form>
+                </div>
            </div>
         
         )

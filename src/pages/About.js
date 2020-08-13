@@ -124,6 +124,7 @@ export class About extends Component {
         componentDidMount(event){
             // event.preventDefault();
             // const registryType = 'selectedValue'; 
+            
             this.setState({ selectedRegistryType: event})
             let type = this.state.selectedRegistryType
             console.log(type)
@@ -184,7 +185,8 @@ back = () => {
 }
 next =() => {
     if (this.state.currentIndex >=4) {
-        return;
+      window.location.href='/dashboard'
+
     }
     this.setState({currentIndex : this.state.currentIndex + 1});
 }
@@ -285,13 +287,13 @@ next =() => {
 
              {this.state.currentIndex === 1 && <div className="col rightSide" >
                 <div className='row'>
-                    <div className='col offset-1 justify-content-center' style={{minHeight:'85vh',padding:'40px'}}>
+                    <div className='col offset-1 justify-content-center' style={{minHeight:'85vh',marginTop:'35px'}}>
                     <div className=''>
                       <h2>What are you most excited <br/>to register at Sibigifts?</h2>
                       <p className="py-4">Select the gift types</p>
                       <div className="col-10 row">
                         {this.state.registryType.map(type=>
-                          <div key={type.id} className="eventItem">
+                          <div key={type.id} className="eventItem col-lg-2">
                             <div className='text-center'>
                               <img src={type.image} alt={type.name} width='70px' />{" "}
                             </div>
@@ -310,7 +312,7 @@ next =() => {
 
             </div>
                 <div className='row'>
-                <div  className="col bg-white d-flex justify-content-between align-items-center" style={{height:'100px'}}>
+                <div  className="col bg-white d-flex justify-content-between align-items-center" style={{height:'90px'}}>
                     {/* <div className=" d-flex justify-content-around"> */}
                     <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
                       Back
@@ -325,7 +327,7 @@ next =() => {
 
             {this.state.currentIndex === 2 && <div className=' col py-3 rightSide' >
                         <div className='row'>
-                            <div className='col offset-1 justify-content-center' style={{minHeight:'90vh',padding:'40px'}}>
+                            <div className='col offset-1 justify-content-center' style={{minHeight:'90vh',marginTop:'40px'}}>
                             <div className='' >
                             <h2 id='header'>What are somethings you  <br/> enjoy doing together</h2>
                         
@@ -333,10 +335,10 @@ next =() => {
                             <div className='row col-10 mb-2'>
 
                                 {this.state.registryCategories.map(category=>
-                                  <div key={category.id} className='eventItem'>
+                                  <div key={category.id} className='eventItem col-lg-3'>
                                     <p></p>
                                   {/* <div className='text-center'><img src={category.image} alt='weddingIcon' /> </div> */}
-                                  <p>{category.name}</p>
+                                  <p className='text-center'>{category.name}</p>
                               </div> 
                               )}
 
@@ -347,10 +349,10 @@ next =() => {
                       </div>
                        <div className='row'>
                        <div className="col bg-white d-flex justify-content-between align-items-center" style={{height:'100px'}}>
-                            <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
+                            <button onClick={this.back} className="btn btn-light rounded-pill px-5">
                             Back
                             </button>
-                            <button to="" onClick={this.next} className="btn btn-dark rounded-pill px-5">
+                            <button onClick={this.next} className="btn btn-dark rounded-pill px-5">
                             Next
                             </button>
                         </div>
@@ -374,73 +376,94 @@ next =() => {
                         </div>
                
                     </div>} 
-                    {this.state.currentIndex === 4 && <div className='col-8 rightSide' >
-                        <div className='py-5 ml-5'>
+                    {this.state.currentIndex === 4 && <div className='col rightSide' >
+                        <div className='py-5 row offset-1 '>
+                        <div className='col'>
                         <h2 id='header'>Try adding few gifts </h2>
                             <p>you can't go wrong with this best sellers</p>
-                            <div className='d-flex'>
-                               <div className='eventItem'>
-                                  <p><img src={bmw} alt='weddingIcon' /> </p>
-                                  <p>Car</p>
+                            <div className='row col-10 mb-2'>
+                               <div className='eventItem col-lg-3 bg-success text-center'>
+                                  <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block text-dark' >Car</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong className='text-white'>#200k</strong>
                                 </div> 
-                               <div className='eventItem'>
-                                    <p> </p>
-                                    <p>Option 2</p>
+                               <div className='eventItem col-lg-3 text-center'>
+                               <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block'>Option 2</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong>#200k</strong>
                                 </div> 
-                                 <div className='eventItem'>
-                                    <p> </p>
-                                    <p>Option 2 </p>
+                                 <div className='eventItem col-lg-3 text-center'>
+                                 <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block'>Option 3</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong>#200k</strong>
                                 </div> 
-                                <div className='eventItem'>
-                                    <p></p>
-                                    <p>Option 3</p>
-                                </div> 
-                            </div>
-                            <div className='d-flex'>
-                                
-                                    <div className=' bg-success eventItem'>
-                                        <p><img src={bmw} alt='weddingIcon' /> </p>
-                                        <p>Car</p>
-                                    </div> 
-                               
-                                    <div className='eventItem'>
-                                        <p> </p>
-                                        <p>Option 2</p>
-                                    </div>    
-                               
-                                <div className='eventItem'>
-                                    <p> </p>
-                                    <p>Option 3 </p>
-                                </div> 
-                                <div className='eventItem'>
-                                    <p></p>
-                                    <p>Option 4</p>
+                                <div className='eventItem col-lg-3 text-center'>
+                                <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block'>Option 4</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong>#200k</strong>
                                 </div> 
                             </div>
-                            <div className='d-flex'>
-                               
-                                    <div className='bg-success eventItem'>
-                                        <p><img src={bmw} alt='weddingIcon' /> </p>
-                                        <p>Car</p>
-                                    </div> 
-                               
-                                    <div className='eventItem'>
-                                        <p> </p>
-                                        <p>Option 2</p>
-                                    </div>    
-                                 
-                                <div className='eventItem'>
-                                    <p> </p>
-                                    <p>Option 3</p>
+                            <div className='row col-10 mb-2'>
+                               <div className='eventItem bg-success col-lg-3 text-center'>
+                               <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block text-dark'>Car</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong className='text-white'>#200k</strong>
                                 </div> 
-                                <div className='eventItem'>
-                                    <p></p>
-                                    <p>Option 4</p>
+                               <div className='eventItem col-lg-3 text-center'>
+                               <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block'>Option 2</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong>#200k</strong>
+                                </div> 
+                                 <div className='eventItem col-lg-3 text-center'>
+                                 <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block'>Option 3</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong>#200k</strong>
+                                </div> 
+                                <div className='eventItem col-lg-3 text-center'>
+                                <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block'>Option 4</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong>#200k</strong>
                                 </div> 
                             </div>
+                            <div className='row col-10 mb-2'>
+                               <div className='eventItem bg-success col-lg-3 text-center'>
+                               <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block text-dark'>Car</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong className='text-white'>#200k</strong>
+                                </div> 
+                               <div className='eventItem col-lg-3 text-center'>
+                               <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block'>Option 2</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong>#200k</strong>
+                                </div> 
+                                 <div className='eventItem col-lg-3 text-center'>
+                                 <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block'>Option 3</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong>#200k</strong>
+                                </div> 
+                                <div className='eventItem col-lg-3 text-center'>
+                                <img src={bmw} width='80px' alt='weddingIcon' /> 
+                                  <strong className='d-block'>Option 4</strong>
+                                  <small className='d-block'>Description of gift</small>
+                                    <strong>#200k</strong>
+                                </div> 
+                            </div>
+                           
+                        </div> 
                         </div>
                          
-                        <div className="d-flex justify-content-around">
+                        <div className="d-flex justify-content-around p-2">
                             <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
                             Back
                             </button>

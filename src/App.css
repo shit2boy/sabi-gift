@@ -216,7 +216,7 @@ Nav.Link {
   background: #E2F3E1;
   opacity: 1;
   color: #888888 ;
-  padding-left: 30px;
+  /* padding-left: 30px; */
 }
 
 .event {
@@ -234,8 +234,8 @@ Nav.Link {
 .eventItem{
   background:#F7F7F7;
   padding: 20px;
-  width: 145px;
-  height: 140px;
+  /* width: 145px; */
+  /* height: 140px; */
   box-shadow: 0px 2px 5px #0000000F;
   border: 1px solid #DDDDDD;
   border-radius: 5px 0px 0px 4px;

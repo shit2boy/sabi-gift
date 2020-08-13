@@ -7,6 +7,7 @@ import { Steps } from "antd";
 import {StateContext} from "../Context"
 import axios from "axios";
 import util from "../util/util";
+import LogOut from "../components/LogOut";
 
 const { Step } = Steps;
 
@@ -212,7 +213,7 @@ next =() => {
                 </Steps>
               </div>
                 <div className='row'>
-                  <Link to='/'>Save and log out</Link>
+                 <LogOut logout={<p>Save and log out</p>} />
                 </div>
                 </div>
             </div>

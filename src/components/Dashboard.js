@@ -25,8 +25,6 @@ export class Dashboard extends Component {
       date : date.toLocaleDateString(undefined, formatDate),
     }
 
-
-
   componentDidMount() {
     axios
       .get(`${util.API_BASE_URL}accounts/profile/`, {

@@ -1,55 +1,3 @@
-// import React from 'react'
-
-// const ActivateAcoount = () => {
-//     const history = useHistory()
-//         useEffect(() => {
-//         const query = new URLSearchParams(history.location.search)
-//         const user_id = query.get("user_id");
-//         const timestamp = query.get("timestamp");
-//         const signature =query.get("signature");
-//         if (user_id) {
-//             setUser_id(user_id)
-//         }
-//         if (timestamp) {
-//             setSimestamp(timestamp)
-//         }
-//         if (signature) {
-//             setSignature(signature)
-//         }
-        
-//     }, []);
-//     return (
-//         <div className='container'>
-//             <div>
-//             <Form noValidate onSubmit ={this.onSubmit}>
-//                 <Form.Group controlId="formBasicEmail">
-//                     <Form.Label>User Id</Form.Label>
-//                     <Form.Control type="text" name="email" value={this.changeHandler} placeholder="Enter user Id" required />
-//                 </Form.Group>
-
-//                 <Form.Group controlId="formBasicPassword">
-//                     <Form.Label>Timestamp</Form.Label>
-//                     <Form.Control type="text" name="password" value={this.changeHandler} placeholder="Timestamp" />
-//                 </Form.Group>
-//                 <Form.Group controlId="formBasicPassword">
-//                     <Form.Label>Signature</Form.Label>
-//                     <Form.Control type="text" name="password" value={this.changeHandler} placeholder="Signature" />
-//                 </Form.Group>
-//                 <Button className="w-100" variant="success" type="submit" style={{background:'#58B852', color:'#ffffff'}}>
-//                     Verify me
-//                 </Button>
-                
-//             </Form>
-//             </div>
-            
-//         </div>
-//     )
-// }
-
-// export default ActivateAcoount
-
-
-
 import React, { Component } from 'react'
 import { Button,Form } from 'react-bootstrap';
 import axios from "axios";
@@ -61,42 +9,47 @@ export default class ActivateAcoount extends Component {
         this.state = {
             user_id : '',
             timestamp : '',
-            signature : ''
+            signature : '',
         }
         this.onSubmit = this.onSubmit.bind(this);
+        this.changeHandler = this.changeHandler.bind(this);
     }
 
+
+    changeHandler(e){
+        this.setState({ [e.target.name] : e.target.value});
+        }
         onSubmit(e){
             e.preventDefault();
             const {user_id, timestamp, signature} = this.state;
-            if (!this.state === ''){
                 axios.post(`${util.API_BASE_URL}accounts/verify-registration/`, {user_id, timestamp,signature},{ 
                     'headers': {
                       "Content-Type": "application/json",
                       },
                     })
                     . then(data=> {
-                        console.log(data);
-                      if (data.status === 200){
                         // console.log(data);
+                      if (data.status === 200){
                         window.localStorage.setItem('token_id', data.data.token);
                         window.localStorage.setItem('username', data.data.email);
-                        window.location.href='/about'
-                        // console.log('successfully login');
+                        window.location.href='/updateprofile'
                       }
                       
                     })
                     .catch(error => {
                       console.log(error);
-                    //   this.setState({errorMessage:'invalid'});
+                      if (error.status === 400) {
+                          window.location.href='/'
+                          
+                      } else {
+                          return;
+                      }
                     
                     });
-            }
         }
 
             componentDidMount(){
                 const query = new URLSearchParams(window.location.search)
-                console.log(window.location.search);
                 const user_id = query.get("user_id");
                 const timestamp = query.get("timestamp");
                 const signature =query.get("signature");
@@ -115,26 +68,29 @@ export default class ActivateAcoount extends Component {
     render() {
         return (
             <div className='container'>
-                <div className='mt-5'>
-                <Form noValidate>
-                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>User Id</Form.Label>
-                     <Form.Control type="text" name="email" value={this.state.user_id} readOnly placeholder="Enter user Id" required />
-                 </Form.Group>
+                <div className='row justify-content-center mt-5'>
+               <div className='col-lg-10 col-sm'>
+                   <h4 className='p-2 text-center'>Please verify your account to continue</h4>
+               <Form noValidate onSubmit={this.onSubmit}>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>User Id</Form.Label>
+                        <Form.Control type="text" name="email" value={this.state.user_id} o readOnly placeholder="Enter user Id" required />
+                    </Form.Group>
 
-                 <Form.Group controlId="formBasicPassword">
-                     <Form.Label>Timestamp</Form.Label>
-                     <Form.Control type="text" name="password" value={this.state.timestamp} readOnly placeholder="Timestamp" />
-                 </Form.Group>
-                 <Form.Group controlId="formBasicPassword">
-                     <Form.Label>Signature</Form.Label>
-                     <Form.Control type="text" name="password" value={this.state.signature} readOnly placeholder="Signature" />
-                 </Form.Group>
-                 <Button className="w-100" variant="success" onClick={this.onSubmit} type="submit" style={{background:'#58B852', color:'#ffffff'}}>
-                     Verify me
-                 </Button>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Timestamp</Form.Label>
+                        <Form.Control type="text" name="password" value={this.state.timestamp} readOnly placeholder="Timestamp" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Signature</Form.Label>
+                        <Form.Control type="text" name="signature" readOnly value={this.state.signature} placeholder="Signature" />
+                    </Form.Group>
+                    <Button className="w-100" variant="success"  type="submit" style={{background:'#58B852', color:'#ffffff'}}>
+                        Verify me
+                    </Button>
                 
-             </Form>
+                </Form>
+               </div>
                 </div>
            </div>
         

@@ -5,6 +5,7 @@ import sabigift from '../images/landing/sabigift.png'
 import image from '../images/Sabi-storepage/image.png'
 import settingIcon from '../images/Sabi-storepage/settingIcon.svg'
 import previewIcon from '../images/Sabi-storepage/previewIcon.svg'
+import LogOut from './LogOut'
 
 
 
@@ -39,6 +40,7 @@ export class DashboardNav extends Component {
                                 <NavDropdown.Item href="#">Edit Profile</NavDropdown.Item>
                                 <NavDropdown.Item href="#">Contact Support</NavDropdown.Item>
                                 <NavDropdown.Item href="#">Knowledge Base</NavDropdown.Item>
+                                <NavDropdown.Item href=""> <LogOut logout='Log out'/></NavDropdown.Item>
                                 
                             </NavDropdown>
                             </Nav>

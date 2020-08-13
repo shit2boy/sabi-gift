@@ -16,7 +16,7 @@ import getstarted from './components/WeddEvent';
 import Login from './pages/Login';
 import {ResetPassword} from './components/ResetPassword';
 import AddItem from './components/AddItem';
-import ActivateAcoount from './pages/ActivateAcoount';
+// import ActivateAcoount from './pages/ActivateAcoount';
 
 const  Home = lazy(()=> import('./pages/Home'));
 
@@ -32,8 +32,8 @@ function App() {
                   <Route exact path='/' component={Home} />
                   <Route path='/createRegistry' component={CreateRegistry} />
                   <Route path='/signUp' component={SignUp} />
-                  <Route path='/about' component={About} />
-                  <Route path='/about/:' component={ActivateAcoount} />
+                  <Route path='/about/:' component={About} />
+                  {/* <Route path='/about/:' component={ActivateAcoount} /> */}
                   <Route path='/checklist' component={RegistryChecklist} />
                   <Route path='/manageregistry' component={ManageRegistry} />
                   <Route path='/giftTracker' component={GiftTracker} />

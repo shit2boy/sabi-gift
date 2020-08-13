@@ -61,7 +61,7 @@ export default class ActivateAcoount extends Component {
         this.state = {
             user_id : '',
             timestamp : '',
-            signature : ''
+            signature : '',
         }
         this.onSubmit = this.onSubmit.bind(this);
     }

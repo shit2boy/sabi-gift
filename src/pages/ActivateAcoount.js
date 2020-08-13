@@ -38,12 +38,8 @@ export default class ActivateAcoount extends Component {
                     })
                     .catch(error => {
                       console.log(error);
-                      if (error.status === 400) {
-                          window.location.href='/'
-                          
-                      } else {
-                          return;
-                      }
+                      if (error.Status === 400) 
+                       window.location.href='/'
                     
                     });
         }

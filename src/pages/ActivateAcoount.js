@@ -70,7 +70,7 @@ export default class ActivateAcoount extends Component {
                <Form noValidate onSubmit={this.onSubmit}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>User Id</Form.Label>
-                        <Form.Control type="text" name="email" value={this.state.user_id} o readOnly placeholder="Enter user Id" required />
+                        <Form.Control type="text" name="email" value={this.state.user_id} readOnly placeholder="Enter user Id" required />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">

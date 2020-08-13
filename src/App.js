@@ -33,7 +33,7 @@ function App() {
                   <Route path='/createRegistry' component={CreateRegistry} />
                   <Route path='/signUp' component={SignUp} />
                   <Route path='/updateprofile' component={About} />
-                  <Route path='/about/' component={ActivateAcoount} />
+                  <Route path='/https://sabigift.netlify.app/about/' component={ActivateAcoount} />
                   <Route path='/checklist' component={RegistryChecklist} />
                   <Route path='/manageregistry' component={ManageRegistry} />
                   <Route path='/giftTracker' component={GiftTracker} />

@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { checkList } from "./imageData";
 import { Card} from "react-bootstrap";
+import AddCategory from './AddCategory';
 
 
 
     class CheckList extends Component {
+
+      
     render() {
         return (
             < div className='container-fluid'>
@@ -12,7 +15,7 @@ import { Card} from "react-bootstrap";
                 {checkList.map((item) => (
                     <Card key={item.id} id='myCards' className='col-sm-1 m-3' style={{ width: "8rem",cursor:'pointer'}}>
                       <Card.Body>
-                        <Card.Img className="center rounded-circle" alt="items" src={item.imageUrl} />
+                        <AddCategory button={<div className="center"><img className=" rounded-circle" width='40px' alt="items" src={item.imageUrl}/></div>} />
                       </Card.Body>
                       <Card.Text className='text-center'>
                           <small className="">{item.Name}</small>

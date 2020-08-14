@@ -20,7 +20,7 @@ export class SideBar extends Component {
         </div>
         <div className="text-center">
           <div className="py-4 o">
-            <Tooltip placement="left" title="overview" color="#5F619F">
+            <Tooltip placement="left" to='/' title="overview" color="#5F619F">
               <GrHome size="25px" />
             </Tooltip>
           </div>

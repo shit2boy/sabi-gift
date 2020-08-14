@@ -119,7 +119,7 @@ export default class getstarted extends Component {
         
       })
       .catch(error => {
-          console.dir( error);
+          // console.dir( error);
           if ( error.response.data.Error !== undefined) {
             this.setState({errorMessage: error.response.data.Error});  
           } else{
@@ -127,8 +127,8 @@ export default class getstarted extends Component {
             
           }
 
-          console.log(error.response.data.Error);
-          console.log(error.response.data.password);
+          // console.log(error.response.data.Error);
+          // console.log(error.response.data.password);
           
 
       });

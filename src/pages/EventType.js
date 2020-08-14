@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import Hero from '../components/Hero';
 import sabigift from "../images/landing/sabigift.png";
+import {StateContext} from "../Context"
 import Product from '../components/Product'
 import AvailableItems from '../components/AvailableItems'
 
@@ -8,10 +9,17 @@ import AvailableItems from '../components/AvailableItems'
 
 const date = new Date();
 const formatDate = {day: 'numeric', year: 'numeric',  month: 'long' };
+
 class EventType extends Component {
+    static contextType = StateContext
+    
     state={
         date : date.toLocaleDateString(undefined, formatDate),
+        
     }
+    componentDidMount() {
+        /* perform a side-effect at mount using the value of UserContext */
+      }
    
     render(){
     return (
@@ -22,7 +30,7 @@ class EventType extends Component {
                 <div className='mb-5'>
                     <Hero hero='birthday'>
                         <div className='text-center'>
-                            <h4> {window.localStorage.name}'s Birthday</h4>
+                            <h4> {window.localStorage.name}'s {this.context.EventType}</h4>
                             <p>{this.state.date}</p>
                         </div>
                     </Hero>

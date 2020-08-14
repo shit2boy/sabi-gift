@@ -9,14 +9,14 @@ import { Rate } from 'antd';
 
 
 
-class AddItem extends Component {
+class AddToCart extends Component {
     constructor(props){
         super(props)
         this.state = {
             modalShow: false,
             product : this.props.productId,
             quantity : [],
-            addedToCart : false
+            addedToCart : false,
         }
        this.addToCart =this.addToCart.bind(this);
        this.handleChange =this.handleChange.bind(this);
@@ -118,4 +118,4 @@ class AddItem extends Component {
     }
 }
 
-export default AddItem
+export default AddToCart

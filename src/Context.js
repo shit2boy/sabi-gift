@@ -7,7 +7,7 @@ class ProductProvider extends Component {
   state = {
       products : [],
       Cart : [],
-     
+      eventType : '',
        
       }
         // handlerChange = (e)=> {
@@ -23,6 +23,7 @@ class ProductProvider extends Component {
   // }
         handleEventType = e => {
           this.setState({ eventType: e.target.innerText})
+          console.log(this.state.eventType);
           // let type = this.state.eventType
           // console.log(this.state.eventType)
         };

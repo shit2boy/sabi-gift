@@ -15,7 +15,7 @@ import RegistryChecklist from './pages/ChecklistPage';
 import getstarted from './components/WeddEvent';
 import Login from './pages/Login';
 import {ResetPassword} from './components/ResetPassword';
-import AddItem from './components/AddItem';
+import AddToCart from './components/AddToCart';
 import ActivateAcoount from './pages/ActivateAcoount';
 
 const  Home = lazy(()=> import('./pages/Home'));
@@ -33,7 +33,7 @@ function App() {
                   <Route path='/createRegistry' component={CreateRegistry} />
                   <Route path='/signUp' component={SignUp} />
                   <Route path='/updateprofile' component={About} />
-                  <Route path='/about/' component={ActivateAcoount} />
+                  <Route path='/verification/' component={ActivateAcoount} />
                   <Route path='/checklist' component={RegistryChecklist} />
                   <Route path='/manageregistry' component={ManageRegistry} />
                   <Route path='/giftTracker' component={GiftTracker} />
@@ -41,7 +41,7 @@ function App() {
                   <Route path='/checkout' component={CheckoutForm} />
                   <Route path='/getstarted' component={getstarted} />
                   <Route path='/sign in' component={Login} />
-                  <Route path='/additem' component={AddItem} />
+                  <Route path='/additem' component={AddToCart} />
                   <Route path='/Passwordreset' component={ResetPassword} />
                   {/* <Route component={()=>} /> */}
                

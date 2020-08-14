@@ -231,6 +231,10 @@ Nav.Link {
   
   
 }
+div.eventItem:hover, div.eventItem:active {
+  background: #FFFFFF;
+}
+
 .eventItem{
   background:#F7F7F7;
   padding: 20px;

@@ -86,7 +86,7 @@ export class CreateRegistry extends Component {
                       <div className="row col-10">
                           {this.state.eventTypeList.map(type=>
                               <button key={type.id} className="eventItem">
-                                      <img src={type.image} alt={type.name} />
+                                      <img src={type.image} width='40px' alt={type.name} />
                                    
                               <p onClick={(e)=>value.handleEventType(e)}>{type.name}</p>
                               </button>
@@ -94,7 +94,7 @@ export class CreateRegistry extends Component {
                                
                             <button onClick={(e)=>value.handleEventType(e)} className="eventItem">
                                 
-                                    <img src={ring} alt="undefine" />{" "}
+                                    <img src={ring} alt="undefine" width='40px' />
                                
                                 <p>Not on list</p>
                             </button> 

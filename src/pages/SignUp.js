@@ -102,11 +102,8 @@ export default class getstarted extends Component {
       .then(response => {
         if (response.status === 200 || response.status === 201){
             console.log(response.statusText);
-
-            // alert('A verification Mail sent to your email')
           this.setState({
             message : `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`})
-          // currentIndex: this.state.currentIndex + 1, 
           // console.log(this.state.message);
         }
         

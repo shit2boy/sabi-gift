@@ -7,7 +7,7 @@ import { Steps } from "antd";
 import {StateContext} from "../Context"
 import axios from "axios";
 import util from "../util/util";
-import LogOut from "../components/LogOut";
+// import LogOut from "../components/LogOut";
 
 const { Step } = Steps;
 
@@ -29,7 +29,6 @@ export class About extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleRegistryType = this.handleRegistryType.bind(this);
     }
 
     handleChange(e) {
@@ -38,25 +37,7 @@ export class About extends Component {
       this.setState({
         formField,
       });
-      // console.log(formField)
     }
-
-          // componentDidMount() {
-      //   axios
-      //     .get(`${util.API_BASE_URL}registry-types/`, {
-      //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      //     })
-      //     .then((res) => {
-      //       // console.log(res.data);
-      //       if (res.data !== undefined) {
-      //          this.setState({registryType : res.data});
-      //       }
-      //     })
-      //     .catch((err) => {
-      //       // console.log(err);
-      //       
-      //     });
-      // }
 
 
 
@@ -116,8 +97,6 @@ export class About extends Component {
         .catch(error => {
             console.dir(error);
             this.setState({errorMessage: error.response.data.first_name});
-
-            // alert("Not successful, Check all Input fields")
             
         });
       
@@ -212,9 +191,9 @@ next =() => {
                   <Step title="Confirm" />
                 </Steps>
               </div>
-                <div className='row'>
+                {/* <div className='row mb-0'>
                  <LogOut logout={<p>Save and log out</p>} />
-                </div>
+                </div> */}
                 </div>
             </div>
 
@@ -228,13 +207,11 @@ next =() => {
                               <Form.Group as={Col} controlId="formGridName">
                                 <Form.Label>First Name</Form.Label>
                                 <Form.Control onChange ={this.handleChange} type="text" name='firstName' placeholder="Jimi" />
-                                {/* <span style={{ color: "red" }}>{this.state.errorMessage["firstName"]} </span> */}
                               </Form.Group>
 
                             <Form.Group as={Col} controlId="formName">
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control onChange ={this.handleChange} type="text" name='lastName' placeholder="Fola" />
-                            {/* <span style={{ color: "red" }}>{this.state.errorMessage["lastName"]} </span> */}
                             </Form.Group>
                             </Form.Row>
                             <Form.Row>

@@ -32,7 +32,7 @@ export default class getstarted extends Component {
       email : '',
       password:'',
       confirm :'',
-      successfulMessage : '',
+      message : '',
       errorMessage : '',
       signUpResponse:{successful:false},
       isValidated : false
@@ -109,13 +109,9 @@ export default class getstarted extends Component {
       .then(response => {
         if (response.status === 201 || response.status === 200){
             console.log(response.statusText);
-            console.log(response);
             this.setState({
               message : `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`})
-
-          // this.setState({currentIndex: this.state.currentIndex + 1, successfulMessage:'A verification Mail sent to your email '})
         }
-          // currentIndex: this.state.currentIndex + 1, 
         
       })
       .catch(error => {
@@ -129,10 +125,8 @@ export default class getstarted extends Component {
 
           // console.log(error.response.data.Error);
           // console.log(error.response.data.password);
-          
-
-      });
-  }
+        });
+      }
 
   render() {
     return (
@@ -370,9 +364,8 @@ export default class getstarted extends Component {
                           required
                         />
                       </Form.Group>
-                      { this.state.errorMessage && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p> }
-                      {/* { !this.state.errorMessage && <p style={{color:'red',textAlign :'center'}}>A verification mail sent to your Email.  </p> } */}
-                      { this.state.successfulMessage && <p style={{color:'green',textAlign :'center'}}>{ this.state.successfulMessage } </p> }
+                      { this.state.errorMessage && !this.state.message && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p> }
+                      { this.state.message && <p style={{color:'green',textAlign :'center'}}>{ this.state.message } </p> }
                     </Form>
                   </div>
                 )}

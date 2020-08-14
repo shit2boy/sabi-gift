@@ -113,7 +113,7 @@ export default class getstarted extends Component {
             this.setState({
               message : `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`})
 
-          this.setState({currentIndex: this.state.currentIndex + 1, successfulMessage:'A verification Mail sent to your email '})
+          // this.setState({currentIndex: this.state.currentIndex + 1, successfulMessage:'A verification Mail sent to your email '})
         }
           // currentIndex: this.state.currentIndex + 1, 
         

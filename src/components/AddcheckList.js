@@ -7,7 +7,7 @@ import AddCategory from './AddCategory';
 
     class CheckList extends Component {
 
-      
+
     render() {
         return (
             < div className='container-fluid'>
@@ -20,7 +20,7 @@ import AddCategory from './AddCategory';
                       <Card.Text className='text-center'>
                           <small className="">{item.Name}</small>
                         <strong className="p-1 d-block">
-                            +
+                            {item.add}
                         </strong>
                       </Card.Text>
                     </Card>

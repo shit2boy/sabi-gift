@@ -50,27 +50,33 @@ export const checkList=[
     {
         id : 1,
         Name : "kitchen Appliances",
-        imageUrl: kitchen
+        imageUrl: kitchen,
+        add : '+'
+        
     },
     {
         id : 2,
         Name : "kitchen Appliances",
-        imageUrl: kitchen
+        imageUrl: kitchen,
+        add : '+'
     },
     {
         id : 3,
         Name : "kitchen Appliances",
-        imageUrl: kitchen
+        imageUrl: kitchen,
+        add : '+'
     },
     {
         id : 4,
         Name : "Dining Essentials",
         imageUrl: kitchen,
+        add : '+'
     },
     {
         id : 5,
         itemName : "Dining Essentials",
-        imageUrl: add
+        imageUrl: add,
+
     },
     {
         id : 6,

@@ -45,7 +45,7 @@ export default class AddCategory extends Component {
     render() {
         return (
             <div>
-                <div className='container'>
+                <div className=''>
                 <span onClick={() =>this.setModalShow(true)} className='pointer'>{this.props.button}</span>
                 <Modal
                 size="lg"

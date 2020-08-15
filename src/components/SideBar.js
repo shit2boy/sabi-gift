@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import {Link} from 'react-router-dom'
 import Avatars from "../images/Sabi-storepage/Avatars.png";
 
 import { GrHome, GrFolder, GrBarChart } from "react-icons/gr";
@@ -20,23 +20,23 @@ export class SideBar extends Component {
         </div>
         <div className="text-center">
           <div className="py-4 o">
-            <Tooltip placement="left" to='/' title="overview" color="#5F619F">
-              <GrHome size="25px" />
+            <Tooltip placement="left" title="overview" color="#5F619F">
+             <Link className='active' to='/dashboard'> <GrHome size="25px" /></Link>
             </Tooltip>
           </div>
           <div className="py-4">
-            <Tooltip placement="left" title="manage registry" color="#5F619F">
-              <BsAlarm size="25px" />
+           <Tooltip placement="left" title="manage registry" color="#5F619F">
+              <Link className='text-link active' to='manageRegistry'><BsAlarm size="25px" /></Link>
             </Tooltip>
           </div>
           <div className="py-4">
             <Tooltip placement="left" title="checklist" color="#5F619F">
-              <GrFolder size="25px" />
+              <Link className='active' to='/checklist'><GrFolder size="25px" /></Link>
             </Tooltip>
           </div>
           <div className="py-4">
             <Tooltip placement="left" title="Track Gift" color="#5F619F">
-              <GrBarChart size="25px" />
+              <Link className='active' to='/gifttracker'><GrBarChart size="25px" /></Link>
             </Tooltip>
           </div>
           <div className="py-4">

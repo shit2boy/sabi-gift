@@ -54,7 +54,7 @@ export default class getstarted extends Component {
         let currentIndex = this.state.currentIndex;
     
         if (this.state.currentIndex > 2) {
-          this.setState({ currentIndex: currentIndex + 1, });
+          this.setState({ currentIndex: currentIndex + 1});
           return;
         }
     
@@ -200,7 +200,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="p-2 rounded-pill btn-outline-light"
+                            className="registryBtn p-2 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -210,7 +210,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="px-4 rounded-pill btn-outline-light"
+                            className="registryBtn px-4 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -243,7 +243,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="p-2 rounded-pill btn-outline-light"
+                            className="registryBtn p-2 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -253,7 +253,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="px-4 rounded-pill btn-outline-light"
+                            className="registryBtn px-4 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -285,7 +285,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="p-2 rounded-pill btn-outline-light"
+                            className="registryBtn p-2 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -295,7 +295,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="px-4 rounded-pill btn-outline-light"
+                            className="registryBtn px-4 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -357,7 +357,7 @@ export default class getstarted extends Component {
                           label="I have read the Privacy Policy and agree to the Terms of Service."
                         />
                       </Form.Group>
-                      { this.state.errorMessage && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p> }
+                      { this.state.errorMessage && !this.state.message && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p> }
                       { this.state.message && <p style={{color:'green',textAlign :'center'}}>{ this.state.message } </p> }
                     </Form>
                   </div>

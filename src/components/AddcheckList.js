@@ -15,12 +15,12 @@ import AddCategory from './AddCategory';
                 {checkList.map((item) => (
                     <Card key={item.id} id='myCards' className='col-sm-1 m-3' style={{ width: "8rem",cursor:'pointer'}}>
                       <Card.Body>
-                        <AddCategory button={<div className="center"><img className=" rounded-circle" width='40px' alt="items" src={item.imageUrl}/></div>} />
+                      <AddCategory button={<div className="center"><img className=" rounded-circle" width='40px' alt="items" src={item.imageUrl}/></div>} />
                       </Card.Body>
                       <Card.Text className='text-center'>
                           <small className="">{item.Name}</small>
                         <strong className="p-1 d-block">
-                            {item.add}
+                        <AddCategory button={item.add} />
                         </strong>
                       </Card.Text>
                     </Card>

@@ -19,6 +19,7 @@ class EventType extends Component {
     }
     componentDidMount() {
         /* perform a side-effect at mount using the value of UserContext */
+        console.log(this.context);
       }
    
     render(){
@@ -30,7 +31,7 @@ class EventType extends Component {
                 <div className='mb-5'>
                     <Hero hero='birthday'>
                         <div className='text-center'>
-                            <h4> {window.localStorage.name}'s {this.StateContext.EventType}</h4>
+                            <h4> {window.localStorage.name}'s {this.context.EventType} </h4>
                             <p>{this.state.date}</p>
                         </div>
                     </Hero>

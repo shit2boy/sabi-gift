@@ -201,7 +201,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="p-2 rounded-pill btn-outline-light"
+                            className="registryBtn p-2 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -211,7 +211,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="px-4 rounded-pill btn-outline-light"
+                            className="registryBtn px-4 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -244,7 +244,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="p-2 rounded-pill btn-outline-light"
+                            className=" registryBtn p-2 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -254,7 +254,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="px-4 rounded-pill btn-outline-light"
+                            className="registryBtn px-4 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -287,7 +287,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="p-2 rounded-pill btn-outline-light"
+                            className="registryBtn p-2 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -297,7 +297,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="px-4 rounded-pill btn-outline-light"
+                            className="registryBtn px-4 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >

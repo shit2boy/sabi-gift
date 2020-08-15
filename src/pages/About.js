@@ -301,9 +301,9 @@ next =() => {
                 </div>
             </div>}
 
-            {this.state.currentIndex === 2 && <div className=' col py-3 rightSide' >
+            {this.state.currentIndex === 2 && <div className=' col rightSide' >
                         <div className='row'>
-                            <div className='col offset-1 justify-content-center' style={{minHeight:'90vh',marginTop:'40px'}}>
+                            <div className='col offset-1 justify-content-center' style={{minHeight:'80vh',marginTop:'40px'}}>
                             <div className='' >
                             <h2 id='header'>What are somethings you  <br/> enjoy doing together</h2>
                         
@@ -324,7 +324,7 @@ next =() => {
                           </div>
                       </div>
                        <div className='row'>
-                       <div className="col bg-white d-flex justify-content-between align-items-center" style={{height:'100px'}}>
+                       <div className="col bg-white d-flex justify-content-between align-items-center" style={{height:'90px'}}>
                             <button onClick={this.back} className="btn btn-light rounded-pill px-5">
                             Back
                             </button>

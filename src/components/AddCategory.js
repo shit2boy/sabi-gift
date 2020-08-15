@@ -26,9 +26,20 @@ export default class AddCategory extends Component {
         .get(`${util.API_BASE_URL}registries/`, {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
 
         .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data !== undefined) {
             let data = res.data;
+
+            // for (let i=0;i<data.length;i++) {
+            // let category =[];
+            // if (data[i].cat ) {
+                
+            // }
+
+               
+            // this.setState({itemCategories : data});
+
+            // }
             for (let i=0;i<data.length;i++) {
                 data[i].picture = data[i].picture.replace("image/upload/","");
             this.setState({itemCategories : data});

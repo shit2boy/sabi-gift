@@ -1,6 +1,6 @@
 import React,{Fragment,Suspense,lazy} from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Dashboard from "./components/Dashboard";
+// import Dashboard from "./components/Dashboard";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FindRegistry from './pages/FindRegistry';
@@ -17,14 +17,18 @@ import Login from './pages/Login';
 import {ResetPassword} from './components/ResetPassword';
 import AddToCart from './components/AddToCart';
 import ActivateAcoount from './pages/ActivateAcoount';
+import Spinner from 'react-bootstrap/Spinner'
 
 const  Home = lazy(()=> import('./pages/Home'));
+const  Dashboard = lazy(()=> import('./components/Dashboard'));
+// const  Home = lazy(()=> import('./pages/Home'));
 
 
 function App() {
   return (
     <Fragment>
-             <Suspense fallback={<div className="spinner center"><h3>Loading...</h3></div>} >
+             <Suspense fallback={<Spinner className='loader' animation="border" role="status"><span className="sr-only">Loading...</span></Spinner>} >
+             {/* <Suspense fallback={<div className="spinner center"><h3>Loading...</h3></div>} > */}
             <Router>
                 <Switch>
                   <Route  exact path='/Dashboard' component={Dashboard} />

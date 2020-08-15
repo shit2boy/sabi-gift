@@ -6,6 +6,7 @@ import kitchen from '../images/Sabi-storepage/kitchen.png'
 import CheckList from '../components/AddcheckList';
 import { manageRegistry } from "../components/imageData";
 // import AddCategory from '../components/AddCategory'
+import add from '../images/Sabi-storepage/Addicon.jpg'
 import axios from 'axios'
 import util from "../util/util";
 
@@ -26,25 +27,18 @@ export class ManageRegistry extends Component {
             // console.log(res.data);
             if (res.data !== undefined) {
             let data = res.data;
+            let category = [];
+
             for (let i=0;i<data.length;i++) {
                 data[i].picture = data[i].picture.replace("image/upload/","");
                 if (data[i].cat === 'Cooking') {
-                    let category = [];
-                    category.push(data[i].cat,data[i].picture)
-                this.setState({itemCategories : category});
+                    category.push(data[i].picture)
                     
-                }else{
-                    return;
                 }
-
-            // let category = [];
-            // category.push(data[i].cat)
-
-            // this.setState({itemCategories : category});
-
             }
-            // this.setState({itemCategories : data});
-            console.log(this.state.itemCategories);
+            
+            this.setState({itemCategories : category});
+            // console.log(this.state.itemCategories);
 
             }
         })
@@ -109,7 +103,8 @@ export class ManageRegistry extends Component {
                                     <div className='m-3'>
                                             <Card id='myCards' key={index} style={{ width:"8rem",cursor:'pointer',border :'1px dotted' }}>
                                                 <Card.Body className=''>
-                                                {/* <Card.Img className="center rounded-circle" alt="items" width='40px' src={item.picture} /> */}
+                                                <Card.Img className="center rounded-circle" alt="items" width='40px' src={add} />
+                                                {/* <Card.Img className="center rounded-circle" alt="items" width='40px' src={item} /> */}
                                                 </Card.Body>
                                             </Card>
                                     </div>

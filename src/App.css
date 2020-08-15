@@ -28,35 +28,13 @@ h1,h2,h3,h4,h5,h6{
   font-weight: bolder;
   opacity: 1 !important;
 }
-/* h1 {
-  font-size: 3em;
-  line-height: 1;
-  margin-bottom: 0.5em;
-}
-h2 {
-  font-size: 2em;
-  margin-bottom: 0.75em;
-}
-h3 {
-  font-size: 1.5em;
-  line-height: 1;
-  margin-bottom: 1em;
-}
-h4 {
-  font-size: 1.2em;
-  line-height: 1.25;
-  margin-bottom: 1.25em;
-}
-h5 {
-  /* font-size: 1em; 
-  font-weight: bold;
-  margin-bottom: 1.5em;
-}
-h6 {
-  font-size: 1em;
-  font-weight: bold;
-  margin-bottom: 1.5em;
-} */
+
+ .loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+} 
+
 .text-link {
   color: inherit !important;
   text-decoration: inherit !important;
@@ -204,6 +182,10 @@ Nav.Link {
   background: #707070;
 }
 
+.registryBtn{
+  margin-right: 35px!important;
+}
+
 .rightside{
   background:#E2F3E1 ;
   /* width: 100%; */
@@ -270,6 +252,9 @@ background: url('./images/landing/birthday@2x.png') center/cover no-repeat;
  background-color: #F9F9F9;
 border-radius: 64px;
 opacity: 1;
+}
+Link.active:active{
+  color : rgb(0, 162, 255)
 }
 
 .cashGift{

@@ -33,10 +33,8 @@ export class DashboardNav extends Component {
                                 <span className='mr-2'><Link className='text-link' to='/checkout'><img src={settingIcon} alt='icon'></img><small>setting</small></Link></span> 
                                 <Link className='text-link' to='/eventType'><span><img src={previewIcon} alt='icon'></img><small>Preview</small></span></Link>
                             </Nav.Link>
-                            <Nav.Link eventKey={2} href="#memes">
-                            <Navbar.Brand href="/Dashboard"><img className='rounded-circle shadow' width='70px' src={image} alt='logo' /></Navbar.Brand>
-                            </Nav.Link>
-                            <NavDropdown title="" id="collasible-nav-dropdown">
+                            {/* <Navbar><img className='rounded-circle shadow' width='70px' src={image} alt='userAvatar' /></Navbar> */}
+                            <NavDropdown title={<img className='rounded-circle shadow' width='70px' src={image} alt='userAvatar' />} id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#">Edit Profile</NavDropdown.Item>
                                 <NavDropdown.Item href="#">Contact Support</NavDropdown.Item>
                                 <NavDropdown.Item href="#">Knowledge Base</NavDropdown.Item>

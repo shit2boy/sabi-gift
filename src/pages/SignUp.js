@@ -146,7 +146,7 @@ export default class getstarted extends Component {
                 <div>
                   <h4 className="text-white">WHY OUR SERVICES?</h4>
                 </div>
-                <Steps className="text-white" direction="vertical" current={1}>
+                <Steps className="text-white" direction="vertical">
                   <Step
                     color=" white"
                     title="Lorem ipsum lorem ipsum"
@@ -210,7 +210,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn px-4 rounded-pill btn-outline-light"
+                            className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -253,7 +253,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn px-4 rounded-pill btn-outline-light"
+                            className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -295,7 +295,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn px-4 rounded-pill btn-outline-light"
+                            className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >

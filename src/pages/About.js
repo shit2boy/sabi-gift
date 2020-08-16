@@ -90,7 +90,7 @@ export class About extends Component {
         .then(response => {
           if (response.status === 200)
           // console.log(response);
-            alert(response.statusText);
+            // alert(response.statusText);
             this.setState({currentIndex : this.state.currentIndex + 1, signUpResponse : {successful:true, message:'Registry Successful'}})
            
         })

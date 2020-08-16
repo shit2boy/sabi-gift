@@ -65,9 +65,9 @@ export class ManageRegistry extends Component {
                             </div>
                         </div>
                         <div className='row mt-5 '>
-                            <div className='col-12 text-center' style={{height :'130px', border:'1px solid'}}>
+                            <div className='col-12 text-center' style={{height :'100px', border:'1px solid'}}>
                                 <h6 className='py-2'>YOUR REGISTRY URL</h6>
-                                <p>www.sabigifts.ng/registry/jimi2020</p>
+                                <p contenteditable="true">www.sabigifts.ng/registry/jimi2020</p>
                             </div>
                        
                             <div className='manageReg text-center mt-4' style={{borderRadius:'25px', height:'250px'}}>

@@ -29,6 +29,19 @@ h1,h2,h3,h4,h5,h6{
   opacity: 1 !important;
 }
 
+[contenteditable] {
+  outline: 0px solid transparent;
+}
+
+input:focus::placeholder {
+  color: transparent;
+  /* opacity: 0; */
+}
+input::placeholder {
+  opacity: 0.4;
+}
+
+
  .loader {
   position: fixed;
   top: 50%;
@@ -177,13 +190,18 @@ Nav.Link {
  justify-content: center;
  margin-bottom: 30px;
 }
+/*******Date Picker ********/
+
+.ant-picker {
+  padding: 8px 20px;
+}
 
 .ant-steps-item-process .ant-steps-item-icon {
   background: #707070;
 }
 
 .registryBtn{
-  margin-right: 35px!important;
+  margin-left: 35px!important;
 }
 
 .rightside{

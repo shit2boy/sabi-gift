@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
-import AvailableItems from "./AvailableItems";
+// import AvailableItems from "./AvailableItems";
 import DashboardNav from "./DashboardNav";
 import { GiReceiveMoney } from "react-icons/gi";
 import { BsGift } from "react-icons/bs";
-import Product from "./Product";
+// import Product from "./Product";
 import RegistryBar from "./ProgressBar";
 import NextSteps from "./NextSteps";
 import SideBar from "./SideBar";
 import CheckList from "./AddcheckList";
-import axios from "axios";
-import util from "../util/util";
+// import axios from "axios";
+// import util from "../util/util";
 
 
 
@@ -25,27 +25,27 @@ export class Dashboard extends Component {
       date : date.toLocaleDateString(undefined, formatDate),
     }
 
-  componentDidMount() {
-    axios
-      .get(`${util.API_BASE_URL}accounts/profile/`, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      })
-      .then((res) => {
-        // console.log(res.data);
-        if (res.data !== undefined) {
-          window.localStorage.setItem("name", res.data.first_name);
-          window.localStorage.setItem("image", res.data.photo);
-          window.localStorage.setItem("username", res.data.username);
-        }
-      })
-      .catch((err) => {
-        // console.log(err);
-        window.localStorage.removeItem("name");
-        window.localStorage.removeItem("image");
-        window.localStorage.removeItem("username");
-        window.location.href = "/";
-      });
-  }
+  // componentDidMount() {
+  //   axios
+  //     .get(`${util.API_BASE_URL}accounts/profile/`, {
+  //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+  //     })
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       if (res.data !== undefined) {
+  //         window.localStorage.setItem("name", res.data.first_name);
+  //         window.localStorage.setItem("image", res.data.photo);
+  //         window.localStorage.setItem("username", res.data.username);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       // console.log(err);
+  //       window.localStorage.removeItem("name");
+  //       window.localStorage.removeItem("image");
+  //       window.localStorage.removeItem("username");
+  //       window.location.href = "/";
+  //     });
+  // }
 
   render() {
     return (
@@ -125,7 +125,7 @@ export class Dashboard extends Component {
                 <CheckList />
               </div>
             </div>
-            <div className="mt-3 py-5 ">
+            {/* <div className="mt-3 py-5 ">
               <h5 className="mb-5 ">Add items to your Registry</h5>
               <Row>
                 <Col xs md={3} lg={3} className="availableItem d-none d-lg-inline-block">
@@ -140,7 +140,7 @@ export class Dashboard extends Component {
                   <Product showWishList={false} />
                 </Col>
               </Row>
-            </div>
+            </div> */}
           </Col>
         </Row>
       </div>

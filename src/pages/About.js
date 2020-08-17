@@ -23,12 +23,14 @@ export class About extends Component {
             signUpResponse:{successful:false, message:''},
             isValidated : false,
             registryType : [],
+            isLoggedIn : false,
             errorMessage : '',
             selectedRegistryType : '',
             registryCategories : [],
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e) {
@@ -41,7 +43,7 @@ export class About extends Component {
 
 
 
-      validateForm() {
+      validateForm = () => {
         let formField = this.state.formField;
         let errors = {};
         let formIsValid = true;
@@ -138,7 +140,7 @@ export class About extends Component {
           
           }
       
-    //    const handleValidation = (event) => {
+    //    const Validation = (event) => {
     //     if (formField.checkValidity() === false) {
     //       event.preventDefault();
     //       event.stopPropagation();
@@ -163,7 +165,7 @@ back = () => {
 }
 next =() => {
     if (this.state.currentIndex >=4) {
-      window.location.href='/dashboard'
+      window.location.href='/manageregistry'
 
     }
     this.setState({currentIndex : this.state.currentIndex + 1});
@@ -269,11 +271,11 @@ next =() => {
                       <p className="py-4">Select the gift types</p>
                       <div className="col-10 row">
                         {this.state.registryType.map(type=>
-                          <div key={type.id} className="eventItem col-lg-2">
-                            <div className='text-center'>
-                              <img src={type.image} alt={type.name} width='70px' />{" "}
+                          <div key={type.id} onClick={this.next} className="eventItem col-lg-3">
+                            <div className='text-center' >
+                              <img src={type.image} alt={type.name} width='80px' minHeight='100px' />{" "}
                             </div>
-                            <p>{type.name}</p>
+                            <p className='text-center mb-0'>{type.name}</p>
                           </div>
                         )}  
                           
@@ -290,10 +292,10 @@ next =() => {
                 <div className='row'>
                 <div  className="col bg-white d-flex justify-content-between align-items-center" style={{height:'90px'}}>
                     {/* <div className=" d-flex justify-content-around"> */}
-                    <button to="" onClick={this.back} className="btn btn-light rounded-pill px-5">
+                    <button onClick={this.back} className="btn btn-light rounded-pill px-5">
                       Back
                     </button>
-                    <button to="" onClick={this.next} className="btn btn-dark rounded-pill px-5">
+                    <button  className="btn btn-dark rounded-pill px-5">
                       Next
                     </button>
                     {/* </div> */}

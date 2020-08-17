@@ -15,11 +15,36 @@ import util from "../util/util";
 export class ManageRegistry extends Component {
     state={
             itemCategories : [],
+            spouseName : '',
         }
 
 
 
     componentDidMount() {
+
+        axios
+        .get(`${util.API_BASE_URL}accounts/profile/`, {
+          headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+        })
+        .then((res) => {
+          // console.log(res.data);
+          if (res.data !== undefined) {
+            window.localStorage.setItem("name", res.data.first_name);
+            window.localStorage.setItem('spouseName', res.data.spouse_name);
+            window.localStorage.setItem("username", res.data.username);
+            window.localStorage.setItem("username", res.data.event_date);
+            window.localStorage.setItem("username", res.data.event_type);
+          }
+          this.setState({spouseName : window.localStorage.spouseName})
+        })
+        .catch((err) => {
+          // console.log(err);
+          window.localStorage.removeItem("name");
+          window.localStorage.removeItem("image");
+          window.localStorage.removeItem("username");
+          window.location.href = "/";
+        });
+
         axios
         .get(`${util.API_BASE_URL}registries/`, {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
 
@@ -71,7 +96,8 @@ export class ManageRegistry extends Component {
                             </div>
                        
                             <div className='manageReg text-center mt-4' style={{borderRadius:'25px', height:'250px'}}>
-                                <h2 className='py-3 text-white'>Jimi & Joanna</h2>
+                                {this.state.spouseName && <h2 className='py-3 text-white'>{window.localStorage.name} & {window.localStorage.spouse_name}</h2>}
+                                {!this.state.spouseName && <h2 className='py-3 text-white'>{window.localStorage.name} </h2>}
                                 <h5 className='py-4 text-white'>February 10, 2020 (14 days left)</h5>
                             </div>
                         </div>

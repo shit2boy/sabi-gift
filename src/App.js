@@ -1,6 +1,6 @@
 import React,{Fragment,Suspense,lazy} from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-// import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/Dashboard";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FindRegistry from './pages/FindRegistry';
@@ -9,7 +9,7 @@ import SignUp from './pages/SignUp';
 import About from './pages/About';
 import GiftTracker from './components/GiftTracker';
 import EventType from './pages/EventType';
-import ManageRegistry from './pages/ManageRegistry';
+// import ManageRegistry from './pages/ManageRegistry';
 import CheckoutForm from './pages/CheckoutForm';
 import RegistryChecklist from './pages/ChecklistPage';
 import getstarted from './components/WeddEvent';
@@ -20,7 +20,7 @@ import ActivateAcoount from './pages/ActivateAcoount';
 import Spinner from 'react-bootstrap/Spinner'
 
 const  Home = lazy(()=> import('./pages/Home'));
-const  Dashboard = lazy(()=> import('./components/Dashboard'));
+const  ManageRegistry = lazy(()=> import('./pages/ManageRegistry'));
 // const  Home = lazy(()=> import('./pages/Home'));
 
 
@@ -41,7 +41,7 @@ function App() {
                   <Route path='/checklist' component={RegistryChecklist} />
                   <Route path='/manageregistry' component={ManageRegistry} />
                   <Route path='/giftTracker' component={GiftTracker} />
-                  <Route path='/eventType' component={EventType} />
+                  <Route path='/myevent' component={EventType} />
                   <Route path='/checkout' component={CheckoutForm} />
                   <Route path='/getstarted' component={getstarted} />
                   <Route path='/sign in' component={Login} />

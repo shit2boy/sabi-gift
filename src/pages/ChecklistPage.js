@@ -23,7 +23,7 @@ export class RegistryChecklist extends Component {
                            <AvailableItems />
                         </div>
                         <div className='col'>
-                            <Product showWishList={false}/>
+                            <Product showWishList={true} />
                         </div>
                     </div>
                 </div>

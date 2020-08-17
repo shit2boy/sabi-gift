@@ -45,7 +45,8 @@ import util from "../util/util";
                 // console.log(data);
                 window.localStorage.setItem('token_id', data.data.token);
                 window.localStorage.setItem('username', data.data.email);
-                window.location.href='/dashboard'
+                window.localStorage.setItem('username', data.data.spouse_name);
+                window.location.href='/manageregistry'
                 // console.log('successfully login');
               }
               

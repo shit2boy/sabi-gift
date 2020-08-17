@@ -6,6 +6,35 @@ import AddCategory from './AddCategory';
 
 
     class CheckList extends Component {
+      constructor(){
+        super();
+        this.state ={
+          isChecked : false,
+      }
+    }
+
+
+    // componentDidMount() {
+    //   axios
+    //     .get(`${util.API_BASE_URL}accounts/profile/`, {
+    //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+    //     })
+    //     .then((res) => {
+    //       // console.log(res.data);
+    //       if (res.data !== undefined) {
+    //         window.localStorage.setItem("name", res.data.first_name);
+    //         window.localStorage.setItem("image", res.data.photo);
+    //         window.localStorage.setItem("username", res.data.username);
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       // console.log(err);
+    //       window.localStorage.removeItem("name");
+    //       window.localStorage.removeItem("image");
+    //       window.localStorage.removeItem("username");
+    //       window.location.href = "/";
+    //     });
+    // }
 
 
     render() {

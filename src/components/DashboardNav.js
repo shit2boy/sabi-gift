@@ -31,7 +31,7 @@ export class DashboardNav extends Component {
                             <Nav.Link href="#">
                                 <span className='row'> {window.localStorage.name}'s registry</span>
                                 <span className='mr-2'><Link className='text-link' to='/checkout'><img src={settingIcon} alt='icon'></img><small>setting</small></Link></span> 
-                                <Link className='text-link' to='/eventType'><span><img src={previewIcon} alt='icon'></img><small>Preview</small></span></Link>
+                                <Link className='text-link' to='/myevent'><span><img src={previewIcon} alt='icon'></img><small>Preview</small></span></Link>
                             </Nav.Link>
                             {/* <Navbar><img className='rounded-circle shadow' width='70px' src={image} alt='userAvatar' /></Navbar> */}
                             <NavDropdown title={<img className='rounded-circle shadow' width='70px' src={image} alt='userAvatar' />} id="collasible-nav-dropdown">

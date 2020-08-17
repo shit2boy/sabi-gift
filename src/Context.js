@@ -8,6 +8,7 @@ class ProductProvider extends Component {
       products : [],
       Cart : [],
       eventType : '',
+      registryCategory : [],
        
       }
         // handlerChange = (e)=> {
@@ -21,9 +22,14 @@ class ProductProvider extends Component {
 
        
   // }
+        handleRegistryCategory = e => {
+          let selectedCategory =[ ];
+          // let type = this.state.registryCategory
+          this.setState({ registryCategory: selectedCategory})
+          // console.log(this.state.registryCategory)
+        };
         handleEventType = e => {
           this.setState({ eventType: e.target.innerText})
-          console.log(this.state.eventType);
           // let type = this.state.eventType
           // console.log(this.state.eventType)
         };

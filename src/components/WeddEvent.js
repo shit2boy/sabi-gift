@@ -132,8 +132,16 @@ export default class getstarted extends Component {
         "content-type": "multipart/form-data",
       })
       .then((response) => {
+        console.log("token_id", response.data["Registration Successful"].token);
+
         if (response.status === 201 || response.status === 200) {
           console.log(response.statusText);
+          window.localStorage.setItem(
+            "token_id",
+            response.data["Registration Successful"].token
+          );
+          window.localStorage.setItem("username", response.data.email);
+          window.localStorage.setItem("username", response.data.spouse_name);
           this.setState({
             message: `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`,
           });

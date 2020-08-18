@@ -419,10 +419,9 @@ export class About extends Component {
                         <div
                           key={category.id}
                           id="#ddd"
-                          type="checkbox"
                           style={containerStyle}
                           className="eventItem col-lg-3"
-                          onClick={this.handleSelectOpt}
+                          // onClick={this.handleSelectOpt}
                         >
                           <p></p>
                           {/* <div className='text-center'><img src={category.image} alt='weddingIcon' /> </div> */}

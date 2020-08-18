@@ -16,13 +16,18 @@
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
 }
- 
+
 body {
   background: var(--mainWhite);
   font-family: trebuchet-ms, Tahoma, sans-serif !important;
 }
 
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: trebuchet-ms, Tahoma, sans-serif !important;
   color: #545871 !important;
   font-weight: bolder;
@@ -41,22 +46,21 @@ input::placeholder {
   opacity: 0.4;
 }
 
-
- .loader {
+.loader {
   position: fixed;
   top: 50%;
   left: 50%;
-} 
+}
 
 .text-link {
   color: inherit !important;
   text-decoration: inherit !important;
 }
 
-#navItems{
-color: #707070;
-font-weight: bolder !important;
-opacity: 1;
+#navItems {
+  color: #707070;
+  font-weight: bolder !important;
+  opacity: 1;
 }
 Nav.Link {
   color: var(--mainText);
@@ -78,7 +82,6 @@ Nav.Link {
   background: var(--mainWhite);
   padding: 3rem;
   text-align: center;
-
 }
 .banner h1 {
   font-size: 2.5rem;
@@ -87,7 +90,6 @@ Nav.Link {
   border-radius: 1.25rem;
   text-decoration: none;
 }
-
 
 @media screen and (min-width: 576px) {
   .banner {
@@ -105,11 +107,11 @@ Nav.Link {
     font-size: 4rem;
   }
 }
-.card-row{
+.card-row {
   margin-top: 25px;
   margin-bottom: 25px;
 }
-#myCard > .card{
+#myCard > .card {
   min-height: 350px !important;
 }
 .cardTitle > h4 {
@@ -129,33 +131,31 @@ Nav.Link {
 
 /*****Why SabiGift******/
 .img-fluid {
-  max-width: 100%; 
+  max-width: 100%;
   height: auto;
   opacity: 0.85;
- 
 }
 .why {
   opacity: 1;
   padding: 80px;
-  height:auto;
+  height: auto;
   margin-top: 10%;
 }
 
 /*****HOW IT WORKS SECTION***********/
-#active{
-  background-color:var(--primaryColor)
+#active {
+  background-color: var(--primaryColor);
 }
-.stepIcon{
-  align-self:center;
-  background: #F7ECEB;
-
+.stepIcon {
+  align-self: center;
+  background: #f7eceb;
 }
 .stepOutline {
   flex-direction: row;
   margin-top: 15px;
   background: #ffffff;
   border: 1px solid #e6dbda;
-   padding: 10px; 
+  padding: 10px;
   opacity: 1;
   max-height: 150px;
   cursor: pointer;
@@ -167,28 +167,25 @@ Nav.Link {
   font-size: large;
 }
 
-.stepTag{
+.stepTag {
   font-weight: bold;
   border-left: 1px solid #e6dbda;
 
   padding: 20px;
- font-size: large;
+  font-size: large;
 }
-
 
 /*****FIND REGISTRY*********/
 .leftside {
   opacity: 1;
   /* min-height: 100vh; */
-  background-color:var(--primaryColor) ;
-
+  background-color: var(--primaryColor);
 }
 
-
 .homeicon {
- width: 70px;
- justify-content: center;
- margin-bottom: 30px;
+  width: 70px;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 /*******Date Picker ********/
 
@@ -200,22 +197,22 @@ Nav.Link {
   background: #707070;
 }
 
-.registryBtn{
-  margin-left: 35px!important;
+.registryBtn {
+  margin-left: 35px !important;
 }
 
-.rightside{
-  background:#E2F3E1 ;
+.rightside {
+  background: #e2f3e1;
   /* width: 100%; */
   /* height: 100vh; */
   opacity: 1;
-  color: #888888 ;
+  color: #888888;
 }
 
 .rightSide {
-  background: #E2F3E1;
+  background: #e2f3e1;
   opacity: 1;
-  color: #888888 ;
+  color: #888888;
   /* padding-left: 30px; */
 }
 
@@ -225,149 +222,148 @@ Nav.Link {
   margin-top: 10px;
   margin-left: 15px;
 }
-.eventType{
+.eventType {
   height: 145px;
-  background: #F7F7F7 ;
-  
-  
+  background: #f7f7f7;
 }
-div.eventItem:hover, div.eventItem:active {
-  background: #FFFFFF;
+div.eventItem:hover,
+div.eventItem:active {
+  background: #ffffff;
 }
 
-.eventItem{
-  background:#F7F7F7;
+.eventItem {
+  background: #f7f7f7;
   padding: 20px;
   /* width: 145px; */
   /* height: 140px; */
-  box-shadow: 0px 2px 5px #0000000F;
-  border: 1px solid #DDDDDD;
+  box-shadow: 0px 2px 5px #0000000f;
+  border: 1px solid #dddddd;
+  border-radius: 5px 0px 0px 4px;
+  opacity: 1;
+}
+.selectItem {
+  background: #f7f7f7;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #222222;
+  box-shadow: 0px 2px 5px #0000000f;
+  border: 1px solid #dddddd;
   border-radius: 5px 0px 0px 4px;
   opacity: 1;
 }
 
-.btnBack{
-  color: #AAAAAA;
+.btnBack {
+  color: #aaaaaa;
 }
 
 /****SignUp****/
 .leftSignUp {
-background: url('./images/landing/birthday@2x.png') center/cover no-repeat;
+  background: url("./images/landing/birthday@2x.png") center/cover no-repeat;
 }
 
- .ant-steps-item-title, .ant-steps-item-description {
+.ant-steps-item-title,
+.ant-steps-item-description {
   color: white !important;
 }
 
-
-
-
-
 /*************Dashoard Navigation sabiGift Store***********/
-.sidebarMenu{
+.sidebarMenu {
   display: block;
- height: 800px;
- background-color: #F9F9F9;
-border-radius: 64px;
-opacity: 1;
+  height: 800px;
+  background-color: #f9f9f9;
+  border-radius: 64px;
+  opacity: 1;
 }
-Link.active:active{
-  color : rgb(0, 162, 255)
+Link.active:active {
+  color: rgb(0, 162, 255);
 }
 
-.cashGift{
-  padding: '25px';
+.cashGift {
+  padding: "25px";
   color: #222222;
-  border: 1px solid #CBCBCB;
+  border: 1px solid #cbcbcb;
   border-radius: 5px;
   opacity: 1;
 }
 
-.giftReceived{
+.giftReceived {
   box-shadow: 0px 15px 30px #00000017;
   color: #222222;
-  border: 1px solid #CBCBCB;
+  border: 1px solid #cbcbcb;
   border-radius: 5px;
   opacity: 1;
 }
 
-
-.backgrndImg{
-  background: url('./images/landing/Group\ 3351.svg');
+.backgrndImg {
+  background: url("./images/landing/Group\ 3351.svg");
 }
 
-.stepsCard{
-  background: transparent url('images/Sabi-storepage/Gift.svg');
-  background-position: center; 
+.stepsCard {
+  background: transparent url("images/Sabi-storepage/Gift.svg");
+  background-position: center;
   background-repeat: no-repeat;
   opacity: 1;
   height: 125px;
-
 }
-.stepsCard2{
-  background: transparent url('images/Sabi-storepage/couple2.svg');
-  background-position: center; 
+.stepsCard2 {
+  background: transparent url("images/Sabi-storepage/couple2.svg");
+  background-position: center;
   background-repeat: no-repeat;
   opacity: 1;
   height: 125px;
-
 }
-.stepsCard3{
-  background: transparent url('images/Sabi-storepage/drinks.svg');
-  background-position: center; 
+.stepsCard3 {
+  background: transparent url("images/Sabi-storepage/drinks.svg");
+  background-position: center;
   background-repeat: no-repeat;
   opacity: 1;
   height: 125px;
-
 }
-.stepsCard4{
-  background: transparent url('images/Sabi-storepage/businessFinance.svg');
-  background-position: center; 
+.stepsCard4 {
+  background: transparent url("images/Sabi-storepage/businessFinance.svg");
+  background-position: center;
   background-repeat: no-repeat;
   opacity: 1;
   height: 125px;
-
 }
-.stepsCard5{
-  background: transparent url('images/Sabi-storepage/monitor.svg');
-  background-position: center; 
+.stepsCard5 {
+  background: transparent url("images/Sabi-storepage/monitor.svg");
+  background-position: center;
   background-repeat: no-repeat;
   opacity: 1;
   height: 125px;
-
 }
-.cardFooter{
+.cardFooter {
   opacity: 1;
   border-top: 0px !important;
-  background: #FFFFFF !important;
+  background: #ffffff !important;
 }
-.availableItem{
-  
+.availableItem {
   box-shadow: 0px 2px 8px #00000022;
-border-radius: 8px;
+  border-radius: 8px;
 }
-.productCards{
-    box-shadow: 0px 2px 8px #00000022;
-    border-radius: 8px;
-    width:  18rem;
-    min-height: 10rem;
-    padding-left : 0px !important;
-    padding-right : 0px !important;
-    box-shadow: 0px 1px 8px #00000022;
-    border-radius: 8px;
-    opacity: 1;
-    overflow: hidden;
+.productCards {
+  box-shadow: 0px 2px 8px #00000022;
+  border-radius: 8px;
+  width: 18rem;
+  min-height: 10rem;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  box-shadow: 0px 1px 8px #00000022;
+  border-radius: 8px;
+  opacity: 1;
+  overflow: hidden;
 }
-#myCards{
-  box-shadow: 0px 15px 45px #D0D0D069;
-border: 1px solid #EFF0F0;
-border-radius: 20px;
-opacity: 1;
+#myCards {
+  box-shadow: 0px 15px 45px #d0d0d069;
+  border: 1px solid #eff0f0;
+  border-radius: 20px;
+  opacity: 1;
 }
 /************MANAGE REGISTRY *************/
-.manageReg{
-  background-image:  url('images/Sabi-storepage/manageReg.png');
-  background-position: center ;
+.manageReg {
+  background-image: url("images/Sabi-storepage/manageReg.png");
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -375,32 +371,32 @@ opacity: 1;
   object-fit: contain;
 }
 
-
 /* *********Event Type******** */
 
-.birthday{
+.birthday {
   /* border: 1px solid var(--mainText); */
-background: transparent url('images/Sabi-storepage/happy-birthday-in-different-languages.png');
-border-radius: 70px;
-display: flex;
+  background: transparent
+    url("images/Sabi-storepage/happy-birthday-in-different-languages.png");
+  border-radius: 70px;
+  display: flex;
   align-items: center;
   justify-content: center;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    object-fit: contain;
-    margin: auto;
-    opacity: 1;
-    height: 500px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: contain;
+  margin: auto;
+  opacity: 1;
+  height: 500px;
 }
 
 /*******************Checkout Form page **********************/
-.orderBtn{
-  background: #6F66F8;
-   width: 200px; 
-   color: #FFFFFF;
-   transition: 0.3s;
+.orderBtn {
+  background: #6f66f8;
+  width: 200px;
+  color: #ffffff;
+  transition: 0.3s;
 }
-.orderBtn:hover{
-  background-color:#130e5e;
+.orderBtn:hover {
+  background-color: #130e5e;
 }

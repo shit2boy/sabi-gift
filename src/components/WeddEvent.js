@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import { Steps,DatePicker } from "antd";
+import { Steps, DatePicker } from "antd";
 import { Form, Button, Col } from "react-bootstrap";
-import Login from '../pages/Login'
+import Login from "../pages/Login";
 
 import axios from "axios";
 import util from "../util/util";
-
 
 const { Step } = Steps;
 
 export default class getstarted extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       questions: [
         "Yay, we love weddings! \n First off ... what's your name?",
@@ -28,25 +27,50 @@ export default class getstarted extends Component {
       noOfGuests: 0,
       currentIndex: 0,
       formValue: "",
-      eventDate : '',
-      email : '',
-      password:'',
-      confirm :'',
-      message : '',
-      errorMessage : '',
-      signUpResponse:{successful:false},
-      isValidated : false
+      eventDate: "",
+      email: "",
+      password: "",
+      confirm: "",
+      eventType: "",
+      message: "",
+      errorMessage: "",
+      signUpResponse: { successful: false },
+      isValidated: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.dateChange = this.dateChange.bind(this);
+  }
 
+  componentDidMount() {
+    axios
+      .get(`${util.API_BASE_URL}event-types/`, {
+        "content-type": "multipart/form-data",
+      })
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data !== undefined) {
+          let data = res.data;
+          let eventtype;
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].name === "Wedding") {
+              eventtype = data[i].id;
+            }
+          }
+          this.setState({ eventType: eventtype });
+        }
+        console.log(this.state.eventType);
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
   }
+
   handleChange(e) {
-    this.setState({ [e.target.name] : e.target.value});
+    this.setState({ [e.target.name]: e.target.value });
   }
-   dateChange(date, dateString) {
-    this.setState({eventDate: dateString});
+  dateChange(date, dateString) {
+    this.setState({ eventDate: dateString });
     // console.log(date, dateString);
   }
 
@@ -58,7 +82,7 @@ export default class getstarted extends Component {
     let currentIndex = this.state.currentIndex;
 
     if (this.state.currentIndex > 3) {
-      this.setState({ currentIndex: currentIndex + 1});
+      this.setState({ currentIndex: currentIndex + 1 });
       return;
     }
 
@@ -89,44 +113,45 @@ export default class getstarted extends Component {
       this.setState({ formValue: formValue });
       // console.log(this.state.formValue);
     }
-
   };
 
   handleSubmit(event) {
     event.preventDefault();
     const newUserInfo = new FormData();
-    newUserInfo.append('first_name', this.state.answers[0]);
-    newUserInfo.append('email', this.state.email);
-    newUserInfo.append('password', this.state.password);
-    newUserInfo.append('event_type', 'wedding');
-    newUserInfo.append('event_date', this.state.eventDate);
-    newUserInfo.append('no_of_guest', this.state.answers[3]);
-    newUserInfo.append('spouse_name', this.state.answers[1]);
-    newUserInfo.append('photo', '');
+    newUserInfo.append("first_name", this.state.answers[0]);
+    newUserInfo.append("email", this.state.email);
+    newUserInfo.append("password", this.state.password);
+    newUserInfo.append("event_type", 2);
+    newUserInfo.append("event_date", this.state.eventDate);
+    newUserInfo.append("no_guest", this.state.answers[3]);
+    newUserInfo.append("spouse_name", this.state.answers[1]);
+    newUserInfo.append("photo", "");
 
-    axios.post(`${util.API_BASE_URL}accounts/register/`, newUserInfo, 
-        { 'content-type': 'multipart/form-data' })
-      .then(response => {
-        if (response.status === 201 || response.status === 200){
-            console.log(response.statusText);
-            this.setState({
-              message : `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`})
-        }
-        
+    axios
+      .post(`${util.API_BASE_URL}accounts/register/`, newUserInfo, {
+        "content-type": "multipart/form-data",
       })
-      .catch(error => {
-          // console.dir( error);
-          if ( error.response.data.Error !== undefined) {
-            this.setState({errorMessage: error.response.data.Error});  
-          } else{
-            this.setState({errorMessage: error.response.data.password});  
-            
-          }
+      .then((response) => {
+        if (response.status === 201 || response.status === 200) {
+          console.log(response.statusText);
+          this.setState({
+            message: `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`,
+          });
+          window.location.href = "/updateprofile";
+        }
+      })
+      .catch((error) => {
+        console.dir(error);
+        if (error.response.data.Error !== undefined) {
+          this.setState({ errorMessage: error.response.data.Error });
+        } else {
+          this.setState({ errorMessage: error.response.data.password });
+        }
 
-          // console.log(error.response.data.Error);
-          // console.log(error.response.data.password);
-        });
-      }
+        // console.log(error.response.data.Error);
+        // console.log(error.response.data.password);
+      });
+  }
 
   render() {
     return (
@@ -135,7 +160,11 @@ export default class getstarted extends Component {
           <div className="row">
             <div
               className="col-4 d-none d-lg-flex align-items-center justify-content-center"
-              style={{ background: "rgb(114, 10, 10)", height: "100vh",opacity:'1' }}
+              style={{
+                background: "rgb(114, 10, 10)",
+                height: "100vh",
+                opacity: "1",
+              }}
             >
               <div className="mt-5">
                 <Link className="" to="/">
@@ -149,7 +178,7 @@ export default class getstarted extends Component {
                 <div>
                   <h4 className="text-white">WHY OUR SERVICES?</h4>
                 </div>
-                <Steps className="text-white" direction="vertical" current={1}>
+                <Steps className="text-white" direction="vertical">
                   <Step
                     color=" white"
                     title="Lorem ipsum lorem ipsum"
@@ -185,8 +214,10 @@ export default class getstarted extends Component {
               >
                 {this.state.currentIndex === 2 && (
                   <div>
-                    {("Hey " +
-                      this.state.answers[0] + " " +
+                    {(
+                      "Hey " +
+                      this.state.answers[0] +
+                      " " +
                       "and " +
                       this.state.answers[1] +
                       this.state.questions[2]
@@ -197,7 +228,7 @@ export default class getstarted extends Component {
                       ))}
                     <div className="mt-4">
                       <form>
-                        <DatePicker onChange={this.dateChange}/>
+                        <DatePicker onChange={this.dateChange} />
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
@@ -237,7 +268,8 @@ export default class getstarted extends Component {
                           type="text"
                           value={this.state.formValue}
                           onChange={(e) =>
-                            this.setState({ formValue: e.target.value })}
+                            this.setState({ formValue: e.target.value })
+                          }
                           placeholder="Enter Name"
                           required
                         />
@@ -280,7 +312,8 @@ export default class getstarted extends Component {
                           type="text"
                           value={this.state.formValue}
                           onChange={(e) =>
-                            this.setState({ formValue: e.target.value })}
+                            this.setState({ formValue: e.target.value })
+                          }
                           placeholder="Enter Number of Guest"
                           required
                         />
@@ -321,9 +354,9 @@ export default class getstarted extends Component {
                         <Form.Group as={Col} controlId="formEmail">
                           <Form.Label>Email Address</Form.Label>
                           <Form.Control
-                            name='email'
+                            name="email"
                             type="email"
-                          onChange={this.handleChange}
+                            onChange={this.handleChange}
                             placeholder="Enter Email Address"
                             required
                           />
@@ -336,9 +369,12 @@ export default class getstarted extends Component {
                         <Form.Group as={Col} controlId="formGridPassword">
                           <Form.Label>Password</Form.Label>
                           <Form.Control
-                            name='password'
-                          onChange={this.handleChange}
-                          type="password" required placeholder="*******" />
+                            name="password"
+                            onChange={this.handleChange}
+                            type="password"
+                            required
+                            placeholder="*******"
+                          />
                           <Form.Control.Feedback type="invalid">
                             Empty
                           </Form.Control.Feedback>
@@ -349,7 +385,7 @@ export default class getstarted extends Component {
                             Empty
                           </Form.Control.Feedback>
                           <Form.Control
-                            name='confirm'
+                            name="confirm"
                             onChange={this.handleChange}
                             type="password"
                             placeholder="*********"
@@ -364,8 +400,16 @@ export default class getstarted extends Component {
                           required
                         />
                       </Form.Group>
-                      { this.state.errorMessage && !this.state.message && <p style={{color:'red',textAlign :'center'}}>{ this.state.errorMessage } </p> }
-                      { this.state.message && <p style={{color:'green',textAlign :'center'}}>{ this.state.message } </p> }
+                      {this.state.errorMessage && !this.state.message && (
+                        <p style={{ color: "red", textAlign: "center" }}>
+                          {this.state.errorMessage}{" "}
+                        </p>
+                      )}
+                      {this.state.message && (
+                        <p style={{ color: "green", textAlign: "center" }}>
+                          {this.state.message}{" "}
+                        </p>
+                      )}
                     </Form>
                   </div>
                 )}
@@ -387,7 +431,10 @@ export default class getstarted extends Component {
                 )}
                 {this.state.currentIndex === 4 && (
                   <div className=" d-flex justify-content-around">
-                     <p>Already a member?<Login signup={<span>Log in</span>}/></p>
+                    <p>
+                      Already a member?
+                      <Login signup={<span>Log in</span>} />
+                    </p>
                     <Button
                       type="submit"
                       onClick={this.handleSubmit}

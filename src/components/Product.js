@@ -86,14 +86,14 @@ export class Product extends Component {
                             <small>{item.description}</small>
                         </Card.Body>
                         <div></div>
-                        {!this.props.showWishList && <div className='col p-0 mb-0'>
+                        {this.props.showWishList && <div className='col p-0 mb-0'>
                             <span type='button' className='col-6 p-2'style={{background:'#ededed',color :'#2c2c2c'}}><GrFavorite/> Wishlist</span>
                             <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='col-6 p-2'style={{background:'#6F64F8',color : '#FFFFFF',borderBottomRightRadius:'8px'}}>Add to cart</span>}/>
                     </div> }
                         
-                        {this.props.showWishList && <div className=' col p-0 mb-0'>
-                            <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-2 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/>
-                            <small type='button' className='col-6 p-1'style={{background:'#ededed',color :'#2c2c2c'}}>Remove from cart</small>
+                        {!this.props.showWishList && <div className=' col p-0 mb-0'>
+                            <small type='button' className='col p-2 text-center'style={{background:'#ededed',color :'#2c2c2c'}}>Remove from cart</small>
+                            {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
                             
                             
                         </div> }

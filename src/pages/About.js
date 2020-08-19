@@ -208,13 +208,10 @@ export class About extends Component {
     this.setState({ currentIndex: this.state.currentIndex + 1 });
   };
   render() {
-    const selctedStyle = {
-      containerStyle: {
-        border: "1px solid",
-        backgroundColor: "#707070",
-      },
+    const containerStyle = {
+      border: "1px solid",
+      backgroundColor: "#ffffff",
     };
-    const { containerStyle } = selctedStyle;
     const unmarkedStyle = {
       backgroundColor: "#f7f7f7",
     };

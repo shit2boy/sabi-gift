@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import util from "../util/util";
-import Login from "../pages/Login";
+// import Login from "../pages/Login";
+import Home from "./Home";
 
 export default class ActivateAcoount extends Component {
   constructor() {
@@ -63,8 +64,10 @@ export default class ActivateAcoount extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row justify-content-center mt-5">
+      <>
+        <Home />
+        {/* <div className="container"> */}
+        {/* <div className="row justify-content-center mt-5">
           <div className="col-lg-10 col-sm">
             <h4 className="p-2 text-center">
               Please verify your account to continue
@@ -119,8 +122,9 @@ export default class ActivateAcoount extends Component {
               />
             </Form>
           </div>
-        </div>
-      </div>
+        </div> */}
+        {/* </div> */}
+      </>
     );
   }
 }

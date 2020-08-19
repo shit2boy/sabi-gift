@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import util from "../util/util";
+import Login from "../pages/Login";
 
 export default class ActivateAcoount extends Component {
   constructor() {

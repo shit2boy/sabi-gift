@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
 import { Form, Col } from "react-bootstrap";
-import bmw from "../images/landing/bmw.png";
+// import bmw from "../images/landing/bmw.png";
 import { Steps } from "antd";
 import { StateContext } from "../Context";
 import axios from "axios";
@@ -24,6 +24,7 @@ export class About extends Component {
       isLoggedIn: false,
       errorMessage: "",
       border: " ",
+      selected: [],
       backgroundColor: "",
       bestSellingItems: [],
       selectedRegistryType: [],
@@ -48,10 +49,19 @@ export class About extends Component {
     console.log(this.state.selectedGiftType);
   };
   handleSelectOpt = (e) => {
-    this.setState({
-      backgroundColor: e.target.id,
-      border: "1px black solid",
-    });
+    var selectedArrr = this.state.selected;
+    if (this.state.selected.indexOf(e.target.id) === -1) {
+      selectedArrr.push(e.target.id);
+      this.setState({ selected: selectedArrr });
+    } else {
+      selectedArrr.splice(this.state.selected.indexOf(e.target.id), 1);
+      this.setState({ selected: selectedArrr });
+    }
+    // this.setState({
+    //   backgroundColor: "#ddd",
+    //   border: "1px black solid",
+    // });
+    console.log(this.state.selected);
   };
 
   validateForm = () => {
@@ -153,14 +163,14 @@ export class About extends Component {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.status === 200) {
           let data = response.data;
 
+          for (let i = 0; i < data.length; i++) {
+            data[i].picture = data[i].picture.replace("image/upload/", "");
+          }
           this.setState({ bestSellingItems: data });
-          // for (let i = 0; i < data.length; i++) {
-          //   data[i].image = data[i].image.replace("image/upload/", "");
-          // }
         }
       })
       .catch((error) => {
@@ -200,11 +210,14 @@ export class About extends Component {
   render() {
     const selctedStyle = {
       containerStyle: {
-        // border: this.state.border,
-        backgroundColor: this.state.backgroundColor,
+        border: "1px solid",
+        backgroundColor: "#707070",
       },
     };
     const { containerStyle } = selctedStyle;
+    const unmarkedStyle = {
+      backgroundColor: "#f7f7f7",
+    };
     return (
       <div className="container-fluid">
         <div className="row">
@@ -442,18 +455,32 @@ export class About extends Component {
                     </h2>
 
                     <p className="py-4">Select as many as you want</p>
-                    <div className="row col-10 mb-2">
+                    <div
+                      className="row col-10 mb-2"
+                      // onClick={this.handleSelectOpt}
+                    >
                       {this.state.registryCategories.map((category) => (
                         <div
+                          id={"ddd" + category.id}
                           key={category.id}
-                          id="#ddd"
-                          style={{ containerStyle }}
+                          style={
+                            this.state.selected.indexOf("ddd" + category.id) >
+                            -1
+                              ? containerStyle
+                              : unmarkedStyle
+                          }
                           className="eventItem col-lg-3"
-                          onClick={this.handleSelectOpt}
+                          // onClick={this.handleSelectOpt}
                         >
                           <p></p>
                           {/* <div className='text-center'><img src={category.image} alt='weddingIcon' /> </div> */}
-                          <p className="text-center">{category.name}</p>
+                          <p
+                            id={"ddd" + category.id}
+                            onClick={this.handleSelectOpt}
+                            className="text-center"
+                          >
+                            {category.name}
+                          </p>
                         </div>
                       ))}
                     </div>
@@ -523,12 +550,12 @@ export class About extends Component {
                   <div className="row col-10 mb-2">
                     {this.state.bestSellingItems.map((item) => (
                       <div className="eventItem col-lg-3 text-center">
-                        <img src={bmw} width="80px" alt="weddingIcon" />
+                        <img src={item.picture} width="100px" alt={item.slug} />
                         <strong className="d-block text-dark">
                           {item.slug}
                         </strong>
-                        <small className="d-block">Description of gift</small>
-                        <strong className="text-white">#{item.price}</strong>
+                        {/* <small className="d-block">Description of gift</small> */}
+                        <strong className="">#{item.price}</strong>
                       </div>
                       // <div className="eventItem col-lg-3 text-center">
                       //   <img src={bmw} width="80px" alt="weddingIcon" />

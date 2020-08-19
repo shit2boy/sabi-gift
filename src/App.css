@@ -226,8 +226,7 @@ Nav.Link {
   height: 145px;
   background: #f7f7f7;
 }
-div.eventItem:hover,
-div.eventItem:active {
+div.eventItem:hover {
   background: #ffffff;
 }
 

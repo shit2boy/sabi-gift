@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card, Modal } from "react-bootstrap";
+import add from "../images/Sabi-storepage/Addicon.jpg";
 import axios from "axios";
 import util from "../util/util";
 
@@ -20,12 +21,12 @@ export default class AddCategory extends Component {
 
   componentDidMount() {
     axios
-      .get(`${util.API_BASE_URL}registries/`, {
+      .get(`${util.API_BASE_URL}categories/`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
 
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data;
 
@@ -39,7 +40,7 @@ export default class AddCategory extends Component {
 
           // }
           for (let i = 0; i < data.length; i++) {
-            data[i].picture = data[i].picture.replace("image/upload/", "");
+            // data[i].picture = data[i].picture.replace("image/upload/", "");
             this.setState({ itemCategories: data });
           }
         }
@@ -84,8 +85,9 @@ export default class AddCategory extends Component {
                           className="center rounded-circle"
                           alt="items"
                           width="50px"
-                          src={item.picture}
+                          src={add}
                         />
+                        <small className="text-center">{item.name}</small>
                       </Card.Body>
                     </Card>
                   </div>

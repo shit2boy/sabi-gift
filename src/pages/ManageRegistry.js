@@ -4,22 +4,18 @@ import { Card } from "react-bootstrap";
 import DashboardNav from "../components/DashboardNav";
 import kitchen from "../images/Sabi-storepage/kitchen.png";
 import CheckList from "../components/AddcheckList";
-import { manageRegistry } from "../components/imageData";
+// import { manageRegistry } from "../components/imageData";
 // import AddCategory from '../components/AddCategory'
-import add from "../images/Sabi-storepage/Addicon.jpg";
+// import add from "../images/Sabi-storepage/Addicon.jpg";
 import axios from "axios";
 import util from "../util/util";
 
-//  let event_date =
-// let eventDaysLeft = new Date("June 30, 2035").getTime() - new Date().getTime();    //Future date - current date
-// let daysTill30June2035 = Math.floor(msDiff / (1000 * 60 * 60 * 24));
-// console.log(daysTill30June2035);
-
 export class ManageRegistry extends Component {
   state = {
-    itemCategories: [],
+    registryItem: [],
     spouseName: "",
     dayLeftToEvent: "",
+    itemCategory: [],
   };
 
   componentDidMount() {
@@ -55,6 +51,32 @@ export class ManageRegistry extends Component {
       });
 
     axios
+      .get(`${util.API_BASE_URL}categories/`, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+
+      .then((response) => {
+        // console.log(res.data);
+        if (response.data !== undefined) {
+          let data = response.data;
+          //   let category = [];
+
+          //   for (let i = 0; i < data.length; i++) {
+          //     data[i].picture = data[i].picture.replace("image/upload/", "");
+          //     if (data[i].cat === "Cooking") {
+          //       category.push(data[i].picture);
+          //     }
+          //   }
+
+          this.setState({ itemCategory: data });
+          //   console.log(this.state.itemCategory);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios
       .get(`${util.API_BASE_URL}registries/`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
@@ -72,8 +94,8 @@ export class ManageRegistry extends Component {
             }
           }
 
-          this.setState({ itemCategories: category });
-          // console.log(this.state.itemCategories);
+          this.setState({ registryItem: res.data });
+          // console.log(this.state.registryItem);
         }
       })
       .catch((err) => {
@@ -105,7 +127,8 @@ export class ManageRegistry extends Component {
               >
                 <h6 className="py-2">YOUR REGISTRY URL</h6>
                 <p contentEditable="false">
-                  www.sabigifts.ng/registry/{window.localStorage.name}2020
+                  https://sabigift.netlify.app/registry/
+                  {window.localStorage.name}2020
                 </p>
               </div>
 
@@ -140,68 +163,72 @@ export class ManageRegistry extends Component {
             </div>
 
             <h5 className="mt-4">Add items to your registry</h5>
-            <div className="row" style={{ marginTop: "40px" }}>
-              <div className="col-sm-2">
-                <Card
-                  id=""
+            {this.state.itemCategory.map((category, index) => (
+              <div key={index} className="row" style={{ marginTop: "40px" }}>
+                <div className="col-sm-2">
+                  <Card
+                    id=""
+                    style={{
+                      width: "8rem",
+                      borderRadius: "25px",
+                      background: "#6668A3",
+                      boxShadow: "0px 30px 60px #BA2F4F41",
+                    }}
+                  >
+                    <Card.Body>
+                      <Card.Img
+                        className="center rounded-circle"
+                        alt="items"
+                        src={kitchen}
+                        width="60px"
+                      />
+                    </Card.Body>
+                    <Card.Text className="text-center">
+                      <small className="p-1">{category.name} Essentials</small>
+                      <strong className="d-block p-1">10</strong>
+                    </Card.Text>
+                  </Card>
+                </div>
+                <div
+                  className="col mb-5"
                   style={{
-                    width: "8rem",
+                    border: "1px solid #CBCBCB",
                     borderRadius: "25px",
-                    background: "#6668A3",
-                    boxShadow: "0px 30px 60px #BA2F4F41",
+                    opacity: "1",
                   }}
                 >
-                  <Card.Body>
-                    <Card.Img
-                      className="center rounded-circle"
-                      alt="items"
-                      src={kitchen}
-                      width="60px"
-                    />
-                  </Card.Body>
-                  <Card.Text className="text-center">
-                    <small className="p-1">kitchen Essentials</small>
-                    <strong className="d-block p-1">10</strong>
-                  </Card.Text>
-                </Card>
-              </div>
-              <div
-                className="col mb-5"
-                style={{
-                  border: "1px solid #CBCBCB",
-                  borderRadius: "25px",
-                  opacity: "1",
-                }}
-              >
-                <div className="row">
-                  {this.state.itemCategories.map((item, index) => (
-                    <div className="m-3">
-                      <Card
-                        id="myCards"
-                        key={index}
-                        style={{
-                          width: "8rem",
-                          cursor: "pointer",
-                          border: "1px dotted",
-                        }}
-                      >
-                        <Card.Body className="">
-                          <Card.Img
-                            className="center rounded-circle"
-                            alt="items"
-                            width="40px"
-                            src={add}
-                          />
-                          {/* <Card.Img className="center rounded-circle" alt="items" width='40px' src={item} /> */}
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  ))}
+                  <div className="row">
+                    {this.state.registryItem.map((item, index) => (
+                      <div className="m-3">
+                        <Card
+                          id="myCards"
+                          key={index}
+                          style={{
+                            width: "8rem",
+                            cursor: "pointer",
+                            border: "1px dotted",
+                          }}
+                        >
+                          <Card.Body className="">
+                            {item.id === category.id && (
+                              <Card.Img
+                                className="center rounded-circle"
+                                alt="items"
+                                width="40px"
+                                src={item.picture}
+                              />
+                            )}
+                            {/* <Card.Img className="center rounded-circle" alt="items" width='40px' src={item} /> */}
+                          </Card.Body>
+                        </Card>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
 
-            <div className="row" style={{ marginTop: "40px" }}>
+            {/* <div className="row" style={{ marginTop: "40px" }}>
               <div className="col-sm-2">
                 <Card
                   id=""
@@ -259,8 +286,8 @@ export class ManageRegistry extends Component {
                   ))}
                 </div>
               </div>
-            </div>
-            <div className="row" style={{ marginTop: "40px" }}>
+            </div> */}
+            {/* <div className="row" style={{ marginTop: "40px" }}>
               <div className="col-sm-2">
                 <Card
                   id=""
@@ -318,7 +345,7 @@ export class ManageRegistry extends Component {
                   ))}
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -128,16 +128,12 @@ export default class getstarted extends Component {
         "content-type": "multipart/form-data",
       })
       .then((response) => {
-        console.log(response.data["Registration Successful"].token);
+        // console.log(response.data["Registration Successful"].token);
         if (response.status === 200 || response.status === 201) {
-          // window.localStorage.setItem("token_id", response.data.data Registration Successful.token);
           window.localStorage.setItem(
             "token_id",
             response.data["Registration Successful"].token
           );
-          // window.localStorage.setItem("username", response.data.email);
-          window.localStorage.setItem("username", response.data.spouse_name);
-          // console.log(response.statusText);
           this.setState({
             message: `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`,
           });

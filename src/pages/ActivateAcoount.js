@@ -28,20 +28,19 @@ export default class ActivateAcoount extends Component {
         {
           headers: {
             "Content-Type": "application/json",
-          }
+          },
         }
       )
       .then((data) => {
         if (data.status === 200) {
           window.localStorage.setItem("token_id", data.data.token);
           window.localStorage.setItem("username", data.data.email);
-          window.location.href = "/updateprofile";
+          window.location.href = "/login";
         }
       })
       .catch((error) => {
         console.log(error);
-        if (error.status === 400)
-         window.location.href = "/";
+        if (error.status === 400) window.location.href = "/";
       });
   }
 
@@ -77,6 +76,7 @@ export default class ActivateAcoount extends Component {
                   name="email"
                   value={this.state.user_id}
                   readOnly
+                  hidden
                   placeholder="Enter user Id"
                   required
                 />
@@ -87,6 +87,7 @@ export default class ActivateAcoount extends Component {
                 <Form.Control
                   type="text"
                   name="password"
+                  hidden
                   value={this.state.timestamp}
                   readOnly
                   placeholder="Timestamp"
@@ -98,18 +99,23 @@ export default class ActivateAcoount extends Component {
                   type="text"
                   name="signature"
                   readOnly
+                  hidden
                   value={this.state.signature}
                   placeholder="Signature"
                 />
               </Form.Group>
-              <Button
-                className="w-100"
-                variant="success"
-                type="submit"
-                style={{ background: "#58B852", color: "#ffffff" }}
-              >
-                Verify me
-              </Button>
+              <Login
+                signup={
+                  <Button
+                    className="w-100 mt-5"
+                    variant="success"
+                    type="submit"
+                    style={{ background: "#58B852", color: "#ffffff" }}
+                  >
+                    Log in
+                  </Button>
+                }
+              />
             </Form>
           </div>
         </div>

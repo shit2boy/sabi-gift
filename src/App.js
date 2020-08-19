@@ -16,7 +16,7 @@ import getstarted from "./components/WeddEvent";
 import Login from "./pages/Login";
 import { ResetPassword } from "./components/ResetPassword";
 import AddToCart from "./components/AddToCart";
-import ActivateAcoount from "./pages/ActivateAcoount";
+// import ActivateAcoount from "./pages/ActivateAcoount";
 import Spinner from "react-bootstrap/Spinner";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -42,7 +42,7 @@ function App() {
             <Route path="/createRegistry" component={CreateRegistry} />
             <Route path="/registration" component={SignUp} />
             <Route path="/updateprofile" component={About} />
-            <Route path="/verification/" component={ActivateAcoount} />
+            <Route path="/verification/" component={Login} />
             <Route path="/checklist" component={RegistryChecklist} />
             <Route path="/manageregistry" component={ManageRegistry} />
             <Route path="/giftTracker" component={GiftTracker} />

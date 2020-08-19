@@ -25,6 +25,7 @@ export class About extends Component {
       errorMessage: "",
       border: " ",
       backgroundColor: "",
+      bestSellingItems: [],
       selectedRegistryType: [],
       registryCategories: [],
     };
@@ -40,7 +41,12 @@ export class About extends Component {
       formField,
     });
   }
-
+  handleSelectedGiftType = (e) => {
+    this.setState({
+      selectedGiftType: e.target.innerText,
+    });
+    console.log(this.state.selectedGiftType);
+  };
   handleSelectOpt = (e) => {
     this.setState({
       backgroundColor: e.target.id,
@@ -137,6 +143,24 @@ export class About extends Component {
             data[i].image = data[i].image.replace("image/upload/", "");
             this.setState({ registryType: data });
           }
+        }
+      })
+      .catch((error) => {
+        console.dir(error);
+      });
+    axios
+      .get(`${util.API_BASE_URL}registries/?best_selling=False`, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+      .then((response) => {
+        console.log(response.data);
+        if (response.status === 200) {
+          let data = response.data;
+
+          this.setState({ bestSellingItems: data });
+          // for (let i = 0; i < data.length; i++) {
+          //   data[i].image = data[i].image.replace("image/upload/", "");
+          // }
         }
       })
       .catch((error) => {
@@ -358,11 +382,7 @@ export class About extends Component {
                     <p className="py-4">Select the gift types</p>
                     <div className="col-10 row">
                       {this.state.registryType.map((type) => (
-                        <div
-                          key={type.id}
-                          onClick={this.next}
-                          className="eventItem col-lg-3"
-                        >
+                        <button key={type.id} className="eventItem col-lg-3">
                           <div className="text-center">
                             <img
                               src={type.image}
@@ -370,8 +390,13 @@ export class About extends Component {
                               width="80px"
                             />{" "}
                           </div>
-                          <p className="text-center mb-0">{type.name}</p>
-                        </div>
+                          <p
+                            onClick={this.handleSelectedGiftType}
+                            className="text-center mb-0"
+                          >
+                            {type.name}
+                          </p>
+                        </button>
                       ))}
                     </div>
                     <div className="p-3">
@@ -392,7 +417,10 @@ export class About extends Component {
                   >
                     Back
                   </button>
-                  <button className="btn btn-dark rounded-pill px-5">
+                  <button
+                    onClick={this.next}
+                    className="btn btn-dark rounded-pill px-5"
+                  >
                     Next
                   </button>
                   {/* </div> */}
@@ -419,9 +447,9 @@ export class About extends Component {
                         <div
                           key={category.id}
                           id="#ddd"
-                          style={containerStyle}
+                          style={{ containerStyle }}
                           className="eventItem col-lg-3"
-                          // onClick={this.handleSelectOpt}
+                          onClick={this.handleSelectOpt}
                         >
                           <p></p>
                           {/* <div className='text-center'><img src={category.image} alt='weddingIcon' /> </div> */}
@@ -493,19 +521,24 @@ export class About extends Component {
                   <h2 id="header">Try adding few gifts </h2>
                   <p>you can't go wrong with this best sellers</p>
                   <div className="row col-10 mb-2">
-                    <div className="eventItem col-lg-3 bg-success text-center">
-                      <img src={bmw} width="80px" alt="weddingIcon" />
-                      <strong className="d-block text-dark">Car</strong>
-                      <small className="d-block">Description of gift</small>
-                      <strong className="text-white">#200k</strong>
-                    </div>
-                    <div className="eventItem col-lg-3 text-center">
-                      <img src={bmw} width="80px" alt="weddingIcon" />
-                      <strong className="d-block">Option 2</strong>
-                      <small className="d-block">Description of gift</small>
-                      <strong>#200k</strong>
-                    </div>
-                    <div className="eventItem col-lg-3 text-center">
+                    {this.state.bestSellingItems.map((item) => (
+                      <div className="eventItem col-lg-3 text-center">
+                        <img src={bmw} width="80px" alt="weddingIcon" />
+                        <strong className="d-block text-dark">
+                          {item.slug}
+                        </strong>
+                        <small className="d-block">Description of gift</small>
+                        <strong className="text-white">#{item.price}</strong>
+                      </div>
+                      // <div className="eventItem col-lg-3 text-center">
+                      //   <img src={bmw} width="80px" alt="weddingIcon" />
+                      //   <strong className="d-block">Option 2</strong>
+                      //   <small className="d-block">Description of gift</small>
+                      //   <strong>#200k</strong>
+                      // </div>
+                    ))}
+
+                    {/* <div className="eventItem col-lg-3 text-center">
                       <img src={bmw} width="80px" alt="weddingIcon" />
                       <strong className="d-block">Option 3</strong>
                       <small className="d-block">Description of gift</small>
@@ -516,9 +549,9 @@ export class About extends Component {
                       <strong className="d-block">Option 4</strong>
                       <small className="d-block">Description of gift</small>
                       <strong>#200k</strong>
-                    </div>
+                    </div> */}
                   </div>
-                  <div className="row col-10 mb-2">
+                  {/* <div className="row col-10 mb-2">
                     <div className="eventItem bg-success col-lg-3 text-center">
                       <img src={bmw} width="80px" alt="weddingIcon" />
                       <strong className="d-block text-dark">Car</strong>
@@ -543,8 +576,8 @@ export class About extends Component {
                       <small className="d-block">Description of gift</small>
                       <strong>#200k</strong>
                     </div>
-                  </div>
-                  <div className="row col-10 mb-2">
+                  </div> */}
+                  {/* <div className="row col-10 mb-2">
                     <div className="eventItem bg-success col-lg-3 text-center">
                       <img src={bmw} width="80px" alt="weddingIcon" />
                       <strong className="d-block text-dark">Car</strong>
@@ -567,9 +600,9 @@ export class About extends Component {
                       <img src={bmw} width="80px" alt="weddingIcon" />
                       <strong className="d-block">Option 4</strong>
                       <small className="d-block">Description of gift</small>
-                      <strong>#200k</strong>
+                      <strong>#200k</strong> 
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

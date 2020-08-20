@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import { Card, Modal } from "react-bootstrap";
 import add from "../images/Sabi-storepage/Addicon.jpg";
-import axios from "axios";
-import util from "../util/util";
+// import axios from "axios";
+// import util from "../util/util";
+import { StateContext } from "../Context";
 
 export default class AddCategory extends Component {
+  static contextType = StateContext;
   state = {
     modalShow: false,
     AddedCategory: "",
     itemCategories: [],
+    selectedCategory: [],
   };
 
   setModalHide = () => {
@@ -19,36 +22,48 @@ export default class AddCategory extends Component {
     this.setState({ modalShow: true });
   };
 
-  componentDidMount() {
-    axios
-      .get(`${util.API_BASE_URL}categories/`, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      })
+  addMoreCategoryToRegistry = (e) => {
+    let selectedArr = this.state.selectedCategory;
+    if (this.state.selectedCategory.indexOf(e.target.id) === -1) {
+      selectedArr.push(e.target.id);
+      this.setState({ selectedCategory: selectedArr });
+    } else {
+      selectedArr.splice(this.state.selectedCategory.indexOf(e.target.id), 1);
+      this.setState({ selectedCategory: selectedArr });
+    }
+    console.log(this.state.selectedCategory);
+  };
 
-      .then((res) => {
-        console.log(res.data);
-        if (res.data !== undefined) {
-          let data = res.data;
+  // componentDidMount() {
+  //   axios
+  //     .get(`${util.API_BASE_URL}categories/`, {
+  //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+  //     })
 
-          // for (let i=0;i<data.length;i++) {
-          // let category =[];
-          // if (data[i].cat ) {
+  //     .then((res) => {
+  // console.log(res.data);
+  // if (res.data !== undefined) {
+  // let data = res.data;
 
-          // }
+  // for (let i=0;i<data.length;i++) {
+  // let category =[];
+  // if (data[i].cat ) {
 
-          // this.setState({itemCategories : data});
+  // }
 
-          // }
-          for (let i = 0; i < data.length; i++) {
-            // data[i].picture = data[i].picture.replace("image/upload/", "");
-            this.setState({ itemCategories: data });
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  // this.setState({itemCategories : data});
+
+  // }
+  // for (let i = 0; i < data.length; i++) {
+  // data[i].picture = data[i].picture.replace("image/upload/", "");
+  //           this.setState({ itemCategories: data });
+  //         }
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   render() {
     return (
@@ -64,7 +79,7 @@ export default class AddCategory extends Component {
           onHide={() => this.setModalHide(false)}
         >
           <Modal.Header closeButton>
-            <p>Select Gift registry</p>
+            <p>Select registry category</p>
           </Modal.Header>
           <Modal.Body className=" ">
             <div className="container">
@@ -80,7 +95,11 @@ export default class AddCategory extends Component {
                         border: "1px dotted",
                       }}
                     >
-                      <Card.Body className="">
+                      <Card.Body
+                        onClick={this.addMoreCategoryToRegistry}
+                        className=""
+                        id={index}
+                      >
                         <Card.Img
                           className="center rounded-circle"
                           alt="items"

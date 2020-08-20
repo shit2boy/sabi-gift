@@ -63,7 +63,7 @@ export class CreateRegistry extends Component {
                       />
                     </Link>
                   </div>
-                  <Steps className="" direction="vertical" current={1}>
+                  <Steps className="" direction="vertical" current={0}>
                     <Step style={{ divor: " white" }} title="Select Event" />
                     <Step title="Event basics" />
                     <Step title="Select Gifts" />

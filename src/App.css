@@ -192,9 +192,33 @@ Nav.Link {
 .ant-picker {
   padding: 8px 20px;
 }
-
+.ant-steps-item-wait .ant-steps-item-icon > .ant-steps-icon {
+  display: none;
+}
+.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
+  color: #fff;
+  display: none;
+}
+.ant-steps-item-wait .ant-steps-item-icon {
+  border-color: #ffffff;
+}
 .ant-steps-item-process .ant-steps-item-icon {
+  border-color: #ffffff;
   background: #707070;
+}
+.anticon .anticon-check .ant-steps-finish-icon {
+  display: none;
+}
+.tail
+  + .ant-steps-vertical
+  > .ant-steps-item
+  > .ant-steps-item-container
+  > .ant-steps-item-tail {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  width: 1px;
+  height: 0%;
 }
 
 .registryBtn {
@@ -235,16 +259,6 @@ div.eventItem:hover {
   padding: 20px;
   /* width: 145px; */
   /* height: 140px; */
-  box-shadow: 0px 2px 5px #0000000f;
-  border: 1px solid #dddddd;
-  border-radius: 5px 0px 0px 4px;
-  opacity: 1;
-}
-.selectItem {
-  background: #f7f7f7;
-  padding: 20px;
-  background: #ffffff;
-  border: 1px solid #222222;
   box-shadow: 0px 2px 5px #0000000f;
   border: 1px solid #dddddd;
   border-radius: 5px 0px 0px 4px;

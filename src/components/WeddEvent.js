@@ -188,23 +188,27 @@ export default class getstarted extends Component {
                 </div>
                 <Steps className="text-white" direction="vertical">
                   <Step
-                    color=" white"
+                    className="tail mb-3"
                     title="Lorem ipsum lorem ipsum"
                     description="Lorem ipsum lorem sioe"
                   />
                   <Step
+                    className="tail mb-3"
                     title="Lorem ipsum lorem ipsum"
                     description="Lorem ipsum lorem sioe"
                   />
                   <Step
+                    className="tail mb-3"
                     title="Lorem ipsum lorem ipsum"
                     description="Lorem ipsum lorem sioe"
                   />
                   <Step
+                    className="tail mb-3"
                     title="Lorem ipsum lorem ipsum"
                     description="Lorem ipsum lorem sioe"
                   />
                   <Step
+                    className="tail mb-3"
                     title="Lorem ipsum lorem ipsum"
                     description="Lorem ipsum lorem sioe"
                   />

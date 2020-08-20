@@ -9,6 +9,7 @@ class ProductProvider extends Component {
     Cart: [],
     // eventType: "",
     registryCategory: [],
+    selected: [],
   };
   // handlerChange = (e)=> {
   //   let formField = this.state.formField;
@@ -20,11 +21,16 @@ class ProductProvider extends Component {
   // }
 
   // }
-  handleRegistryCategory = (e) => {
-    let selectedCategory = [];
-    // let type = this.state.registryCategory
-    this.setState({ registryCategory: selectedCategory });
-    // console.log(this.state.registryCategory)
+  handleSelectOpt = (e) => {
+    let selectedArrr = this.state.selected;
+    if (this.state.selected.indexOf(e.target.id) === -1) {
+      selectedArrr.push(e.target.id);
+      this.setState({ selected: selectedArrr });
+    } else {
+      selectedArrr.splice(this.state.selected.indexOf(e.target.id), 1);
+      this.setState({ selected: selectedArrr });
+    }
+    console.log(this.state.selected);
   };
   // handleEventType = (e) => {
   //   this.setState({ eventType: e.target.id });
@@ -37,31 +43,6 @@ class ProductProvider extends Component {
     return product;
   };
 
-  // handleItemDetails = (id) => {
-  //   const product = this.getItemId(id);
-  //   console.log(product);
-  //   this.setState(()=>{
-  //    console.log(product);
-  //   })
-  // }
-
-  // addToCart =(id)=>{
-  //   let tempProducts = [...this.state.products];
-  //   const index = tempProducts.indexOf(this.getItemId(id));
-  //   const product = tempProducts[index]
-  //   console.log(product);
-  // product.inCart =true;
-  // product.count = 1;
-  // const price = product.price;
-  // product.total = price;
-  //   this.setState(()=>{
-  //     return { products:tempProducts, cart : [...this.state.cart, product]};
-  //   },() =>{console.log(this.state)})
-
-  // }
-  // wishlist =()=>{
-  //   console.log('wishlist');
-  // }
   //   componentDidMount() {
   //     this.setProducts();
   //   }
@@ -81,7 +62,7 @@ class ProductProvider extends Component {
       <StateContext.Provider
         value={{
           ...this.state,
-
+          handleSelectOpt: this.handleSelectOpt,
           handleEventType: this.handleEventType,
           // addToCart : this.addToCart,
           // wishist : this.wishlist,

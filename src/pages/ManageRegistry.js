@@ -158,7 +158,7 @@ export class ManageRegistry extends Component {
             </div>
             <div className="mt-4 row">
               <div className="col">
-                <CheckList />
+                <CheckList itemCategorires={this.state.itemCategory} />
               </div>
             </div>
 
@@ -200,27 +200,28 @@ export class ManageRegistry extends Component {
                   <div className="row">
                     {this.state.registryItem.map((item, index) => (
                       <div className="m-3">
-                        <Card
-                          id="myCards"
-                          key={index}
-                          style={{
-                            width: "8rem",
-                            cursor: "pointer",
-                            border: "1px dotted",
-                          }}
-                        >
-                          <Card.Body className="">
-                            {item.id === category.id && (
+                        {item.cat === category.name && (
+                          <Card
+                            id="myCards"
+                            key={index}
+                            style={{
+                              width: "8rem",
+                              cursor: "pointer",
+                              border: "1px dotted",
+                            }}
+                          >
+                            <Card.Body className="">
                               <Card.Img
                                 className="center rounded-circle"
                                 alt="items"
                                 width="40px"
                                 src={item.picture}
                               />
-                            )}
-                            {/* <Card.Img className="center rounded-circle" alt="items" width='40px' src={item} /> */}
-                          </Card.Body>
-                        </Card>
+
+                              {/* <Card.Img className="center rounded-circle" alt="items" width='40px' src={item} /> */}
+                            </Card.Body>
+                          </Card>
+                        )}
                       </div>
                     ))}
                   </div>

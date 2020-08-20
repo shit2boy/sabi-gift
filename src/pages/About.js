@@ -25,6 +25,7 @@ export class About extends Component {
       errorMessage: "",
       border: " ",
       selected: [],
+      selectedgift: [],
       backgroundColor: "",
       bestSellingItems: [],
       selectedRegistryType: [],
@@ -48,20 +49,27 @@ export class About extends Component {
     });
     console.log(this.state.selectedGiftType);
   };
-  handleSelectOpt = (e) => {
-    var selectedArrr = this.state.selected;
-    if (this.state.selected.indexOf(e.target.id) === -1) {
-      selectedArrr.push(e.target.id);
-      this.setState({ selected: selectedArrr });
+  // handleSelectOpt = (e) => {
+  //   let selectedArrr = this.state.selected;
+  //   if (this.state.selected.indexOf(e.target.id) === -1) {
+  //     selectedArrr.push(e.target.id);
+  //     this.setState({ selected: selectedArrr });
+  //   } else {
+  //     selectedArrr.splice(this.state.selected.indexOf(e.target.id), 1);
+  //     this.setState({ selected: selectedArrr });
+  //   }
+  //   // console.log(this.state.selected);
+  // };
+  addedToRegistry = (e) => {
+    let selectedArr = this.state.selectedgift;
+    if (this.state.selectedgift.indexOf(e.target.id) === -1) {
+      selectedArr.push(e.target.id);
+      this.setState({ selectedgift: selectedArr });
     } else {
-      selectedArrr.splice(this.state.selected.indexOf(e.target.id), 1);
-      this.setState({ selected: selectedArrr });
+      selectedArr.splice(this.state.selectedgift.indexOf(e.target.id), 1);
+      this.setState({ selectedgift: selectedArr });
     }
-    // this.setState({
-    //   backgroundColor: "#ddd",
-    //   border: "1px black solid",
-    // });
-    console.log(this.state.selected);
+    console.log(this.state.selectedgift);
   };
 
   validateForm = () => {
@@ -178,6 +186,37 @@ export class About extends Component {
       });
   }
 
+  handleGiftSubmit = (event) => {
+    event.preventDefault();
+    const gift = this.state.selectedgift;
+    // let result = gift.map(x => {
+    //   return parseInt(x, 10);
+    // });
+    let gifts = {
+      gifts: gift,
+    };
+
+    axios
+      .post(`${util.API_BASE_URL}add-registries/`, gifts, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+      .then((response) => {
+        if (response.status === 200)
+          // console.log(response);
+          window.location.href = "/manageregistry";
+        this.setState({
+          currentIndex: this.state.currentIndex + 1,
+        });
+        // console.log(gifts);
+      })
+      .catch((error) => {
+        console.dir(error);
+        // this.setState({ errorMessage: error.response.data.first_name });
+      });
+    console.log(gifts);
+    console.log(this.state.selectedgift);
+  };
+
   //    const Validation = (event) => {
   //     if (formField.checkValidity() === false) {
   //       event.preventDefault();
@@ -204,6 +243,8 @@ export class About extends Component {
   next = () => {
     if (this.state.currentIndex >= 4) {
       window.location.href = "/manageregistry";
+
+      return;
     }
     this.setState({ currentIndex: this.state.currentIndex + 1 });
   };
@@ -211,9 +252,15 @@ export class About extends Component {
     const containerStyle = {
       border: "1px solid",
       backgroundColor: "#ffffff",
+      cursor: "pointer",
     };
     const unmarkedStyle = {
       backgroundColor: "#f7f7f7",
+      cursor: "pointer",
+    };
+    const unmarkedgiftStyle = {
+      backgroundColor: "#red",
+      cursor: "pointer",
     };
     return (
       <div className="container-fluid">
@@ -235,10 +282,10 @@ export class About extends Component {
                   direction="vertical"
                   current={this.state.currentIndex}
                 >
-                  <Step title="Your Profile" />
-                  <Step title="Event basics" />
-                  <Step title="Select Gifts" />
-                  <Step title="Confirm" />
+                  <Step className="mb-3" title="Your Profile" />
+                  <Step className="mb-3" title="Event basics" />
+                  <Step className="mb-3" title="Select Gifts" />
+                  <Step className="mb-3" title="Confirm" />
                 </Steps>
               </div>
               {/* <div className='row mb-0'>
@@ -461,7 +508,7 @@ export class About extends Component {
                           id={"ddd" + category.id}
                           key={category.id}
                           style={
-                            this.state.selected.indexOf("ddd" + category.id) >
+                            this.context.selected.indexOf("ddd" + category.id) >
                             -1
                               ? containerStyle
                               : unmarkedStyle
@@ -473,7 +520,7 @@ export class About extends Component {
                           {/* <div className='text-center'><img src={category.image} alt='weddingIcon' /> </div> */}
                           <p
                             id={"ddd" + category.id}
-                            onClick={this.handleSelectOpt}
+                            onClick={this.context.handleSelectOpt}
                             className="text-center"
                           >
                             {category.name}
@@ -546,8 +593,23 @@ export class About extends Component {
                   <p>you can't go wrong with this best sellers</p>
                   <div className="row col-10 mb-2">
                     {this.state.bestSellingItems.map((item) => (
-                      <div className="eventItem col-lg-3 text-center">
-                        <img src={item.picture} width="100px" alt={item.slug} />
+                      <div
+                        id={item.id}
+                        key={item.id}
+                        style={
+                          this.state.selectedgift.indexOf(item.id) > -1
+                            ? containerStyle
+                            : unmarkedgiftStyle
+                        }
+                        className="eventItem col-lg-3 text-center"
+                      >
+                        <img
+                          src={item.picture}
+                          id={item.id}
+                          width="100px"
+                          alt={item.slug}
+                          onClick={this.addedToRegistry}
+                        />
                         <strong className="d-block text-dark">
                           {item.slug}
                         </strong>
@@ -641,6 +703,7 @@ export class About extends Component {
                 <button
                   to=""
                   onClick={this.next}
+                  // onClick={this.handleGiftSubmit}
                   className="btn btn-dark rounded-pill px-5"
                 >
                   Next

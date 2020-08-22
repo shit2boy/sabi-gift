@@ -16,6 +16,8 @@ export class ManageRegistry extends Component {
     spouseName: "",
     dayLeftToEvent: "",
     itemCategory: [],
+    Registry: [],
+    itemChecked: false,
   };
 
   componentDidMount() {
@@ -102,8 +104,23 @@ export class ManageRegistry extends Component {
         console.log(err);
       });
   }
+  addToReg = (e) => {
+    let item = [];
+    if (this.state.Registry.indexOf(e.target.id) === -1) {
+      item.push(e.target.id);
+      this.setState({ Registry: item, itemChecked: true });
+    }
+
+    console.log(this.state.Registry);
+  };
 
   render() {
+    const hiddenStyle = {
+      display: "none",
+    };
+    const showStyle = {
+      opacity: 1,
+    };
     return (
       <div className="container-fluid">
         <DashboardNav />
@@ -126,7 +143,7 @@ export class ManageRegistry extends Component {
                 style={{ height: "100px", border: "1px solid" }}
               >
                 <h6 className="py-2">YOUR REGISTRY URL</h6>
-                <p contentEditable="false">
+                <p>
                   https://sabigift.netlify.app/registry/
                   {window.localStorage.name}2020
                 </p>
@@ -139,7 +156,7 @@ export class ManageRegistry extends Component {
                 {this.state.spouseName && (
                   <h2 className="py-3 text-white">
                     {window.localStorage.name} &{" "}
-                    {window.localStorage.spouse_name}
+                    {window.localStorage.spouseName}
                   </h2>
                 )}
                 {!this.state.spouseName && (
@@ -153,7 +170,7 @@ export class ManageRegistry extends Component {
                 </h5>
               </div>
             </div>
-            <div classNmae=" row col" style={{ marginTop: "25px" }}>
+            <div className=" row col" style={{ marginTop: "25px" }}>
               <h5>Your Registry Checklist</h5>
             </div>
             <div className="mt-4 row">
@@ -199,10 +216,10 @@ export class ManageRegistry extends Component {
                 >
                   <div className="row">
                     {this.state.registryItem.map((item, index) => (
-                      <div className="m-3">
+                      <div key={index} className="m-3">
                         {item.cat === category.name && (
                           <Card
-                            id="myCards"
+                            id=""
                             key={index}
                             style={{
                               width: "8rem",
@@ -212,6 +229,14 @@ export class ManageRegistry extends Component {
                           >
                             <Card.Body className="">
                               <Card.Img
+                                id={"ddd" + item.id}
+                                onClick={this.addToReg}
+                                style={
+                                  this.state.Registry.indexOf("ddd" + item.id) >
+                                  -1
+                                    ? hiddenStyle
+                                    : showStyle
+                                }
                                 className="center rounded-circle"
                                 alt="items"
                                 width="40px"

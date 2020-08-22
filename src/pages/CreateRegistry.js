@@ -41,9 +41,9 @@ export class CreateRegistry extends Component {
   }
 
   handleEvent = (e) => {
-    console.log(e);
+    // console.log(e);
     this.setState({ eventType: e.target.id });
-    console.log(this.state.eventType);
+    // console.log(this.state.eventType);
   };
 
   render() {

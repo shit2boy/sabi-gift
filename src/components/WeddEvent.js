@@ -33,6 +33,7 @@ export default class getstarted extends Component {
       confirm: "",
       eventType: "",
       message: "",
+      error: "",
       errorMessage: "",
       signUpResponse: { successful: false },
       isValidated: false,
@@ -59,7 +60,7 @@ export default class getstarted extends Component {
           }
           this.setState({ eventType: eventtype });
         }
-        console.log(this.state.eventType);
+        // console.log(this.state.eventType);
       })
       .catch((err) => {
         // console.log(err);
@@ -76,23 +77,25 @@ export default class getstarted extends Component {
 
   mapValueAndNext = (e) => {
     e.preventDefault();
-    // console.log(this.state.formValue);
+    console.log(this.state.formValue);
     // console.log(this.state.currentIndex);
     let value = this.state.formValue;
     let currentIndex = this.state.currentIndex;
 
-    if (this.state.currentIndex > 3) {
-      this.setState({ currentIndex: currentIndex + 1 });
-      return;
-    }
+    // if (this.state.currentIndex > 3 ) {
+    //   this.setState({ currentIndex: currentIndex + 1 });
+    //   return;
+    // }
 
     let answers = this.state.answers;
     answers[currentIndex] = value;
     this.setState({ answers: answers });
     // console.dir(this.state);
     // console.log(answers);
-    this.setState({ currentIndex: currentIndex + 1 });
-    this.setState({ formValue: this.state.answers[currentIndex + 1] });
+    if (value.length >= 4 || this.state.eventDate !== "") {
+      this.setState({ currentIndex: currentIndex + 1 });
+      this.setState({ formValue: this.state.answers[currentIndex + 1] });
+    }
 
     // console.log("current index" + this.state.currentIndex);
   };
@@ -276,15 +279,16 @@ export default class getstarted extends Component {
                     <div className="mt-4">
                       <form>
                         <input
-                          className="p-2"
-                          type="text"
                           value={this.state.formValue}
                           onChange={(e) =>
                             this.setState({ formValue: e.target.value })
                           }
-                          placeholder="Enter Name"
+                          className="p-2"
+                          type="text"
                           required
+                          placeholder="Enter Name"
                         />
+
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
@@ -306,6 +310,9 @@ export default class getstarted extends Component {
                           </Button>
                         )}
                       </form>
+                      <span style={{ color: "red", marginTop: "20px" }}>
+                        {this.state.error}
+                      </span>
                     </div>
                   </div>
                 )}
@@ -320,14 +327,14 @@ export default class getstarted extends Component {
                     <div className="mt-4">
                       <form>
                         <input
-                          className="p-2"
-                          type="text"
                           value={this.state.formValue}
                           onChange={(e) =>
                             this.setState({ formValue: e.target.value })
                           }
-                          placeholder="Enter Number of Guest"
+                          className="p-2"
+                          type="text"
                           required
+                          placeholder="Enter Number of Guest"
                         />
                         {this.state.currentIndex === 0 && (
                           <Button

@@ -19,10 +19,10 @@ export class About extends Component {
       formField: {},
       currentIndex: 0,
       signUpResponse: { successful: false, message: "" },
-      isValidated: false,
       registryType: [],
       isLoggedIn: false,
       errorMessage: "",
+      errors: {},
       border: " ",
       selected: [],
       selectedgift: [],
@@ -72,17 +72,17 @@ export class About extends Component {
     console.log(this.state.selectedgift);
   };
 
-  validateForm = () => {
+  validateForm() {
     let formField = this.state.formField;
     let errors = {};
     let formIsValid = true;
-    if (!formField["firstName"]) {
+    if (!formField["firstName"] || formField["firstName"].length < 3) {
       formIsValid = false;
-      errors["firstName"] = "Cannot be empty";
+      errors["firstName"] = "Cannot be empty or less than 3 characters";
     }
-    if (!formField["lastName"]) {
+    if (!formField["lastName"] || formField["lastName"].length < 3) {
       formIsValid = false;
-      errors["lastName"] = "Cannot be empty";
+      errors["lastName"] = "Cannot be empty  or less than 3 characters";
     }
     if (!formField["address"]) {
       formIsValid = false;
@@ -96,45 +96,52 @@ export class About extends Component {
       formIsValid = false;
       errors["city"] = "Cannot be empty";
     }
-    this.setState({ errorMessage: errors });
+    this.setState({ error: errors });
     return formIsValid;
-  };
+  }
 
   handleSubmit(event) {
     event.preventDefault();
-    let formField = this.state.formField;
-    const newUserInfo = new FormData();
-    // newUserInfo.append('email', formField['email']);
-    newUserInfo.append("first_name", formField["firstName"]);
-    newUserInfo.append("last_name", formField["lastName"]);
-    newUserInfo.append("mobile", formField["Phone"]);
-    newUserInfo.append("street", formField["address"]);
-    newUserInfo.append("lga", formField["city"]);
-    newUserInfo.append("city", formField["city"]);
-    newUserInfo.append("gender", undefined);
-    newUserInfo.append("photo", "");
+    if (this.validateForm()) {
+      alert("Form has Error");
+    } else {
+      let formField = this.state.formField;
+      const newUserInfo = new FormData();
+      // newUserInfo.append('email', formField['email']);
+      newUserInfo.append("first_name", formField["firstName"]);
+      newUserInfo.append("last_name", formField["lastName"]);
+      newUserInfo.append("mobile", formField["Phone"]);
+      newUserInfo.append("street", formField["address"]);
+      newUserInfo.append("lga", formField["city"]);
+      newUserInfo.append("city", formField["city"]);
+      newUserInfo.append("gender", undefined);
+      newUserInfo.append("photo", "");
 
-    axios
-      .patch(`${util.API_BASE_URL}accounts/profile/`, newUserInfo, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      })
-      .then((response) => {
-        if (response.status === 200)
-          // console.log(response);
-          // alert(response.statusText);
-          this.setState({
-            currentIndex: this.state.currentIndex + 1,
-            signUpResponse: {
-              successful: true,
-              message: "Registry Successful",
-            },
-          });
-      })
-      .catch((error) => {
-        console.dir(error);
-        this.setState({ errorMessage: error.response.data.first_name });
-      });
+      axios
+        .patch(`${util.API_BASE_URL}accounts/profile/`, newUserInfo, {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
+          },
+        })
+        .then((response) => {
+          if (response.status === 200)
+            // console.log(response);
+            // alert(response.statusText);
+            this.setState({
+              currentIndex: this.state.currentIndex + 1,
+              signUpResponse: {
+                successful: true,
+                message: "Registry Successful",
+              },
+            });
+        })
+        .catch((error) => {
+          console.dir(error);
+          this.setState({ errorMessage: error.response.data.first_name });
+        });
+    }
   }
+
   componentDidMount(event) {
     this.setState({ selectedRegistryType: event });
     let type = this.state.selectedRegistryType;
@@ -189,15 +196,13 @@ export class About extends Component {
   handleGiftSubmit = (event) => {
     event.preventDefault();
     const gift = this.state.selectedgift;
-    // let result = gift.map(x => {
-    //   return parseInt(x, 10);
-    // });
+    // let result = gift.map(Number);
     let gifts = {
-      gifts: gift,
+      gifts: gift.map(Number),
     };
 
     axios
-      .post(`${util.API_BASE_URL}add-registries/`, gifts, {
+      .patch(`${util.API_BASE_URL}add-registries/3/`, gifts, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((response) => {
@@ -305,11 +310,7 @@ export class About extends Component {
                     <h2 className="">
                       Hello! Please tell us a little <br /> bit about Yourself.
                     </h2>
-                    <Form
-                      noValidate
-                      onSubmit={this.handleSubmit}
-                      className="w-75"
-                    >
+                    <Form onSubmit={this.handleSubmit} className="w-75">
                       <Form.Row>
                         <Form.Group as={Col} controlId="formGridName">
                           <Form.Label>First Name</Form.Label>
@@ -319,6 +320,9 @@ export class About extends Component {
                             name="firstName"
                             placeholder="Jimi"
                           />
+                          <span style={{ color: "red" }}>
+                            {this.state.errors["firstName"]}
+                          </span>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formName">
@@ -329,6 +333,9 @@ export class About extends Component {
                             name="lastName"
                             placeholder="Fola"
                           />
+                          <span style={{ color: "red" }}>
+                            {this.state.errors["lastName"]}
+                          </span>
                         </Form.Group>
                       </Form.Row>
                       <Form.Row>
@@ -340,9 +347,12 @@ export class About extends Component {
                             name="Phone"
                             placeholder="0000 0000-0000"
                           />
-                          <Form.Control.Feedback type="invalid">
+                          <span style={{ color: "red" }}>
+                            {this.state.errors["Phone"]}
+                          </span>
+                          {/* <Form.Control.Feedback type="invalid">
                             Empty
-                          </Form.Control.Feedback>
+                          </Form.Control.Feedback> */}
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="AltPhone">
@@ -363,9 +373,9 @@ export class About extends Component {
                           name="address"
                           placeholder="14b wole Ariyo street"
                         />
-                        <Form.Control.Feedback type="invalid">
+                        {/* <Form.Control.Feedback type="invalid">
                           Empty
-                        </Form.Control.Feedback>
+                        </Form.Control.Feedback> */}
                       </Form.Group>
                       <Form.Row>
                         <Form.Group as={Col} controlId="City">
@@ -376,9 +386,12 @@ export class About extends Component {
                             name="city"
                             placeholder="Lekki"
                           />
-                          <Form.Control.Feedback type="invalid">
+                          <span style={{ color: "red" }}>
+                            {this.state.errors["city"]}
+                          </span>
+                          {/* <Form.Control.Feedback type="invalid">
                             Empty
-                          </Form.Control.Feedback>
+                          </Form.Control.Feedback> */}
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="State">
@@ -389,9 +402,12 @@ export class About extends Component {
                             name="state"
                             placeholder="State"
                           />
-                          <Form.Control.Feedback type="invalid">
+                          <span style={{ color: "red" }}>
+                            {this.state.errors["state"]}
+                          </span>
+                          {/* <Form.Control.Feedback type="invalid">
                             Empty
-                          </Form.Control.Feedback>
+                          </Form.Control.Feedback> */}
                         </Form.Group>
                       </Form.Row>
                       {this.state.errorMessage && (
@@ -702,8 +718,8 @@ export class About extends Component {
                 </button>
                 <button
                   to=""
-                  onClick={this.next}
-                  // onClick={this.handleGiftSubmit}
+                  // onClick={this.next}
+                  onClick={this.handleGiftSubmit}
                   className="btn btn-dark rounded-pill px-5"
                 >
                   Next

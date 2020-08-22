@@ -80,18 +80,20 @@ export default class getstarted extends Component {
     let value = this.state.formValue;
     let currentIndex = this.state.currentIndex;
 
-    if (this.state.currentIndex > 2) {
-      this.setState({ currentIndex: currentIndex + 1 });
-      return;
-    }
+    // if (this.state.currentIndex > 2) {
+    //   this.setState({ currentIndex: currentIndex + 1 });
+    //   return;
+    // }
 
     let answers = this.state.answers;
     answers[currentIndex] = value;
     this.setState({ answers: answers });
     // console.dir(this.state);
     // console.log(answers);
-    this.setState({ currentIndex: currentIndex + 1 });
-    this.setState({ formValue: this.state.answers[currentIndex + 1] });
+    if (value.length >= 4 || this.state.eventDate !== "") {
+      this.setState({ currentIndex: currentIndex + 1 });
+      this.setState({ formValue: this.state.answers[currentIndex + 1] });
+    }
   };
 
   goBack = () => {
@@ -309,6 +311,7 @@ export default class getstarted extends Component {
                             this.setState({ formValue: e.target.value })
                           }
                           className="p-2"
+                          required
                           type="text"
                           placeholder="Number of Guest"
                         />

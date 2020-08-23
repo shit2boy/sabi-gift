@@ -12,19 +12,21 @@ import CheckList from "./AddcheckList";
 // import axios from "axios";
 // import util from "../util/util";
 
-
-
-
 const date = new Date();
-const formatDate = {day: 'numeric', year: 'numeric',  month: 'long' };
+const formatDate = { day: "numeric", year: "numeric", month: "long" };
 
 // console.log(date.toLocaleDateString(undefined, options));
 export class Dashboard extends Component {
-    
   state = {
-      date : date.toLocaleDateString(undefined, formatDate),
-    }
+    date: date.toLocaleDateString(undefined, formatDate),
+    isLogged: false,
+  };
 
+  componentDidMount() {
+    if (!window.localStorage.token_id) {
+      window.location.href = "/";
+    }
+  }
   // componentDidMount() {
   //   axios
   //     .get(`${util.API_BASE_URL}accounts/profile/`, {
@@ -53,19 +55,18 @@ export class Dashboard extends Component {
         <DashboardNav />
         {/* <hr className="mt-0 mb-0" /> */}
         <Row className="mt-4">
-          <Col
-            xs={1}
-            md={1}
-            lg={1}
-            className=" d-none d-lg-block "
-          >
+          <Col xs={1} md={1} lg={1} className=" d-none d-lg-block ">
             <SideBar />
           </Col>
           <Col className=" content">
             <div className="row justify-content-center">
               <div
                 className="col-sm-5 text-left backgrndImg"
-                style={{ width: "400px", height: "125px",borderRadius :'10px' }}
+                style={{
+                  width: "400px",
+                  height: "125px",
+                  borderRadius: "10px",
+                }}
               >
                 <p className="text-right text-white">
                   Welcome {window.localStorage.name},
@@ -112,7 +113,7 @@ export class Dashboard extends Component {
                   </div>
                 </div>
               </div>
-                <RegistryBar number={5} />
+              <RegistryBar number={5} />
             </div>
             <div>
               <h5 className="mt-4 py-4 ">Next steps to take</h5>

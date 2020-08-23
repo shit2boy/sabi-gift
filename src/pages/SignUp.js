@@ -33,6 +33,7 @@ export default class getstarted extends Component {
       eventDate: "",
       eventType: "",
       error: "",
+      isLogged: "",
       message: "",
       errorMessage: [],
       signUpResponse: { successful: false },
@@ -51,6 +52,9 @@ export default class getstarted extends Component {
   }
 
   componentDidMount() {
+    if (window.localStorage.token_id) {
+      this.setState({ isLogged: true });
+    }
     axios
       .get(`${util.API_BASE_URL}event-types/`, {
         "content-type": "multipart/form-data",
@@ -90,7 +94,7 @@ export default class getstarted extends Component {
     this.setState({ answers: answers });
     // console.dir(this.state);
     // console.log(answers);
-    if (value.length >= 4 || this.state.eventDate !== "") {
+    if (value.length >= 3 || this.state.eventDate !== "") {
       this.setState({ currentIndex: currentIndex + 1 });
       this.setState({ formValue: this.state.answers[currentIndex + 1] });
     }
@@ -269,6 +273,7 @@ export default class getstarted extends Component {
                           className="p-2"
                           type="text"
                           required
+                          pattern="[A-Za-z]"
                           placeholder="Enter Name"
                         />
                         {this.state.currentIndex === 0 && (
@@ -313,6 +318,7 @@ export default class getstarted extends Component {
                           className="p-2"
                           required
                           type="text"
+                          pattern="[0-9]"
                           placeholder="Number of Guest"
                         />
                         {this.state.currentIndex === 0 && (
@@ -340,7 +346,7 @@ export default class getstarted extends Component {
                   </div>
                 )}
 
-                {this.state.currentIndex === 3 && (
+                {this.state.currentIndex === 3 && !this.state.isLogged && (
                   <div className="">
                     <h2>
                       Good News! You can create <br />a free registry on
@@ -424,7 +430,7 @@ export default class getstarted extends Component {
                     BACK
                   </Button>
                 )}
-                {this.state.currentIndex === 3 && (
+                {this.state.currentIndex === 3 && !this.state.isLogged && (
                   <div className=" d-flex justify-content-between">
                     <p>
                       Already a member?
@@ -432,7 +438,7 @@ export default class getstarted extends Component {
                     </p>
                     <Button
                       onClick={this.handleSubmit}
-                      className="px-5 btn-outline-dark"
+                      className="px-5 btn-outline-dark pointer"
                       style={{
                         background: "#AAAAAA",
                         border: "1px solid #DDDDDD",

@@ -72,7 +72,7 @@ export class About extends Component {
     console.log(this.state.selectedgift);
   };
 
-  validateForm() {
+  validateForm = (e) => {
     let formField = this.state.formField;
     let errors = {};
     let formIsValid = true;
@@ -98,11 +98,12 @@ export class About extends Component {
     }
     this.setState({ error: errors });
     return formIsValid;
-  }
+  };
 
   handleSubmit(event) {
     event.preventDefault();
     if (this.validateForm()) {
+      event.stopPropagation();
       alert("Form has Error");
     } else {
       let formField = this.state.formField;
@@ -209,9 +210,9 @@ export class About extends Component {
         if (response.status === 200)
           // console.log(response);
           window.location.href = "/manageregistry";
-        this.setState({
-          currentIndex: this.state.currentIndex + 1,
-        });
+        // this.setState({
+        //   currentIndex: this.state.currentIndex + 1,
+        // });
         // console.log(gifts);
       })
       .catch((error) => {
@@ -319,6 +320,8 @@ export class About extends Component {
                             type="text"
                             name="firstName"
                             placeholder="Jimi"
+                            pattern="[A-Za-z]"
+                            required
                           />
                           <span style={{ color: "red" }}>
                             {this.state.errors["firstName"]}
@@ -332,6 +335,8 @@ export class About extends Component {
                             type="text"
                             name="lastName"
                             placeholder="Fola"
+                            pattern="[A-Za-z]"
+                            required
                           />
                           <span style={{ color: "red" }}>
                             {this.state.errors["lastName"]}
@@ -362,6 +367,7 @@ export class About extends Component {
                             type="tel"
                             name="AltPhone"
                             placeholder="0000-0000-0000"
+                            required
                           />
                         </Form.Group>
                       </Form.Row>

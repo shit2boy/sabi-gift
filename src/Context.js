@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 // import { ProductItems } from "./components/imageData";
+import axios from "axios";
+import util from "./util/util";
 
 const StateContext = React.createContext();
 
@@ -11,6 +13,28 @@ class ProductProvider extends Component {
     registryCategory: [],
     selected: [],
   };
+
+  componentDidMount() {
+    axios
+      .get(`${util.API_BASE_URL}registries/`, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data !== undefined) {
+          let data = res.data;
+          for (let i = 0; i < data.length; i++) {
+            data[i].picture = data[i].picture.replace("image/upload/", "");
+          }
+          this.setState({ Products: data });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   // handlerChange = (e)=> {
   //   let formField = this.state.formField;
   //   formField[e.target.name] = e.target.value;

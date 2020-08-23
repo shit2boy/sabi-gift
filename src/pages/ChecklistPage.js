@@ -3,10 +3,13 @@ import SideBar from "../components/SideBar";
 import DashboardNav from "../components/DashboardNav";
 import AvailableItems from "../components/AvailableItems";
 import Product from "../components/Product";
+import { StateContext } from "../Context";
 import axios from "axios";
 import util from "../util/util";
 
 export class RegistryChecklist extends Component {
+  static contextType = StateContext;
+
   componentDidMount() {
     axios
       .get(`${util.API_BASE_URL}events/`, {
@@ -48,7 +51,10 @@ export class RegistryChecklist extends Component {
                 <AvailableItems />
               </div>
               <div className="col">
-                <Product showWishList={false} />
+                <Product
+                  Products={this.context.Products}
+                  showWishList={false}
+                />
               </div>
             </div>
           </div>

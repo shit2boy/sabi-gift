@@ -37,6 +37,9 @@ h6 {
 [contenteditable] {
   outline: 0px solid transparent;
 }
+.pointer {
+  cursor: pointer;
+}
 
 input:focus::placeholder {
   color: transparent;

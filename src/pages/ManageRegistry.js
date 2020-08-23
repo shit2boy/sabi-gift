@@ -47,8 +47,10 @@ export class ManageRegistry extends Component {
       .catch((err) => {
         // console.log(err);
         window.localStorage.removeItem("name");
-        window.localStorage.removeItem("image");
+        window.localStorage.removeItem("spouseName");
         window.localStorage.removeItem("username");
+        window.localStorage.removeItem("event_type");
+        window.localStorage.removeItem("event_date");
         window.location.href = "/";
       });
 

@@ -6,6 +6,7 @@ import addItem from "../images/Sabi-storepage/addItem.svg";
 import invite from "../images/Sabi-storepage/invite.svg";
 import manage from "../images/Sabi-storepage/manage.svg";
 import setup from "../images/Sabi-storepage/setup.svg";
+import { Link } from "react-router-dom";
 
 export class NextSteps extends Component {
   render() {
@@ -19,7 +20,7 @@ export class NextSteps extends Component {
           <Card.Footer className="cardFooter">
             <strong className="ml-1">1</strong>
             {window.localStorage.event_type && (
-              <img className="ml-1 d-block" src={addItem} alt="step1" />
+              <img className="ml-1 d-block pointer" src={addItem} alt="step1" />
             )}{" "}
             {!window.localStorage.event_type && (
               <p className="ml-1 d-block">Done</p>
@@ -38,7 +39,7 @@ export class NextSteps extends Component {
           <Card.Body className="stepsCard2"></Card.Body>
           <Card.Footer className="cardFooter">
             <strong className="ml-1">2</strong>
-            <img className="ml-1 d-block" src={Add} alt="step2" />{" "}
+            <img className="ml-1 d-block pointer" src={Add} alt="step2" />{" "}
             <span className="text-right">+</span>
           </Card.Footer>
         </Card>
@@ -49,7 +50,11 @@ export class NextSteps extends Component {
           <Card.Body className="stepsCard3"></Card.Body>
           <Card.Footer className="cardFooter">
             <strong className="ml-1">3 </strong>
-            <img className="ml-1 d-block" src={invite} alt="step3" />{" "}
+            <img
+              className="ml-1 d-block pointer"
+              src={invite}
+              alt="step3"
+            />{" "}
             <span className="text-right">+</span>
           </Card.Footer>
         </Card>
@@ -59,9 +64,15 @@ export class NextSteps extends Component {
           </Card.Title>
           <Card.Body className="stepsCard4"></Card.Body>
           <Card.Footer className="cardFooter">
-            <strong className="ml-1">4</strong>
-            <img className="ml-1 d-block" src={manage} alt="step4" />{" "}
-            <span className="text-right">+</span>
+            <Link className="text-link" to="/createregistry">
+              <strong className="ml-1">4</strong>
+              <img
+                className="ml-1 d-block pointer"
+                src={manage}
+                alt="step4"
+              />{" "}
+              <span className="text-right">+</span>
+            </Link>
           </Card.Footer>
         </Card>
         <Card id="myCards" className="shadow mb-3" style={{ width: "12rem" }}>
@@ -71,7 +82,11 @@ export class NextSteps extends Component {
           <Card.Body className="stepsCard5"></Card.Body>
           <Card.Footer className="cardFooter">
             <strong className="ml-1">5 </strong>
-            <img className="ml-1 d-block" src={setup} alt="step5" />{" "}
+            <img
+              className="ml-1 d-block pointer"
+              src={setup}
+              alt="step5"
+            />{" "}
             <span className="text-right">+</span>
           </Card.Footer>
         </Card>

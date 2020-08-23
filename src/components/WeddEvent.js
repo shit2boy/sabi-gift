@@ -37,6 +37,7 @@ export default class getstarted extends Component {
       errorMessage: "",
       signUpResponse: { successful: false },
       isValidated: false,
+      isLogged: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,6 +45,9 @@ export default class getstarted extends Component {
   }
 
   componentDidMount() {
+    if (window.localStorage.token_id) {
+      this.setState({ isLogged: true });
+    }
     axios
       .get(`${util.API_BASE_URL}event-types/`, {
         "content-type": "multipart/form-data",
@@ -92,7 +96,7 @@ export default class getstarted extends Component {
     this.setState({ answers: answers });
     // console.dir(this.state);
     // console.log(answers);
-    if (value.length >= 4 || this.state.eventDate !== "") {
+    if (value.length >= 3 || this.state.eventDate !== "") {
       this.setState({ currentIndex: currentIndex + 1 });
       this.setState({ formValue: this.state.answers[currentIndex + 1] });
     }
@@ -285,8 +289,9 @@ export default class getstarted extends Component {
                           }
                           className="p-2"
                           type="text"
-                          required
                           placeholder="Enter Name"
+                          pattern="[A-Za-z]"
+                          required
                         />
 
                         {this.state.currentIndex === 0 && (
@@ -310,9 +315,6 @@ export default class getstarted extends Component {
                           </Button>
                         )}
                       </form>
-                      <span style={{ color: "red", marginTop: "20px" }}>
-                        {this.state.error}
-                      </span>
                     </div>
                   </div>
                 )}
@@ -333,8 +335,9 @@ export default class getstarted extends Component {
                           }
                           className="p-2"
                           type="text"
-                          required
                           placeholder="Enter Number of Guest"
+                          pattern="[0-9]"
+                          required
                         />
                         {this.state.currentIndex === 0 && (
                           <Button
@@ -360,7 +363,7 @@ export default class getstarted extends Component {
                     </div>
                   </div>
                 )}
-                {this.state.currentIndex === 4 && (
+                {this.state.currentIndex === 4 && !this.state.isLogged && (
                   <div className="">
                     <h2>
                       Good News! You can create <br />a free registry on
@@ -448,7 +451,7 @@ export default class getstarted extends Component {
                     BACK
                   </Button>
                 )}
-                {this.state.currentIndex === 4 && (
+                {this.state.currentIndex === 4 && !this.state.isLogged && (
                   <div className=" d-flex justify-content-around">
                     <p>
                       Already a member?

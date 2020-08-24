@@ -72,7 +72,7 @@ export class About extends Component {
     console.log(this.state.selectedgift);
   };
 
-  validateForm = (e) => {
+  validateForm() {
     let formField = this.state.formField;
     let errors = {};
     let formIsValid = true;
@@ -80,9 +80,32 @@ export class About extends Component {
       formIsValid = false;
       errors["firstName"] = "Cannot be empty or less than 3 characters";
     }
+    if (typeof formField["firstName"] !== "undefined") {
+      if (!formField["firstName"].match(/^[a-zA-Z ]*$/)) {
+        formIsValid = false;
+        errors["firstName"] = "*Please enter alphabet characters only.";
+      }
+    }
     if (!formField["lastName"] || formField["lastName"].length < 3) {
       formIsValid = false;
       errors["lastName"] = "Cannot be empty  or less than 3 characters";
+    }
+    if (typeof formField["lastName"] !== "undefined") {
+      if (!formField["lastName"].match(/^[a-zA-Z ]*$/)) {
+        formIsValid = false;
+        errors["lastName"] = "*Please enter alphabet characters only.";
+      }
+    }
+    if (!formField["Phone"]) {
+      formIsValid = false;
+      errors["Phone"] = "*Please enter your mobile no.";
+    }
+
+    if (typeof formField["Phone"] !== "undefined") {
+      if (!formField["Phone"].match(/^[0-9]{11}$/)) {
+        formIsValid = false;
+        errors["Phone"] = "*Please enter valid mobile no.";
+      }
     }
     if (!formField["address"]) {
       formIsValid = false;
@@ -96,16 +119,21 @@ export class About extends Component {
       formIsValid = false;
       errors["city"] = "Cannot be empty";
     }
-    this.setState({ error: errors });
+    if (!formField["state"]) {
+      formIsValid = false;
+      errors["state"] = "Cannot be empty";
+    }
+    this.setState({ errors: errors });
     return formIsValid;
-  };
+  }
 
   handleSubmit(event) {
+    console.log(this.validateForm());
+
     event.preventDefault();
     if (this.validateForm()) {
       event.stopPropagation();
-      alert("Form has Error");
-    } else {
+      alert("Profile Updated");
       let formField = this.state.formField;
       const newUserInfo = new FormData();
       // newUserInfo.append('email', formField['email']);
@@ -210,35 +238,16 @@ export class About extends Component {
         if (response.status === 200)
           // console.log(response);
           window.location.href = "/manageregistry";
-        // this.setState({
-        //   currentIndex: this.state.currentIndex + 1,
-        // });
+
         // console.log(gifts);
       })
       .catch((error) => {
         console.dir(error);
         // this.setState({ errorMessage: error.response.data.first_name });
       });
-    console.log(gifts);
-    console.log(this.state.selectedgift);
+    // console.log(gifts);
+    // console.log(this.state.selectedgift);
   };
-
-  //    const Validation = (event) => {
-  //     if (formField.checkValidity() === false) {
-  //       event.preventDefault();
-  //       event.stopPropagation();
-  //     } else{
-  //       const formField = new FormData();
-
-  //       axios (`${util.API_BASE_URL}accounts/register/`, {
-  //         method: 'POST',
-  //         body: formField,
-  //       });
-  //     }
-
-  //     this.setState({isValidated : false});
-  //   }
-  // }
 
   back = () => {
     if (this.state.currentIndex <= 0) {
@@ -355,9 +364,6 @@ export class About extends Component {
                           <span style={{ color: "red" }}>
                             {this.state.errors["Phone"]}
                           </span>
-                          {/* <Form.Control.Feedback type="invalid">
-                            Empty
-                          </Form.Control.Feedback> */}
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="AltPhone">
@@ -379,9 +385,9 @@ export class About extends Component {
                           name="address"
                           placeholder="14b wole Ariyo street"
                         />
-                        {/* <Form.Control.Feedback type="invalid">
-                          Empty
-                        </Form.Control.Feedback> */}
+                        <span style={{ color: "red" }}>
+                          {this.state.errors["address"]}
+                        </span>
                       </Form.Group>
                       <Form.Row>
                         <Form.Group as={Col} controlId="City">
@@ -395,9 +401,6 @@ export class About extends Component {
                           <span style={{ color: "red" }}>
                             {this.state.errors["city"]}
                           </span>
-                          {/* <Form.Control.Feedback type="invalid">
-                            Empty
-                          </Form.Control.Feedback> */}
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="State">
@@ -411,9 +414,6 @@ export class About extends Component {
                           <span style={{ color: "red" }}>
                             {this.state.errors["state"]}
                           </span>
-                          {/* <Form.Control.Feedback type="invalid">
-                            Empty
-                          </Form.Control.Feedback> */}
                         </Form.Group>
                       </Form.Row>
                       {this.state.errorMessage && (

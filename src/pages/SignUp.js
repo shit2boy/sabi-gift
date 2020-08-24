@@ -32,8 +32,9 @@ export default class getstarted extends Component {
       confirm: "",
       eventDate: "",
       eventType: "",
-      error: "",
+      errors: "",
       isLogged: "",
+      formField: {},
       message: "",
       errorMessage: [],
       signUpResponse: { successful: false },
@@ -43,9 +44,12 @@ export default class getstarted extends Component {
     this.dateChange = this.dateChange.bind(this);
   }
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    let formField = this.state.formField;
+    formField[e.target.name] = e.target.value;
+    this.setState({
+      formField,
+    });
   }
-
   dateChange(date, dateString) {
     this.setState({ eventDate: dateString });
     console.log(date, dateString);
@@ -117,47 +121,97 @@ export default class getstarted extends Component {
       console.log(this.state.formValue);
     }
   };
+
+  validateForm() {
+    let formField = this.state.formField;
+    let errors = {};
+    let formIsValid = true;
+    if (!formField["email"]) {
+      formIsValid = false;
+      errors["email"] = "*Please enter your email-ID.";
+    }
+
+    if (typeof formField["email"] !== "undefined") {
+      //regular expression for email validation
+      var pattern = new RegExp(
+        /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+      );
+      if (!pattern.test(formField["email"])) {
+        formIsValid = false;
+        errors["email"] = "*Please enter valid email-ID.";
+      }
+    }
+    if (!formField["password"]) {
+      formIsValid = false;
+      errors["password"] = "*Please enter your password.";
+    }
+
+    // if (typeof formField["password"] !== "undefined") {
+    //   if (
+    //     !formField["password"].match(
+    //       /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/
+    //     )
+    //   ) {
+    //     formIsValid = false;
+    //     errors["password"] = "*Please enter secure and strong password.";
+    //   }
+    // }
+    if (formField["password"] !== formField["confirm_password"]) {
+      formIsValid = false;
+      errors["confirm_password"] = "*password mismatch.";
+    }
+    this.setState({
+      errors: errors,
+    });
+    return formIsValid;
+  }
+
   handleSubmit(event) {
+    console.log(this.validateForm());
+
     event.preventDefault();
-    const newUserInfo = new FormData();
-    newUserInfo.append("first_name", this.state.answers[0]);
-    newUserInfo.append("email", this.state.email);
-    newUserInfo.append("password", this.state.password);
-    newUserInfo.append("event_type", 3);
-    newUserInfo.append("event_date", this.state.eventDate);
-    newUserInfo.append("no_guest", this.state.answers[2]);
-    newUserInfo.append("spouse_name", "");
-    newUserInfo.append("photo", "");
+    if (this.validateForm()) {
+      let formField = this.state.formField;
+      const newUserInfo = new FormData();
+      newUserInfo.append("first_name", this.state.answers[0]);
+      newUserInfo.append("email", formField["email"]);
+      newUserInfo.append("password", formField["password"]);
+      newUserInfo.append("event_type", 3);
+      newUserInfo.append("event_date", this.state.eventDate);
+      newUserInfo.append("no_guest", this.state.answers[2]);
+      newUserInfo.append("spouse_name", "");
+      newUserInfo.append("photo", "");
 
-    axios
-      .post(`${util.API_BASE_URL}accounts/register/`, newUserInfo, {
-        "content-type": "multipart/form-data",
-      })
-      .then((response) => {
-        // console.log(response.data["Registration Successful"].token);
-        if (response.status === 200 || response.status === 201) {
-          window.localStorage.setItem(
-            "token_id",
-            response.data["Registration Successful"].token
-          );
-          this.setState({
-            message: `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`,
-          });
-          // console.log(this.state.message);
-          window.location.href = "/updateprofile";
-        }
-      })
-      .catch((error) => {
-        // console.dir(error);
-        if (error.response.data.Error !== undefined) {
-          this.setState({ errorMessage: error.response.data.Error });
-        } else {
-          this.setState({ errorMessage: error.response.data.password });
-        }
+      axios
+        .post(`${util.API_BASE_URL}accounts/register/`, newUserInfo, {
+          "content-type": "multipart/form-data",
+        })
+        .then((response) => {
+          // console.log(response.data["Registration Successful"].token);
+          if (response.status === 200 || response.status === 201) {
+            window.localStorage.setItem(
+              "token_id",
+              response.data["Registration Successful"].token
+            );
+            this.setState({
+              message: `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`,
+            });
+            // console.log(this.state.message);
+            window.location.href = "/updateprofile";
+          }
+        })
+        .catch((error) => {
+          // console.dir(error);
+          if (error.response.data.Error !== undefined) {
+            this.setState({ errorMessage: error.response.data.Error });
+          } else {
+            this.setState({ errorMessage: error.response.data.password });
+          }
 
-        // console.log(error.response.data.Error);
-        // console.log(error.response.data.password);
-      });
+          // console.log(error.response.data.Error);
+          // console.log(error.response.data.password);
+        });
+    }
   }
 
   render() {
@@ -364,9 +418,9 @@ export default class getstarted extends Component {
                             onChange={this.handleChange}
                             placeholder=" Email Address"
                           />
-                          <Form.Control.Feedback type="invalid">
-                            Empty
-                          </Form.Control.Feedback>
+                          <span style={{ color: "red" }}>
+                            {this.state.errors["email"]}
+                          </span>
                         </Form.Group>
                       </Form.Row>
                       <Form.Row>
@@ -378,21 +432,22 @@ export default class getstarted extends Component {
                             onChange={this.handleChange}
                             placeholder="*******"
                           />
-                          <Form.Control.Feedback type="invalid">
-                            Empty
-                          </Form.Control.Feedback>
+                          <span style={{ color: "red" }}>
+                            {this.state.errors["password"]}
+                          </span>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridConfirm">
                           <Form.Label>Confirm Password</Form.Label>
-                          <Form.Control.Feedback type="invalid">
-                            Empty
-                          </Form.Control.Feedback>
+
                           <Form.Control
-                            name="confirm"
+                            name="confirm_password"
                             onChange={this.handleChange}
                             type="password"
                             placeholder="*********"
                           />
+                          <span style={{ color: "red" }}>
+                            {this.state.errors["confirm_password"]}
+                          </span>
                         </Form.Group>
                       </Form.Row>
                       <Form.Group id="formGridCheckbox">

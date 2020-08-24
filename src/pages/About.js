@@ -296,7 +296,7 @@ export class About extends Component {
       cursor: "pointer",
     };
     const unmarkedgiftStyle = {
-      backgroundColor: "red",
+      // backgroundColor: "red",
       cursor: "pointer",
     };
     return (

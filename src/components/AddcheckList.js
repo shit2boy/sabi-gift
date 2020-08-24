@@ -23,7 +23,7 @@ class CheckList extends Component {
       .then((res) => {
         // console.log(res.data);
         if (res.data !== undefined) {
-          let data = res.data;
+          let data = res.data.results;
           this.setState({ itemCategories: data });
         }
       })

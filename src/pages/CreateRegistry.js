@@ -25,10 +25,10 @@ export class CreateRegistry extends Component {
         "content-type": "multipart/form-data",
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data !== undefined) {
           // const typeList = res.data
-          let data = res.data;
+          let data = res.data.results;
           for (let i = 0; i < data.length; i++) {
             data[i].image = data[i].image.replace("image/upload/", "");
           }

@@ -26,13 +26,14 @@ export class ManageRegistry extends Component {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data !== undefined) {
           window.localStorage.setItem("name", res.data.first_name);
           window.localStorage.setItem("spouseName", res.data.spouse_name);
           window.localStorage.setItem("username", res.data.username);
           window.localStorage.setItem("event_date", res.data.event_date);
           window.localStorage.setItem("event_type", res.data.event_type);
+          window.localStorage.setItem("userId", res.data.id);
         }
         this.setState({ spouseName: window.localStorage.spouseName });
         let event_date = window.localStorage.event_date;
@@ -62,7 +63,7 @@ export class ManageRegistry extends Component {
       .then((response) => {
         // console.log(res.data);
         if (response.data !== undefined) {
-          let data = response.data;
+          let data = response.data.results;
           //   let category = [];
 
           //   for (let i = 0; i < data.length; i++) {

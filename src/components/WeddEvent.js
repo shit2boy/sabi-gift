@@ -71,7 +71,9 @@ export default class getstarted extends Component {
 
   handleChanger(e) {
     let formField = this.state.formField;
-    formField[e.target.name] = e.target.value;
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    formField[e.target.name] = value;
     this.setState({
       formField,
     });
@@ -146,6 +148,10 @@ export default class getstarted extends Component {
     if (!formField["password"]) {
       formIsValid = false;
       errors["password"] = "*Please enter your password.";
+    }
+    if (!formField["checked"]) {
+      formIsValid = false;
+      errors["checked"] = "* Agreement policy.";
     }
 
     // if (typeof formField["password"] !== "undefined") {
@@ -402,7 +408,7 @@ export default class getstarted extends Component {
                             GET STARTED
                           </Button>
                         )}
-                        {this.state.currentIndex > 0 && (
+                        {this.state.currentIndex > 0 && !this.state.isLogged && (
                           <Button
                             type="submit"
                             className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
@@ -411,6 +417,15 @@ export default class getstarted extends Component {
                           >
                             Next
                           </Button>
+                        )}
+                        {this.state.currentIndex > 0 && (
+                          <Link
+                            to="/updateprofile"
+                            className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
+                            style={{ background: "#AAAAAA" }}
+                          >
+                            Next
+                          </Link>
                         )}
                       </form>
                     </div>
@@ -474,9 +489,14 @@ export default class getstarted extends Component {
                       <Form.Group id="formGridCheckbox">
                         <Form.Check
                           type="checkbox"
+                          onChange={this.handleChanger}
+                          name="checked"
                           label="I have read the Privacy Policy and agree to the Terms of Service."
                           required
                         />
+                        <span style={{ color: "red" }}>
+                          {this.state.errors["checked"]}
+                        </span>
                       </Form.Group>
                       {this.state.errorMessage && !this.state.message && (
                         <p style={{ color: "red", textAlign: "center" }}>

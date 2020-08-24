@@ -8,6 +8,7 @@ function ModalFindEvent(props) {
   const [validated, setValidated] = useState(false);
   const [searchedValue, setSearchedValue] = useState("");
   const [data, setData] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const onSearch = (event) => {
     const name = event.target.value;
@@ -27,15 +28,29 @@ function ModalFindEvent(props) {
         console.log(err);
       });
   };
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    event.preventDefault();
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
+  const validateForm = () => {
+    let searchField = searchedValue;
+    let errors = "";
+    let formIsValid = true;
+    if (!searchField) {
+      formIsValid = false;
+      errors = "*Empty field.";
     }
+    setErrors(errors);
+    return formIsValid;
+  };
 
-    setValidated(true);
-    handleSearch();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validateForm()) {
+      const form = event.currentTarget;
+      if (form.checkValidity() === false) {
+        event.stopPropagation();
+      }
+
+      setValidated(true);
+      handleSearch();
+    }
   };
 
   return (
@@ -65,6 +80,7 @@ function ModalFindEvent(props) {
                 type="text"
                 placeholder="Victor's Birthday"
               />
+              <span style={{ color: "red" }}>{errors}</span>
               <Form.Control.Feedback type="invalid">
                 Empty
               </Form.Control.Feedback>

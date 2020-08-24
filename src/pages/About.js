@@ -42,6 +42,7 @@ export class About extends Component {
     this.setState({
       formField,
     });
+    console.log(formField);
   }
   handleSelectedGiftType = (e) => {
     this.setState({
@@ -69,16 +70,16 @@ export class About extends Component {
       selectedArr.splice(this.state.selectedgift.indexOf(e.target.id), 1);
       this.setState({ selectedgift: selectedArr });
     }
-    console.log(this.state.selectedgift);
+    // console.log("gifts", this.state.selectedgift);
   };
 
   validateForm() {
     let formField = this.state.formField;
     let errors = {};
     let formIsValid = true;
-    if (!formField["firstName"] || formField["firstName"].length < 3) {
+    if (!formField["firstName"]) {
       formIsValid = false;
-      errors["firstName"] = "Cannot be empty or less than 3 characters";
+      errors["firstName"] = "Cannot be empty";
     }
     if (typeof formField["firstName"] !== "undefined") {
       if (!formField["firstName"].match(/^[a-zA-Z ]*$/)) {
@@ -86,9 +87,9 @@ export class About extends Component {
         errors["firstName"] = "*Please enter alphabet characters only.";
       }
     }
-    if (!formField["lastName"] || formField["lastName"].length < 3) {
+    if (!formField["lastName"]) {
       formIsValid = false;
-      errors["lastName"] = "Cannot be empty  or less than 3 characters";
+      errors["lastName"] = "Cannot be empty";
     }
     if (typeof formField["lastName"] !== "undefined") {
       if (!formField["lastName"].match(/^[a-zA-Z ]*$/)) {
@@ -131,44 +132,53 @@ export class About extends Component {
     console.log(this.validateForm());
 
     event.preventDefault();
-    if (this.validateForm()) {
-      event.stopPropagation();
-      alert("Profile Updated");
-      let formField = this.state.formField;
-      const newUserInfo = new FormData();
-      // newUserInfo.append('email', formField['email']);
-      newUserInfo.append("first_name", formField["firstName"]);
-      newUserInfo.append("last_name", formField["lastName"]);
-      newUserInfo.append("mobile", formField["Phone"]);
-      newUserInfo.append("street", formField["address"]);
-      newUserInfo.append("lga", formField["city"]);
-      newUserInfo.append("city", formField["city"]);
-      newUserInfo.append("gender", undefined);
-      newUserInfo.append("photo", "");
+    // if (this.validateForm()) {
+    let formField = this.state.formField;
+    const newUserInfo = new FormData();
+    // newUserInfo.append('email', formField['email']);
+    newUserInfo.append("first_name", formField["firstName"]);
+    newUserInfo.append("last_name", formField["lastName"]);
+    newUserInfo.append("mobile", formField["Phone"]);
+    newUserInfo.append("street", formField["address"]);
+    newUserInfo.append("lga", formField["city"]);
+    newUserInfo.append("city", formField["city"]);
+    newUserInfo.append("gender", undefined);
+    newUserInfo.append("photo", "");
 
-      axios
-        .patch(`${util.API_BASE_URL}accounts/profile/`, newUserInfo, {
-          headers: {
-            Authorization: "Token " + localStorage.getItem("token_id"),
+    axios
+      .patch(`${util.API_BASE_URL}accounts/profile/`, newUserInfo, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+        },
+      })
+      .then((response) => {
+        if (response.status === 200)
+          window.localStorage.setItem("userId", response.data.id);
+        window.localStorage.setItem("event_type", response.data.event_type);
+        window.localStorage.setItem("name", response.data.first_name);
+        // console.log(response);
+        // alert(response.statusText);
+        this.setState({
+          currentIndex: this.state.currentIndex + 1,
+          signUpResponse: {
+            successful: true,
+            message: "Registry Successful",
           },
-        })
-        .then((response) => {
-          if (response.status === 200)
-            // console.log(response);
-            // alert(response.statusText);
-            this.setState({
-              currentIndex: this.state.currentIndex + 1,
-              signUpResponse: {
-                successful: true,
-                message: "Registry Successful",
-              },
-            });
-        })
-        .catch((error) => {
-          console.dir(error);
-          this.setState({ errorMessage: error.response.data.first_name });
         });
-    }
+      })
+      .catch((error) => {
+        console.dir(error);
+        this.setState({ errorMessage: error.response.data.first_name });
+      });
+
+    this.setState({
+      currentIndex: this.state.currentIndex + 1,
+      signUpResponse: {
+        successful: true,
+        message: "Registry Successful",
+      },
+    });
+    // }
   }
 
   componentDidMount(event) {
@@ -180,8 +190,9 @@ export class About extends Component {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((response) => {
+        // console.log("regtyp", response);
         if (response.status === 200)
-          this.setState({ registryCategories: response.data });
+          this.setState({ registryCategories: response.data.results });
       })
       .catch((error) => {
         console.dir(error);
@@ -192,7 +203,7 @@ export class About extends Component {
       })
       .then((response) => {
         if (response.status === 200) {
-          let data = response.data;
+          let data = response.data.results;
           for (let i = 0; i < data.length; i++) {
             data[i].image = data[i].image.replace("image/upload/", "");
             this.setState({ registryType: data });
@@ -225,17 +236,31 @@ export class About extends Component {
   handleGiftSubmit = (event) => {
     event.preventDefault();
     const gift = this.state.selectedgift;
-    // let result = gift.map(Number);
-    let gifts = {
-      gifts: gift.map(Number),
-    };
+    let gifts = gift.map(Number);
 
+    // console.log(gifts);
+    let eventLink = `https://sabigift.netlify.app/registry/${window.localStorage.name}2020`;
+
+    let UserEventInfo = {
+      event_owner: window.localStorage.userId,
+      title: window.localStorage.first_name,
+      event_link: eventLink,
+      start_date: window.localStorage.event_date,
+      start_time: "07:00:00",
+      event_type: window.localStorage.event_type,
+      poster: "",
+      gifts: gifts,
+    };
     axios
-      .patch(`${util.API_BASE_URL}add-registries/3/`, gifts, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      .post(`${util.API_BASE_URL}events/`, UserEventInfo, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       })
       .then((response) => {
-        if (response.status === 200)
+        if (response.status === 200 || response.status === 201)
           // console.log(response);
           window.location.href = "/manageregistry";
 
@@ -243,10 +268,7 @@ export class About extends Component {
       })
       .catch((error) => {
         console.dir(error);
-        // this.setState({ errorMessage: error.response.data.first_name });
       });
-    // console.log(gifts);
-    // console.log(this.state.selectedgift);
   };
 
   back = () => {
@@ -274,7 +296,7 @@ export class About extends Component {
       cursor: "pointer",
     };
     const unmarkedgiftStyle = {
-      backgroundColor: "#red",
+      backgroundColor: "red",
       cursor: "pointer",
     };
     return (

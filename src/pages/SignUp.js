@@ -145,6 +145,10 @@ export default class getstarted extends Component {
       formIsValid = false;
       errors["password"] = "*Please enter your password.";
     }
+    if (!formField["checked"]) {
+      formIsValid = false;
+      errors["checked"] = "* Agreement policy.";
+    }
 
     // if (typeof formField["password"] !== "undefined") {
     //   if (
@@ -452,9 +456,14 @@ export default class getstarted extends Component {
                       </Form.Row>
                       <Form.Group id="formGridCheckbox">
                         <Form.Check
+                          onChange={this.handleChange}
+                          name="checked"
                           type="checkbox"
                           label="I have read the Privacy Policy and agree to the Terms of Service."
                         />
+                        <span style={{ color: "red" }}>
+                          {this.state.errors["checked"]}
+                        </span>
                       </Form.Group>
                       {this.state.errorMessage && !this.state.message && (
                         <p style={{ color: "red", textAlign: "center" }}>

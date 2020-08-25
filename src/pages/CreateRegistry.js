@@ -86,15 +86,18 @@ export class CreateRegistry extends Component {
                       <p className="py-4">Select the Event type</p>
                       <div className="row col-10">
                         {this.state.eventTypeList.map((type) => (
-                          <button key={type.id} className="eventItem">
+                          <button
+                            onClick={this.handleEvent}
+                            key={type.id}
+                            className="eventItem"
+                          >
                             <img
                               src={type.image}
                               width="40px"
                               alt={type.name}
+                              id={type.id}
                             />
-                            <p onClick={this.handleEvent} id={type.id}>
-                              {type.name}
-                            </p>
+                            <p id={type.id}>{type.name}</p>
                           </button>
                         ))}
 

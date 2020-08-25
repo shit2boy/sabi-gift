@@ -47,6 +47,7 @@ function App() {
             <Route path="/manageregistry" component={ManageRegistry} />
             <Route path="/giftTracker" component={GiftTracker} />
             <Route path="/registry/:handle" component={EventType} />
+            <Route path="/myregistry" component={EventType} />
             <Route path="/checkout" component={CheckoutForm} />
             <Route path="/getstarted" component={getstarted} />
             <Route path="/sign in" component={Login} />

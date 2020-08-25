@@ -3,14 +3,36 @@ import SideBar from "../components/SideBar";
 import DashboardNav from "../components/DashboardNav";
 import AvailableItems from "../components/AvailableItems";
 import Product from "../components/Product";
-import { StateContext } from "../Context";
 import axios from "axios";
 import util from "../util/util";
 
 export class RegistryChecklist extends Component {
-  static contextType = StateContext;
-
+  constructor() {
+    super();
+    this.state = {
+      products: [],
+    };
+  }
   componentDidMount() {
+    axios
+      .get(`${util.API_BASE_URL}registries/`, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+
+      .then((response) => {
+        console.log(response.data);
+        if (response.data !== undefined) {
+          let data = response.data;
+          for (let i = 0; i < data.length; i++) {
+            data[i].picture = data[i].picture.replace("image/upload/", "");
+          }
+          this.setState({ products: data });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     axios
       .get(`${util.API_BASE_URL}events/`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
@@ -51,10 +73,7 @@ export class RegistryChecklist extends Component {
                 <AvailableItems />
               </div>
               <div className="col">
-                <Product
-                  Products={this.context.Products}
-                  showWishList={false}
-                />
+                <Product Products={this.state.products} showWishList={false} />
               </div>
             </div>
           </div>

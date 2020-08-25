@@ -25,7 +25,7 @@ export class About extends Component {
       errors: {},
       border: " ",
       selected: [],
-      selectedgift: [],
+      selectedgift: false,
       backgroundColor: "",
       bestSellingItems: [],
       selectedRegistryType: [],
@@ -46,7 +46,7 @@ export class About extends Component {
   }
   handleSelectedGiftType = (e) => {
     this.setState({
-      selectedGiftType: e.target.innerText,
+      selectedGiftType: true,
     });
     console.log(this.state.selectedGiftType);
   };
@@ -70,7 +70,7 @@ export class About extends Component {
       selectedArr.splice(this.state.selectedgift.indexOf(e.target.id), 1);
       this.setState({ selectedgift: selectedArr });
     }
-    // console.log("gifts", this.state.selectedgift);
+    console.log("gifts", this.state.selectedgift);
   };
 
   validateForm() {
@@ -236,9 +236,13 @@ export class About extends Component {
   handleGiftSubmit = (event) => {
     event.preventDefault();
     const gift = this.state.selectedgift;
+    for (let i = 0; i < gift.length; i++) {
+      gift[i] = gift[i].replace("k", "");
+      console.log(gift[i]);
+    }
     let gifts = gift.map(Number);
 
-    // console.log(gifts);
+    console.log(gifts);
     let eventLink = `https://sabigift.netlify.app/registry/${window.localStorage.name}2020`;
 
     let UserEventInfo = {
@@ -261,8 +265,8 @@ export class About extends Component {
       })
       .then((response) => {
         if (response.status === 200 || response.status === 201)
-          // console.log(response);
-          window.location.href = "/manageregistry";
+          console.log(response);
+        // window.location.href = "/manageregistry";
 
         // console.log(gifts);
       })
@@ -280,8 +284,6 @@ export class About extends Component {
   next = () => {
     if (this.state.currentIndex >= 4) {
       window.location.href = "/manageregistry";
-
-      return;
     }
     this.setState({ currentIndex: this.state.currentIndex + 1 });
   };
@@ -483,21 +485,24 @@ export class About extends Component {
                     <p className="py-4">Select the gift types</p>
                     <div className="col-10 row">
                       {this.state.registryType.map((type) => (
-                        <button key={type.id} className="eventItem col-lg-3">
+                        <div
+                          id={type.id}
+                          onClick={this.handleSelectedGiftType}
+                          key={type.id}
+                          className="eventItem col-lg-3"
+                        >
                           <div className="text-center">
                             <img
+                              id={type.id}
                               src={type.image}
                               alt={type.name}
                               width="80px"
                             />{" "}
                           </div>
-                          <p
-                            onClick={this.handleSelectedGiftType}
-                            className="text-center mb-0"
-                          >
+                          <p className="text-center mb-0" id={type.id}>
                             {type.name}
                           </p>
-                        </button>
+                        </div>
                       ))}
                     </div>
                     <div className="p-3">
@@ -518,12 +523,14 @@ export class About extends Component {
                   >
                     Back
                   </button>
-                  <button
-                    onClick={this.next}
-                    className="btn btn-dark rounded-pill px-5"
-                  >
-                    Next
-                  </button>
+                  {this.state.selectedGiftType && (
+                    <button
+                      onClick={this.next}
+                      className="btn btn-dark rounded-pill px-5"
+                    >
+                      Next
+                    </button>
+                  )}
                   {/* </div> */}
                 </div>
               </div>
@@ -558,13 +565,13 @@ export class About extends Component {
                               : unmarkedStyle
                           }
                           className="eventItem col-lg-3"
-                          // onClick={this.handleSelectOpt}
+                          onClick={this.context.handleSelectOpt}
                         >
                           <p></p>
                           {/* <div className='text-center'><img src={category.image} alt='weddingIcon' /> </div> */}
                           <p
                             id={"ddd" + category.id}
-                            onClick={this.context.handleSelectOpt}
+                            // onClick={this.context.handleSelectOpt}
                             className="text-center"
                           >
                             {category.name}
@@ -636,12 +643,13 @@ export class About extends Component {
                   <h2 id="header">Try adding few gifts </h2>
                   <p>you can't go wrong with this best sellers</p>
                   <div className="row col-10 mb-2">
-                    {this.state.bestSellingItems.map((item) => (
+                    {this.state.bestSellingItems.map((item, index) => (
                       <div
-                        id={item.id}
-                        key={item.id}
+                        id={"k" + item.id}
+                        key={index}
+                        onClick={this.addedToRegistry}
                         style={
-                          this.state.selectedgift.indexOf(item.id) > -1
+                          this.state.selectedgift.indexOf("k" + item.id) > -1
                             ? containerStyle
                             : unmarkedgiftStyle
                         }
@@ -649,12 +657,14 @@ export class About extends Component {
                       >
                         <img
                           src={item.picture}
-                          id={item.id}
+                          id={"k" + item.id}
                           width="100px"
                           alt={item.slug}
-                          onClick={this.addedToRegistry}
                         />
-                        <strong className="d-block text-dark">
+                        <strong
+                          id={"k" + item.id}
+                          className="d-block text-dark"
+                        >
                           {item.slug}
                         </strong>
                         {/* <small className="d-block">Description of gift</small> */}

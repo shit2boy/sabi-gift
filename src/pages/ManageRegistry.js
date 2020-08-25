@@ -148,7 +148,7 @@ export class ManageRegistry extends Component {
                 <h6 className="py-2">YOUR REGISTRY URL</h6>
                 <p>
                   https://sabigift.netlify.app/registry/
-                  {window.localStorage.name}2020
+                  {window.localStorage.name}/2020
                 </p>
               </div>
 

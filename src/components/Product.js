@@ -4,8 +4,8 @@ import { Input } from "antd";
 import { BsFillGridFill, BsListUl } from "react-icons/bs";
 import { Card } from "react-bootstrap";
 // import {StateContext} from "../Context"
-import axios from "axios";
-import util from "../util/util";
+// import axios from "axios";
+// import util from "../util/util";
 import AddToCart from "./AddToCart";
 // import { propTypes } from 'prop-types';
 
@@ -23,33 +23,6 @@ const { Search } = Input;
 // }
 
 export class Product extends Component {
-  //   static contextType = StateContext;
-
-  state = {
-    Products: [],
-  };
-
-  componentDidMount() {
-    axios
-      .get(`${util.API_BASE_URL}registries/`, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      })
-
-      .then((res) => {
-        // console.log(res.data);
-        if (res.data !== undefined) {
-          let data = res.data;
-          for (let i = 0; i < data.length; i++) {
-            data[i].picture = data[i].picture.replace("image/upload/", "");
-          }
-          this.setState({ Products: data });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   render() {
     return (
       <div className="container-fluid">
@@ -81,7 +54,7 @@ export class Product extends Component {
         </div>
         <div className="row">
           {/* onClick={(id)=>this.context.handleItemDetails(id)} */}
-          {this.state.Products.map((item) => (
+          {this.props.Products.map((item) => (
             <Card key={item.id} className="productCards  col-sm-3 m-3">
               <div>
                 <img

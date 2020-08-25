@@ -9,14 +9,17 @@ import RegistryBar from "./ProgressBar";
 import NextSteps from "./NextSteps";
 import SideBar from "./SideBar";
 import CheckList from "./AddcheckList";
-// import axios from "axios";
-// import util from "../util/util";
+import axios from "axios";
+import util from "../util/util";
+import { StateContext } from "../Context";
 
 const date = new Date();
 const formatDate = { day: "numeric", year: "numeric", month: "long" };
 
 // console.log(date.toLocaleDateString(undefined, options));
 export class Dashboard extends Component {
+  static contextType = StateContext;
+
   state = {
     date: date.toLocaleDateString(undefined, formatDate),
     isLogged: false,
@@ -26,6 +29,48 @@ export class Dashboard extends Component {
     if (!window.localStorage.token_id) {
       window.location.href = "/";
     }
+    const { handle } = this.props.match.params;
+
+    axios
+
+      .get(`${util.API_BASE_URL}events/${handle}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data !== undefined) {
+          let data = res.data;
+          for (let i = 0; i < data.gifts.length; i++) {
+            data.gifts[i].picture = data.gifts[i].picture.replace(
+              "image/upload/",
+              ""
+            );
+          }
+
+          this.setState({
+            event_type: data.event_type,
+            event_date: data.start_date,
+            slug: data.slug,
+            products: data.gifts,
+          });
+          window.localStorage.setItem("name", res.data.first_name);
+
+          let event_date = this.state.event_date;
+          let dateDifference =
+            new Date(event_date).getTime() - new Date().getTime(); //Future date - current date
+          let daysTillEventday = Math.floor(
+            dateDifference / (1000 * 60 * 60 * 24)
+          );
+          this.setState({ dayLeftToEvent: daysTillEventday });
+        }
+        console.log(this.state);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   // componentDidMount() {
   //   axios
@@ -90,7 +135,7 @@ export class Dashboard extends Component {
                         <span className="badge badge-pill badge-success">
                           cash
                         </span>
-                        <p>200,000</p>
+                        <p>0</p>
                       </div>
                     </div>
                   </div>
@@ -107,7 +152,7 @@ export class Dashboard extends Component {
                         <span className="badge badge-pill badge-primary">
                           Gifts
                         </span>
-                        <p>400,000</p>
+                        <p>0</p>
                       </div>
                     </div>
                   </div>

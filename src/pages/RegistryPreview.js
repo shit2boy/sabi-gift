@@ -24,7 +24,7 @@ class EventType extends Component {
     dayLeftToEvent: "",
   };
   componentDidMount() {
-    const { handle } = this.props.match.params;
+    // const { handle } = this.props.match.params;
     // fetch(`${util.API_BASE_URL}events/${handle}`).then((user) => {
     //   this.setState(() => ({ user }));
     //   console.log(user);

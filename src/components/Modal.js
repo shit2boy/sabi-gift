@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Form, Col } from "react-bootstrap";
 import coupleimg from "../images/landing/coupleimg.png";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import util from "../util/util";
 
@@ -23,6 +24,7 @@ function ModalFindEvent(props) {
         // console.log(res.data);
         setData(res.data);
         console.log("data  is", data);
+        console.log(res.data.event_link);
       })
       .catch((err) => {
         console.log(err);
@@ -43,6 +45,7 @@ function ModalFindEvent(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
+      event.preventDefault();
       setValidated(true);
       handleSearch();
     }
@@ -94,7 +97,10 @@ function ModalFindEvent(props) {
         </Form>
         <div className="row">
           {data.map((event, index) => (
-            <div key={index} className="card p-0 col-sm m-2 col-3 text-center">
+            <div
+              key={index}
+              className="card p-0 m-2 col-lg-3 col-sm text-center"
+            >
               <div>
                 <img
                   className=" img-fluid"
@@ -105,7 +111,7 @@ function ModalFindEvent(props) {
               </div>
 
               <div className="card-footer" style={{ cursor: "pointer" }}>
-                <p>VIEW EVENT</p>
+                <Link to={event.event_link}>VIEW EVENT</Link>
                 {/* <p>{event.event_type}</p> */}
               </div>
             </div>

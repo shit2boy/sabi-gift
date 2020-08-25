@@ -38,7 +38,7 @@ export class DashboardNav extends Component {
                   <small>setting</small>
                 </Link>
               </span>
-              <Link className="text-link" to="/registry">
+              <Link className="text-link" to="/myregistry">
                 <span>
                   <img src={previewIcon} alt="icon"></img>
                   <small>Preview</small>

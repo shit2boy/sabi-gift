@@ -18,7 +18,7 @@ class EventType extends Component {
   };
   componentDidMount() {
     const { handle } = this.props.match.params;
-    fetch(`https://sabigift.netlify.app/registry/${handle}`).then((user) => {
+    fetch(`http://localhost:3000/registry/${handle}`).then((user) => {
       this.setState(() => ({ user }));
     });
     if (window.localStorage.event_type === "2") {

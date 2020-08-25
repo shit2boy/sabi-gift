@@ -4,6 +4,7 @@ import sabigift from "../images/landing/sabigift.png";
 import { StateContext } from "../Context";
 import Product from "../components/Product";
 import AvailableItems from "../components/AvailableItems";
+import util from "../util/util";
 
 const date = new Date();
 const formatDate = { day: "numeric", year: "numeric", month: "long" };
@@ -18,14 +19,10 @@ class EventType extends Component {
   };
   componentDidMount() {
     const { handle } = this.props.match.params;
-    fetch(`https://sabigift.netlify.app/registry/${handle}`).then((user) => {
+    fetch(`${util.API_BASE_URL}events/${handle}`).then((user) => {
       this.setState(() => ({ user }));
+      console.log(user);
     });
-    if (window.localStorage.event_type === "2") {
-      this.setState({ event_type: "Wedding" });
-    } else {
-      this.setState({ event_type: "Birthday" });
-    }
   }
 
   render() {

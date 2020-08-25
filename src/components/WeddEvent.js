@@ -311,6 +311,7 @@ export default class getstarted extends Component {
                     <div className="mt-4">
                       <form>
                         <DatePicker
+                          required
                           onChange={this.dateChange}
                           disabledDate={this.disabledDate}
                         />

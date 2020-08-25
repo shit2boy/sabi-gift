@@ -54,6 +54,10 @@ export default class getstarted extends Component {
     this.setState({ eventDate: dateString });
     console.log(date, dateString);
   }
+  disabledDate = (current) => {
+    // Can not select days before today and today
+    return current && current.valueOf() < Date.now();
+  };
 
   componentDidMount() {
     if (window.localStorage.token_id) {
@@ -287,7 +291,11 @@ export default class getstarted extends Component {
 
                     <div className="mt-4">
                       <form>
-                        <DatePicker required onChange={this.dateChange} />
+                        <DatePicker
+                          required
+                          onChange={this.dateChange}
+                          disabledDate={this.disabledDate}
+                        />
 
                         {this.state.currentIndex === 0 && (
                           <Button

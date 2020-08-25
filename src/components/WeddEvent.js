@@ -83,6 +83,10 @@ export default class getstarted extends Component {
     this.setState({ eventDate: dateString });
     // console.log(date, dateString);
   }
+  disabledDate = (current) => {
+    // Can not select days before today and today
+    return current && current.valueOf() < Date.now();
+  };
 
   mapValueAndNext = (e) => {
     e.preventDefault();
@@ -151,7 +155,7 @@ export default class getstarted extends Component {
     }
     if (!formField["checked"]) {
       formIsValid = false;
-      errors["checked"] = "* Agreement policy.";
+      errors["checked"] = "*check the box.";
     }
 
     // if (typeof formField["password"] !== "undefined") {
@@ -306,7 +310,10 @@ export default class getstarted extends Component {
                       ))}
                     <div className="mt-4">
                       <form>
-                        <DatePicker onChange={this.dateChange} />
+                        <DatePicker
+                          onChange={this.dateChange}
+                          disabledDate={this.disabledDate}
+                        />
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
@@ -408,7 +415,7 @@ export default class getstarted extends Component {
                             GET STARTED
                           </Button>
                         )}
-                        {this.state.currentIndex > 0 && !this.state.isLogged && (
+                        {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
                             className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
@@ -418,7 +425,7 @@ export default class getstarted extends Component {
                             Next
                           </Button>
                         )}
-                        {this.state.currentIndex > 0 && (
+                        {/* {this.state.currentIndex > 0 && (
                           <Link
                             to="/updateprofile"
                             className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
@@ -426,12 +433,12 @@ export default class getstarted extends Component {
                           >
                             Next
                           </Link>
-                        )}
+                        )} */}
                       </form>
                     </div>
                   </div>
                 )}
-                {this.state.currentIndex === 4 && !this.state.isLogged && (
+                {this.state.currentIndex === 4 && (
                   <div className="">
                     <h2>
                       Good News! You can create <br />a free registry on
@@ -527,7 +534,7 @@ export default class getstarted extends Component {
                     BACK
                   </Button>
                 )}
-                {this.state.currentIndex === 4 && !this.state.isLogged && (
+                {this.state.currentIndex === 4 && (
                   <div className=" d-flex justify-content-around">
                     <p>
                       Already a member?

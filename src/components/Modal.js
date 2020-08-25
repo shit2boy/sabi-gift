@@ -43,11 +43,6 @@ function ModalFindEvent(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
-      const form = event.currentTarget;
-      if (form.checkValidity() === false) {
-        event.stopPropagation();
-      }
-
       setValidated(true);
       handleSearch();
     }
@@ -99,7 +94,7 @@ function ModalFindEvent(props) {
         </Form>
         <div className="row">
           {data.map((event, index) => (
-            <div className="card p-0 col-sm m-2 col-3 text-center">
+            <div key={index} className="card p-0 col-sm m-2 col-3 text-center">
               <div>
                 <img
                   className=" img-fluid"
@@ -115,9 +110,9 @@ function ModalFindEvent(props) {
               </div>
             </div>
           ))}
-          {data.length <= 0 && searchedValue.length !== 0 && (
+          {/* {data.length <= 0 && searchedValue.length !== 0 && (
             <p className="text-center">Oops..., no event found !</p>
-          )}
+          )} */}
         </div>
       </Modal.Body>
     </Modal>
@@ -130,7 +125,8 @@ function FindEvent() {
   return (
     <>
       <button
-        className="text-white border-0 bg-success px-4 py-2 bannerBtn"
+        className="text-white text-decoration-none border-0 bg-success px-4 py-2 bannerBtn"
+        style={{ outline: "0" }}
         onClick={() => setModalShow(true)}
       >
         Find an Event

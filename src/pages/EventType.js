@@ -14,8 +14,13 @@ class EventType extends Component {
   state = {
     date: date.toLocaleDateString(undefined, formatDate),
     event_type: "",
+    user: null,
   };
   componentDidMount() {
+    const { handle } = this.props.match.params;
+    fetch(`https://sabigift.netlify.app/registry/${handle}`).then((user) => {
+      this.setState(() => ({ user }));
+    });
     if (window.localStorage.event_type === "2") {
       this.setState({ event_type: "Wedding" });
     } else {

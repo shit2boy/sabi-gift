@@ -46,7 +46,7 @@ function App() {
             <Route path="/checklist" component={RegistryChecklist} />
             <Route path="/manageregistry" component={ManageRegistry} />
             <Route path="/giftTracker" component={GiftTracker} />
-            <Route path="/registry/" component={EventType} />
+            <Route path="/registry/:user_id" component={EventType} />
             <Route path="/checkout" component={CheckoutForm} />
             <Route path="/getstarted" component={getstarted} />
             <Route path="/sign in" component={Login} />

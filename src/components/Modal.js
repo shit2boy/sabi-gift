@@ -111,7 +111,9 @@ function ModalFindEvent(props) {
               </div>
 
               <div className="card-footer" style={{ cursor: "pointer" }}>
-                <Link to={event.event_link}>VIEW EVENT</Link>
+                <Link to="/registry/{event.slug}" target="blank">
+                  VIEW EVENT
+                </Link>
                 {/* <p>{event.event_type}</p> */}
               </div>
             </div>

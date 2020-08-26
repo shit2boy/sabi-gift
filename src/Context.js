@@ -10,6 +10,7 @@ class ProductProvider extends Component {
     products: [],
     Cart: [],
     // eventType: "",
+    clicked: false,
     registryCategory: [],
     selected: [],
   };
@@ -55,6 +56,7 @@ class ProductProvider extends Component {
       this.setState({ selected: selectedArrr });
     }
     console.log(this.state.selected);
+    this.setState({ clicked: true });
   };
   // handleEventType = (e) => {
   //   this.setState({ eventType: e.target.id });

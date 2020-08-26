@@ -36,12 +36,12 @@ class AddToCart extends Component {
     axios
       .post(
         `${util.API_BASE_URL}carts/`,
-        { product, quantity },
-        {
-          headers: {
-            Authorization: "Token " + localStorage.getItem("token_id"),
-          },
-        }
+        { product, quantity }
+        // {
+        //   headers: {
+        //     Authorization: "Token " + localStorage.getItem("token_id"),
+        //   },
+        // }
       )
       .then((res) => {
         if (res.status === 200) {

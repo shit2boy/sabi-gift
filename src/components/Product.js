@@ -4,8 +4,8 @@ import { Input } from "antd";
 import { BsFillGridFill, BsListUl } from "react-icons/bs";
 import { Card } from "react-bootstrap";
 // import {StateContext} from "../Context"
-// import axios from "axios";
-// import util from "../util/util";
+import axios from "axios";
+import util from "../util/util";
 import AddToCart from "./AddToCart";
 // import { propTypes } from 'prop-types';
 
@@ -23,6 +23,67 @@ const { Search } = Input;
 // }
 
 export class Product extends Component {
+  state = {
+    eventId: "",
+    gift: "",
+  };
+
+  componentDidMount() {
+    axios
+
+      .get(`${util.API_BASE_URL}events/?user=23`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data !== undefined) {
+          let data = res.data;
+          let eventId;
+          for (let i = 0; i < data.length; i++) {
+            // console.log(data[i].cash_gifts);
+            // console.log(data[i].gifts_received);
+            eventId = data[i].id;
+          }
+
+          this.setState({
+            eventId: eventId,
+          });
+          console.log(eventId);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  removeGiftFromRegistry = (e) => {
+    let evtid = this.state.eventId;
+    this.setState({ gift: e.target.id });
+    console.log(this.state.gift);
+    const giftId = new FormData();
+    giftId.append("gifts", this.state.gift);
+    axios
+      .patch(`${util.API_BASE_URL}remove-resgistries/${evtid}/`, giftId, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        if (response.status === 200 || response.status === 201)
+          console.log(response);
+        // window.location.href = "/manageregistry";
+
+        // console.log(gifts);
+      })
+      .catch((error) => {
+        console.dir(error);
+      });
+  };
   render() {
     return (
       <div className="container-fluid">
@@ -61,6 +122,7 @@ export class Product extends Component {
                   className="card-img center"
                   alt="items"
                   src={item.picture}
+                  id={item.id + "jk"}
                 />
               </div>
               <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p>
@@ -103,7 +165,10 @@ export class Product extends Component {
               )}
 
               {!this.props.showWishList && (
-                <div className=" col p-0 mb-0">
+                <div
+                  onClick={this.removeGiftFromRegistry}
+                  className=" col p-0 mb-0"
+                >
                   <small
                     type="button"
                     className="col p-2 text-center"

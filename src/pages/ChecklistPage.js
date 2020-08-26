@@ -11,48 +11,58 @@ export class RegistryChecklist extends Component {
     super();
     this.state = {
       products: [],
+      allRegistry: [],
+      emptyRegistry: false,
     };
   }
   componentDidMount() {
-    axios
-      .get(`${util.API_BASE_URL}registries/`, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      })
+    // axios
+    //   .get(`${util.API_BASE_URL}registries/`, {
+    //     headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+    //   })
 
-      .then((response) => {
-        console.log(response.data);
-        if (response.data !== undefined) {
-          let data = response.data;
-          for (let i = 0; i < data.length; i++) {
-            data[i].picture = data[i].picture.replace("image/upload/", "");
-          }
-          this.setState({ products: data });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data !== undefined) {
+    //       let data = response.data;
+    //       for (let i = 0; i < data.length; i++) {
+    //         data[i].picture = data[i].picture.replace("image/upload/", "");
+    //       }
+    //       this.setState({ allRegistry: data });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     axios
-      .get(`${util.API_BASE_URL}events/`, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      .get(`${util.API_BASE_URL}events/?user=23`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       })
       .then((res) => {
         console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data;
-          let eventtype;
+          let eventGifts;
           for (let i = 0; i < data.length; i++) {
-            if (data[i].name === "Wedding") {
-              eventtype = data[i].id;
+            // console.log(data[i].gifts);
+            eventGifts = data[i].gifts;
+            for (let i = 0; i < eventGifts.length; i++) {
+              eventGifts[i].picture = eventGifts[i].picture.replace(
+                "image/upload/",
+                ""
+              );
             }
           }
-          this.setState({ eventType: eventtype });
+          this.setState({ products: eventGifts });
         }
-        console.log(this.state.eventType);
       })
       .catch((err) => {
         // console.log(err);
+        this.setState({ emptyRegistry: true });
       });
   }
 

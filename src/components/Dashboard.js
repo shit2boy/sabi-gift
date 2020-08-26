@@ -23,50 +23,41 @@ export class Dashboard extends Component {
   state = {
     date: date.toLocaleDateString(undefined, formatDate),
     isLogged: false,
+    cashRecieved: "",
+    giftRecieved: "",
   };
 
   componentDidMount() {
     if (!window.localStorage.token_id) {
       window.location.href = "/";
     }
-    const { handle } = this.props.match.params;
 
     axios
 
-      .get(`${util.API_BASE_URL}events/${handle}`, {
+      .get(`${util.API_BASE_URL}events/?user=23`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data;
-          for (let i = 0; i < data.gifts.length; i++) {
-            data.gifts[i].picture = data.gifts[i].picture.replace(
-              "image/upload/",
-              ""
-            );
+          let cashGift;
+          let gifts_received;
+          for (let i = 0; i < data.length; i++) {
+            // console.log(data[i].cash_gifts);
+            // console.log(data[i].gifts_received);
+            cashGift = data[i].cash_gifts;
+            gifts_received = data[i].gifts_received;
           }
 
           this.setState({
-            event_type: data.event_type,
-            event_date: data.start_date,
-            slug: data.slug,
-            products: data.gifts,
+            cashRecieved: cashGift,
+            giftRecieved: gifts_received,
           });
-          window.localStorage.setItem("name", res.data.first_name);
-
-          let event_date = this.state.event_date;
-          let dateDifference =
-            new Date(event_date).getTime() - new Date().getTime(); //Future date - current date
-          let daysTillEventday = Math.floor(
-            dateDifference / (1000 * 60 * 60 * 24)
-          );
-          this.setState({ dayLeftToEvent: daysTillEventday });
         }
-        console.log(this.state);
       })
       .catch((err) => {
         console.log(err);
@@ -135,7 +126,7 @@ export class Dashboard extends Component {
                         <span className="badge badge-pill badge-success">
                           cash
                         </span>
-                        <p>0</p>
+                        <p>{this.state.cashRecieved}</p>
                       </div>
                     </div>
                   </div>
@@ -152,7 +143,7 @@ export class Dashboard extends Component {
                         <span className="badge badge-pill badge-primary">
                           Gifts
                         </span>
-                        <p>0</p>
+                        <p>{this.state.giftRecieved}</p>
                       </div>
                     </div>
                   </div>

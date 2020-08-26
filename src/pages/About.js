@@ -24,8 +24,8 @@ export class About extends Component {
       errorMessage: "",
       errors: {},
       border: " ",
-      selected: [],
-      selectedgift: false,
+      selected: false,
+      selectedgift: [],
       backgroundColor: "",
       bestSellingItems: [],
       selectedRegistryType: [],
@@ -42,13 +42,13 @@ export class About extends Component {
     this.setState({
       formField,
     });
-    console.log(formField);
+    // console.log(formField);
   }
   handleSelectedGiftType = (e) => {
     this.setState({
       selectedGiftType: true,
     });
-    console.log(this.state.selectedGiftType);
+    // console.log(this.state.selectedGiftType);
   };
   // handleSelectOpt = (e) => {
   //   let selectedArrr = this.state.selected;
@@ -70,7 +70,7 @@ export class About extends Component {
       selectedArr.splice(this.state.selectedgift.indexOf(e.target.id), 1);
       this.setState({ selectedgift: selectedArr });
     }
-    console.log("gifts", this.state.selectedgift);
+    // console.log("gifts", this.state.selectedgift);
   };
 
   validateForm() {
@@ -132,53 +132,47 @@ export class About extends Component {
     console.log(this.validateForm());
 
     event.preventDefault();
-    // if (this.validateForm()) {
-    let formField = this.state.formField;
-    const newUserInfo = new FormData();
-    // newUserInfo.append('email', formField['email']);
-    newUserInfo.append("first_name", formField["firstName"]);
-    newUserInfo.append("last_name", formField["lastName"]);
-    newUserInfo.append("mobile", formField["Phone"]);
-    newUserInfo.append("street", formField["address"]);
-    newUserInfo.append("lga", formField["city"]);
-    newUserInfo.append("city", formField["city"]);
-    newUserInfo.append("gender", undefined);
-    newUserInfo.append("photo", "");
+    if (this.validateForm()) {
+      let formField = this.state.formField;
+      const newUserInfo = new FormData();
+      newUserInfo.append("first_name", formField["firstName"]);
+      newUserInfo.append("last_name", formField["lastName"]);
+      newUserInfo.append("mobile", formField["Phone"]);
+      newUserInfo.append("street", formField["address"]);
+      newUserInfo.append("lga", formField["city"]);
+      newUserInfo.append("city", formField["city"]);
+      newUserInfo.append("gender", undefined);
+      newUserInfo.append("photo", "");
 
-    axios
-      .patch(`${util.API_BASE_URL}accounts/profile/`, newUserInfo, {
-        headers: {
-          Authorization: "Token " + localStorage.getItem("token_id"),
-        },
-      })
-      .then((response) => {
-        if (response.status === 200)
-          window.localStorage.setItem("userId", response.data.id);
-        window.localStorage.setItem("event_type", response.data.event_type);
-        window.localStorage.setItem("name", response.data.first_name);
-        // console.log(response);
-        // alert(response.statusText);
-        this.setState({
-          currentIndex: this.state.currentIndex + 1,
-          signUpResponse: {
-            successful: true,
-            message: "Registry Successful",
+      axios
+        .patch(`${util.API_BASE_URL}accounts/profile/`, newUserInfo, {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
           },
+        })
+        .then((response) => {
+          if (response.status === 200)
+            window.localStorage.setItem("userId", response.data.id);
+          window.localStorage.setItem("event_type", response.data.event_type);
+          window.localStorage.setItem("name", response.data.first_name);
+          // console.log(response);
+          // alert(response.statusText);
+          this.setState({
+            // currentIndex: this.state.currentIndex + 1,
+            signUpResponse: {
+              successful: true,
+              message: "Registry Successful",
+            },
+          });
+        })
+        .catch((error) => {
+          console.dir(error);
+          this.setState({ errorMessage: error.response.data.first_name });
         });
-      })
-      .catch((error) => {
-        console.dir(error);
-        this.setState({ errorMessage: error.response.data.first_name });
-      });
-
+    }
     this.setState({
       currentIndex: this.state.currentIndex + 1,
-      signUpResponse: {
-        successful: true,
-        message: "Registry Successful",
-      },
     });
-    // }
   }
 
   componentDidMount(event) {
@@ -243,7 +237,7 @@ export class About extends Component {
     let gifts = gift.map(Number);
 
     console.log(gifts);
-    let eventLink = `https://sabigift.netlify.app/registry/${window.localStorage.name}2020`;
+    let eventLink = `https://sabigift.netlify.app/registry/${window.localStorage.userId}/${window.localStorage.name}2020`;
 
     let UserEventInfo = {
       event_owner: window.localStorage.userId,
@@ -286,6 +280,7 @@ export class About extends Component {
       window.location.href = "/manageregistry";
     }
     this.setState({ currentIndex: this.state.currentIndex + 1 });
+    console.log("clicked");
   };
   render() {
     const containerStyle = {
@@ -593,12 +588,14 @@ export class About extends Component {
                   >
                     Back
                   </button>
-                  <button
-                    onClick={this.next}
-                    className="btn btn-dark rounded-pill px-5"
-                  >
-                    Next
-                  </button>
+                  {this.context.clicked && (
+                    <button
+                      onClick={this.next}
+                      className="btn btn-dark rounded-pill px-5"
+                    >
+                      Next
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

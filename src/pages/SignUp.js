@@ -151,7 +151,7 @@ export default class getstarted extends Component {
     }
     if (!formField["checked"]) {
       formIsValid = false;
-      errors["checked"] = "* Agreement policy.";
+      errors["checked"] = "*check the box.";
     }
 
     // if (typeof formField["password"] !== "undefined") {

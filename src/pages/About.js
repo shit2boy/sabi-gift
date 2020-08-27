@@ -79,7 +79,7 @@ export class About extends Component {
     let formIsValid = true;
     if (!formField["firstName"]) {
       formIsValid = false;
-      errors["firstName"] = "Cannot be empty";
+      errors["firstName"] = "*Cannot be empty";
     }
     if (typeof formField["firstName"] !== "undefined") {
       if (!formField["firstName"].match(/^[a-zA-Z ]*$/)) {
@@ -110,7 +110,7 @@ export class About extends Component {
     }
     if (!formField["address"]) {
       formIsValid = false;
-      errors["address"] = "Cannot be empty";
+      errors["address"] = "*Cannot be empty";
     }
     // if (!formField["street"]) {
     //   formIsValid = false;
@@ -118,11 +118,11 @@ export class About extends Component {
     // }
     if (!formField["city"]) {
       formIsValid = false;
-      errors["city"] = "Cannot be empty";
+      errors["city"] = "*Cannot be empty";
     }
     if (!formField["state"]) {
       formIsValid = false;
-      errors["state"] = "Cannot be empty";
+      errors["state"] = "*Cannot be empty";
     }
     this.setState({ errors: errors });
     return formIsValid;
@@ -271,13 +271,14 @@ export class About extends Component {
       .then((response) => {
         if (response.status === 200 || response.status === 201)
           console.log(response);
-        window.location.href = "/manageregistry";
+        // window.location.href = "/manageregistry";
 
-        console.log(gifts);
+        // console.log(gifts);
       })
       .catch((error) => {
         console.dir(error);
       });
+    window.location.href = "/manageregistry";
   };
 
   back = () => {

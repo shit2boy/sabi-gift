@@ -31,7 +31,7 @@ export class Product extends Component {
   componentDidMount() {
     axios
 
-      .get(`${util.API_BASE_URL}events/?user=23`, {
+      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

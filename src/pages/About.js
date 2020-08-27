@@ -112,10 +112,10 @@ export class About extends Component {
       formIsValid = false;
       errors["address"] = "Cannot be empty";
     }
-    if (!formField["street"]) {
-      formIsValid = false;
-      errors["street"] = "Cannot be empty";
-    }
+    // if (!formField["street"]) {
+    //   formIsValid = false;
+    //   errors["street"] = "Cannot be empty";
+    // }
     if (!formField["city"]) {
       formIsValid = false;
       errors["city"] = "Cannot be empty";
@@ -131,7 +131,7 @@ export class About extends Component {
   handleSubmit(event) {
     console.log(this.validateForm());
 
-    event.preventDefault();
+    // event.preventDefault();
     if (this.validateForm()) {
       let formField = this.state.formField;
       const newUserInfo = new FormData();
@@ -158,7 +158,7 @@ export class About extends Component {
           // console.log(response);
           // alert(response.statusText);
           this.setState({
-            // currentIndex: this.state.currentIndex + 1,
+            currentIndex: this.state.currentIndex + 1,
             signUpResponse: {
               successful: true,
               message: "Registry Successful",
@@ -170,12 +170,23 @@ export class About extends Component {
           this.setState({ errorMessage: error.response.data.first_name });
         });
     }
-    this.setState({
-      currentIndex: this.state.currentIndex + 1,
-    });
   }
 
   componentDidMount(event) {
+    axios
+      .get(`${util.API_BASE_URL}accounts/profile/`, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data !== undefined) {
+          window.localStorage.setItem("name", res.data.first_name);
+        }
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
+
     this.setState({ selectedRegistryType: event });
     let type = this.state.selectedRegistryType;
     console.log(type);
@@ -237,7 +248,7 @@ export class About extends Component {
     let gifts = gift.map(Number);
 
     console.log(gifts);
-    let eventLink = `https://sabigift.netlify.app/registry/${window.localStorage.userId}/${window.localStorage.name}2020`;
+    let eventLink = `https://sabigift.netlify.app/regsistry/${window.localStorage.userId}/${window.localStorage.name}2020`;
 
     let UserEventInfo = {
       event_owner: window.localStorage.userId,
@@ -260,9 +271,9 @@ export class About extends Component {
       .then((response) => {
         if (response.status === 200 || response.status === 201)
           console.log(response);
-        // window.location.href = "/manageregistry";
+        window.location.href = "/manageregistry";
 
-        // console.log(gifts);
+        console.log(gifts);
       })
       .catch((error) => {
         console.dir(error);
@@ -349,6 +360,7 @@ export class About extends Component {
                             name="firstName"
                             placeholder="Jimi"
                             pattern="[A-Za-z]"
+                            defaultValue={window.localStorage.name}
                             required
                           />
                           <span style={{ color: "red" }}>
@@ -480,7 +492,7 @@ export class About extends Component {
                     <p className="py-4">Select the gift types</p>
                     <div className="col-10 row">
                       {this.state.registryType.map((type) => (
-                        <div
+                        <button
                           id={type.id}
                           onClick={this.handleSelectedGiftType}
                           key={type.id}
@@ -497,7 +509,7 @@ export class About extends Component {
                           <p className="text-center mb-0" id={type.id}>
                             {type.name}
                           </p>
-                        </div>
+                        </button>
                       ))}
                     </div>
                     <div className="p-3">
@@ -665,7 +677,9 @@ export class About extends Component {
                           {item.slug}
                         </strong>
                         {/* <small className="d-block">Description of gift</small> */}
-                        <strong className="">#{item.price}</strong>
+                        <strong id={"k" + item.id} className="">
+                          #{item.price}
+                        </strong>
                       </div>
                       // <div className="eventItem col-lg-3 text-center">
                       //   <img src={bmw} width="80px" alt="weddingIcon" />

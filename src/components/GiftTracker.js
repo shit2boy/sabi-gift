@@ -18,8 +18,35 @@ export class GiftTracker extends Component {
     super();
     this.state = {
       trackedItems: [],
+      giftConverted: false,
+      giftTrackerId: "",
     };
   }
+
+  convertToCredit = (id) => {
+    console.log("clicked" + id);
+    const convertedItemDetail = new FormData();
+    convertedItemDetail.append("status", this.state.gift);
+    convertedItemDetail.append("gift_tracker", this.state.giftTrackerId);
+    convertedItemDetail.append("item", id);
+    axios
+      .patch(`${util.API_BASE_URL}convert-gift/`, convertedItemDetail, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        if (response.status === 200 || response.status === 201)
+          console.log(response);
+        this.setState({ giftConverted: true });
+      })
+      .catch((error) => {
+        console.dir(error);
+      });
+  };
+
   componentDidMount() {
     axios
       .get(
@@ -33,15 +60,22 @@ export class GiftTracker extends Component {
         }
       )
       .then((res) => {
-        console.log(res.data);
-        if (res.data !== undefined) {
-          let data = res.data;
+        console.log(res.data.results);
+        if (res.data.results !== undefined) {
+          let data = res.data.results;
           let trackedGift;
-          for (let key in data) {
-            trackedGift = data[key];
+          for (let i = 0; i < data.length; i++) {
+            trackedGift = data[i].registry;
+            this.setState({ giftTrackerId: data[i].id });
           }
-          this.setState({ trackedItems: data });
-          console.log(trackedGift);
+          for (let i = 0; i < trackedGift.length; i++) {
+            trackedGift[i].picture = trackedGift[i].picture.replace(
+              "image/upload/",
+              ""
+            );
+          }
+          this.setState({ trackedItems: trackedGift });
+          console.log(this.state.trackedItems);
         }
       })
       .catch((err) => {
@@ -106,6 +140,52 @@ export class GiftTracker extends Component {
                 </div>
               </div>
             </div>
+            {this.state.trackedItems.map((item, index) => (
+              <div className="d-flex justify-content-between" style={styles}>
+                <div className="d-flex align-items-center">
+                  <img
+                    src={item.picture}
+                    width="100px"
+                    alt="giftFromGuest"
+                    className="m-4"
+                  />
+                  <div className="ml-2">
+                    <h5>{item.name}</h5>
+                    <p>{item.description}</p>
+                    <span>#{item.price}</span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <div>
+                    <Button
+                      className="mb-1 shadow-lg"
+                      style={{
+                        background: "#6F64F8",
+                        width: "158px",
+                        borderBottomRightRadius: "8px",
+                      }}
+                    >
+                      SEND NOW
+                    </Button>
+                  </div>
+                  <div>
+                    <Button
+                      id={item.id}
+                      onClick={() => this.convertToCredit(item.id)}
+                      style={{
+                        background: "#ededed",
+                        color: "#2c2c2c",
+                        borderBottomLeftRadius: "8px",
+                      }}
+                      disabled={this.state.giftConverted}
+                    >
+                      <GrFavorite />
+                      Convert to credit
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

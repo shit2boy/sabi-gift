@@ -46,14 +46,14 @@ function App() {
             <Route path="/checklist" component={RegistryChecklist} />
             <Route path="/manageregistry" component={ManageRegistry} />
             <Route path="/giftTracker" component={GiftTracker} />
-            <Route path="/registry/:handle" component={EventType} />
+            <Route exact path="/registry/:handle" component={EventType} />
             <Route path="/myregistry" component={EventType} />
             <Route path="/checkout" component={CheckoutForm} />
             <Route path="/getstarted" component={getstarted} />
             <Route path="/sign in" component={Login} />
             <Route path="/additem" component={AddToCart} />
             <Route path="/Passwordreset" component={ResetPassword} />
-            {/* <Route component={()=>} /> */}
+            <Route component={Home} />
           </Switch>
         </Router>
       </Suspense>

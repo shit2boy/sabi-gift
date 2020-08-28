@@ -271,14 +271,16 @@ export class About extends Component {
       .then((response) => {
         if (response.status === 200 || response.status === 201)
           console.log(response);
-        // window.location.href = "/manageregistry";
+        window.localStorage.setItem("slug", response.data.slug);
+
+        window.location.href = "/manageregistry";
 
         // console.log(gifts);
       })
       .catch((error) => {
         console.dir(error);
       });
-    window.location.href = "/manageregistry";
+    // window.location.href = "/manageregistry";
   };
 
   back = () => {

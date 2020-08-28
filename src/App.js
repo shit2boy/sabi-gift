@@ -43,7 +43,7 @@ function App() {
             <Route path="/registration" component={SignUp} />
             <Route path="/updateprofile" component={About} />
             <Route path="/verification/" component={ActivateAcoount} />
-            <Route path="/checklist" component={RegistryChecklist} />
+            <Route path="/checklist/doit" component={RegistryChecklist} />
             <Route path="/manageregistry" component={ManageRegistry} />
             <Route path="/giftTracker" component={GiftTracker} />
             <Route exact path="/registry/:handle" component={EventType} />

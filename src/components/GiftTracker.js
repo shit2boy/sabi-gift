@@ -14,35 +14,39 @@ let styles = {
   opacity: 1,
 };
 export class GiftTracker extends Component {
+  constructor() {
+    super();
+    this.state = {
+      trackedItems: [],
+    };
+  }
   componentDidMount() {
     axios
-      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `${util.API_BASE_URL}gift-tracker/?event=${window.localStorage.eventId}`,
+        {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data;
-          let eventGifts;
-          for (let i = 0; i < data.length; i++) {
-            // console.log(data[i].gifts);
-            eventGifts = data[i].gifts;
-            for (let i = 0; i < eventGifts.length; i++) {
-              eventGifts[i].picture = eventGifts[i].picture.replace(
-                "image/upload/",
-                ""
-              );
-            }
+          let trackedGift;
+          for (let key in data) {
+            trackedGift = data[key];
           }
-          this.setState({ products: eventGifts });
+          this.setState({ trackedItems: data });
+          console.log(trackedGift);
         }
       })
       .catch((err) => {
-        // console.log(err);
-        this.setState({ emptyRegistry: true });
+        console.log(err);
+        // this.setState({ emptyRegistry: true });
       });
   }
 

@@ -26,7 +26,12 @@ export class Product extends Component {
   state = {
     eventId: "",
     gift: "",
+    Products: [],
   };
+  componentWillReceiveProps(props) {
+    console.log(props.Products);
+    this.setState({ Products: props.Products });
+  }
 
   componentDidMount() {
     axios
@@ -52,6 +57,7 @@ export class Product extends Component {
             eventId: eventId,
           });
           console.log(eventId);
+          window.localStorage.setItem("eventId", eventId);
         }
       })
       .catch((err) => {
@@ -59,14 +65,25 @@ export class Product extends Component {
       });
   }
 
-  removeGiftFromRegistry = (e) => {
+  getIndexOfProduct = (id) => {
+    for (let i = 0; i < this.state.Products.length; i++) {
+      if (this.state.Products[i].id === id) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+
+  removeGiftFromRegistry = (id) => {
+    console.log("clicked" + id);
     let evtid = this.state.eventId;
-    this.setState({ gift: e.target.id });
+    this.setState({ gift: id });
     console.log(this.state.gift);
     const giftId = new FormData();
     giftId.append("gifts", this.state.gift);
     axios
-      .patch(`${util.API_BASE_URL}remove-resgistries/${evtid}/`, giftId, {
+      .patch(`${util.API_BASE_URL}remove-registries/${evtid}/`, giftId, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token_id"),
           Accept: "application/json",
@@ -76,9 +93,9 @@ export class Product extends Component {
       .then((response) => {
         if (response.status === 200 || response.status === 201)
           console.log(response);
-        // window.location.href = "/manageregistry";
-
-        // console.log(gifts);
+        let products = this.state.Products;
+        products.splice(this.getIndexOfProduct(id), 1);
+        this.setState({ Products: products });
       })
       .catch((error) => {
         console.dir(error);
@@ -114,20 +131,18 @@ export class Product extends Component {
           </div>
         </div>
         <div className="row">
-          {/* onClick={(id)=>this.context.handleItemDetails(id)} */}
-          {this.props.Products.map((item) => (
+          {this.state.Products.map((item) => (
             <Card key={item.id} className="productCards  col-sm-3 m-3">
               <div>
                 <img
                   className="card-img center"
                   alt="items"
                   src={item.picture}
-                  id={item.id + "jk"}
+                  id={item.id}
                 />
               </div>
               <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p>
               <span className="d-block ml-auto">#{item.price}</span>
-              {/* <span className='d-block mr-auto'>#{item.discount_price}</span> */}
               <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
                 <strong
                   className="d-block"
@@ -166,10 +181,11 @@ export class Product extends Component {
 
               {!this.props.showWishList && (
                 <div
-                  onClick={this.removeGiftFromRegistry}
+                  onClick={() => this.removeGiftFromRegistry(item.id)}
                   className=" col p-0 mb-0"
                 >
                   <small
+                    id={item.id}
                     type="button"
                     className="col p-2 text-center"
                     style={{ background: "#ededed", color: "#2c2c2c" }}

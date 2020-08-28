@@ -41,6 +41,8 @@ class EventType extends Component {
         console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data;
+          window.localStorage.setItem("slug", data.slug);
+
           for (let i = 0; i < data.gifts.length; i++) {
             data.gifts[i].picture = data.gifts[i].picture.replace(
               "image/upload/",
@@ -69,9 +71,6 @@ class EventType extends Component {
       .catch((err) => {
         // console.log(err);
         window.localStorage.removeItem("name");
-        window.localStorage.removeItem("image");
-        window.localStorage.removeItem("username");
-        window.location.href = "/";
       });
   }
 

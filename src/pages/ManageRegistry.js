@@ -18,6 +18,7 @@ export class ManageRegistry extends Component {
     itemCategory: [],
     Registry: [],
     itemChecked: false,
+    eventSlug: "",
   };
 
   componentDidMount() {
@@ -106,15 +107,69 @@ export class ManageRegistry extends Component {
       .catch((err) => {
         console.log(err);
       });
+
+    axios
+      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data !== undefined) {
+          let data = res.data;
+          window.localStorage.setItem("slug", data.slug);
+
+          let eventSlug;
+          for (let i = 0; i < data.length; i++) {
+            eventSlug = data[data.length - 1].slug;
+            window.localStorage.setItem("slug", data.slug);
+          }
+          this.setState({ eventSlug: eventSlug });
+          // console.log(this.state.eventSlug);
+        }
+      })
+      .catch((err) => {
+        // console.log(err);
+        this.setState({ emptyRegistry: true });
+      });
   }
+
   addToReg = (e) => {
     let item = [];
     if (this.state.Registry.indexOf(e.target.id) === -1) {
       item.push(e.target.id);
       this.setState({ Registry: item, itemChecked: true });
+      for (let i = 0; i < item.length; i++) {
+        item[i] = item[i].replace("ddd", "");
+      }
     }
+    let items = item.map(Number);
+    let addeditem = {
+      gitfs: items,
+    };
 
-    console.log(this.state.Registry);
+    axios
+      .patch(
+        `${util.API_BASE_URL}add-registries/${this.state.eventSlug}/`,
+        addeditem,
+        {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
+          },
+        }
+      )
+
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    console.log(addeditem);
+    // console.log(item);
   };
 
   render() {

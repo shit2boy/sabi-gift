@@ -43,7 +43,7 @@ export class RegistryChecklist extends Component {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data;
           let eventGifts;

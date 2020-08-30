@@ -58,7 +58,7 @@ export class RegistryChecklist extends Component {
             }
           }
           this.setState({ products: eventGifts });
-          console.log(this.state.products);
+          // console.log(this.state.products);
         }
       })
       .catch((err) => {

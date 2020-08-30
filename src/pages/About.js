@@ -275,7 +275,7 @@ export class About extends Component {
           console.log(response);
         window.localStorage.setItem("slug", response.data.slug);
 
-        // window.location.href = "/manageregistry";
+        window.location.href = "/manageregistry";
 
         // console.log(gifts);
       })

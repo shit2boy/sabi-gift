@@ -18,6 +18,7 @@ import { ResetPassword } from "./components/ResetPassword";
 import AddToCart from "./components/AddToCart";
 import ActivateAcoount from "./pages/ActivateAcoount";
 import Spinner from "react-bootstrap/Spinner";
+import CartItem from "./pages/CartItem";
 
 const Home = lazy(() => import("./pages/Home"));
 const ManageRegistry = lazy(() => import("./pages/ManageRegistry"));
@@ -43,7 +44,7 @@ function App() {
             <Route path="/registration" component={SignUp} />
             <Route path="/updateprofile" component={About} />
             <Route path="/verification/" component={ActivateAcoount} />
-            <Route path="/checklist/doit" component={RegistryChecklist} />
+            <Route path="/checklist" component={RegistryChecklist} />
             <Route path="/manageregistry" component={ManageRegistry} />
             <Route path="/giftTracker" component={GiftTracker} />
             <Route exact path="/registry/:handle" component={EventType} />
@@ -52,6 +53,7 @@ function App() {
             <Route path="/getstarted" component={getstarted} />
             <Route path="/sign in" component={Login} />
             <Route path="/additem" component={AddToCart} />
+            <Route path="/cart" component={CartItem} />
             <Route path="/Passwordreset" component={ResetPassword} />
             <Route component={Home} />
           </Switch>

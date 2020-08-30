@@ -124,7 +124,7 @@ export class ManageRegistry extends Component {
           let eventSlug;
           for (let i = 0; i < data.length; i++) {
             eventSlug = data[data.length - 1].slug;
-            window.localStorage.setItem("slug", data.slug);
+            window.localStorage.setItem("slug", eventSlug);
           }
           this.setState({ eventSlug: eventSlug });
           // console.log(this.state.eventSlug);
@@ -203,7 +203,7 @@ export class ManageRegistry extends Component {
                 <h6 className="py-2">YOUR REGISTRY URL</h6>
                 <p>
                   https://sabigift.netlify.app/registry/
-                  {window.localStorage.userId}/{window.localStorage.name}2020
+                  {window.localStorage.slug}
                 </p>
               </div>
 

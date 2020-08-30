@@ -33,6 +33,7 @@ class AddToCart extends Component {
       quantity: this.state.quantity,
     });
     const { product, quantity } = this.state;
+
     axios
       .post(
         `${util.API_BASE_URL}carts/`,

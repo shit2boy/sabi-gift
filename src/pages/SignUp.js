@@ -79,7 +79,7 @@ export default class getstarted extends Component {
           }
           this.setState({ eventType: eventtype });
         }
-        console.log(this.state.eventType);
+        // console.log(this.state.eventType);
       })
       .catch((err) => {
         // console.log(err);
@@ -189,6 +189,7 @@ export default class getstarted extends Component {
       newUserInfo.append("no_guest", this.state.answers[2]);
       newUserInfo.append("spouse_name", "");
       newUserInfo.append("photo", "");
+      window.localStorage.setItem("event_date", this.state.eventDate);
 
       axios
         .post(`${util.API_BASE_URL}accounts/register/`, newUserInfo, {

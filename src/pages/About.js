@@ -131,7 +131,7 @@ export class About extends Component {
   handleSubmit(event) {
     console.log(this.validateForm());
 
-    // event.preventDefault();
+    event.preventDefault();
     if (this.validateForm()) {
       let formField = this.state.formField;
       const newUserInfo = new FormData();
@@ -151,9 +151,11 @@ export class About extends Component {
           },
         })
         .then((response) => {
+          console.log(response);
           if (response.status === 200)
             window.localStorage.setItem("userId", response.data.id);
           window.localStorage.setItem("event_type", response.data.event_type);
+          window.localStorage.setItem("event_date", response.data.event_date);
           window.localStorage.setItem("name", response.data.first_name);
           // console.log(response);
           // alert(response.statusText);
@@ -252,12 +254,12 @@ export class About extends Component {
 
     let UserEventInfo = {
       event_owner: window.localStorage.userId,
-      title: window.localStorage.first_name,
       event_link: eventLink,
       start_date: window.localStorage.event_date,
       start_time: "07:00:00",
       event_type: window.localStorage.event_type,
       poster: "",
+      title: `${window.localStorage.name}'s ${window.localStorage.event_date}`,
       gifts: gifts,
     };
     axios
@@ -273,7 +275,7 @@ export class About extends Component {
           console.log(response);
         window.localStorage.setItem("slug", response.data.slug);
 
-        window.location.href = "/manageregistry";
+        // window.location.href = "/manageregistry";
 
         // console.log(gifts);
       })

@@ -192,7 +192,7 @@ export default class getstarted extends Component {
       newUserInfo.append("no_guest", this.state.answers[3]);
       newUserInfo.append("spouse_name", this.state.answers[1]);
       newUserInfo.append("photo", "");
-
+      window.localStorage.setItem("event_date", this.state.eventDate);
       axios
         .post(`${util.API_BASE_URL}accounts/register/`, newUserInfo, {
           "content-type": "multipart/form-data",

@@ -6,6 +6,8 @@ import Product from "../components/Product";
 import AvailableItems from "../components/AvailableItems";
 import util from "../util/util";
 import axios from "axios";
+import { GrCart } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 const date = new Date();
 const formatDate = { day: "numeric", year: "numeric", month: "long" };
@@ -22,6 +24,7 @@ class EventType extends Component {
     event_owner: "",
     slug: "",
     dayLeftToEvent: "",
+    itemInCart: 0,
   };
   componentDidMount() {
     const { handle } = this.props.match.params;
@@ -42,6 +45,7 @@ class EventType extends Component {
         if (res.data !== undefined) {
           let data = res.data;
           window.localStorage.setItem("slug", data.slug);
+          window.localStorage.setItem("event_owner", data.event_owner);
 
           for (let i = 0; i < data.gifts.length; i++) {
             data.gifts[i].picture = data.gifts[i].picture.replace(
@@ -77,18 +81,30 @@ class EventType extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div className="mb-4">
+        <div className="mb-4 d-flex justify-content-between">
           <a href="/Dashboard">
             {" "}
             <img src={sabigift} alt="logo" width="75px" />{" "}
           </a>
+          <div style={{ position: "relative" }}>
+            {" "}
+            <span
+              className="badge-danger"
+              style={{ color: "white", font: "16px", position: "absolute" }}
+            >
+              {this.state.itemInCart}
+            </span>
+            <Link to="/cart">
+              <GrCart size="45px" color="red" title="45" />
+            </Link>
+          </div>
         </div>
         <div className="mb-5">
           <Hero hero="birthday">
             <div className="text-center">
               <h4>
                 {" "}
-                {window.localStorage.name}'s {this.state.event_type}{" "}
+                {window.localStorage.event_owner}'s {this.state.event_type}{" "}
               </h4>
               <p>{this.state.dayLeftToEvent} days Left</p>
             </div>

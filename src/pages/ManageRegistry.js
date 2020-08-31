@@ -147,7 +147,7 @@ export class ManageRegistry extends Component {
     }
     let items = item.map(Number);
     let addeditem = {
-      gitfs: items,
+      gifts: items,
     };
 
     axios

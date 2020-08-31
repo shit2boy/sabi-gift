@@ -109,7 +109,7 @@ export class ManageRegistry extends Component {
       });
 
     axios
-      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.eventId}`, {
+      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -152,7 +152,7 @@ export class ManageRegistry extends Component {
 
     axios
       .patch(
-        `${util.API_BASE_URL}add-registries/${this.state.eventSlug}/`,
+        `${util.API_BASE_URL}add-registries/${window.localStorage.eventId}/`,
         addeditem,
         {
           headers: {

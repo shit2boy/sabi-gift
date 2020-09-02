@@ -24,7 +24,6 @@ class EventType extends Component {
     event_owner: "",
     slug: "",
     dayLeftToEvent: "",
-    itemInCart: 0,
   };
   componentDidMount() {
     const { handle } = this.props.match.params;
@@ -46,6 +45,7 @@ class EventType extends Component {
           let data = res.data;
           window.localStorage.setItem("slug", data.slug);
           window.localStorage.setItem("event_owner", data.event_owner);
+          window.localStorage.setItem("event_id", data.id);
 
           for (let i = 0; i < data.gifts.length; i++) {
             data.gifts[i].picture = data.gifts[i].picture.replace(
@@ -92,10 +92,10 @@ class EventType extends Component {
               className="badge-danger"
               style={{ color: "white", font: "16px", position: "absolute" }}
             >
-              {this.state.itemInCart}
+              {this.context.quantity}
             </span>
             <Link to="/cart">
-              <GrCart size="45px" color="red" title="45" />
+              <GrCart size="20px" />
             </Link>
           </div>
         </div>

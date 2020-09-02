@@ -16,6 +16,7 @@ export class ManageRegistry extends Component {
     spouseName: "",
     dayLeftToEvent: "",
     itemCategory: [],
+    addSuccessfully: false,
     Registry: [],
     itemChecked: false,
     eventSlug: "",
@@ -163,6 +164,9 @@ export class ManageRegistry extends Component {
 
       .then((res) => {
         console.log(res.data);
+        if (res.status === 200) {
+          this.setState({ addSuccessfully: true });
+        }
       })
       .catch((err) => {
         console.log(err);

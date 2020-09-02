@@ -4,6 +4,37 @@ import sabigift from "../images/landing/sabigift.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import util from "../util/util";
+import { PaystackButton } from "react-paystack";
+
+const config = {
+  reference: new Date().getTime(),
+  email: "writeshittu@gmail.com",
+  amount: 20000,
+  publicKey: "pk_test_bba449a6a2f6edf99cb57feb50cd2bb6b65d4e03",
+};
+
+const componentProps = {
+  ...config,
+  text: "Place Order",
+  onSuccess: (res) => {
+    const paymentdetails = {
+      paystack_charge_id: res.reference,
+      amount: window.localStorage.sum * 100,
+      customers: 22,
+    };
+    axios
+      .post(`${util.API_BASE_URL}payments/`, paymentdetails)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // initializePayment();
+    console.log(res);
+  },
+  onClose: () => null,
+};
 
 export default class CheckoutForm extends Component {
   constructor() {
@@ -25,14 +56,25 @@ export default class CheckoutForm extends Component {
     console.log(formField);
   }
   handlePost = () => {
+    let formField = this.state.formField;
+    let customer = new FormData();
+    customer.append("first_name", formField["firstName"]);
+    customer.append("last_name", formField["lastName"]);
+    customer.append("mobile", formField["phone"]);
+    customer.append("email", formField["email"]);
+    customer.append("street_address", formField["address"]);
+    customer.append("state", formField["state"]);
+    customer.append("zip_code", formField["zip"]);
+
     axios
-      .post(`${util.API_BASE_URL}orders/`, { ...this.state.formField })
+      .post(`${util.API_BASE_URL}customers/`, customer)
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err);
       });
+    // initializePayment();
   };
   validateForm = () => {
     let formField = this.state.formField;
@@ -58,6 +100,21 @@ export default class CheckoutForm extends Component {
         errors["lastName"] = "*Please enter alphabet characters only.";
       }
     }
+    if (!formField["email"]) {
+      formIsValid = false;
+      errors["email"] = "*Please enter your email-ID.";
+    }
+
+    if (typeof formField["email"] !== "undefined") {
+      //regular expression for email validation
+      var pattern = new RegExp(
+        /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+      );
+      if (!pattern.test(formField["email"])) {
+        formIsValid = false;
+        errors["email"] = "*Please enter valid email-ID.";
+      }
+    }
     if (!formField["phone"]) {
       formIsValid = false;
       errors["phone"] = "*Please enter your mobile no.";
@@ -73,9 +130,9 @@ export default class CheckoutForm extends Component {
     //   formIsValid = false;
     //   errors["address"] = "*Cannot be empty";
     // }
-    if (!formField["label"]) {
+    if (!formField["address"]) {
       formIsValid = false;
-      errors["label"] = "Cannot be empty";
+      errors["address"] = "Cannot be empty";
     }
     // if (!formField["zip"]) {
     //   formIsValid = false;
@@ -160,28 +217,31 @@ export default class CheckoutForm extends Component {
                       {this.state.errors["phone"]}
                     </span>
                   </Form.Group>
-                  <Form.Group as={Col} controlId="phone">
-                    <Form.Label>Alt Phone</Form.Label>
+                  <Form.Group as={Col} controlId="email">
+                    <Form.Label>Email</Form.Label>
                     <Form.Control
                       onChange={this.handleChange}
-                      name="alt_phone"
+                      name="email"
                       required
-                      type="tel"
-                      placeholder="0000-0000"
+                      type="email"
+                      placeholder="Enter Email Address"
                     />
+                    <span style={{ color: "red" }}>
+                      {this.state.errors["email"]}
+                    </span>
                   </Form.Group>
                 </Form.Row>
                 <Form.Row>
                   <Form.Group as={Col} controlId="label">
-                    <Form.Label>Label</Form.Label>
+                    <Form.Label>Street Address</Form.Label>
                     <Form.Control
                       onChange={this.handleChange}
-                      name="label"
+                      name="address"
                       type="text"
-                      placeholder="Placeholder text"
+                      placeholder="Address"
                     />
                     <span style={{ color: "red", font: "italic" }}>
-                      {this.state.errors["label"]}
+                      {this.state.errors["address"]}
                     </span>
                   </Form.Group>
                 </Form.Row>
@@ -265,13 +325,17 @@ export default class CheckoutForm extends Component {
                 </tbody>
               </Table>
               <div className="text-center">
-                <span
+                {/* <span
                   onClick={this.handleSubmit}
                   type="button"
                   className="p-3 orderBtn"
-                >
-                  Place Order
-                </span>{" "}
+                > */}
+                <PaystackButton
+                  onClick={this.handleSubmit}
+                  className="p-3 orderBtn"
+                  {...componentProps}
+                />
+                {/* </span>{" "} */}
               </div>
             </div>
           </div>

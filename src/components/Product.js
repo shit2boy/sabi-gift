@@ -6,7 +6,9 @@ import { Card } from "react-bootstrap";
 // import {StateContext} from "../Context"
 import axios from "axios";
 import util from "../util/util";
-import AddToCart from "./AddToCart";
+// import AddToCart from "./AddToCart";
+import { StateContext } from "../Context";
+
 // import { propTypes } from 'prop-types';
 
 const { Search } = Input;
@@ -23,12 +25,26 @@ const { Search } = Input;
 // }
 
 export class Product extends Component {
+  static contextType = StateContext;
   state = {
     eventId: "",
     gift: "",
+    addItems: false,
     Products: [],
+    quantity: 1,
+    selectedIds: [],
   };
-  componentWillReceiveProps(props) {
+
+  addToCart = (item) => {
+    let itemsInCart = this.context.itemsInCart;
+    itemsInCart.push(item);
+    var selectedIds = this.state.selectedIds;
+    selectedIds.push(item.id);
+    this.setState({ selectedIds: selectedIds });
+    console.log(this.context.itemsInCart);
+  };
+
+  UNSAFE_componentWillReceiveProps(props) {
     console.log(props.Products);
     this.setState({ Products: props.Products });
   }
@@ -76,7 +92,7 @@ export class Product extends Component {
   };
 
   removeGiftFromRegistry = (id) => {
-    console.log("clicked" + id);
+    // console.log("clicked" + id);
     let evtid = this.state.eventId;
     this.setState({ gift: id });
     console.log(this.state.gift);
@@ -156,7 +172,26 @@ export class Product extends Component {
               {this.props.showWishList && (
                 <div className="col p-0 mb-0">
                   {/* <span type='button' className='col-6 p-2'style={{background:'#ededed',color :'#2c2c2c'}}><GrFavorite/> Wishlist</span> */}
-                  <AddToCart
+                  <button
+                    type="button"
+                    id={item.id}
+                    onClick={() => {
+                      this.addToCart(item);
+                    }}
+                    className="col text-center p-2"
+                    style={{
+                      background: "#6F64F8",
+                      color: "#FFFFFF",
+                      borderBottomRightRadius: "8px",
+                    }}
+                    disabled={this.state.selectedIds.indexOf(item.id) > -1}
+                  >
+                    {this.state.selectedIds.indexOf(item.id) > -1
+                      ? "Item in a cart"
+                      : "Add to cart"}
+                  </button>
+
+                  {/* <AddToCart
                     productId={item.id}
                     image={item.picture}
                     info={item.description}
@@ -175,7 +210,7 @@ export class Product extends Component {
                         Add to cart
                       </span>
                     }
-                  />
+                  /> */}
                 </div>
               )}
 

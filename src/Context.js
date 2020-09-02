@@ -8,8 +8,9 @@ const StateContext = React.createContext();
 class ProductProvider extends Component {
   state = {
     products: [],
-    Cart: [],
-    // eventType: "",
+    quantity: 0,
+    amountToPay: 0,
+    itemsInCart: [],
     clicked: false,
     registryCategory: [],
     selected: [],
@@ -46,6 +47,54 @@ class ProductProvider extends Component {
   // }
 
   // }
+
+  // addToCart = (item) => {
+  //   let itemsInCart = this.state.itemsInCart;
+  //   itemsInCart.push(this.props.items[item.id]);
+  //   shoppingProducts[item.id].inCart = true;
+  //   shoppingProducts[item.id].quantityInCart = 1;
+  //   this.setState({
+  //     quantity: this.state.quantity + 1,
+  //     amountToPay: this.state.amountToPay + this.props.items[item.id].price,
+  //     itemsInCart: itemsInCart,
+  //     items: shoppingProducts,
+  //   });
+  // };
+  // removeFromCart = (item, indexInCart) => {
+  //   let itemsInCart = this.state.itemsInCart;
+  //   shoppingProducts[item.id].inCart = false;
+  //   shoppingProducts[item.id].quantityInCart = 0;
+  //   itemsInCart.splice(indexInCart, 1);
+  //   this.setState({
+  //     quantity: this.state.quantity - 1,
+  //     amountToPay: this.state.amountToPay - this.props.items[item.id].price,
+  //     itemsInCart: itemsInCart,
+  //     items: shoppingProducts,
+  //   });
+  // };
+
+  // addToCart = (id) => {
+  //   let tempProducts = [...this.state.products];
+  //   const index = tempProducts.indexOf(this.getItem(id));
+  //   const product = tempProducts[index];
+  //   product.inCart = true;
+  //   product.count = 1;
+  //   const price = product.price;
+  //   product.total = price;
+  //   this.setState(
+  //     () => {
+  //       return { products: tempProducts, cart: [...this.state.cart, product] };
+  //     },
+  //     () => {
+  //       this.addTotals();
+  //     }
+  //   );
+  // };
+  handleQuantityChange = (e) => {
+    this.setState({ quantity: e.target.value });
+    // console.log(e.target.value);
+  };
+
   handleSelectOpt = (e) => {
     let selectedArrr = this.state.selected;
     if (this.state.selected.indexOf(e.target.id) === -1) {
@@ -90,6 +139,7 @@ class ProductProvider extends Component {
           ...this.state,
           handleSelectOpt: this.handleSelectOpt,
           handleEventType: this.handleEventType,
+          handleQuantityChange: this.handleQuantityChange,
           // addToCart : this.addToCart,
           // wishist : this.wishlist,
           // handleItemDetails : this.handleItemDetails,

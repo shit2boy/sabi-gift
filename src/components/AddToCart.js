@@ -4,15 +4,21 @@ import { GrFavorite } from "react-icons/gr";
 import { Modal } from "react-bootstrap";
 import util from "../util/util";
 import axios from "axios";
+import { StateContext } from "../Context";
 import { Rate } from "antd";
 
 class AddToCart extends Component {
+  static contextType = StateContext;
   constructor(props) {
     super(props);
+    console.log(this.props);
     this.state = {
       modalShow: false,
       product: this.props.productId,
-      quantity: [],
+      price: this.props.price,
+      itemImage: this.props.image,
+      itemInfo: this.props.info,
+      quantity: 0,
       addedToCart: false,
     };
     this.addToCart = this.addToCart.bind(this);
@@ -28,35 +34,44 @@ class AddToCart extends Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-  addToCart() {
+
+  addToCart = (item) => {
+    let itemsInCart = this.context.itemsInCart;
+    itemsInCart.push(this.props);
     this.setState({
-      quantity: this.state.quantity,
+      quantity: this.state.quantity + 1,
+      // amountToPay: this.state.amountToPay + this.props.price,
+      itemsInCart: itemsInCart,
     });
-    const { product, quantity } = this.state;
+    console.log(this.state.quantity);
+    console.log(this.context.itemsInCart);
+    console.log(this.state.price);
+  };
 
-    axios
-      .post(
-        `${util.API_BASE_URL}carts/`,
-        { product, quantity }
-        // {
-        //   headers: {
-        //     Authorization: "Token " + localStorage.getItem("token_id"),
-        //   },
-        // }
-      )
-      .then((res) => {
-        if (res.status === 200) {
-          console.log(res);
-          this.setState({ addedToCart: true });
+  // addToCart() {
+  //   this.setState({
+  //     quantity: this.state.quantity,
+  //   });
+  //   const { product, quantity } = this.state;
 
-          // console.log('successfully ');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log(product);
-      });
-  }
+  // axios
+  //   .post(
+  //     `${util.API_BASE_URL}carts/`,
+  //     { product, quantity }
+  //   )
+  //   .then((res) => {
+  //     if (res.status === 200) {
+  //       console.log(res);
+  //       this.setState({ addedToCart: true });
+
+  //       // console.log('successfully ');
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //     console.log(product);
+  //   });
+  // }
 
   render() {
     return (

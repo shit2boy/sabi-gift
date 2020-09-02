@@ -9,7 +9,7 @@ import { PaystackButton } from "react-paystack";
 const config = {
   reference: new Date().getTime(),
   email: "writeshittu@gmail.com",
-  amount: 20000,
+  amount: window.localStorage.sum * 100,
   publicKey: "pk_test_bba449a6a2f6edf99cb57feb50cd2bb6b65d4e03",
 };
 
@@ -19,7 +19,7 @@ const componentProps = {
   onSuccess: (res) => {
     const paymentdetails = {
       paystack_charge_id: res.reference,
-      amount: window.localStorage.sum * 100,
+
       customers: 22,
     };
     axios

@@ -26,7 +26,7 @@ export default class CartItem extends Component {
   amountToPyay = () => {
     let sum = 0;
     let productIdInCart = [];
-    let cart = {};
+    // let cart = {};
     for (let i = 0; i < this.state.itemsInCart.length; i++) {
       let cart = this.state.itemsInCart[i];
       this.setState({ productIdInCart: productIdInCart });

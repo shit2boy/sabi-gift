@@ -8,9 +8,10 @@ import { PaystackButton } from "react-paystack";
 
 const config = {
   reference: new Date().getTime(),
-  email: window.localStorage.email,
+  // email: window.localStorage.getItem("email"),
+  email: "writeshittu@gmail.com",
   amount: window.localStorage.sum * 100,
-  publicKey: "pk_test_bba449a6a2f6edf99cb57feb50cd2bb6b65d4e03",
+  publicKey: "pk_test_33c5ce31f9965f58cba4db83ce4aae86548f3eaf",
 };
 
 const componentProps = {
@@ -18,7 +19,7 @@ const componentProps = {
   text: "Pay Now",
   onSuccess: (res) => {
     const paymentdetails = {
-      paystack_charge_id: Number(res.reference),
+      paystack_charge_id: res.reference,
 
       customers: Number(window.localStorage.customer_id),
     };
@@ -26,6 +27,11 @@ const componentProps = {
       .post(`${util.API_BASE_URL}payments/`, paymentdetails)
       .then((res) => {
         console.log(res);
+        if (res !== undefined) {
+          console.log(res.results.id);
+          console.log(res.data.results.id);
+          window.localStorage.setItem("payment_id", res.data.results.id);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -33,7 +39,7 @@ const componentProps = {
 
     let orderDetails = {
       ref_code: res.reference,
-      items: window.localStorage.cart_ids,
+      items: window.localStorage.cart_ids.map(Number),
       customers: window.localStorage.customer_id,
       payment: 5,
     };
@@ -66,6 +72,7 @@ export default class CheckoutForm extends Component {
     this.setState({
       formField,
     });
+    window.localStorage.setItem("email", formField["email"]);
     console.log(formField);
   }
   handlePost = () => {
@@ -86,7 +93,7 @@ export default class CheckoutForm extends Component {
         console.log(res.data);
         if (res !== undefined) {
           window.localStorage.setItem("customer_id", res.data.id);
-          window.localStorage.setItem("email", res.data.email);
+          // window.localStorage.setItem("email", res.data.email);
           this.setState({ customerId: true });
         }
       })
@@ -170,6 +177,8 @@ export default class CheckoutForm extends Component {
   };
 
   handleSubmit(event) {
+    console.log(window.localStorage.email);
+    console.log(window.localStorage.sum);
     event.preventDefault();
     if (this.validateForm()) {
       this.handlePost();
@@ -315,7 +324,7 @@ export default class CheckoutForm extends Component {
               style={{
                 border: "2px solid #e6e6e6",
                 background: "#f2f2f2",
-                height: "350px",
+                height: "300px",
                 opacity: "1",
               }}
             >
@@ -323,23 +332,15 @@ export default class CheckoutForm extends Component {
                 <tbody>
                   <tr>
                     <td>Sub-total</td>
-                    <td>#300,000</td>
-                  </tr>
-                  <tr>
-                    <td>Estimated</td>
-                    <td>#30,000</td>
-                  </tr>
-                  <tr>
-                    <td>Sub-total</td>
-                    <td>#300,000</td>
+                    <td>#{window.localStorage.getItem("sum")}</td>
                   </tr>
                   <tr>
                     <td>Shipping</td>
-                    <td>#2,000</td>
+                    <td>#0</td>
                   </tr>
                   <tr>
                     <td>Total</td>
-                    <td>#332,000</td>
+                    <td>#{window.localStorage.getItem("sum")}</td>
                   </tr>
                 </tbody>
               </Table>

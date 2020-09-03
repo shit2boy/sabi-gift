@@ -31,8 +31,8 @@ export class Product extends Component {
     gift: "",
     addItems: false,
     Products: [],
-    quantity: 1,
     selectedIds: [],
+    count: 0,
   };
 
   addToCart = (item) => {
@@ -41,7 +41,7 @@ export class Product extends Component {
     var selectedIds = this.state.selectedIds;
     selectedIds.push(item.id);
     this.setState({ selectedIds: selectedIds });
-    console.log(this.context.itemsInCart);
+    console.log(this.context.quantity);
   };
 
   UNSAFE_componentWillReceiveProps(props) {
@@ -151,7 +151,7 @@ export class Product extends Component {
             <Card key={item.id} className="productCards  col-sm-3 m-3">
               <div>
                 <img
-                  className="card-img center"
+                  className="grow card-img center"
                   alt="items"
                   src={item.picture}
                   id={item.id}
@@ -225,7 +225,7 @@ export class Product extends Component {
                     className="col p-2 text-center"
                     style={{ background: "#ededed", color: "#2c2c2c" }}
                   >
-                    Remove from cart
+                    Remove item
                   </small>
                   {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
                 </div>

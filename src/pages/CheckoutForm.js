@@ -10,7 +10,7 @@ const config = {
   reference: new Date().getTime(),
   email: window.localStorage.email,
   amount: window.localStorage.sum * 100,
-  publicKey: "pk_test_33c5ce31f9965f58cba4db83ce4aae86548f3eaf",
+  publicKey: "pk_test_bba449a6a2f6edf99cb57feb50cd2bb6b65d4e03",
 };
 
 const componentProps = {

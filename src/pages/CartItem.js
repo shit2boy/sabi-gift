@@ -105,14 +105,14 @@ export default class CartItem extends Component {
           </a>
           <div style={{ position: "relative" }}>
             {" "}
-            <span
-              className=" badge badge-danger"
-              style={{ color: "white", font: "16px", position: "absolute" }}
-            >
-              {this.state.quantity}
-            </span>
             <Link to="/cart">
-              <GrCart size="45px" color="red" title="45" />
+              <span
+                className=" badge badge-danger"
+                style={{ color: "white", font: "16px", position: "absolute" }}
+              >
+                {this.state.quantity}
+              </span>
+              <GrCart size="40px" />
             </Link>
           </div>
         </div>

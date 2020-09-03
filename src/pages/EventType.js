@@ -88,14 +88,14 @@ class EventType extends Component {
           </a>
           <div style={{ position: "relative" }}>
             {" "}
-            <span
-              className="badge-danger"
-              style={{ color: "white", font: "16px", position: "absolute" }}
-            >
-              {this.context.quantity}
-            </span>
             <Link to="/cart">
-              <GrCart size="20px" />
+              <span
+                className="badge-danger"
+                style={{ color: "white", font: "16px", position: "absolute" }}
+              >
+                {this.context.quantity}
+              </span>
+              <GrCart size="40px" />
             </Link>
           </div>
         </div>

@@ -178,7 +178,7 @@ export class Product extends Component {
                     onClick={() => {
                       this.addToCart(item);
                     }}
-                    className="col text-center p-2"
+                    className="col text-center p-2 border-0"
                     style={{
                       background: "#6F64F8",
                       color: "#FFFFFF",

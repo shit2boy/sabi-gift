@@ -82,9 +82,12 @@ export default class CartItem extends Component {
         },
       })
       .then((response) => {
-        if (response.status === 200) console.log(response);
+        if (response.status === 200) {
+          window.localStorage.setItem("cart_ids", response.data.Cart_IDs);
+          // console.log(window.localStorage.cart_ids);
 
-        window.location.href = "/checkout";
+          window.location.href = "/checkout";
+        }
       })
       .catch((error) => {
         console.dir(error);

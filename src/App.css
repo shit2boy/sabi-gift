@@ -412,6 +412,7 @@ Link.active:active {
   width: 200px;
   color: #ffffff;
   transition: 0.3s;
+  border: 0;
 }
 .orderBtn:hover {
   background-color: #130e5e;

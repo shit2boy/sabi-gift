@@ -14,6 +14,7 @@ class ProductProvider extends Component {
     clicked: false,
     registryCategory: [],
     selected: [],
+    cart_Ids: [],
   };
 
   // componentDidMount() {

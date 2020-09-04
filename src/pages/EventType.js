@@ -26,7 +26,7 @@ class EventType extends Component {
     dayLeftToEvent: "",
   };
   componentDidMount() {
-    if (!window.localStorage.token_id) {
+    if (window.localStorage.token_id === null) {
       window.localStorage.clear();
     }
     const { handle } = this.props.match.params;

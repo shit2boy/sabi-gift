@@ -83,8 +83,10 @@ export default class CartItem extends Component {
       })
       .then((response) => {
         if (response.status === 200) {
-          window.localStorage.setItem("cart_ids", response.data.Cart_IDs);
-          // console.log(window.localStorage.cart_ids);
+          window.localStorage.setItem(
+            "cartList",
+            JSON.stringify(response.data.Cart_IDs)
+          );
 
           window.location.href = "/checkout";
         }
@@ -92,7 +94,6 @@ export default class CartItem extends Component {
       .catch((error) => {
         console.dir(error);
       });
-    // window.location.href = "/manageregistry";
   }
 
   render() {
@@ -118,7 +119,7 @@ export default class CartItem extends Component {
         </div>
         <hr />
         <div className="row mt-5 justify-content-center">
-          <Table bordered hover>
+          <Table hover>
             <thead>
               <tr>
                 <th>#</th>
@@ -162,6 +163,7 @@ export default class CartItem extends Component {
                   </td>
                   <td>#{inCart.price}</td>
                   <td>
+                    #
                     {this.state.quantityObject["quantity" + inCart.id] ===
                     undefined
                       ? inCart.price
@@ -169,17 +171,23 @@ export default class CartItem extends Component {
                         inCart.price}
                   </td>
                   <td
+                    className="pointer"
                     onClick={() => {
                       this.removeFromCart(inCart);
                     }}
                   >
-                    delete
+                    delete Item
                   </td>
                 </tr>
               ))}
               <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>Total</td>
-                <td>{this.state.totalSum}</td>
+                <td>#{this.state.totalSum}</td>
               </tr>
             </tbody>
           </Table>

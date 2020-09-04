@@ -9,6 +9,8 @@ import CheckList from "../components/AddcheckList";
 // import add from "../images/Sabi-storepage/Addicon.jpg";
 import axios from "axios";
 import util from "../util/util";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export class ManageRegistry extends Component {
   state = {
@@ -136,6 +138,7 @@ export class ManageRegistry extends Component {
         this.setState({ emptyRegistry: true });
       });
   }
+  notify = () => toast.success("Added to registry!", { autoClose: 2000 });
 
   addToReg = (e) => {
     let item = [];
@@ -166,14 +169,12 @@ export class ManageRegistry extends Component {
         console.log(res.data);
         if (res.status === 200) {
           this.setState({ addSuccessfully: true });
+          this.notify();
         }
       })
       .catch((err) => {
         console.log(err);
       });
-
-    console.log(addeditem);
-    // console.log(item);
   };
 
   render() {
@@ -307,6 +308,7 @@ export class ManageRegistry extends Component {
 
                               {/* <Card.Img className="center rounded-circle" alt="items" width='40px' src={item} /> */}
                             </Card.Body>
+                            <ToastContainer />
                           </Card>
                         )}
                       </div>

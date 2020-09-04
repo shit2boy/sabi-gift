@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ image, title, content, footerTitle, footDescription }) => {
   return (
-    <div className="mt-4" id="myCard">
+    <div className="grow mt-4" id="myCard">
       <div className="card text-center">
         <div>
           <img

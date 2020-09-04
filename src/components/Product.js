@@ -38,14 +38,14 @@ export class Product extends Component {
   addToCart = (item) => {
     let itemsInCart = this.context.itemsInCart;
     itemsInCart.push(item);
-    var selectedIds = this.state.selectedIds;
+    let selectedIds = this.state.selectedIds;
     selectedIds.push(item.id);
     this.setState({ selectedIds: selectedIds });
     console.log(this.context.quantity);
   };
 
   UNSAFE_componentWillReceiveProps(props) {
-    console.log(props.Products);
+    // console.log(props.Products);
     this.setState({ Products: props.Products });
   }
 
@@ -148,10 +148,10 @@ export class Product extends Component {
         </div>
         <div className="row">
           {this.state.Products.map((item) => (
-            <Card key={item.id} className="productCards  col-sm-3 m-3">
+            <Card key={item.id} className="productCards grow  col-sm-3 m-3">
               <div>
                 <img
-                  className="grow card-img center"
+                  className="card-img center"
                   alt="items"
                   src={item.picture}
                   id={item.id}

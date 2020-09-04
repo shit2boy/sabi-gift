@@ -17,80 +17,10 @@ class ProductProvider extends Component {
     cart_Ids: [],
   };
 
-  // componentDidMount() {
-  //   axios
-  //     .get(`${util.API_BASE_URL}registries/`, {
-  //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-  //     })
+  updateContextState = (key, val) => {
+    this.setState({ [key]: val });
+  };
 
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       if (res.data !== undefined) {
-  //         let data = res.data;
-  //         for (let i = 0; i < data.length; i++) {
-  //           data[i].picture = data[i].picture.replace("image/upload/", "");
-  //         }
-  //         this.setState({ products: data });
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
-  // handlerChange = (e)=> {
-  //   let formField = this.state.formField;
-  //   formField[e.target.name] = e.target.value;
-  //   this.setState({
-  //     formField,
-  //   });
-  // console.log(formField)
-  // }
-
-  // }
-
-  // addToCart = (item) => {
-  //   let itemsInCart = this.state.itemsInCart;
-  //   itemsInCart.push(this.props.items[item.id]);
-  //   shoppingProducts[item.id].inCart = true;
-  //   shoppingProducts[item.id].quantityInCart = 1;
-  //   this.setState({
-  //     quantity: this.state.quantity + 1,
-  //     amountToPay: this.state.amountToPay + this.props.items[item.id].price,
-  //     itemsInCart: itemsInCart,
-  //     items: shoppingProducts,
-  //   });
-  // };
-  // removeFromCart = (item, indexInCart) => {
-  //   let itemsInCart = this.state.itemsInCart;
-  //   shoppingProducts[item.id].inCart = false;
-  //   shoppingProducts[item.id].quantityInCart = 0;
-  //   itemsInCart.splice(indexInCart, 1);
-  //   this.setState({
-  //     quantity: this.state.quantity - 1,
-  //     amountToPay: this.state.amountToPay - this.props.items[item.id].price,
-  //     itemsInCart: itemsInCart,
-  //     items: shoppingProducts,
-  //   });
-  // };
-
-  // addToCart = (id) => {
-  //   let tempProducts = [...this.state.products];
-  //   const index = tempProducts.indexOf(this.getItem(id));
-  //   const product = tempProducts[index];
-  //   product.inCart = true;
-  //   product.count = 1;
-  //   const price = product.price;
-  //   product.total = price;
-  //   this.setState(
-  //     () => {
-  //       return { products: tempProducts, cart: [...this.state.cart, product] };
-  //     },
-  //     () => {
-  //       this.addTotals();
-  //     }
-  //   );
-  // };
   handleQuantityChange = (e) => {
     this.setState({ quantity: e.target.value });
     // console.log(e.target.value);
@@ -119,31 +49,15 @@ class ProductProvider extends Component {
     return product;
   };
 
-  //   componentDidMount() {
-  //     this.setProducts();
-  //   }
-  // setProducts = () =>{
-  //   let tempProducts=[];
-  //   ProductItems.forEach(item =>{
-  //     const singleItem = {...item};
-  //     tempProducts = [...tempProducts,singleItem]
-  //   })
-  //   this.setState(()=>{
-  //     return {products:tempProducts}})
-
-  // }
-
   render() {
     return (
       <StateContext.Provider
         value={{
           ...this.state,
           handleSelectOpt: this.handleSelectOpt,
-          handleEventType: this.handleEventType,
+          // handleEventType: this.handleEventType,
           handleQuantityChange: this.handleQuantityChange,
-          // addToCart : this.addToCart,
-          // wishist : this.wishlist,
-          // handleItemDetails : this.handleItemDetails,
+          updateContextState: this.updateContextState,
         }}
       >
         {this.props.children}

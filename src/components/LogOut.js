@@ -28,6 +28,7 @@ export class LogOut extends Component {
           window.localStorage.removeItem("name");
           window.localStorage.removeItem("username");
           window.localStorage.removeItem("spouseName");
+          window.localstorage.clear();
           window.location.href = "/";
           // console.log('successfully login');
         }

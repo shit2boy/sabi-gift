@@ -408,12 +408,12 @@ Link.active:active {
 
 /*******************Checkout Form page **********************/
 .orderBtn {
-  background: #6f66f8;
+  background-color: var(--primaryColor);
   width: 150px;
   color: #ffffff;
   transition: 0.3s;
   border: 0;
 }
 .orderBtn:hover {
-  background-color: #130e5e;
+  background-color: #459641;
 }

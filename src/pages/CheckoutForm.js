@@ -77,8 +77,8 @@ export default class CheckoutForm extends Component {
     this.setState({
       formField,
     });
-    window.localStorage.setItem("email", formField["email"]);
-    console.log(formField);
+    // window.localStorage.setItem("email", formField["email"]);
+    // console.log(formField);
   }
 
   // componentDidMount() {
@@ -90,6 +90,8 @@ export default class CheckoutForm extends Component {
   handlePost = () => {
     let formField = this.state.formField;
     let customer = new FormData();
+    let authorization_url;
+    let reference;
     customer.append("first_name", formField["firstName"]);
     customer.append("last_name", formField["lastName"]);
     customer.append("mobile", formField["phone"]);
@@ -110,14 +112,39 @@ export default class CheckoutForm extends Component {
           let newArr = window.localStorage.cartList;
           const customer_details = {
             customer_id: Number(window.localStorage.customer_id),
-            // carts: this.state.cartIds,
             carts: JSON.parse(newArr),
           };
           axios
             .post(`${util.API_BASE_URL}init-payment/`, customer_details)
             .then((res) => {
-              console.log(res.data);
+              console.log(res.data.paystack);
               if (res !== undefined) {
+                // window.localStorage.setItem(
+                //   "authorization_url",
+                //   res.data.paystack.data.authorization_url
+                // );
+                authorization_url = res.data.paystack.data.authorization_url;
+                reference = res.data.paystack.data.reference;
+                window.localStorage.setItem(
+                  "reference",
+                  res.data.paystack.data.reference
+                );
+                const orderItemDetails = {
+                  ref_code: reference,
+                  items: JSON.parse(newArr),
+                  customers: Number(window.localStorage.customer_id),
+                };
+                axios
+                  .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
+                  .then((res) => {
+                    console.log(res.data);
+                    if (res !== undefined) {
+                      window.location.href = authorization_url;
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
               }
             })
             .catch((err) => {
@@ -128,8 +155,6 @@ export default class CheckoutForm extends Component {
       .catch((err) => {
         console.log(err);
       });
-    // initializePayment();
-    console.log(this.context.cart_Ids);
   };
   validateForm = () => {
     let formField = this.state.formField;

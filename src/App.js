@@ -13,11 +13,11 @@ import EventType from "./pages/EventType";
 import CheckoutForm from "./pages/CheckoutForm";
 import RegistryChecklist from "./pages/ChecklistPage";
 import getstarted from "./components/WeddEvent";
-import Pay from "./components/pay";
 import Login from "./pages/Login";
 import { ResetPassword } from "./components/ResetPassword";
 // import AddToCart from "./components/AddToCart";
 import ActivateAcoount from "./pages/ActivateAcoount";
+import ThankYouPage from "./pages/ThankYouPage";
 import Spinner from "react-bootstrap/Spinner";
 import CartItem from "./pages/CartItem";
 
@@ -52,10 +52,10 @@ function App() {
             <Route path="/myregistry" component={EventType} />
             <Route path="/checkout" component={CheckoutForm} />
             <Route path="/getstarted" component={getstarted} />
+            <Route path="/payout" component={ThankYouPage} />
             <Route path="/sign in" component={Login} />
             {/* <Route path="/additem" component={AddToCart} /> */}
             <Route path="/cart" component={CartItem} />
-            <Route path="/pay" component={Pay} />
             <Route path="/Passwordreset" component={ResetPassword} />
             <Route component={Home} />
           </Switch>

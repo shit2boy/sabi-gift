@@ -49,7 +49,6 @@ class Login extends Component {
 
   setModalHide = () => {
     this.setState({ modalShow: false, modalTitle: "" });
-    window.localStorage.clear();
     window.location.href = `/registry/${window.localStorage.slug}`;
   };
 

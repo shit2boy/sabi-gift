@@ -26,6 +26,9 @@ class EventType extends Component {
     dayLeftToEvent: "",
   };
   componentDidMount() {
+    if (!window.localStorage.token_id) {
+      window.localStorage.clear();
+    }
     const { handle } = this.props.match.params;
     // fetch(`${util.API_BASE_URL}events/${handle}`).then((user) => {
     //   this.setState(() => ({ user }));

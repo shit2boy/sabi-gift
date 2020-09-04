@@ -1,61 +1,10 @@
 import React, { Component } from "react";
-import { Form, Col, Table } from "react-bootstrap";
+import { Form, Col, Table, Alert } from "react-bootstrap";
 import sabigift from "../images/landing/sabigift.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import util from "../util/util";
 import { StateContext } from "../Context";
-
-// import { PaystackButton } from "react-paystack";
-
-// const config = {
-//   reference: new Date().getTime(),
-//   // email: window.localStorage.getItem("email"),
-//   email: "writeshittu@gmail.com",
-//   amount: window.localStorage.sum * 100,
-//   publicKey: "pk_test_33c5ce31f9965f58cba4db83ce4aae86548f3eaf",
-// };
-
-// const componentProps = {
-//   ...config,
-//   text: "Pay Now",
-//   onSuccess: (res) => {
-//     const paymentdetails = {
-//       paystack_charge_id: res.reference,
-
-//       customers: Number(window.localStorage.customer_id),
-//     };
-//     axios
-//       .post(`${util.API_BASE_URL}payments/`, paymentdetails)
-//       .then((res) => {
-//         console.log(res);
-//         if (res !== undefined) {
-//           console.log(res.results.id);
-//           console.log(res.data.results.id);
-//           window.localStorage.setItem("payment_id", res.data.results.id);
-//         }
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-
-//     let orderDetails = {
-//       ref_code: res.reference,
-//       items: window.localStorage.cart_ids.map(Number),
-//       customers: window.localStorage.customer_id,
-//       payment: 5,
-//     };
-//     axios
-//       .post(`${util.API_BASE_URL}orders/`, orderDetails)
-//       .then((res) => {
-//         console.log(res);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   },
-//   onClose: () => null,
-// };
 
 export default class CheckoutForm extends Component {
   static contextType = StateContext;
@@ -77,15 +26,7 @@ export default class CheckoutForm extends Component {
     this.setState({
       formField,
     });
-    // window.localStorage.setItem("email", formField["email"]);
-    // console.log(formField);
   }
-
-  // componentDidMount() {
-  //   this.setState({ cartIds: this.context.cart_Ids });
-  //   console.log(this.state.cartIds);
-  //   console.log(this.context.cart_Ids);
-  // }
 
   handlePost = () => {
     let formField = this.state.formField;
@@ -150,6 +91,7 @@ export default class CheckoutForm extends Component {
       })
       .catch((err) => {
         console.log(err);
+        Alert("Please check your connection and try again");
       });
   };
   validateForm = () => {

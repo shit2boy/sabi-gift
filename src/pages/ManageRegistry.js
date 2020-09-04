@@ -282,15 +282,16 @@ export class ManageRegistry extends Component {
                       <div key={index} className="m-3">
                         {item.cat === category.name && (
                           <Card
+                            className=""
                             id=""
                             key={index}
                             style={{
                               width: "8rem",
                               cursor: "pointer",
-                              border: "1px dotted",
+                              // border: "1px dotted",
                             }}
                           >
-                            <Card.Body className="">
+                            <Card.Body className="grow hide-child">
                               <Card.Img
                                 id={"ddd" + item.id}
                                 onClick={this.addToReg}
@@ -300,12 +301,12 @@ export class ManageRegistry extends Component {
                                     ? hiddenStyle
                                     : showStyle
                                 }
-                                className="center rounded-circle"
+                                className="center"
                                 alt="items"
                                 width="40px"
                                 src={item.picture}
                               />
-
+                              <small className="child">{item.name}</small>
                               {/* <Card.Img className="center rounded-circle" alt="items" width='40px' src={item} /> */}
                             </Card.Body>
                             <ToastContainer />

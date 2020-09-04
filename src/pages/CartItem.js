@@ -14,7 +14,7 @@ export default class CartItem extends Component {
     this.state = {
       count: 0,
       productIdInCart: [],
-      Itemsquantity: [],
+      Itemsquantity: 0,
       quantityObject: {},
       amount: "",
       itemsInCart: [],
@@ -28,9 +28,10 @@ export default class CartItem extends Component {
     let productIdInCart = [];
     // let cart = {};
     for (let i = 0; i < this.state.itemsInCart.length; i++) {
+      this.setState({ Itemsquantity: this.state.itemsInCart.length });
       let cart = this.state.itemsInCart[i];
       this.setState({ productIdInCart: productIdInCart });
-      console.log(this.state.productIdInCart);
+      // console.log(this.state.productIdInCart);
       let quantity =
         this.state.quantityObject["quantity" + cart.id] === undefined
           ? 1
@@ -111,7 +112,7 @@ export default class CartItem extends Component {
                 className=" badge badge-danger"
                 style={{ color: "white", font: "16px", position: "absolute" }}
               >
-                {this.state.quantity}
+                {this.state.Itemsquantity}
               </span>
               <GrCart size="40px" />
             </Link>

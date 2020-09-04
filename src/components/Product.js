@@ -32,7 +32,7 @@ export class Product extends Component {
     addItems: false,
     Products: [],
     selectedIds: [],
-    count: 0,
+    quantity: 0,
   };
 
   addToCart = (item) => {
@@ -40,8 +40,10 @@ export class Product extends Component {
     itemsInCart.push(item);
     let selectedIds = this.state.selectedIds;
     selectedIds.push(item.id);
-    this.setState({ selectedIds: selectedIds });
-    console.log(this.context.quantity);
+    this.setState({
+      selectedIds: selectedIds,
+      quantity: this.state.quantity + 1,
+    });
   };
 
   UNSAFE_componentWillReceiveProps(props) {
@@ -72,7 +74,7 @@ export class Product extends Component {
           this.setState({
             eventId: eventId,
           });
-          console.log(eventId);
+          // console.log(eventId);
           window.localStorage.setItem("eventId", eventId);
         }
       })

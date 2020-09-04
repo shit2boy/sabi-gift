@@ -22,15 +22,8 @@ export class LogOut extends Component {
       .then((data) => {
         if (data.status === 200) {
           // console.log(data);
-          window.localStorage.removeItem("token_id");
-          window.localStorage.removeItem("event_date");
-          window.localStorage.removeItem("event_type");
-          window.localStorage.removeItem("name");
-          window.localStorage.removeItem("username");
-          window.localStorage.removeItem("spouseName");
           window.localstorage.clear();
           window.location.href = "/";
-          // console.log('successfully login');
         }
       })
       .catch((error) => {

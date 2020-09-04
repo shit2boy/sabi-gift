@@ -125,10 +125,6 @@ export default class CheckoutForm extends Component {
                 // );
                 authorization_url = res.data.paystack.data.authorization_url;
                 reference = res.data.paystack.data.reference;
-                window.localStorage.setItem(
-                  "reference",
-                  res.data.paystack.data.reference
-                );
                 const orderItemDetails = {
                   ref_code: reference,
                   items: JSON.parse(newArr),

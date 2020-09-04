@@ -52,7 +52,7 @@ function App() {
             <Route path="/myregistry" component={EventType} />
             <Route path="/checkout" component={CheckoutForm} />
             <Route path="/getstarted" component={getstarted} />
-            <Route path="/payout" component={ThankYouPage} />
+            <Route path="/payout/" component={ThankYouPage} />
             <Route path="/sign in" component={Login} />
             {/* <Route path="/additem" component={AddToCart} /> */}
             <Route path="/cart" component={CartItem} />

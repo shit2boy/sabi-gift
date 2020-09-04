@@ -9,13 +9,28 @@ class Login extends Component {
     this.state = {
       modalShow: false,
       modalTitle: "",
+      trxref: "",
+      reference: "",
     };
   }
 
   componentDidMount() {
-    let reference = window.localStorage.getItem("reference");
+    const query = new URLSearchParams(window.location.search);
+    const trxref = query.get("trxref");
+    const ref_code = query.get("reference");
+    if (trxref) {
+      this.setState({ trxref: trxref });
+    }
+    if (ref_code) {
+      this.setState({ reference: ref_code });
+    }
+    const refCode = {
+      ref_code: ref_code,
+    };
+    console.log(ref_code);
+    console.log("trf", ref_code);
     axios
-      .post(`${util.API_BASE_URL}verify-order/`, reference, {
+      .post(`${util.API_BASE_URL}verify-order/`, refCode, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -26,12 +41,16 @@ class Login extends Component {
       })
       .catch((error) => {
         console.log(error);
+        console.log(ref_code);
       });
+    // console.log(ref_code);
+    console.log(trxref);
   }
 
   setModalHide = () => {
     this.setState({ modalShow: false, modalTitle: "" });
-    window.location.href = "/";
+    window.localStorage.clear();
+    window.location.href = `/registry/${window.localStorage.slug}`;
   };
 
   setModalShow = () => {

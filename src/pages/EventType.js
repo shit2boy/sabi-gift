@@ -81,7 +81,7 @@ class EventType extends Component {
     return (
       <div className="container-fluid">
         <div className="mb-4 d-flex justify-content-between">
-          <a href="/Dashboard">
+          <a href="/home">
             {" "}
             <img src={sabigift} alt="logo" width="75px" />{" "}
           </a>

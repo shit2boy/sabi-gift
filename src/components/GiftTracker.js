@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import smartwatch from "../images/Sabi-storepage/smartwatch.jpg";
+// import smartwatch from "../images/Sabi-storepage/smartwatch.jpg";
 // import Button from './Button'
 import { GrFavorite } from "react-icons/gr";
 import DashboardNav from "./DashboardNav";

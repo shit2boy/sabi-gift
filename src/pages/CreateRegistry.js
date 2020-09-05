@@ -125,13 +125,13 @@ export class CreateRegistry extends Component {
                     className="col bg-white  d-flex justify-content-between align-items-center"
                     style={{ height: "90px" }}
                   >
-                    <button
-                      to=""
+                    <Link
+                      to="/"
                       className="btn rounded-pill px-5"
                       style={{ background: "#ffffff" }}
                     >
                       Back
-                    </button>
+                    </Link>
                     {this.state.eventType === "2" && (
                       <Link
                         to="/getstarted"

@@ -523,7 +523,7 @@ export default class getstarted extends Component {
               <div className="text-center">
                 {this.state.currentIndex >= 0 && this.state.currentIndex <= 3 && (
                   <Button
-                    type="submit"
+                    type=""
                     onClick={() => this.goBack()}
                     className="px-5 btn-outline-dark"
                     style={{

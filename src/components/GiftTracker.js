@@ -99,7 +99,7 @@ export class GiftTracker extends Component {
               We'll list all gifts the guests buy you on this page and your app.
               Here's a rundown on how to them get them home.
             </p>
-            <div className="d-flex justify-content-between" style={styles}>
+            {/* <div className="d-flex justify-content-between" style={styles}>
               <div className="d-flex align-items-center">
                 <img
                   src={smartwatch}
@@ -139,9 +139,13 @@ export class GiftTracker extends Component {
                   </Button>
                 </div>
               </div>
-            </div>
+            </div> */}
             {this.state.trackedItems.map((item, index) => (
-              <div className="d-flex justify-content-between" style={styles}>
+              <div
+                key={index}
+                className="d-flex justify-content-between"
+                style={styles}
+              >
                 <div className="d-flex align-items-center">
                   <img
                     src={item.picture}

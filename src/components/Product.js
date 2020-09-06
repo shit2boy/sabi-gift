@@ -54,12 +54,15 @@ export class Product extends Component {
   componentDidMount() {
     axios
 
-      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `${util.API_BASE_URL}events/?user=${window.localStorage.event_owner_id}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         // console.log(res.data);
         if (res.data !== undefined) {

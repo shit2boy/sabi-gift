@@ -31,7 +31,7 @@ export default class CheckoutForm extends Component {
   handlePost = () => {
     let formField = this.state.formField;
     let customer = new FormData();
-    let authorization_url;
+    // let authorization_url;
     let reference;
     customer.append("first_name", formField["firstName"]);
     customer.append("last_name", formField["lastName"]);
@@ -64,7 +64,7 @@ export default class CheckoutForm extends Component {
                 //   "authorization_url",
                 //   res.data.paystack.data.authorization_url
                 // );
-                authorization_url = res.data.paystack.data.authorization_url;
+                // authorization_url = res.data.paystack.data.authorization_url;
                 reference = res.data.paystack.data.reference;
                 const orderItemDetails = {
                   ref_code: reference,

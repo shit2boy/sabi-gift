@@ -48,7 +48,7 @@ class EventType extends Component {
           let data = res.data;
           window.localStorage.setItem("slug", data.slug);
           window.localStorage.setItem("event_owner", data.event_owner);
-          window.localStorage.setItem("event_owner_id", data.event_owner_id);
+          window.localStorage.setItem("userId", data.event_owner_id);
           window.localStorage.setItem("event_id", data.id);
 
           for (let i = 0; i < data.gifts.length; i++) {

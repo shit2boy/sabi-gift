@@ -33,7 +33,7 @@ export class DashboardNav extends Component {
                 {window.localStorage.name}'s registry
               </span>
               <span className="mr-2">
-                <Link className="text-link" to="/#">
+                <Link className="text-link" to="#">
                   <img src={settingIcon} alt="icon"></img>
                   <small>setting</small>
                 </Link>

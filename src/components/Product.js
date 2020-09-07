@@ -54,15 +54,12 @@ export class Product extends Component {
   componentDidMount() {
     axios
 
-      .get(
-        `${util.API_BASE_URL}events/?user=${window.localStorage.event_owner_id}`,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
         // console.log(res.data);
         if (res.data !== undefined) {
@@ -112,11 +109,12 @@ export class Product extends Component {
         },
       })
       .then((response) => {
-        if (response.status === 200 || response.status === 201)
-          console.log(response);
-        let products = this.state.Products;
-        products.splice(this.getIndexOfProduct(id), 1);
-        this.setState({ Products: products });
+        if (response.status === 200 || response.status === 201) {
+          // console.log(response);
+          let products = this.state.Products;
+          products.splice(this.getIndexOfProduct(id), 1);
+          this.setState({ Products: products });
+        }
       })
       .catch((error) => {
         console.dir(error);

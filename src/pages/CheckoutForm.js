@@ -53,30 +53,31 @@ export default class CheckoutForm extends Component {
           customer_id: Number(window.localStorage.customer_id),
           carts: JSON.parse(newArr),
         };
-        res = await axios.post(
-          `${util.API_BASE_URL}init-payment/`,
-          customer_details
-        );
-        if (res !== undefined) {
-          authorization_url = res.data.paystack.data.authorization_url;
-          reference = res.data.paystack.data.reference;
-          const orderItemDetails = {
-            ref_code: reference,
-            items: JSON.parse(newArr),
-            customers: window.localStorage.customer_id,
-          };
-          axios
-            .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
-            .then((res) => {
-              console.log(res.data);
-              if (res !== undefined) {
-                window.location.href = authorization_url;
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }
+
+        axios
+          .post(`${util.API_BASE_URL}init-payment/`, customer_details)
+          .then((res) => {
+            authorization_url = res.data.paystack.data.authorization_url;
+            reference = res.data.paystack.data.reference;
+            return {
+              ref_code: reference,
+              items: JSON.parse(newArr),
+              customers: window.localStorage.customer_id,
+            };
+          })
+          .then((orderItemDetails) => {
+            axios
+              .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
+              .then((res) => {
+                console.log(res.data);
+                if (res !== undefined) {
+                  window.location.href = authorization_url;
+                }
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     } catch (err) {
       // Handle Error Here

@@ -30,7 +30,7 @@ export class GiftTracker extends Component {
     convertedItemDetail.append("gift_tracker", this.state.giftTrackerId);
     convertedItemDetail.append("item", id);
     axios
-      .patch(`${util.API_BASE_URL}convert-gift/`, convertedItemDetail, {
+      .post(`${util.API_BASE_URL}convert-gift/`, convertedItemDetail, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token_id"),
           Accept: "application/json",

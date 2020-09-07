@@ -68,7 +68,7 @@ export default class CheckoutForm extends Component {
           axios
             .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
             .then((res) => {
-              // console.log(res.data);
+              console.log(res.data);
               if (res !== undefined) {
                 window.location.href = authorization_url;
               }

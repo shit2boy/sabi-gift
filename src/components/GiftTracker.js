@@ -26,7 +26,7 @@ export class GiftTracker extends Component {
   convertToCredit = (id) => {
     console.log("clicked" + id);
     const convertedItemDetail = new FormData();
-    convertedItemDetail.append("status", this.state.gift);
+    convertedItemDetail.append("status", "converted to cash");
     convertedItemDetail.append("gift_tracker", this.state.giftTrackerId);
     convertedItemDetail.append("item", id);
     axios

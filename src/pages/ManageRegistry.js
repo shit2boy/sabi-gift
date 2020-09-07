@@ -130,7 +130,7 @@ export class ManageRegistry extends Component {
             window.localStorage.setItem("slug", eventSlug);
           }
           this.setState({ eventSlug: eventSlug });
-          // console.log(this.state.eventSlug);
+          console.log(this.state.eventSlug);
         }
       })
       .catch((err) => {

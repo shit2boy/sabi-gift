@@ -203,7 +203,7 @@ export default class getstarted extends Component {
               response.data["Registration Successful"].token
             );
             this.setState({
-              message: `Dear ${this.state.answers[0]},We have sent you an email '${this.state.email}' with your verification link.`,
+              message: `Dear ${this.state.answers[0]},We have sent you an email '${this.state.formField["email"]}' with your verification link.`,
             });
             // console.log(this.state.message);
             window.location.href = "/updateprofile";

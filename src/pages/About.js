@@ -686,26 +686,7 @@ export class About extends Component {
                           #{item.price}
                         </strong>
                       </div>
-                      // <div className="eventItem col-lg-3 text-center">
-                      //   <img src={bmw} width="80px" alt="weddingIcon" />
-                      //   <strong className="d-block">Option 2</strong>
-                      //   <small className="d-block">Description of gift</small>
-                      //   <strong>#200k</strong>
-                      // </div>
                     ))}
-
-                    {/* <div className="eventItem col-lg-3 text-center">
-                      <img src={bmw} width="80px" alt="weddingIcon" />
-                      <strong className="d-block">Option 3</strong>
-                      <small className="d-block">Description of gift</small>
-                      <strong>#200k</strong>
-                    </div>
-                    <div className="eventItem col-lg-3 text-center">
-                      <img src={bmw} width="80px" alt="weddingIcon" />
-                      <strong className="d-block">Option 4</strong>
-                      <small className="d-block">Description of gift</small>
-                      <strong>#200k</strong>
-                    </div> */}
                   </div>
                 </div>
               </div>

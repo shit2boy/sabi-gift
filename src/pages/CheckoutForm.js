@@ -28,10 +28,10 @@ export default class CheckoutForm extends Component {
     });
   }
 
-  handlePost = () => {
+  handlePost = async () => {
     let formField = this.state.formField;
     let customer = new FormData();
-    // let authorization_url;
+    let authorization_url;
     let reference;
     customer.append("first_name", formField["firstName"]);
     customer.append("last_name", formField["lastName"]);
@@ -42,58 +42,49 @@ export default class CheckoutForm extends Component {
     customer.append("state", formField["state"]);
     customer.append("zip_code", formField["zip"]);
 
-    axios
-      .post(`${util.API_BASE_URL}customers/`, customer)
-      .then((res) => {
-        console.log(res.data);
+    try {
+      var res = await axios.post(`${util.API_BASE_URL}customers/`, customer);
+      console.log(res.data);
+      if (res.data !== undefined) {
+        window.localStorage.setItem("customer_id", res.data.id);
+        this.setState({ customerId: true });
+        let newArr = window.localStorage.cartList;
+        const customer_details = {
+          customer_id: Number(window.localStorage.customer_id),
+          carts: JSON.parse(newArr),
+        };
+        res = await axios.post(
+          `${util.API_BASE_URL}init-payment/`,
+          customer_details
+        );
         if (res !== undefined) {
-          window.localStorage.setItem("customer_id", res.data.id);
-          // window.localStorage.setItem("email", res.data.email);
-          this.setState({ customerId: true });
-          let newArr = window.localStorage.cartList;
-          const customer_details = {
-            customer_id: Number(window.localStorage.customer_id),
-            carts: JSON.parse(newArr),
+          authorization_url = res.data.paystack.data.authorization_url;
+          reference = res.data.paystack.data.reference;
+          const orderItemDetails = {
+            ref_code: reference,
+            items: JSON.parse(newArr),
+            customers: window.localStorage.customer_id,
           };
           axios
-            .post(`${util.API_BASE_URL}init-payment/`, customer_details)
+            .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
             .then((res) => {
-              console.log(res.data.paystack);
+              // console.log(res.data);
               if (res !== undefined) {
-                // window.localStorage.setItem(
-                //   "authorization_url",
-                //   res.data.paystack.data.authorization_url
-                // );
-                // authorization_url = res.data.paystack.data.authorization_url;
-                reference = res.data.paystack.data.reference;
-                const orderItemDetails = {
-                  ref_code: reference,
-                  items: JSON.parse(newArr),
-                  customers: window.localStorage.customer_id,
-                };
-                axios
-                  .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
-                  .then((res) => {
-                    // console.log(res.data);
-                    if (res !== undefined) {
-                      // window.location.href = authorization_url;
-                    }
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  });
+                window.location.href = authorization_url;
               }
             })
             .catch((err) => {
               console.log(err);
             });
         }
-      })
-      .catch((err) => {
-        console.log(err);
-        Alert("Please check your connection and try again");
-      });
+      }
+    } catch (err) {
+      // Handle Error Here
+      console.log(err);
+      Alert("Please check your connection and try again");
+    }
   };
+
   validateForm = () => {
     let formField = this.state.formField;
     let errors = {};
@@ -169,8 +160,6 @@ export default class CheckoutForm extends Component {
   };
 
   handleSubmit(event) {
-    // console.log(window.localStorage.email);
-    // console.log(window.localStorage.sum);
     event.preventDefault();
     if (this.validateForm()) {
       this.handlePost();

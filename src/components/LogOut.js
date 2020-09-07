@@ -22,7 +22,7 @@ export class LogOut extends Component {
       .then((data) => {
         if (data.status === 200) {
           // console.log(data);
-          window.localstorage.clear();
+          // window.localstorage.clear();
           window.location.href = "/";
         }
       })

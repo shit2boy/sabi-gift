@@ -69,14 +69,14 @@ export default class CheckoutForm extends Component {
                 const orderItemDetails = {
                   ref_code: reference,
                   items: JSON.parse(newArr),
-                  customers: Number(window.localStorage.customer_id),
+                  customers: window.localStorage.customer_id,
                 };
                 axios
                   .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
                   .then((res) => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     if (res !== undefined) {
-                      window.location.href = authorization_url;
+                      // window.location.href = authorization_url;
                     }
                   })
                   .catch((err) => {

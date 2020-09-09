@@ -51,7 +51,7 @@ export class GiftTracker extends Component {
   componentDidMount() {
     axios
       .get(
-        `${util.API_BASE_URL}gift-tracker/?event=${window.localStorage.eventId}`,
+        `${util.API_BASE_URL}gift-tracker/?event=${window.localStorage.eventIID}`,
         {
           headers: {
             Authorization: "Token " + localStorage.getItem("token_id"),

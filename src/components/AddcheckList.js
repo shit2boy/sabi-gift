@@ -11,6 +11,7 @@ class CheckList extends Component {
     this.state = {
       isChecked: false,
       itemCategories: [],
+      categoryId: "",
     };
   }
 
@@ -24,6 +25,12 @@ class CheckList extends Component {
         // console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data.results;
+          let categoryId;
+          for (let i = 0; i < data.length; i++) {
+            categoryId = data[i].id;
+            this.setState({ categoryId: categoryId });
+          }
+          // console.log(this.state.categoryId);
           this.setState({ itemCategories: data });
         }
       })
@@ -45,11 +52,12 @@ class CheckList extends Component {
             >
               <Card.Body>
                 <AddCategory
+                  categoryId={this.state.categoryId}
                   button={
                     <div className="center">
                       <img
                         className=" rounded-circle img-fluid"
-                        width="40px"
+                        width="100%"
                         alt="items"
                         src={kitchen}
                       />

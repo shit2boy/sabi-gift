@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import { Card, Modal } from "react-bootstrap";
-import add from "../images/Sabi-storepage/Addicon.jpg";
+// import add from "../images/Sabi-storepage/Addicon.jpg";
 // import axios from "axios";
 // import util from "../util/util";
 import { StateContext } from "../Context";
 
 export default class AddCategory extends Component {
   static contextType = StateContext;
-  state = {
-    modalShow: false,
-    AddedCategory: "",
-    itemCategories: [],
-    selectedCategory: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalShow: false,
+      AddedCategory: "",
+      itemByCategory: [],
+      selectedCategory: [],
+      categoryId: this.props.categoryId,
+    };
+  }
 
   setModalHide = () => {
     this.setState({ modalShow: false });
@@ -31,32 +35,22 @@ export default class AddCategory extends Component {
       selectedArr.splice(this.state.selectedCategory.indexOf(e.target.id), 1);
       this.setState({ selectedCategory: selectedArr });
     }
-    console.log(this.state.selectedCategory);
+    // console.log(this.state.selectedCategory);
   };
 
   // componentDidMount() {
   //   axios
-  //     .get(`${util.API_BASE_URL}categories/`, {
+  //     .get(`${util.API_BASE_URL}registries/?cats=2`, {
   //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
   //     })
 
   //     .then((res) => {
-  // console.log(res.data);
-  // if (res.data !== undefined) {
-  // let data = res.data;
-
-  // for (let i=0;i<data.length;i++) {
-  // let category =[];
-  // if (data[i].cat ) {
-
-  // }
-
-  // this.setState({itemCategories : data});
-
-  // }
-  // for (let i = 0; i < data.length; i++) {
-  // data[i].picture = data[i].picture.replace("image/upload/", "");
-  //           this.setState({ itemCategories: data });
+  //       // console.log(res.data);
+  //       if (res.data !== undefined) {
+  //         let data = res.data;
+  //         for (let i = 0; i < data.length; i++) {
+  //           data[i].picture = data[i].picture.replace("image/upload/", "");
+  //           this.setState({ itemByCategory: data });
   //         }
   //       }
   //     })
@@ -84,9 +78,10 @@ export default class AddCategory extends Component {
           <Modal.Body className=" ">
             <div className="container">
               <div className="row justify-content-center">
-                {this.state.itemCategories.map((item, index) => (
-                  <div key={index} className="m-3">
+                {this.state.itemByCategory.map((item, index) => (
+                  <div key={index} className="m-3 d-flex">
                     <Card
+                      className="flex-fill"
                       id="myCards"
                       key={item.id}
                       style={{
@@ -104,7 +99,7 @@ export default class AddCategory extends Component {
                           className="center rounded-circle"
                           alt="items"
                           width="50px"
-                          src={add}
+                          src={item.picture}
                         />
                         <small className="text-center">{item.name}</small>
                       </Card.Body>

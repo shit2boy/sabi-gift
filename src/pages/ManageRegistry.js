@@ -22,9 +22,11 @@ export class ManageRegistry extends Component {
     Registry: [],
     itemChecked: false,
     eventSlug: "",
+    isLoggedIn: false,
   };
 
   componentDidMount() {
+    this.setState({ isLoggedIn: true });
     axios
       .get(`${util.API_BASE_URL}accounts/profile/`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
@@ -68,14 +70,6 @@ export class ManageRegistry extends Component {
         // console.log(res.data);
         if (response.data !== undefined) {
           let data = response.data.results;
-          //   let category = [];
-
-          //   for (let i = 0; i < data.length; i++) {
-          //     data[i].picture = data[i].picture.replace("image/upload/", "");
-          //     if (data[i].cat === "Cooking") {
-          //       category.push(data[i].picture);
-          //     }
-          //   }
 
           this.setState({ itemCategory: data });
           //   console.log(this.state.itemCategory);
@@ -123,14 +117,16 @@ export class ManageRegistry extends Component {
         if (res.data !== undefined) {
           let data = res.data;
           window.localStorage.setItem("slug", data.slug);
-
           let eventSlug;
+          let eventIID;
           for (let i = 0; i < data.length; i++) {
             eventSlug = data[data.length - 1].slug;
+            eventIID = data[data.length - 1].id;
             window.localStorage.setItem("slug", eventSlug);
+            window.localStorage.setItem("eventIID", eventIID);
           }
           this.setState({ eventSlug: eventSlug });
-          console.log(this.state.eventSlug);
+          // console.log(this.state.eventSlug);
         }
       })
       .catch((err) => {
@@ -323,125 +319,6 @@ export class ManageRegistry extends Component {
                 </div>
               </div>
             ))}
-
-            {/* <div className="row" style={{ marginTop: "40px" }}>
-              <div className="col-sm-2">
-                <Card
-                  id=""
-                  style={{
-                    width: "8rem",
-                    borderRadius: "25px",
-                    background: "#6668A3",
-                    boxShadow: "0px 30px 60px #BA2F4F41",
-                  }}
-                >
-                  <Card.Body>
-                    <Card.Img
-                      className="center rounded-circle"
-                      alt="items"
-                      src={kitchen}
-                      width="60px"
-                    />
-                  </Card.Body>
-                  <Card.Text className="text-center">
-                    <small className="p-1">Dining Essentials</small>
-                    <strong className="d-block p-1">10</strong>
-                  </Card.Text>
-                </Card>
-              </div>
-              <div
-                className="col mb-5"
-                style={{
-                  border: "1px solid #CBCBCB",
-                  borderRadius: "25px",
-                  opacity: "1",
-                }}
-              >
-                <div className="row">
-                  {manageRegistry.map((item, index) => (
-                    <div className="m-3">
-                      <Card
-                        id="myCards"
-                        key={index}
-                        style={{
-                          width: "8rem",
-                          cursor: "pointer",
-                          border: "1px dashed",
-                        }}
-                      >
-                        <Card.Body className="">
-                          <Card.Img
-                            className="center rounded-circle"
-                            alt="items"
-                            width="40px"
-                            src={item.imageUrl}
-                          />
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="row" style={{ marginTop: "40px" }}>
-              <div className="col-sm-2">
-                <Card
-                  id=""
-                  style={{
-                    width: "8rem",
-                    borderRadius: "25px",
-                    background: "#6668A3",
-                    boxShadow: "0px 30px 60px #BA2F4F41",
-                  }}
-                >
-                  <Card.Body>
-                    <Card.Img
-                      className="center rounded-circle"
-                      alt="items"
-                      src={kitchen}
-                      width="60px"
-                    />
-                  </Card.Body>
-                  <Card.Text className="text-center">
-                    <small className="p-1">kitchen Essentials</small>
-                    <strong className="d-block p-1">10</strong>
-                  </Card.Text>
-                </Card>
-              </div>
-              <div
-                className="col mb-5"
-                style={{
-                  border: "1px solid #CBCBCB",
-                  borderRadius: "25px",
-                  opacity: "1",
-                }}
-              >
-                <div className="row">
-                  {manageRegistry.map((item, index) => (
-                    <div className="m-3">
-                      <Card
-                        id="myCards"
-                        key={index}
-                        style={{
-                          width: "8rem",
-                          cursor: "pointer",
-                          border: "1px dashed",
-                        }}
-                      >
-                        <Card.Body className="">
-                          <Card.Img
-                            className="center rounded-circle"
-                            alt="items"
-                            width="40px"
-                            src={item.imageUrl}
-                          />
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

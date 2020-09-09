@@ -204,10 +204,16 @@ export class ManageRegistry extends Component {
                 }}
               >
                 <h6 className="py-2">YOUR REGISTRY URL</h6>
-                <p contenteditable="true">
+                <p>
                   https://sabigift.netlify.app/registry/
-                  {window.localStorage.slug}
-                  <BsPencil className="ml-2" color="blue" />
+                  <span className="p1" contentEditable="true">
+                    {window.localStorage.slug}
+                    <BsPencil
+                      className="ml-2 bg-success"
+                      color="white"
+                      size="25px"
+                    />
+                  </span>
                 </p>
               </div>
 
@@ -215,6 +221,10 @@ export class ManageRegistry extends Component {
                 className="manageReg text-center mt-4"
                 style={{ borderRadius: "25px", height: "250px" }}
               >
+                <label class="btn btn-success">
+                  <BsPencil />
+                  <input type="file" style={{ display: "none" }} name="image" />
+                </label>
                 <div className="hero-text">
                   {this.state.spouseName && (
                     <h2 className="py-3 text-white">

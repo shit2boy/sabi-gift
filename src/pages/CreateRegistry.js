@@ -132,7 +132,7 @@ export class CreateRegistry extends Component {
                     >
                       Back
                     </Link>
-                    {this.state.eventType === "2" && (
+                    {this.state.eventType === "1" && (
                       <Link
                         to="/getstarted"
                         className=" text-link btn btn-dark rounded-pill px-5"
@@ -140,7 +140,7 @@ export class CreateRegistry extends Component {
                         Next
                       </Link>
                     )}
-                    {this.state.eventType === "3" && (
+                    {this.state.eventType === "2" && (
                       <Link
                         to="/registration"
                         className=" text-link btn btn-dark rounded-pill px-5"

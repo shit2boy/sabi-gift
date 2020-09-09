@@ -12,6 +12,7 @@ class CheckList extends Component {
       isChecked: false,
       itemCategories: [],
       categoryId: "",
+      registryItem: [],
     };
   }
 
@@ -37,6 +38,31 @@ class CheckList extends Component {
       .catch((err) => {
         console.log(err);
       });
+    axios
+      .get(`${util.API_BASE_URL}registries/`, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data !== undefined) {
+          let data = res.data;
+          let category = [];
+
+          for (let i = 0; i < data.length; i++) {
+            data[i].picture = data[i].picture.replace("image/upload/", "");
+            if (data[i].cat === "Cooking") {
+              category.push(data[i].picture);
+            }
+          }
+
+          this.setState({ registryItem: res.data });
+          // console.log(this.state.registryItem);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -52,7 +78,7 @@ class CheckList extends Component {
             >
               <Card.Body>
                 <AddCategory
-                  categoryId={this.state.categoryId}
+                  registryItem={this.state.registryItem}
                   button={
                     <div className="center">
                       <img

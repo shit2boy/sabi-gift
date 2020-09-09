@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Card, Modal } from "react-bootstrap";
 // import add from "../images/Sabi-storepage/Addicon.jpg";
-// import axios from "axios";
-// import util from "../util/util";
+import axios from "axios";
+import util from "../util/util";
 import { StateContext } from "../Context";
 
 export default class AddCategory extends Component {
@@ -14,7 +14,7 @@ export default class AddCategory extends Component {
       AddedCategory: "",
       itemByCategory: [],
       selectedCategory: [],
-      categoryId: this.props.categoryId,
+      itemCategories: this.props.categoryId,
     };
   }
 
@@ -38,26 +38,26 @@ export default class AddCategory extends Component {
     // console.log(this.state.selectedCategory);
   };
 
-  // componentDidMount() {
-  //   axios
-  //     .get(`${util.API_BASE_URL}registries/?cats=2`, {
-  //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-  //     })
+  componentDidMount() {
+    axios
+      .get(`${util.API_BASE_URL}registries/?cats=2`, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
 
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       if (res.data !== undefined) {
-  //         let data = res.data;
-  //         for (let i = 0; i < data.length; i++) {
-  //           data[i].picture = data[i].picture.replace("image/upload/", "");
-  //           this.setState({ itemByCategory: data });
-  //         }
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data !== undefined) {
+          let data = res.data;
+          for (let i = 0; i < data.length; i++) {
+            data[i].picture = data[i].picture.replace("image/upload/", "");
+            this.setState({ itemByCategory: data });
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (

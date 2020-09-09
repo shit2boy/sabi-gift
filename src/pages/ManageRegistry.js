@@ -23,8 +23,37 @@ export class ManageRegistry extends Component {
     itemChecked: false,
     eventSlug: "",
     isLoggedIn: false,
+    file: "",
+  };
+  fileInput = React.createRef();
+
+  triggerInputFile = () => {
+    if (
+      this.fileInput.current !== undefined &&
+      this.fileInput.current.click !== undefined
+    )
+      this.fileInput.current.click();
   };
 
+  handleImageUpload = () => {
+    // console.log(this.fileInput);
+  };
+
+  // handleImageChange=(e)=> {
+  //   e.preventDefault();
+
+  //   let reader = new FileReader();
+  //   let file = e.target.files[0];
+
+  //   reader.onloadend = () => {
+  //     this.setState({
+  //       file: file,
+  //       imagePreviewUrl: reader.result
+  //     });
+  //   }
+
+  //   reader.readAsDataURL(file)
+  // }
   componentDidMount() {
     this.setState({ isLoggedIn: true });
     axios
@@ -217,9 +246,15 @@ export class ManageRegistry extends Component {
                 className="manageReg text-center mt-4"
                 style={{ borderRadius: "25px", height: "250px" }}
               >
-                <label class="btn btn-success">
+                <label class="btn bg-white" onClick={this.triggerInputFile}>
                   <BsPencil />
-                  <input type="file" style={{ display: "none" }} name="image" />
+                  <input
+                    type="file"
+                    style={{ display: "none" }}
+                    name="image"
+                    ref={this.fileInput}
+                    onClick={this.handleImageUpload}
+                  />
                 </label>
                 <div className="hero-text">
                   {this.state.spouseName && (

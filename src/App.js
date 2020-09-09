@@ -15,7 +15,6 @@ import RegistryChecklist from "./pages/ChecklistPage";
 import getstarted from "./components/WeddEvent";
 import Login from "./pages/Login";
 import { ResetPassword } from "./components/ResetPassword";
-// import AddToCart from "./components/AddToCart";
 import ActivateAcoount from "./pages/ActivateAcoount";
 import ThankYouPage from "./pages/ThankYouPage";
 import Spinner from "react-bootstrap/Spinner";

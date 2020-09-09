@@ -12,7 +12,11 @@ export class NextSteps extends Component {
   render() {
     return (
       <div className="row justify-content-around ">
-        <Card id="myCards" className="shadow mb-3" style={{ width: "12rem" }}>
+        <Card
+          id="myCards"
+          className="shadow mb-3 grow"
+          style={{ width: "12rem" }}
+        >
           <BsBell className="ml-2 mt-1" />
           <Card.Body className="stepsCard"></Card.Body>
           <Card.Footer className="cardFooter">
@@ -30,7 +34,11 @@ export class NextSteps extends Component {
             </h4> */}
         </Card>
 
-        <Card id="myCards" className="shadow mb-3" style={{ width: "12rem" }}>
+        <Card
+          id="myCards"
+          className="shadow mb-3 grow"
+          style={{ width: "12rem" }}
+        >
           <BsBell className="ml-2 mt-1" />
 
           <Card.Body className="stepsCard2"></Card.Body>
@@ -40,7 +48,11 @@ export class NextSteps extends Component {
             <span className="text-right">+</span>
           </Card.Footer>
         </Card>
-        <Card id="myCards" className="shadow mb-3" style={{ width: "12rem" }}>
+        <Card
+          id="myCards"
+          className="shadow mb-3 grow"
+          style={{ width: "12rem" }}
+        >
           <BsBell className="ml-2 mt-1" />
 
           <Card.Body className="stepsCard3"></Card.Body>
@@ -54,7 +66,11 @@ export class NextSteps extends Component {
             <span className="text-right">+</span>
           </Card.Footer>
         </Card>
-        <Card id="myCards" className="shadow mb-3" style={{ width: "12rem" }}>
+        <Card
+          id="myCards"
+          className="shadow mb-3 grow"
+          style={{ width: "12rem" }}
+        >
           <BsBell className="ml-2 mt-1" />
 
           <Card.Body className="stepsCard4"></Card.Body>
@@ -70,7 +86,11 @@ export class NextSteps extends Component {
             </Link>
           </Card.Footer>
         </Card>
-        <Card id="myCards" className="shadow mb-3" style={{ width: "12rem" }}>
+        <Card
+          id="myCards"
+          className="shadow mb-3 grow"
+          style={{ width: "12rem" }}
+        >
           <BsBell className="ml-2 mt-1" />
 
           <Card.Body className="stepsCard5"></Card.Body>

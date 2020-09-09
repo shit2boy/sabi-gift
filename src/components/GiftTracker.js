@@ -20,6 +20,7 @@ export class GiftTracker extends Component {
       trackedItems: [],
       giftConverted: false,
       giftTrackerId: "",
+      giftTracker: false,
     };
   }
 
@@ -67,6 +68,9 @@ export class GiftTracker extends Component {
           for (let i = 0; i < data.length; i++) {
             trackedGift = data[i].registry;
             this.setState({ giftTrackerId: data[i].id });
+            if (trackedGift.length >= 1) {
+              this.setState({ giftTracker: true });
+            }
           }
           for (let i = 0; i < trackedGift.length; i++) {
             trackedGift[i].picture = trackedGift[i].picture.replace(
@@ -75,7 +79,7 @@ export class GiftTracker extends Component {
             );
           }
           this.setState({ trackedItems: trackedGift });
-          console.log(this.state.trackedItems);
+          // console.log(this.state.trackedItems);
         }
       })
       .catch((err) => {
@@ -99,6 +103,7 @@ export class GiftTracker extends Component {
               We'll list all gifts the guests buy you on this page and your app.
               Here's a rundown on how to them get them home.
             </p>
+            {!this.state.giftTracker && <div>No item available yet</div>}
             {/* <div className="d-flex justify-content-between" style={styles}>
               <div className="d-flex align-items-center">
                 <img

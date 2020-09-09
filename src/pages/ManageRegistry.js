@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 import DashboardNav from "../components/DashboardNav";
 import kitchen from "../images/Sabi-storepage/kitchen.png";
 import CheckList from "../components/AddcheckList";
-// import { manageRegistry } from "../components/imageData";
+import { BsPencil } from "react-icons/bs";
 // import AddCategory from '../components/AddCategory'
 // import add from "../images/Sabi-storepage/Addicon.jpg";
 import axios from "axios";
@@ -32,12 +32,12 @@ export class ManageRegistry extends Component {
       .then((res) => {
         // console.log(res.data);
         if (res.data !== undefined) {
+          window.localStorage.setItem("userId", res.data.id);
           window.localStorage.setItem("name", res.data.first_name);
           window.localStorage.setItem("spouseName", res.data.spouse_name);
-          window.localStorage.setItem("username", res.data.username);
           window.localStorage.setItem("event_date", res.data.event_date);
           window.localStorage.setItem("event_type", res.data.event_type);
-          window.localStorage.setItem("userId", res.data.id);
+          window.localStorage.setItem("username", res.data.username);
         }
         this.setState({ spouseName: window.localStorage.spouseName });
         let event_date = window.localStorage.event_date;
@@ -178,12 +178,6 @@ export class ManageRegistry extends Component {
   };
 
   render() {
-    const hiddenStyle = {
-      display: "none",
-    };
-    const showStyle = {
-      opacity: 1,
-    };
     return (
       <div className="container-fluid">
         <DashboardNav />
@@ -202,13 +196,18 @@ export class ManageRegistry extends Component {
             </div>
             <div className="row mt-5 ">
               <div
-                className="col-12 text-center"
-                style={{ height: "100px", border: "1px solid" }}
+                className="col-12 text-center shadow"
+                style={{
+                  height: "100px",
+                  // border: "1px solid",
+                  background: "#FFFFFF",
+                }}
               >
                 <h6 className="py-2">YOUR REGISTRY URL</h6>
-                <p>
+                <p contenteditable="true">
                   https://sabigift.netlify.app/registry/
                   {window.localStorage.slug}
+                  <BsPencil className="ml-2" color="blue" />
                 </p>
               </div>
 
@@ -216,21 +215,23 @@ export class ManageRegistry extends Component {
                 className="manageReg text-center mt-4"
                 style={{ borderRadius: "25px", height: "250px" }}
               >
-                {this.state.spouseName && (
-                  <h2 className="py-3 text-white">
-                    {window.localStorage.name} &{" "}
-                    {window.localStorage.spouseName}
-                  </h2>
-                )}
-                {!this.state.spouseName && (
-                  <h2 className="py-3 text-white">
-                    {window.localStorage.name}{" "}
-                  </h2>
-                )}
-                <h5 className="py-4 text-white">
-                  {window.localStorage.event_date} ({this.state.dayLeftToEvent}{" "}
-                  days Left)
-                </h5>
+                <div className="hero-text">
+                  {this.state.spouseName && (
+                    <h2 className="py-3 text-white">
+                      {window.localStorage.name} &{" "}
+                      {window.localStorage.spouseName}'s wedding
+                    </h2>
+                  )}
+                  {!this.state.spouseName && (
+                    <h2 className="py-3 text-white">
+                      {window.localStorage.name}'s birthday
+                    </h2>
+                  )}
+                  <h5 className="py-4 text-white">
+                    {window.localStorage.event_date} (
+                    {this.state.dayLeftToEvent} days Left)
+                  </h5>
+                </div>
               </div>
             </div>
             <div className=" row col" style={{ marginTop: "25px" }}>
@@ -260,7 +261,7 @@ export class ManageRegistry extends Component {
                         className="center rounded-circle"
                         alt="items"
                         src={kitchen}
-                        width="60px"
+                        width="100%"
                       />
                     </Card.Body>
                     <Card.Text className="text-center">
@@ -279,10 +280,10 @@ export class ManageRegistry extends Component {
                 >
                   <div className="row">
                     {this.state.registryItem.map((item, index) => (
-                      <div key={index} className="m-3">
+                      <div key={index} className="m-3 d-flex">
                         {item.cat === category.name && (
                           <Card
-                            className=""
+                            className=" flex-fill"
                             id=""
                             key={index}
                             style={{
@@ -295,15 +296,9 @@ export class ManageRegistry extends Component {
                               <Card.Img
                                 id={"ddd" + item.id}
                                 onClick={this.addToReg}
-                                style={
-                                  this.state.Registry.indexOf("ddd" + item.id) >
-                                  -1
-                                    ? hiddenStyle
-                                    : showStyle
-                                }
                                 className="center"
                                 alt="items"
-                                width="40px"
+                                width="100%"
                                 src={item.picture}
                               />
                               <small className="child">{item.name}</small>

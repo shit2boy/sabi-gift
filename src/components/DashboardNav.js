@@ -15,7 +15,7 @@ export class DashboardNav extends Component {
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="white" style={style}>
-        <Navbar.Brand href="/Dashboard">
+        <Navbar.Brand href="/manageregistry">
           <img src={sabigift} alt="logo" width="70px" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

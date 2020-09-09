@@ -28,7 +28,7 @@ export class AvailableItems extends Component {
     return (
       <>
         <div className=" container">
-          <p>Multi Range</p>
+          <p className=" pt-4">Multi Range</p>
           <div className="row col-10">
             <Radio.Group>
               <Radio style={radioStyle} value={1}>
@@ -51,7 +51,7 @@ export class AvailableItems extends Component {
           <div className="row col-10">
             <Slider />
           </div>
-          <p>Category</p>
+          <p className="pt-4">Category</p>
           <div className="row col-10">
             <Radio.Group onChange={this.onChange} value={value}>
               {storeProduct.map((item) => (
@@ -62,7 +62,7 @@ export class AvailableItems extends Component {
               ))}
             </Radio.Group>
           </div>
-          <p>Brand</p>
+          <p className="pt-4">Brand</p>
           <div className="row col-10">
             <Radio.Group onChange={this.onChange} value={value}>
               {storeProduct.map((item) => (

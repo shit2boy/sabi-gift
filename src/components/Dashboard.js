@@ -8,7 +8,7 @@ import { BsGift } from "react-icons/bs";
 import RegistryBar from "./ProgressBar";
 import NextSteps from "./NextSteps";
 import SideBar from "./SideBar";
-import CheckList from "./AddcheckList";
+// import CheckList from "./AddcheckList";
 import axios from "axios";
 import util from "../util/util";
 import { StateContext } from "../Context";
@@ -34,7 +34,7 @@ export class Dashboard extends Component {
 
     axios
 
-      .get(`${util.API_BASE_URL}events/?user=23`, {
+      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export class Dashboard extends Component {
       <div className="container-fluid">
         <DashboardNav />
         {/* <hr className="mt-0 mb-0" /> */}
-        <Row className="mt-4">
+        <Row className="mt-4 mb-3">
           <Col xs={1} md={1} lg={1} className=" d-none d-lg-block ">
             <SideBar />
           </Col>
@@ -151,17 +151,17 @@ export class Dashboard extends Component {
               </div>
               <RegistryBar number={5} />
             </div>
-            <div>
+            <div className="mb-3">
               <h5 className="mt-4 py-4 ">Next steps to take</h5>
 
               <NextSteps />
             </div>
-            <div className="mt-5 py-5">
+            {/* <div className="mt-5 py-5">
               <h5 className="">Your Registry Checklist</h5>
               <div className="row justify-content-around">
                 <CheckList />
               </div>
-            </div>
+            </div> */}
             {/* <div className="mt-3 py-5 ">
               <h5 className="mb-5 ">Add items to your Registry</h5>
               <Row>

@@ -22,7 +22,15 @@ export class LogOut extends Component {
       .then((data) => {
         if (data.status === 200) {
           // console.log(data);
-          // window.localstorage.clear();
+          window.localStorage.removeItem("userId");
+          window.localStorage.removeItem("name");
+          window.localStorage.removeItem("spouseName");
+          window.localStorage.removeItem("event_date");
+          window.localStorage.removeItem("event_type");
+          window.localStorage.removeItem("token_id");
+          window.localStorage.removeItem("username");
+          window.localStorage.removeItem("slug");
+          window.localStorage.removeItem("userId");
           window.location.href = "/";
         }
       })

@@ -151,7 +151,7 @@ export class Product extends Component {
         </div>
         <div className="row">
           {this.state.Products.map((item) => (
-            <Card key={item.id} className="productCards grow  col-sm-3 m-3">
+            <Card key={item.id} className="productCards grow col-sm-3 m-3">
               <div>
                 <img
                   className="card-img center"

@@ -6,6 +6,8 @@ import { Card } from "react-bootstrap";
 // import {StateContext} from "../Context"
 import axios from "axios";
 import util from "../util/util";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import AddToCart from "./AddToCart";
 import { StateContext } from "../Context";
 
@@ -32,8 +34,17 @@ export class Product extends Component {
     addItems: false,
     Products: [],
     selectedIds: [],
-    quantity: 0,
+    quantity: 1,
   };
+
+  input = React.createRef();
+
+  // handleQuantity(event) {
+  //   event.preventDefault();
+  //   let quantityNeeded = this.input.current.value;
+  //   this.setState({ quantity: quantityNeeded });
+  //   console.log(quantityNeeded);
+  // }
 
   addToCart = (item) => {
     let itemsInCart = this.context.itemsInCart;
@@ -51,37 +62,37 @@ export class Product extends Component {
     this.setState({ Products: props.Products });
   }
 
-  componentDidMount() {
-    axios
+  // componentDidMount() {
+  //   axios
 
-      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        // console.log(res.data);
-        if (res.data !== undefined) {
-          let data = res.data;
-          let eventId;
-          for (let i = 0; i < data.length; i++) {
-            // console.log(data[i].cash_gifts);
-            // console.log(data[i].gifts_received);
-            eventId = data[i].id;
-          }
+  //     .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       if (res.data !== undefined) {
+  //         let data = res.data;
+  //         let eventId;
+  //         for (let i = 0; i < data.length; i++) {
+  //           // console.log(data[i].cash_gifts);
+  //           // console.log(data[i].gifts_received);
+  //           eventId = data[i].id;
+  //         }
 
-          this.setState({
-            eventId: eventId,
-          });
-          // console.log(eventId);
-          window.localStorage.setItem("eventId", eventId);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  //         this.setState({
+  //           eventId: eventId,
+  //         });
+  //         // console.log(eventId);
+  //         window.localStorage.setItem("eventId", eventId);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   getIndexOfProduct = (id) => {
     for (let i = 0; i < this.state.Products.length; i++) {
@@ -93,31 +104,40 @@ export class Product extends Component {
     return -1;
   };
 
+  notify = () => toast.success("Added to registry!", { autoClose: 2000 });
   removeGiftFromRegistry = (id) => {
     // console.log("clicked" + id);
-    let evtid = this.state.eventId;
+    // let evtid = this.state.eventId;
+    let eventId = window.localStorage.eventId;
+    let quantityNeeded = this.input.current.value;
+    this.setState({ quantity: quantityNeeded });
+    console.log(quantityNeeded);
     this.setState({ gift: id });
-    console.log(this.state.gift);
-    const giftId = new FormData();
-    giftId.append("gifts", this.state.gift);
+    let addeditem = {
+      gifts: [Number(this.state.gift)],
+      event: eventId,
+      quantity: this.state.quantity,
+    };
+
     axios
-      .patch(`${util.API_BASE_URL}remove-registries/${evtid}/`, giftId, {
+      .patch(`${util.API_BASE_URL}add-registries/${eventId}/`, addeditem, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token_id"),
-          Accept: "application/json",
-          "Content-Type": "application/json",
         },
       })
-      .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          // console.log(response);
+
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          this.setState({ addSuccessfully: true });
           let products = this.state.Products;
           products.splice(this.getIndexOfProduct(id), 1);
           this.setState({ Products: products });
+          this.notify();
         }
       })
-      .catch((error) => {
-        console.dir(error);
+      .catch((err) => {
+        console.log(err);
       });
   };
   render() {
@@ -151,10 +171,10 @@ export class Product extends Component {
         </div>
         <div className="row">
           {this.state.Products.map((item) => (
-            <Card key={item.id} className="productCards grow col-sm-3 m-3">
+            <Card key={item.id} className="productCards col-sm-3 m-3">
               <div>
                 <img
-                  className="card-img center"
+                  className="card-img center grow"
                   alt="items"
                   src={item.picture}
                   id={item.id}
@@ -218,23 +238,28 @@ export class Product extends Component {
               )}
 
               {!this.props.showWishList && (
-                <div
-                  onClick={() => this.removeGiftFromRegistry(item.id)}
-                  className=" col p-0 mb-0"
-                >
+                <div className=" col p-0 mb-0">
+                  <input
+                    className="col-2 p-1"
+                    type="number"
+                    min="1"
+                    ref={this.input}
+                  />
                   <small
+                    onClick={() => this.removeGiftFromRegistry(item.id)}
                     id={item.id}
                     type="button"
-                    className="col p-2 text-center"
-                    style={{ background: "#ededed", color: "#2c2c2c" }}
+                    className="col-10 p-2 text-center"
+                    style={{ background: "#6F64F8", color: "#FFFFFF" }}
                   >
-                    Remove item
+                    Add to Registry
                   </small>
                   {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
                 </div>
               )}
             </Card>
           ))}
+          <ToastContainer />
         </div>
       </div>
     );

@@ -14,47 +14,42 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export class ManageRegistry extends Component {
-  state = {
-    registryItem: [],
-    spouseName: "",
-    dayLeftToEvent: "",
-    itemCategory: [],
-    addSuccessfully: false,
-    Registry: [],
-    itemChecked: false,
-    eventSlug: "",
-    isLoggedIn: false,
-    file: "",
-  };
-  fileInput = React.createRef();
+  constructor() {
+    super();
+    this.state = {
+      registryItem: [],
+      spouseName: "",
+      dayLeftToEvent: "",
+      itemCategory: [],
+      addSuccessfully: false,
+      Registry: [],
+      itemChecked: false,
+      eventSlug: "",
+      isLoggedIn: false,
+      file: "",
+    };
+    this.fileInput = React.createRef();
+  }
 
-  triggerInputFile = () => {
-    if (
-      this.fileInput.current !== undefined &&
-      this.fileInput.current.click !== undefined
-    )
-      this.fileInput.current.click();
-  };
+  triggerInputFile(event) {
+    // highlight-range{3}
+    event.preventDefault();
+    // alert(`Selected file - ${this.fileInput.current.files[0].name}`);
+    console.log(this.fileInput.current.files[0].name);
+  }
+  // triggerInputFile = () => {
+  //   if (
+  //     this.fileInput.current !== undefined &&
+  //     this.fileInput.current.click !== undefined
+  //   )
+  //     this.fileInput.current.click();
+  //   console.log(this.fileInput);
+  // };
 
-  handleImageUpload = () => {
-    // console.log(this.fileInput);
-  };
+  // handleImageUpload = () => {
+  //   console.log(this.fileInput);
+  // };
 
-  // handleImageChange=(e)=> {
-  //   e.preventDefault();
-
-  //   let reader = new FileReader();
-  //   let file = e.target.files[0];
-
-  //   reader.onloadend = () => {
-  //     this.setState({
-  //       file: file,
-  //       imagePreviewUrl: reader.result
-  //     });
-  //   }
-
-  //   reader.readAsDataURL(file)
-  // }
   componentDidMount() {
     this.setState({ isLoggedIn: true });
     axios
@@ -182,7 +177,7 @@ export class ManageRegistry extends Component {
 
     axios
       .patch(
-        `${util.API_BASE_URL}add-registries/${window.localStorage.eventId}/`,
+        `${util.API_BASE_URL}add-registries/${window.localStorage.eventIID}/`,
         addeditem,
         {
           headers: {
@@ -247,14 +242,16 @@ export class ManageRegistry extends Component {
                 className="manageReg text-center mt-4"
                 style={{ borderRadius: "25px", height: "250px" }}
               >
-                <label class="btn bg-white" onClick={this.triggerInputFile}>
+                <label
+                  class="btn bg-white"
+                  // onClick={this.triggerInputFile}
+                >
                   <BsPencil />
                   <input
                     type="file"
                     style={{ display: "none" }}
                     name="image"
                     ref={this.fileInput}
-                    onClick={this.handleImageUpload}
                   />
                 </label>
                 <div className="hero-text">

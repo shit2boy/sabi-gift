@@ -25,7 +25,7 @@ export class EditRegistryUrl extends Component {
     let slug = window.localStorage.slug;
     const { registryUrl } = this.state;
     axios
-      .patch(`${util.API_BASE_URL}/events/${slug}/`, registryUrl, {
+      .patch(`${util.API_BASE_URL}events/${slug}/`, registryUrl, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((data) => {

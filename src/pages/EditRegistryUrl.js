@@ -3,12 +3,18 @@ import { Button, Form } from "react-bootstrap";
 import DashboardNav from "../components/DashboardNav";
 import axios from "axios";
 import util from "../util/util";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export class EditRegistryUrl extends Component {
   state = {
     registryUrl: "",
     successful: false,
+    status: true,
   };
+
+  notify = () =>
+    toast.error("Error processing your request!", { autoClose: 2000 });
 
   changeHandler = (e) => {
     this.setState({ registryUrl: e.target.value, successful: true });
@@ -29,6 +35,8 @@ export class EditRegistryUrl extends Component {
       })
       .catch((error) => {
         console.log(error);
+        this.notify();
+        this.setState({ status: false });
       });
   };
 
@@ -51,7 +59,7 @@ export class EditRegistryUrl extends Component {
                 />
               </Form.Group>
               <Button
-                className="w-25 text-center mt-5"
+                className=" mt-5"
                 variant="success"
                 type="submit"
                 disabled={!this.state.successful}
@@ -60,8 +68,11 @@ export class EditRegistryUrl extends Component {
                 Update
               </Button>
             </Form>
-            <h5> REGISTRY URL</h5>
-            <p>www.sabigift.netlify.app/registry/{this.state.registryUrl}</p>
+            <ToastContainer position="top-center" />
+            <div className="mt-4">
+              <h5> REGISTRY URL</h5>
+              <p>www.sabigift.netlify.app/registry/{this.state.registryUrl}</p>
+            </div>
           </div>
         </div>
       </div>

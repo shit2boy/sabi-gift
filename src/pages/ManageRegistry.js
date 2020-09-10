@@ -5,6 +5,7 @@ import DashboardNav from "../components/DashboardNav";
 import kitchen from "../images/Sabi-storepage/kitchen.png";
 import CheckList from "../components/AddcheckList";
 import { BsPencil } from "react-icons/bs";
+import { Link } from "react-router-dom";
 // import AddCategory from '../components/AddCategory'
 // import add from "../images/Sabi-storepage/Addicon.jpg";
 import axios from "axios";
@@ -231,14 +232,14 @@ export class ManageRegistry extends Component {
                 <h6 className="py-2">YOUR REGISTRY URL</h6>
                 <p>
                   https://sabigift.netlify.app/registry/
-                  <span className="p1" contentEditable="true">
-                    {window.localStorage.slug}
+                  {window.localStorage.slug}{" "}
+                  <Link to="/editurl">
                     <BsPencil
                       className="ml-2 bg-success"
                       color="white"
                       size="25px"
                     />
-                  </span>
+                  </Link>
                 </p>
               </div>
 

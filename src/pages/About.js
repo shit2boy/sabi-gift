@@ -282,7 +282,6 @@ export class About extends Component {
       .catch((error) => {
         console.dir(error);
       });
-    // window.location.href = "/manageregistry";
   };
 
   back = () => {

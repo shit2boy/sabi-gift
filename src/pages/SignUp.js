@@ -413,7 +413,7 @@ export default class getstarted extends Component {
                   </div>
                 )}
 
-                {this.state.currentIndex === 3 && !this.state.isLogged && (
+                {this.state.currentIndex === 3 && (
                   <div className="">
                     <h2>
                       Good News! You can create <br />a free registry on
@@ -503,7 +503,7 @@ export default class getstarted extends Component {
                     BACK
                   </Button>
                 )}
-                {this.state.currentIndex === 3 && !this.state.isLogged && (
+                {this.state.currentIndex === 3 && (
                   <div className=" d-flex justify-content-between">
                     <p>
                       Already a member?

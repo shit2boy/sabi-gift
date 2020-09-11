@@ -49,28 +49,30 @@ export class NextSteps extends Component {
             <span className="text-right">+</span>
           </Card.Footer>
         </Card>
-        <Card
-          id="myCards"
-          className="shadow mb-3 grow"
-          style={{ width: "12rem" }}
-        >
-          <BsBell className="ml-2 mt-1" />
+        <SendInvite
+          button={
+            <Card
+              id="myCards"
+              className="shadow mb-3 grow"
+              style={{ width: "12rem" }}
+            >
+              <BsBell className="ml-2 mt-1" />
 
-          <Card.Body className="stepsCard3"></Card.Body>
-          <Card.Footer className="cardFooter">
-            <strong className="ml-1">3 </strong>
-            <SendInvite
-              button={
+              <Card.Body className="stepsCard3"></Card.Body>
+              <Card.Footer className="cardFooter">
+                <strong className="ml-1">3 </strong>
+
                 <img
                   className="ml-1 d-block pointer"
                   src={invite}
                   alt="step3"
                 />
-              }
-            />
-            <span className="text-right">+</span>
-          </Card.Footer>
-        </Card>
+
+                <span className="text-right">+</span>
+              </Card.Footer>
+            </Card>
+          }
+        />
         <Card
           id="myCards"
           className="shadow mb-3 grow"

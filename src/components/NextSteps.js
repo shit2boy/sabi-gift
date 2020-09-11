@@ -7,6 +7,7 @@ import invite from "../images/Sabi-storepage/invite.svg";
 import manage from "../images/Sabi-storepage/manage.svg";
 import setup from "../images/Sabi-storepage/setup.svg";
 import { Link } from "react-router-dom";
+import SendInvite from "./SendInvite";
 
 export class NextSteps extends Component {
   render() {
@@ -58,11 +59,15 @@ export class NextSteps extends Component {
           <Card.Body className="stepsCard3"></Card.Body>
           <Card.Footer className="cardFooter">
             <strong className="ml-1">3 </strong>
-            <img
-              className="ml-1 d-block pointer"
-              src={invite}
-              alt="step3"
-            />{" "}
+            <SendInvite
+              button={
+                <img
+                  className="ml-1 d-block pointer"
+                  src={invite}
+                  alt="step3"
+                />
+              }
+            />
             <span className="text-right">+</span>
           </Card.Footer>
         </Card>

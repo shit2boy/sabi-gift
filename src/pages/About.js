@@ -221,7 +221,7 @@ export class About extends Component {
         console.dir(error);
       });
     axios
-      .get(`${util.API_BASE_URL}registries/?best_selling=False`, {
+      .get(`${util.API_BASE_URL}registries/?best_selling=true`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((response) => {
@@ -293,7 +293,7 @@ export class About extends Component {
   };
   next = () => {
     if (this.state.currentIndex >= 4) {
-      window.location.href = "/manageregistry";
+      // window.location.href = "/manageregistry";
     }
     this.setState({ currentIndex: this.state.currentIndex + 1 });
     console.log("clicked");

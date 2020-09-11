@@ -13,8 +13,10 @@ export class EditRegistryUrl extends Component {
     status: true,
   };
 
-  notify = () =>
+  errorNotify = () =>
     toast.error("Error processing your request!", { autoClose: 2000 });
+  notify = () =>
+    toast.success("RegistryUrl updated successfully!", { autoClose: 2000 });
 
   changeHandler = (e) => {
     this.setState({ registryUrl: e.target.value, successful: true });
@@ -22,20 +24,21 @@ export class EditRegistryUrl extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    let slug = window.localStorage.slug;
-    const { registryUrl } = this.state;
+    let event_id = window.localStorage.eventIID;
+    const registryUrl = { slug: this.state.registryUrl, event_id: event_id };
     axios
-      .patch(`${util.API_BASE_URL}events/${slug}/`, registryUrl, {
+      .post(`${util.API_BASE_URL}change-slug/`, registryUrl, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((data) => {
         if (data.status === 200) {
           this.setState({ successful: true });
+          this.notify();
         }
       })
       .catch((error) => {
         console.log(error);
-        this.notify();
+        this.errorNotify();
         this.setState({ status: false });
       });
   };

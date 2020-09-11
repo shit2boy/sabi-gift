@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import SideBar from "../components/SideBar";
-import { Card } from "react-bootstrap";
+// import { Card } from "react-bootstrap";
 import DashboardNav from "../components/DashboardNav";
-import kitchen from "../images/Sabi-storepage/kitchen.png";
+// import kitchen from "../images/Sabi-storepage/kitchen.png";
 import CheckList from "../components/AddcheckList";
 import { BsPencil } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Product from "../components/Product";
 // import AddCategory from '../components/AddCategory'
 // import add from "../images/Sabi-storepage/Addicon.jpg";
 import axios from "axios";
@@ -104,31 +105,31 @@ export class ManageRegistry extends Component {
         console.log(err);
       });
 
-    axios
-      .get(`${util.API_BASE_URL}registries/`, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      })
+    // axios
+    //   .get(`${util.API_BASE_URL}registries/`, {
+    //     headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+    //   })
 
-      .then((res) => {
-        // console.log(res.data);
-        if (res.data !== undefined) {
-          let data = res.data;
-          let category = [];
+    //   .then((res) => {
+    // console.log(res.data);
+    // if (res.data !== undefined) {
+    //   let data = res.data;
+    //   let category = [];
 
-          for (let i = 0; i < data.length; i++) {
-            data[i].picture = data[i].picture.replace("image/upload/", "");
-            if (data[i].cat === "Cooking") {
-              category.push(data[i].picture);
-            }
-          }
+    //   for (let i = 0; i < data.length; i++) {
+    //     data[i].picture = data[i].picture.replace("image/upload/", "");
+    //     if (data[i].cat === "Cooking") {
+    //       category.push(data[i].picture);
+    //     }
+    //   }
 
-          this.setState({ registryItem: res.data });
-          // console.log(this.state.registryItem);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //   this.setState({ registryItem: res.data });
+    // console.log(this.state.registryItem);
+    //   }
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
 
     axios
       .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
@@ -144,15 +145,25 @@ export class ManageRegistry extends Component {
           window.localStorage.setItem("slug", data.slug);
           let eventSlug;
           let eventIID;
+          let eventGifts;
           for (let i = 0; i < data.length; i++) {
             eventSlug = data[data.length - 1].slug;
             eventIID = data[data.length - 1].id;
             window.localStorage.setItem("slug", eventSlug);
             window.localStorage.setItem("eventIID", eventIID);
+            eventGifts = data[i].gifts;
+            for (let i = 0; i < eventGifts.length; i++) {
+              eventGifts[i].picture = eventGifts[i].picture.replace(
+                "image/upload/",
+                ""
+              );
+            }
           }
+          this.setState({ registryItem: eventGifts });
+          // console.log(this.state.registryItem);
           this.setState({ eventSlug: eventSlug });
-          // console.log(this.state.eventSlug);
         }
+        // console.log(this.state.eventSlug);
       })
       .catch((err) => {
         // console.log(err);
@@ -161,42 +172,42 @@ export class ManageRegistry extends Component {
   }
   notify = () => toast.success("Added to registry!", { autoClose: 2000 });
 
-  addToReg = (e) => {
-    let item = [];
-    if (this.state.Registry.indexOf(e.target.id) === -1) {
-      item.push(e.target.id);
-      this.setState({ Registry: item, itemChecked: true });
-      for (let i = 0; i < item.length; i++) {
-        item[i] = item[i].replace("ddd", "");
-      }
-    }
-    let items = item.map(Number);
-    let addeditem = {
-      gifts: items,
-    };
+  // addToReg = (e) => {
+  //   let item = [];
+  //   if (this.state.Registry.indexOf(e.target.id) === -1) {
+  //     item.push(e.target.id);
+  //     this.setState({ Registry: item, itemChecked: true });
+  //     for (let i = 0; i < item.length; i++) {
+  //       item[i] = item[i].replace("ddd", "");
+  //     }
+  //   }
+  //   let items = item.map(Number);
+  //   let addeditem = {
+  //     gifts: items,
+  //   };
 
-    axios
-      .patch(
-        `${util.API_BASE_URL}add-registries/${window.localStorage.eventIID}/`,
-        addeditem,
-        {
-          headers: {
-            Authorization: "Token " + localStorage.getItem("token_id"),
-          },
-        }
-      )
+  // axios
+  //   .patch(
+  //     `${util.API_BASE_URL}add-registries/${window.localStorage.eventIID}/`,
+  //     addeditem,
+  //     {
+  //       headers: {
+  //         Authorization: "Token " + localStorage.getItem("token_id"),
+  //       },
+  //     }
+  //   )
 
-      .then((res) => {
-        console.log(res.data);
-        if (res.status === 200) {
-          this.setState({ addSuccessfully: true });
-          this.notify();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  //   .then((res) => {
+  //     console.log(res.data);
+  //     if (res.status === 200) {
+  //       this.setState({ addSuccessfully: true });
+  //       this.notify();
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  // };
 
   render() {
     return (
@@ -243,7 +254,7 @@ export class ManageRegistry extends Component {
                 style={{ borderRadius: "25px", height: "250px" }}
               >
                 <label
-                  class="btn bg-white"
+                  className="btn bg-white"
                   // onClick={this.triggerInputFile}
                 >
                   <BsPencil />
@@ -283,7 +294,13 @@ export class ManageRegistry extends Component {
             </div>
 
             <h5 className="mt-4">Add items to your registry</h5>
-            {this.state.itemCategory.map((category, index) => (
+            <Product
+              Products={this.state.registryItem}
+              showWishList={false}
+              inRegistry={true}
+            />
+            <ToastContainer />
+            {/* {this.state.itemCategory.map((category, index) => (
               <div key={index} className="row" style={{ marginTop: "40px" }}>
                 <div className="col-sm-2">
                   <Card
@@ -327,22 +344,22 @@ export class ManageRegistry extends Component {
                             key={index}
                             style={{
                               width: "8rem",
-                              cursor: "pointer",
+                              cursor: "pointer", 
                               // border: "1px dotted",
-                            }}
-                          >
-                            <Card.Body className="grow hide-child">
-                              <Card.Img
-                                id={"ddd" + item.id}
-                                onClick={this.addToReg}
-                                className="center"
-                                alt="items"
-                                width="100%"
-                                src={item.picture}
-                              />
-                              <small className="child">{item.name}</small>
+                          //   }}
+                          // >
+                          //   <Card.Body className="grow hide-child">
+                          //     <Card.Img
+                          //       id={"ddd" + item.id}
+                          //       onClick={this.addToReg}
+                          //       className="center"
+                          //       alt="items"
+                          //       width="100%"
+                          //       src={item.picture}
+                          //     />
+                          //     <small className="child">{item.name}</small>
                               {/* <Card.Img className="center rounded-circle" alt="items" width='40px' src={item} /> */}
-                            </Card.Body>
+            {/* </Card.Body>
                             <ToastContainer />
                           </Card>
                         )}
@@ -351,7 +368,7 @@ export class ManageRegistry extends Component {
                   </div>
                 </div>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

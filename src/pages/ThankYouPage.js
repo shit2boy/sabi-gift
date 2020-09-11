@@ -41,9 +41,7 @@ class Login extends Component {
       })
       .catch((error) => {
         console.log(error);
-        console.log(ref_code);
       });
-    // console.log(ref_code);
     console.log(trxref);
   }
 

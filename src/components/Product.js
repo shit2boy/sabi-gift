@@ -11,40 +11,28 @@ import "react-toastify/dist/ReactToastify.css";
 // import AddToCart from "./AddToCart";
 import { StateContext } from "../Context";
 
-// import { propTypes } from 'prop-types';
-
 const { Search } = Input;
-
-// let productStyle= {
-// width : '8rem',
-// minHeight: '10rem',
-// paddingLeft : '0px',
-// paddingRight : '0px',
-// boxShadow: '0px 1px 8px #00000022',
-// borderRadius: '8px',
-// opacity: '1',
-// overflow: 'hidden',
-// }
 
 export class Product extends Component {
   static contextType = StateContext;
-  state = {
-    eventId: "",
-    gift: "",
-    addItems: false,
-    Products: [],
-    selectedIds: [],
-    quantity: 1,
+  constructor() {
+    super();
+    this.state = {
+      eventId: "",
+      gift: "",
+      addItems: false,
+      Products: [],
+      selectedIds: [],
+      quantity: "",
+    };
+  }
+
+  handleQuantity = (e) => {
+    // let quantityNeeded = this.state.quantity;
+    //  : ;
+    this.setState({ [e.target.name]: e.target.value });
+    // console.log(quantityNeeded);
   };
-
-  input = React.createRef();
-
-  // handleQuantity(event) {
-  //   event.preventDefault();
-  //   let quantityNeeded = this.input.current.value;
-  //   this.setState({ quantity: quantityNeeded });
-  //   console.log(quantityNeeded);
-  // }
 
   addToCart = (item) => {
     let itemsInCart = this.context.itemsInCart;
@@ -105,22 +93,22 @@ export class Product extends Component {
   };
 
   notify = () => toast.success("Added to registry!", { autoClose: 2000 });
-  removeGiftFromRegistry = (id) => {
+  addGiftToRegistry = (id) => {
     // console.log("clicked" + id);
     // let evtid = this.state.eventId;
-    let eventId = window.localStorage.eventId;
-    let quantityNeeded = this.input.current.value;
+    let eventId = window.localStorage.eventIID;
+    let quantityNeeded = this.state.quantity;
     this.setState({ quantity: quantityNeeded });
     console.log(quantityNeeded);
     this.setState({ gift: id });
     let addeditem = {
       gifts: [Number(this.state.gift)],
-      event: eventId,
-      quantity: this.state.quantity,
+      event: Number(eventId),
+      quantity: Number(quantityNeeded),
     };
 
     axios
-      .patch(`${util.API_BASE_URL}add-registries/${eventId}/`, addeditem, {
+      .post(`${util.API_BASE_URL}add-registry/`, addeditem, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token_id"),
         },
@@ -138,6 +126,43 @@ export class Product extends Component {
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+
+  errorNotify = () =>
+    toast.error("Error! request not processed", { autoClose: 2000 });
+  successNotify = () =>
+    toast.error("Removed from registry", { autoClose: 2000 });
+  removeItemFromRegistry = (id) => {
+    // console.log("clicked" + id);
+    // let evtid = this.state.eventId;
+    let eventId = window.localStorage.eventIID;
+    this.setState({ gift: id });
+    let addeditem = {
+      gifts: Number(this.state.gift),
+      event: Number(eventId),
+    };
+
+    axios
+      .post(`${util.API_BASE_URL}remove-registry/`, addeditem, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+        },
+      })
+
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          this.setState({ addSuccessfully: true });
+          let products = this.state.Products;
+          products.splice(this.getIndexOfProduct(id), 1);
+          this.setState({ Products: products });
+          this.successNotify();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.errorNotify();
       });
   };
   render() {
@@ -237,22 +262,43 @@ export class Product extends Component {
                 </div>
               )}
 
-              {!this.props.showWishList && (
+              {!this.props.showWishList && !this.props.inRegistry && (
                 <div className=" col p-0 mb-0">
                   <input
                     className="col-2 p-1"
                     type="number"
+                    id={item.id}
+                    name="quantity"
                     min="1"
-                    ref={this.input}
+                    onChange={this.handleQuantity}
+                    value={this.state.quantity}
                   />
                   <small
-                    onClick={() => this.removeGiftFromRegistry(item.id)}
+                    onClick={() => this.addGiftToRegistry(item.id)}
                     id={item.id}
                     type="button"
                     className="col-10 p-2 text-center"
                     style={{ background: "#6F64F8", color: "#FFFFFF" }}
                   >
                     Add to Registry
+                  </small>
+                  {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
+                </div>
+              )}
+              {this.props.inRegistry && (
+                <div className=" col p-0 mb-0">
+                  <small
+                    onClick={() => this.removeItemFromRegistry(item.id)}
+                    id={item.id}
+                    type="button"
+                    className="col p-2 text-center"
+                    style={{
+                      background: "#6F64F8",
+                      color: "#FFFFFF",
+                      borderBottomRightRadius: "8px",
+                    }}
+                  >
+                    Remove from registry
                   </small>
                   {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
                 </div>

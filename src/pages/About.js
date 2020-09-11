@@ -221,7 +221,7 @@ export class About extends Component {
         console.dir(error);
       });
     axios
-      .get(`${util.API_BASE_URL}registries/?best_selling=true`, {
+      .get(`${util.API_BASE_URL}registries/?best_selling=True`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((response) => {

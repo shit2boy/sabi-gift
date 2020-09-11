@@ -27,8 +27,6 @@ class Login extends Component {
     const refCode = {
       ref_code: ref_code,
     };
-    console.log(ref_code);
-    console.log("trf", ref_code);
     axios
       .post(`${util.API_BASE_URL}verify-order/`, refCode, {
         headers: {
@@ -36,7 +34,7 @@ class Login extends Component {
         },
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         this.setModalShow();
       })
       .catch((error) => {

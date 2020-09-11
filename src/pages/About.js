@@ -129,7 +129,7 @@ export class About extends Component {
   }
 
   handleSubmit(event) {
-    console.log(this.validateForm());
+    // console.log(this.validateForm());
 
     event.preventDefault();
     if (this.validateForm()) {

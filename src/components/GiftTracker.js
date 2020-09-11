@@ -7,6 +7,8 @@ import SideBar from "./SideBar";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import util from "../util/util";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 let styles = {
   boxShadow: "0px 2px 8px #00000022",
@@ -21,11 +23,23 @@ export class GiftTracker extends Component {
       giftConverted: false,
       giftTrackerId: "",
       giftTracker: false,
+      itemConvert: [],
     };
   }
 
+  errorNotify = () =>
+    toast.error("Error processing your request!", { autoClose: 2000 });
+  notify = () => toast.success("Item  converted to Cash!", { autoClose: 2000 });
+
   convertToCredit = (id) => {
     console.log("clicked" + id);
+
+    let itemConvert = this.state.trackedItems;
+    itemConvert.push(id);
+    this.setState({
+      itemConvert: itemConvert,
+    });
+
     const convertedItemDetail = new FormData();
     convertedItemDetail.append("status", "converted to cash");
     convertedItemDetail.append("gift_tracker", this.state.giftTrackerId);
@@ -41,10 +55,15 @@ export class GiftTracker extends Component {
       .then((response) => {
         if (response.status === 200 || response.status === 201)
           console.log(response);
+        // let itemConvert = this.state.trackedItems;
+        itemConvert.splice(this.state.trackedItems.indexOf(id), 1);
+        this.setState({ itemConvert: itemConvert });
         this.setState({ giftConverted: true });
+        this.notify();
       })
       .catch((error) => {
         console.dir(error);
+        this.errorNotify();
       });
   };
 
@@ -104,47 +123,7 @@ export class GiftTracker extends Component {
               Here's a rundown on how to them get them home.
             </p>
             {!this.state.giftTracker && <div>No item available yet</div>}
-            {/* <div className="d-flex justify-content-between" style={styles}>
-              <div className="d-flex align-items-center">
-                <img
-                  src={smartwatch}
-                  width="100px"
-                  alt="giftFromGuest"
-                  className="m-4"
-                />
-                <div className="ml-2">
-                  <h5>Apple watch Series 4 GPS</h5>
-                  <p>Redesigned from scratch and completely revised.</p>
-                  <span>#13,000</span>
-                </div>
-              </div>
-              <div className="p-4">
-                <div>
-                  <Button
-                    className="mb-1 shadow-lg"
-                    style={{
-                      background: "#6F64F8",
-                      width: "158px",
-                      borderBottomRightRadius: "8px",
-                    }}
-                  >
-                    SEND NOW
-                  </Button>
-                </div>
-                <div>
-                  <Button
-                    style={{
-                      background: "#ededed",
-                      color: "#2c2c2c",
-                      borderBottomLeftRadius: "8px",
-                    }}
-                  >
-                    <GrFavorite />
-                    Convert to credit
-                  </Button>
-                </div>
-              </div>
-            </div> */}
+
             {this.state.trackedItems.map((item, index) => (
               <div
                 key={index}
@@ -186,13 +165,14 @@ export class GiftTracker extends Component {
                         color: "#2c2c2c",
                         borderBottomLeftRadius: "8px",
                       }}
-                      disabled={this.state.giftConverted}
+                      disabled={this.state.itemConvert.indexOf(item.id) > -1}
                     >
                       <GrFavorite />
                       Convert to credit
                     </Button>
                   </div>
                 </div>
+                <ToastContainer />
               </div>
             ))}
           </div>

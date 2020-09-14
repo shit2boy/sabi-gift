@@ -14,19 +14,8 @@ import util from "../util/util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { Button } from "antd";
+import backgroundimg from "../images/Sabi-storepage/manageReg.png";
 
-// let manageReg = {
-//   backgroundImage: 'url("images/Sabi-storepage/manageReg.png")',
-//   backgroundPosition: "center",
-//   backgroundSize: "cover",
-//   backgroundRepeat: "noRepeat",
-//   width: "100%",
-//   position: "relative",
-//   /* height: 30%; */
-//   objectFit: "contain",
-//   borderRadius: "25px",
-//   height: "250px",
-// };
 export class ManageRegistry extends Component {
   constructor() {
     super();
@@ -42,6 +31,8 @@ export class ManageRegistry extends Component {
       isLoggedIn: false,
       selectedFile: null,
       fileSelected: false,
+      isPosterImg: false,
+      backgroundImage: "",
     };
   }
 
@@ -168,7 +159,7 @@ export class ManageRegistry extends Component {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data;
           window.localStorage.setItem("slug", data.slug);
@@ -178,6 +169,15 @@ export class ManageRegistry extends Component {
           for (let i = 0; i < data.length; i++) {
             eventSlug = data[data.length - 1].slug;
             eventIID = data[data.length - 1].id;
+            data[i].poster = data[data.length - 1].poster.replace(
+              "image/upload/",
+              ""
+            );
+            // console.log(data[i].poster);
+            this.setState({
+              backgroundImage: data[i].poster,
+              isPosterImg: true,
+            });
             window.localStorage.setItem("slug", eventSlug);
             window.localStorage.setItem("eventIID", eventIID);
             eventGifts = data[i].gifts;
@@ -238,6 +238,22 @@ export class ManageRegistry extends Component {
   // };
 
   render() {
+    let imgUrl = this.state.isPosterImg
+      ? this.state.backgroundImage
+      : `${backgroundimg}`;
+    let manageReg = {
+      backgroundImage: `url(${imgUrl})`,
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      backgroundRepeat: "noRepeat",
+      width: "100%",
+      position: "relative",
+      /* height: 30%; */
+      objectFit: "contain",
+      borderRadius: "25px",
+      height: "250px",
+    };
+
     return (
       <div className="container-fluid">
         <DashboardNav />
@@ -268,19 +284,12 @@ export class ManageRegistry extends Component {
                   https://sabigift.netlify.app/registry/
                   {window.localStorage.slug}{" "}
                   <Link to="/editurl">
-                    <BsPencil
-                      className="ml-2 bg-success"
-                      color="white"
-                      size="25px"
-                    />
+                    <BsPencil className="ml-2" color="black" size="25px" />
                   </Link>
                 </p>
               </div>
 
-              <div
-                className="manageReg text-center mt-4"
-                style={{ borderRadius: "25px", height: "250px" }}
-              >
+              <div className=" text-center mt-4" style={manageReg}>
                 <label className="btn bg-white">
                   <BsPencil />
                   <input

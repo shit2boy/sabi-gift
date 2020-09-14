@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Hero from "../components/Hero";
+import backgroundimg from "../images/Sabi-storepage/manageReg.png";
 import sabigift from "../images/landing/sabigift.png";
 import { StateContext } from "../Context";
 import Product from "../components/Product";
@@ -24,6 +24,8 @@ class EventType extends Component {
     event_owner: "",
     slug: "",
     dayLeftToEvent: "",
+    isPosterImg: false,
+    backgroundImage: "",
   };
   componentDidMount() {
     if (!window.localStorage.token_id) {
@@ -50,6 +52,12 @@ class EventType extends Component {
           window.localStorage.setItem("event_owner", data.event_owner);
           window.localStorage.setItem("userId", data.event_owner_id);
           window.localStorage.setItem("event_id", data.id);
+          data.poster = data.poster.replace("image/upload/", "");
+          console.log(data.poster);
+          this.setState({
+            backgroundImage: data.poster,
+            isPosterImg: true,
+          });
 
           for (let i = 0; i < data.gifts.length; i++) {
             data.gifts[i].picture = data.gifts[i].picture.replace(
@@ -82,6 +90,24 @@ class EventType extends Component {
   }
 
   render() {
+    let imgUrl = this.state.isPosterImg
+      ? this.state.backgroundImage
+      : `${backgroundimg}`;
+    const birthday = {
+      background: `transparent
+      url(${imgUrl})`,
+      borderRadius: "70px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      objectFit: "contain",
+      margin: "auto",
+      opacity: "1",
+      height: "500px",
+    };
     return (
       <div className="container-fluid">
         <div className="mb-4 d-flex justify-content-between">
@@ -103,7 +129,7 @@ class EventType extends Component {
           </div>
         </div>
         <div className="mb-5">
-          <Hero hero="birthday">
+          <div style={birthday}>
             <div className="text-center">
               <h4>
                 {" "}
@@ -111,7 +137,7 @@ class EventType extends Component {
               </h4>
               <p>{this.state.dayLeftToEvent} days Left</p>
             </div>
-          </Hero>
+          </div>
         </div>
         <div className="container mt-5 ">
           <div className="row">

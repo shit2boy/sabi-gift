@@ -23,14 +23,15 @@ export class Product extends Component {
       addItems: false,
       Products: [],
       selectedIds: [],
-      quantity: "",
+      quantity: {},
     };
   }
 
   handleQuantity = (e) => {
-    // let quantityNeeded = this.state.quantity;
+    let quantityNeeded = this.state.quantity;
     //  : ;
-    this.setState({ [e.target.name]: e.target.value });
+    quantityNeeded[e.target.name] = e.target.value;
+    this.setState({ quantityNeeded: quantityNeeded });
     // console.log(quantityNeeded);
   };
 
@@ -104,7 +105,7 @@ export class Product extends Component {
     let addeditem = {
       gifts: [Number(this.state.gift)],
       event: Number(eventId),
-      quantity: Number(quantityNeeded),
+      quantity: Number(quantityNeeded["quantity"]),
     };
 
     axios
@@ -126,6 +127,7 @@ export class Product extends Component {
       })
       .catch((err) => {
         console.log(err);
+        this.errorNotify();
       });
   };
 
@@ -271,7 +273,7 @@ export class Product extends Component {
                     name="quantity"
                     min="1"
                     onChange={this.handleQuantity}
-                    value={this.state.quantity}
+                    // value={this.state.quantity}
                   />
                   <small
                     onClick={() => this.addGiftToRegistry(item.id)}

@@ -13,7 +13,20 @@ import axios from "axios";
 import util from "../util/util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import { Button } from "antd";
 
+// let manageReg = {
+//   backgroundImage: 'url("images/Sabi-storepage/manageReg.png")',
+//   backgroundPosition: "center",
+//   backgroundSize: "cover",
+//   backgroundRepeat: "noRepeat",
+//   width: "100%",
+//   position: "relative",
+//   /* height: 30%; */
+//   objectFit: "contain",
+//   borderRadius: "25px",
+//   height: "250px",
+// };
 export class ManageRegistry extends Component {
   constructor() {
     super();
@@ -27,32 +40,48 @@ export class ManageRegistry extends Component {
       itemChecked: false,
       eventSlug: "",
       isLoggedIn: false,
-      file: "",
+      selectedFile: null,
+      fileSelected: false,
     };
-    this.fileInput = React.createRef();
   }
 
-  triggerInputFile(event) {
-    // highlight-range{3}
-    event.preventDefault();
-    // alert(`Selected file - ${this.fileInput.current.files[0].name}`);
-    console.log(this.fileInput.current.files[0].name);
-  }
-  // triggerInputFile = () => {
-  //   if (
-  //     this.fileInput.current !== undefined &&
-  //     this.fileInput.current.click !== undefined
-  //   )
-  //     this.fileInput.current.click();
-  //   console.log(this.fileInput);
-  // };
+  triggerInputFile = (e) => {
+    this.setState({ selectedFile: e.target.files[0], fileSelected: true });
+    console.log(this.state.selectedFile);
+  };
 
-  // handleImageUpload = () => {
-  //   console.log(this.fileInput);
-  // };
+  notify = () => toast.success("Upload success", { autoClose: 2000 });
+  errorNotify = () => toast.error("Request not processed", { autoClose: 2000 });
+
+  handleFileUpload = () => {
+    const backgroundImg = new FormData();
+    backgroundImg.append(
+      "poster",
+      this.state.selectedFile,
+      this.state.selectedFile.name
+    );
+    let slug = window.localStorage.slug;
+    axios
+      .patch(`${util.API_BASE_URL}events/${slug}/`, backgroundImg, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({ fileSelected: false });
+          let poster = res.data.poster;
+          console.log(poster);
+          this.notify();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.errorNotify();
+        this.setState({ status: false });
+      });
+  };
 
   componentDidMount() {
-    this.setState({ isLoggedIn: true });
+    window.localStorage.setItem("isLoggedIn", true);
     axios
       .get(`${util.API_BASE_URL}accounts/profile/`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
@@ -170,7 +199,6 @@ export class ManageRegistry extends Component {
         this.setState({ emptyRegistry: true });
       });
   }
-  notify = () => toast.success("Added to registry!", { autoClose: 2000 });
 
   // addToReg = (e) => {
   //   let item = [];
@@ -253,17 +281,22 @@ export class ManageRegistry extends Component {
                 className="manageReg text-center mt-4"
                 style={{ borderRadius: "25px", height: "250px" }}
               >
-                <label
-                  className="btn bg-white"
-                  // onClick={this.triggerInputFile}
-                >
+                <label className="btn bg-white">
                   <BsPencil />
                   <input
                     type="file"
                     style={{ display: "none" }}
                     name="image"
-                    ref={this.fileInput}
+                    accept="image"
+                    onChange={this.triggerInputFile}
                   />
+                  {this.state.fileSelected && (
+                    <input
+                      onClick={this.handleFileUpload}
+                      type="button"
+                      value="upload"
+                    />
+                  )}
                 </label>
                 <div className="hero-text">
                   {this.state.spouseName && (

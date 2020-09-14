@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import { ResetPassword } from "./components/ResetPassword";
 import SendInvite from "./components/SendInvite";
 import ActivateAcoount from "./pages/ActivateAcoount";
+import Setting from "./pages/settings";
 import ThankYouPage from "./pages/ThankYouPage";
 import Spinner from "react-bootstrap/Spinner";
 import CartItem from "./pages/CartItem";
@@ -55,6 +56,7 @@ function App() {
             <Route path="/getstarted" component={getstarted} />
             <Route path="/send-invite" component={SendInvite} />
             <Route path="/payout/" component={ThankYouPage} />
+            <Route path="/editprofile" component={Setting} />
             <Route path="/sign in" component={Login} />
             <Route path="/editurl" component={EditRegistryUrl} />
             {/* <Route path="/additem" component={AddToCart} /> */}

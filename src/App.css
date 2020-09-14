@@ -384,7 +384,7 @@ Link.active:active {
   background-repeat: no-repeat;
   width: 100%;
   position: relative;
-  /* height: 30%; */
+
   object-fit: contain;
 }
 .hero-text {

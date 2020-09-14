@@ -25,6 +25,7 @@ export class Product extends Component {
       selectedIds: [],
       quantity: {},
       filterData: [],
+      search: null,
     };
   }
 
@@ -47,10 +48,9 @@ export class Product extends Component {
     });
   };
 
-  onSearch = (e) => {
-    this.setState({
-      filterData: this.state.Products,
-    });
+  onSearch = (event) => {
+    let keyword = event.target.value;
+    this.setState({ search: keyword });
   };
 
   filterList = (e) => {
@@ -184,6 +184,124 @@ export class Product extends Component {
       });
   };
   render() {
+    const items = this.state.Products.filter((data) => {
+      if (this.state.search == null) return data;
+      else if (
+        data.name.toLowerCase().includes(this.state.search.toLowerCase()) ||
+        data.description.toLowerCase().includes(this.state.search.toLowerCase())
+      ) {
+        return data;
+      }
+    }).map((item) => {
+      return (
+        <Card key={item.id} className="productCards col-sm-3 m-3">
+          <div>
+            <img
+              className="card-img center grow"
+              alt="items"
+              src={item.picture}
+              id={item.id}
+            />
+          </div>
+          <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p>
+          <span className="d-block ml-auto">#{item.price}</span>
+          <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
+            <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
+              {item.name}
+            </strong>
+            <small>{item.description}</small>
+          </Card.Body>
+          <div></div>
+          {this.props.showWishList && (
+            <div className="col p-0 mb-0">
+              {/* <span type='button' className='col-6 p-2'style={{background:'#ededed',color :'#2c2c2c'}}><GrFavorite/> Wishlist</span> */}
+              <button
+                type="button"
+                id={item.id}
+                onClick={() => {
+                  this.addToCart(item);
+                }}
+                className="col text-center p-2 border-0"
+                style={{
+                  background: "#6F64F8",
+                  color: "#FFFFFF",
+                  borderBottomRightRadius: "8px",
+                }}
+                disabled={this.state.selectedIds.indexOf(item.id) > -1}
+              >
+                {this.state.selectedIds.indexOf(item.id) > -1
+                  ? "Item in a cart"
+                  : "Add to cart"}
+              </button>
+
+              {/* <AddToCart
+              productId={item.id}
+              image={item.picture}
+              info={item.description}
+              price={item.price}
+              inStock={item.in_stock}
+              button={
+                <span
+                  type="button"
+                  className="col text-center p-2"
+                  style={{
+                    background: "#6F64F8",
+                    color: "#FFFFFF",
+                    borderBottomRightRadius: "8px",
+                  }}
+                >
+                  Add to cart
+                </span>
+              }
+            /> */}
+            </div>
+          )}
+
+          {!this.props.showWishList && !this.props.inRegistry && (
+            <div className=" col p-0 mb-0">
+              <input
+                className="col-2 p-1"
+                type="number"
+                id={item.id}
+                name="quantity"
+                min="1"
+                onChange={this.handleQuantity}
+                // value={this.state.quantity}
+              />
+              <small
+                onClick={() => this.addGiftToRegistry(item.id)}
+                id={item.id}
+                type="button"
+                className="col-10 p-2 text-center"
+                style={{ background: "#6F64F8", color: "#FFFFFF" }}
+              >
+                Add to Registry
+              </small>
+              {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
+            </div>
+          )}
+          {this.props.inRegistry && (
+            <div className=" col p-0 mb-0">
+              <small
+                onClick={() => this.removeItemFromRegistry(item.id)}
+                id={item.id}
+                type="button"
+                className="col p-2 text-center"
+                style={{
+                  background: "#6F64F8",
+                  color: "#FFFFFF",
+                  borderBottomRightRadius: "8px",
+                }}
+              >
+                Remove from registry
+              </small>
+              {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
+            </div>
+          )}
+        </Card>
+      );
+    });
+
     return (
       <div className="container-fluid">
         <div className="row mb-1">
@@ -196,10 +314,10 @@ export class Product extends Component {
               <option>item</option>
               <option>item</option>
             </select>
-            <span>
+            <span className="p-2">
               <BsFillGridFill />
             </span>
-            <span className="">
+            <span className=" p-2">
               <BsListUl />
             </span>
           </div>
@@ -208,121 +326,12 @@ export class Product extends Component {
           <div className="col-sm-10">
             <Search
               placeholder="Search here"
-              onSearch={(value) => console.log(value)}
+              onChange={(e) => this.onSearch(e)}
             />
           </div>
         </div>
         <div className="row">
-          {this.state.Products.map((item) => (
-            <Card key={item.id} className="productCards col-sm-3 m-3">
-              <div>
-                <img
-                  className="card-img center grow"
-                  alt="items"
-                  src={item.picture}
-                  id={item.id}
-                />
-              </div>
-              <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p>
-              <span className="d-block ml-auto">#{item.price}</span>
-              <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
-                <strong
-                  className="d-block"
-                  style={{ textOverflow: "ellipsis" }}
-                >
-                  {item.name}
-                </strong>
-                <small>{item.description}</small>
-              </Card.Body>
-              <div></div>
-              {this.props.showWishList && (
-                <div className="col p-0 mb-0">
-                  {/* <span type='button' className='col-6 p-2'style={{background:'#ededed',color :'#2c2c2c'}}><GrFavorite/> Wishlist</span> */}
-                  <button
-                    type="button"
-                    id={item.id}
-                    onClick={() => {
-                      this.addToCart(item);
-                    }}
-                    className="col text-center p-2 border-0"
-                    style={{
-                      background: "#6F64F8",
-                      color: "#FFFFFF",
-                      borderBottomRightRadius: "8px",
-                    }}
-                    disabled={this.state.selectedIds.indexOf(item.id) > -1}
-                  >
-                    {this.state.selectedIds.indexOf(item.id) > -1
-                      ? "Item in a cart"
-                      : "Add to cart"}
-                  </button>
-
-                  {/* <AddToCart
-                    productId={item.id}
-                    image={item.picture}
-                    info={item.description}
-                    price={item.price}
-                    inStock={item.in_stock}
-                    button={
-                      <span
-                        type="button"
-                        className="col text-center p-2"
-                        style={{
-                          background: "#6F64F8",
-                          color: "#FFFFFF",
-                          borderBottomRightRadius: "8px",
-                        }}
-                      >
-                        Add to cart
-                      </span>
-                    }
-                  /> */}
-                </div>
-              )}
-
-              {!this.props.showWishList && !this.props.inRegistry && (
-                <div className=" col p-0 mb-0">
-                  <input
-                    className="col-2 p-1"
-                    type="number"
-                    id={item.id}
-                    name="quantity"
-                    min="1"
-                    onChange={this.handleQuantity}
-                    // value={this.state.quantity}
-                  />
-                  <small
-                    onClick={() => this.addGiftToRegistry(item.id)}
-                    id={item.id}
-                    type="button"
-                    className="col-10 p-2 text-center"
-                    style={{ background: "#6F64F8", color: "#FFFFFF" }}
-                  >
-                    Add to Registry
-                  </small>
-                  {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
-                </div>
-              )}
-              {this.props.inRegistry && (
-                <div className=" col p-0 mb-0">
-                  <small
-                    onClick={() => this.removeItemFromRegistry(item.id)}
-                    id={item.id}
-                    type="button"
-                    className="col p-2 text-center"
-                    style={{
-                      background: "#6F64F8",
-                      color: "#FFFFFF",
-                      borderBottomRightRadius: "8px",
-                    }}
-                  >
-                    Remove from registry
-                  </small>
-                  {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
-                </div>
-              )}
-            </Card>
-          ))}
+          {items}
           <ToastContainer />
         </div>
       </div>

@@ -261,7 +261,7 @@ export class ManageRegistry extends Component {
           <div className="col-1 d-none d-lg-block">
             <SideBar />
           </div>
-          <div className="col ml-3">
+          <div className="col ml-3 mb-3">
             <div className="row ">
               <div className="col-12">
                 <h1>

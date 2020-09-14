@@ -172,9 +172,9 @@ export class GiftTracker extends Component {
                     </Button>
                   </div>
                 </div>
-                <ToastContainer />
               </div>
             ))}
+            <ToastContainer />
           </div>
         </div>
       </div>

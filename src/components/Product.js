@@ -260,7 +260,7 @@ export class Product extends Component {
           {!this.props.showWishList && !this.props.inRegistry && (
             <div className=" col p-0 mb-0">
               <input
-                className="col-2 p-1"
+                className="col-3 p-1 "
                 type="number"
                 id={item.id}
                 name="quantity"
@@ -272,7 +272,7 @@ export class Product extends Component {
                 onClick={() => this.addGiftToRegistry(item.id)}
                 id={item.id}
                 type="button"
-                className="col-10 p-2 text-center"
+                className="col-9 p-2 text-center"
                 style={{ background: "#6F64F8", color: "#FFFFFF" }}
               >
                 Add to Registry
@@ -308,7 +308,7 @@ export class Product extends Component {
           <div className="col-8">
             <small>7,618 results found in 5ms</small>
           </div>
-          <div className="col-2 d-none d-lg-block">
+          <div className="col d-none d-lg-block">
             <select className="p-1">
               <option>Default</option>
               <option>item</option>

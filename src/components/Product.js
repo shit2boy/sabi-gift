@@ -24,6 +24,7 @@ export class Product extends Component {
       Products: [],
       selectedIds: [],
       quantity: {},
+      filterData: [],
     };
   }
 
@@ -44,6 +45,21 @@ export class Product extends Component {
       selectedIds: selectedIds,
       quantity: this.state.quantity + 1,
     });
+  };
+
+  onSearch = (e) => {
+    this.setState({
+      filterData: this.state.Products,
+    });
+  };
+
+  filterList = (e) => {
+    const filterItem = this.state.Products.filter((item) => {
+      return (
+        item.continent.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+      );
+    });
+    this.setState({ filterData: filterItem });
   };
 
   UNSAFE_componentWillReceiveProps(props) {

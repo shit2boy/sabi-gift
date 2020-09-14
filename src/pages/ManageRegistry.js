@@ -48,6 +48,7 @@ export class ManageRegistry extends Component {
   triggerInputFile = (e) => {
     this.setState({ selectedFile: e.target.files[0], fileSelected: true });
     console.log(this.state.selectedFile);
+    this.handleFileUpload();
   };
 
   notify = () => toast.success("Upload success", { autoClose: 2000 });
@@ -57,8 +58,8 @@ export class ManageRegistry extends Component {
     const backgroundImg = new FormData();
     backgroundImg.append(
       "poster",
-      this.state.selectedFile,
-      this.state.selectedFile.name
+      this.state.selectedFile
+      // this.state.selectedFile.name
     );
     let slug = window.localStorage.slug;
     axios
@@ -93,7 +94,6 @@ export class ManageRegistry extends Component {
           window.localStorage.setItem("name", res.data.first_name);
           window.localStorage.setItem("spouseName", res.data.spouse_name);
           window.localStorage.setItem("event_date", res.data.event_date);
-          window.localStorage.setItem("event_type", res.data.event_type);
           window.localStorage.setItem("username", res.data.username);
         }
         this.setState({ spouseName: window.localStorage.spouseName });
@@ -290,13 +290,13 @@ export class ManageRegistry extends Component {
                     accept="image"
                     onChange={this.triggerInputFile}
                   />
-                  {this.state.fileSelected && (
+                  {/* {this.state.fileSelected && (
                     <input
                       onClick={this.handleFileUpload}
                       type="button"
                       value="upload"
                     />
-                  )}
+                  )} */}
                 </label>
                 <div className="hero-text">
                   {this.state.spouseName && (

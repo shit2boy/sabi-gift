@@ -33,13 +33,13 @@ export default class CartItem extends Component {
       this.setState({ productIdInCart: productIdInCart });
       // console.log(this.state.productIdInCart);
       let quantity =
-        this.state.quantityObject["quantity" + cart.id] === undefined
+        this.state.quantityObject["quantity" + cart.item["id"]] === undefined
           ? 1
-          : parseInt(this.state.quantityObject["quantity" + cart.id]);
-      let price = parseFloat(cart.price);
+          : parseInt(this.state.quantityObject["quantity" + cart.item["id"]]);
+      let price = parseFloat(cart.item["price"]);
       sum = sum + price * quantity;
       cart = {
-        item: cart.id,
+        item: cart.item["id"],
         quantity: quantity,
         evt: Number(window.localStorage.event_id),
       };
@@ -139,37 +139,46 @@ export default class CartItem extends Component {
                   <td>
                     {" "}
                     <img
-                      src={inCart.picture}
+                      src={inCart.item["picture"]}
                       width="80px"
                       alt="giftFromGuest"
                       className="m-4"
                     />
                   </td>
-                  <td>{inCart.description}</td>
+                  <td>{inCart.item["description"]}</td>
                   <td className="text-center">
                     <input
                       type="number"
-                      name={"quantity" + inCart.id}
+                      name={"quantity" + inCart.item["id"]}
                       min="1"
                       max="10"
                       value={
-                        this.state.quantityObject["quantity" + inCart.id] ===
-                          undefined ||
-                        isNaN(this.state.quantityObject["quantity" + inCart.id])
+                        this.state.quantityObject[
+                          "quantity" + inCart.item["id"]
+                        ] === undefined ||
+                        isNaN(
+                          this.state.quantityObject[
+                            "quantity" + inCart.item["id"]
+                          ]
+                        )
                           ? 1
-                          : this.state.quantityObject["quantity" + inCart.id]
+                          : this.state.quantityObject[
+                              "quantity" + inCart.item["id"]
+                            ]
                       }
                       onChange={this.handleQuantityChange}
                     />
                   </td>
-                  <td>#{inCart.price}</td>
+                  <td>#{inCart.item["price"]}</td>
                   <td>
                     #
-                    {this.state.quantityObject["quantity" + inCart.id] ===
-                    undefined
-                      ? inCart.price
-                      : this.state.quantityObject["quantity" + inCart.id] *
-                        inCart.price}
+                    {this.state.quantityObject[
+                      "quantity" + inCart.item["id"]
+                    ] === undefined
+                      ? inCart.item["price"]
+                      : this.state.quantityObject[
+                          "quantity" + inCart.item["id"]
+                        ] * inCart.item["price"]}
                   </td>
                   <td
                     className="pointer"

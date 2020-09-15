@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 // import AvailableItems from "./AvailableItems";
 import DashboardNav from "./DashboardNav";
 import { GiReceiveMoney } from "react-icons/gi";
@@ -12,6 +12,7 @@ import SideBar from "./SideBar";
 import axios from "axios";
 import util from "../util/util";
 import { StateContext } from "../Context";
+import CashGift from "../pages/CashGiftPage";
 
 const date = new Date();
 const formatDate = { day: "numeric", year: "numeric", month: "long" };
@@ -155,6 +156,15 @@ export class Dashboard extends Component {
               <h5 className="mt-4 py-4 ">Next steps to take</h5>
 
               <NextSteps />
+            </div>
+            <div className="mt-lg-5">
+              <CashGift
+                button={
+                  <Button className="btn-outline-success" variant="default">
+                    Add Cash Fund
+                  </Button>
+                }
+              />
             </div>
             {/* <div className="mt-5 py-5">
               <h5 className="">Your Registry Checklist</h5>

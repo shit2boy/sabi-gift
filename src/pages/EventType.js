@@ -53,24 +53,14 @@ class EventType extends Component {
           window.localStorage.setItem("userId", data.event_owner_id);
           window.localStorage.setItem("event_id", data.id);
           data.poster = data.poster.replace("image/upload/", "");
-          console.log(data.poster);
+          // console.log(data.poster);
           this.setState({
             backgroundImage: data.poster,
             isPosterImg: true,
-          });
-
-          for (let i = 0; i < data.gifts.length; i++) {
-            data.gifts[i].picture = data.gifts[i].picture.replace(
-              "image/upload/",
-              ""
-            );
-          }
-
-          this.setState({
             event_type: data.event_type,
             event_date: data.start_date,
             slug: data.slug,
-            products: data.gifts,
+            products: res.data.items,
           });
           window.localStorage.setItem("name", res.data.first_name);
 

@@ -180,13 +180,8 @@ export class ManageRegistry extends Component {
             });
             window.localStorage.setItem("slug", eventSlug);
             window.localStorage.setItem("eventIID", eventIID);
-            eventGifts = data[i].gifts;
-            for (let i = 0; i < eventGifts.length; i++) {
-              eventGifts[i].picture = eventGifts[i].picture.replace(
-                "image/upload/",
-                ""
-              );
-            }
+            eventGifts = data[i].items;
+            // console.log(eventGifts);
           }
           this.setState({ registryItem: eventGifts });
           // console.log(this.state.registryItem);

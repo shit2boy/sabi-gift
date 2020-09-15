@@ -67,7 +67,7 @@ export default class SendInvite extends Component {
         inviter: window.localStorage.userId,
       };
       axios
-        .post(`${util.API_BASE_URL}invite/send-invite/`, SendInviteDetails, {
+        .post(`${util.API_BASE_URL}event/invite-user/`, SendInviteDetails, {
           headers: {
             Authorization: "Token " + localStorage.getItem("token_id"),
           },

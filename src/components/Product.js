@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Input } from "antd";
 // import { GrFavorite } from "react-icons/gr";
 import { BsFillGridFill, BsListUl } from "react-icons/bs";
-import { Card } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 // import {StateContext} from "../Context"
 import axios from "axios";
 import util from "../util/util";
@@ -37,11 +37,11 @@ export class Product extends Component {
     // console.log(quantityNeeded);
   };
 
-  addToCart = (item) => {
+  addToCart = (data) => {
     let itemsInCart = this.context.itemsInCart;
-    itemsInCart.push(item);
+    itemsInCart.push(data);
     let selectedIds = this.state.selectedIds;
-    selectedIds.push(item.id);
+    selectedIds.push(data.item["id"]);
     this.setState({
       selectedIds: selectedIds,
       quantity: this.state.quantity + 1,
@@ -51,15 +51,6 @@ export class Product extends Component {
   onSearch = (event) => {
     let keyword = event.target.value;
     this.setState({ search: keyword });
-  };
-
-  filterList = (e) => {
-    const filterItem = this.state.Products.filter((item) => {
-      return (
-        item.continent.toLowerCase().search(e.target.value.toLowerCase()) !== -1
-      );
-    });
-    this.setState({ filterData: filterItem });
   };
 
   UNSAFE_componentWillReceiveProps(props) {
@@ -183,33 +174,39 @@ export class Product extends Component {
         this.errorNotify();
       });
   };
+
   render() {
     const items = this.state.Products.filter((data) => {
-      if (this.state.search == null) return data;
-      else if (
-        data.name.toLowerCase().includes(this.state.search.toLowerCase()) ||
-        data.description.toLowerCase().includes(this.state.search.toLowerCase())
+      if (this.state.search == null) {
+        return data.item;
+      } else if (
+        data.item["name"]
+          .toLowerCase()
+          .includes(this.state.search.toLowerCase()) ||
+        data.item["description"]
+          .toLowerCase()
+          .includes(this.state.search.toLowerCase())
       ) {
-        return data;
+        return data.item;
       }
-    }).map((item) => {
+    }).map((data, index) => {
       return (
-        <Card key={item.id} className="productCards col-sm-3 m-3">
+        <Card key={index} className="productCards col-sm-3 m-3">
           <div>
             <img
               className="card-img center grow"
               alt="items"
-              src={item.picture}
-              id={item.id}
+              src={data.item["picture"]}
+              id={data.item["id"]}
             />
           </div>
           <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p>
-          <span className="d-block ml-auto">#{item.price}</span>
+          <span className="d-block ml-auto">#{data.item["price"]}</span>
           <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
             <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
-              {item.name}
+              {data.item["name"]}
             </strong>
-            <small>{item.description}</small>
+            <small>{data.item["description"]}</small>
           </Card.Body>
           <div></div>
           {this.props.showWishList && (
@@ -217,9 +214,9 @@ export class Product extends Component {
               {/* <span type='button' className='col-6 p-2'style={{background:'#ededed',color :'#2c2c2c'}}><GrFavorite/> Wishlist</span> */}
               <button
                 type="button"
-                id={item.id}
+                id={data.item["id"]}
                 onClick={() => {
-                  this.addToCart(item);
+                  this.addToCart(data);
                 }}
                 className="col text-center p-2 border-0"
                 style={{
@@ -227,9 +224,9 @@ export class Product extends Component {
                   color: "#FFFFFF",
                   borderBottomRightRadius: "8px",
                 }}
-                disabled={this.state.selectedIds.indexOf(item.id) > -1}
+                disabled={this.state.selectedIds.indexOf(data.item["id"]) > -1}
               >
-                {this.state.selectedIds.indexOf(item.id) > -1
+                {this.state.selectedIds.indexOf(data.item["id"]) > -1
                   ? "Item in a cart"
                   : "Add to cart"}
               </button>
@@ -259,32 +256,42 @@ export class Product extends Component {
 
           {!this.props.showWishList && !this.props.inRegistry && (
             <div className=" col p-0 mb-0">
-              <input
+              {/* <input
                 className="col-3 p-1 "
                 type="number"
                 id={item.id}
                 name="quantity"
                 min="1"
-                onChange={this.handleQuantity}
+                onChange={this.handleQuantity} 
                 // value={this.state.quantity}
-              />
-              <small
-                onClick={() => this.addGiftToRegistry(item.id)}
-                id={item.id}
-                type="button"
-                className="col-9 p-2 text-center"
-                style={{ background: "#6F64F8", color: "#FFFFFF" }}
-              >
-                Add to Registry
-              </small>
+              {/* /> */}
+              <Form.Row>
+                <Form.Control
+                  type="number"
+                  className="col-3 ml-2 p-1"
+                  id={data.item["id"]}
+                  name="quantity"
+                  min="1"
+                  onChange={this.handleQuantity}
+                />
+
+                <Form.Control
+                  onClick={() => this.addGiftToRegistry(data.item["id"])}
+                  id={data.item["id"]}
+                  type="button"
+                  className="col-8 p-1 mr-0 text-center"
+                  style={{ background: "#6F64F8", color: "#FFFFFF" }}
+                  value="Add to Registry"
+                />
+              </Form.Row>
               {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
             </div>
           )}
           {this.props.inRegistry && (
             <div className=" col p-0 mb-0">
               <small
-                onClick={() => this.removeItemFromRegistry(item.id)}
-                id={item.id}
+                onClick={() => this.removeItemFromRegistry(data.item["id"])}
+                id={data.item["id"]}
                 type="button"
                 className="col p-2 text-center"
                 style={{
@@ -301,7 +308,6 @@ export class Product extends Component {
         </Card>
       );
     });
-
     return (
       <div className="container-fluid">
         <div className="row mb-1">

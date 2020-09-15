@@ -22,6 +22,7 @@ import ThankYouPage from "./pages/ThankYouPage";
 import Spinner from "react-bootstrap/Spinner";
 import CartItem from "./pages/CartItem";
 import EditRegistryUrl from "./pages/EditRegistryUrl";
+import CashGift from "./pages/CashGiftPage";
 
 const Home = lazy(() => import("./pages/Home"));
 const ManageRegistry = lazy(() => import("./pages/ManageRegistry"));
@@ -59,7 +60,7 @@ function App() {
             <Route path="/editprofile" component={Setting} />
             <Route path="/sign in" component={Login} />
             <Route path="/editurl" component={EditRegistryUrl} />
-            {/* <Route path="/additem" component={AddToCart} /> */}
+            <Route path="/cash-funds" component={CashGift} />
             <Route path="/cart" component={CartItem} />
             <Route path="/Passwordreset" component={ResetPassword} />
             <Route component={Home} />

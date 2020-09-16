@@ -32,10 +32,6 @@ class EventType extends Component {
       window.localStorage.clear();
     }
     const { handle } = this.props.match.params;
-    // fetch(`${util.API_BASE_URL}events/${handle}`).then((user) => {
-    //   this.setState(() => ({ user }));
-    //   console.log(user);
-    // });
 
     axios
       .get(`${util.API_BASE_URL}events/${handle}`, {

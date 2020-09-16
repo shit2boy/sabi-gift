@@ -60,10 +60,10 @@ export default class SendInvite extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     if (this.validateForm()) {
-      let event_id = window.localStorage.eventIID;
+      let event_slug = window.localStorage.slug;
       const SendInviteDetails = {
         email: this.state.email,
-        event_id: event_id,
+        event: event_slug,
         inviter: window.localStorage.userId,
       };
       axios

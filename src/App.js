@@ -51,7 +51,7 @@ function App() {
             <Route path="/checklist" component={RegistryChecklist} />
             <Route path="/manageregistry" component={ManageRegistry} />
             <Route path="/giftTracker" component={GiftTracker} />
-            <Route exact path="/registry/:handle" component={EventType} />
+            <Route exact path="/registry/:handle/" component={EventType} />
             <Route path="/myregistry" component={EventType} />
             <Route path="/checkout" component={CheckoutForm} />
             <Route path="/getstarted" component={getstarted} />

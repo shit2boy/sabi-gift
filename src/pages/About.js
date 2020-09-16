@@ -245,16 +245,14 @@ export class About extends Component {
     const gift = this.state.selectedgift;
     for (let i = 0; i < gift.length; i++) {
       gift[i] = gift[i].replace("k", "");
-      console.log(gift[i]);
+      // console.log(gift[i]);
     }
     let gifts = gift.map(Number);
 
     console.log(gifts);
-    let eventLink = `https://sabigift.netlify.app/regsistry/${window.localStorage.userId}/${window.localStorage.name}2020`;
 
     let UserEventInfo = {
       event_owner: window.localStorage.userId,
-      event_link: eventLink,
       start_date: window.localStorage.event_date,
       start_time: "07:00:00",
       event_type: window.localStorage.event_type,
@@ -271,13 +269,27 @@ export class About extends Component {
         },
       })
       .then((response) => {
-        if (response.status === 200 || response.status === 201)
-          console.log(response);
-        window.localStorage.setItem("slug", response.data.slug);
-
-        window.location.href = "/manageregistry";
-
-        // console.log(gifts);
+        if (response.status === 200 || response.status === 201) {
+          window.localStorage.setItem("slug", response.data.slug);
+          let event_link = `https://sabigift.netlify.app/regsistry/${window.localStorage.slug}/`;
+          axios
+            .patch(
+              `${util.API_BASE_URL}events/${window.localStorage.slug}`,
+              event_link,
+              {
+                headers: {
+                  Authorization: "Token " + localStorage.getItem("token_id"),
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+              }
+            )
+            .then((response) => {
+              if (response.status === 200 || response.status === 201) {
+                window.location.href = "/manageregistry";
+              }
+            });
+        }
       })
       .catch((error) => {
         console.dir(error);

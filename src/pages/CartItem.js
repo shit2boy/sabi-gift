@@ -151,7 +151,7 @@ export default class CartItem extends Component {
                       type="number"
                       name={"quantity" + inCart.item["id"]}
                       min="1"
-                      max="10"
+                      max={inCart.item.qty[0]}
                       value={
                         this.state.quantityObject[
                           "quantity" + inCart.item["id"]

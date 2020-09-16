@@ -30,7 +30,7 @@ export default class SendInvite extends Component {
 
   changeHandler = (e) => {
     this.setState({ email: e.target.value, successful: true });
-    console.log(this.state.email);
+    // console.log(this.state.email);
   };
 
   validateForm = () => {
@@ -57,6 +57,34 @@ export default class SendInvite extends Component {
     return emailIsValid;
   };
 
+  onAddPartner = (e) => {
+    e.preventDefault();
+    if (this.validateForm()) {
+      let event_slug = window.localStorage.slug;
+      const addPartner = {
+        email: this.state.email,
+        event: event_slug,
+        inviter: window.localStorage.userId,
+      };
+      axios
+        .post(`${util.API_BASE_URL}event/invite-co-celebrant/`, addPartner, {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
+          },
+        })
+        .then((data) => {
+          if (data.status === 200 || data.status === 201) {
+            this.setState({ successful: true });
+            this.notify();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.errorNotify();
+          this.setState({ status: false });
+        });
+    }
+  };
   onSubmit = (e) => {
     e.preventDefault();
     if (this.validateForm()) {
@@ -100,32 +128,51 @@ export default class SendInvite extends Component {
           onHide={() => this.setModalHide(false)}
         >
           <Modal.Header closeButton>
-            <p>Send an invite to your guest</p>
+            <p>{this.props.title}</p>
           </Modal.Header>
           <Modal.Body className=" ">
             <div className="container">
               <div className="row justify-content-center">
                 <div className="m-3">
-                  <Form noValidate onSubmit={this.onSubmit}>
+                  <Form
+                    noValidate
+                    onSubmit={
+                      this.props.isSabiPartner
+                        ? this.onAddPartner
+                        : this.onSubmit
+                    }
+                  >
                     <Form.Group>
                       <Form.Label>Email address</Form.Label>
                       <Form.Control
                         type="email"
                         name="email"
                         onChange={this.changeHandler}
-                        placeholder="Enter your guest email ..."
+                        placeholder={this.props.placeholder}
                         required
                       />
                       <span style={{ color: "red" }}>{this.state.error}</span>
                     </Form.Group>
-                    <Button
-                      className=" mt-5"
-                      variant="success"
-                      type="submit"
-                      style={{ background: "#58B852", color: "#ffffff" }}
-                    >
-                      Send Invite
-                    </Button>
+                    {!this.props.isSabiPartner && (
+                      <Button
+                        className="mt-5 w-100"
+                        variant="success"
+                        type="submit"
+                        style={{ background: "#58B852", color: "#ffffff" }}
+                      >
+                        Send Invite
+                      </Button>
+                    )}
+                    {this.props.isSabiPartner && (
+                      <Button
+                        className="w-100 mt-5"
+                        variant="success"
+                        type="submit"
+                        style={{ background: "#58B852", color: "#ffffff" }}
+                      >
+                        Invite Co-celebrant
+                      </Button>
+                    )}
                   </Form>
                   <ToastContainer position="top-center" />
                 </div>

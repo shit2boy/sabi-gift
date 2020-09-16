@@ -34,6 +34,18 @@ export class EditRegistryUrl extends Component {
         if (data.status === 200) {
           this.setState({ successful: true });
           this.notify();
+          let event_link = `https://sabigift.netlify.app/regsistry/${this.state.registryUrl}/`;
+          axios.patch(
+            `${util.API_BASE_URL}events/${this.state.registryUrl}`,
+            event_link,
+            {
+              headers: {
+                Authorization: "Token " + localStorage.getItem("token_id"),
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            }
+          );
         }
       })
       .catch((error) => {

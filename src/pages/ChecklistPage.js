@@ -198,51 +198,65 @@ export class RegistryChecklist extends Component {
   }
 
   render() {
-    const items = this.state.allRegistryItem.map((data, index) => {
-      return (
-        <Card key={index} className="productCards col-sm-3 m-3">
-          <div>
-            <img
-              className="card-img center grow"
-              alt="items"
-              src={data.picture}
-              id={data.id}
-            />
-          </div>
-          <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p>
-          <span className="d-block ml-auto">#{data.price}</span>
-          <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
-            <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
-              {data.name}
-            </strong>
-            <small>{data.description}</small>
-          </Card.Body>
-          <div></div>
-
-          <div className=" col p-0 mb-0">
-            <Form.Row>
-              <Form.Control
-                type="number"
-                className="col-3 ml-2 p-1"
+    const items = this.state.allRegistryItem
+      .filter((data) => {
+        if (this.state.search == null) {
+          return data;
+        } else if (
+          data.name.toLowerCase().includes(this.state.search.toLowerCase()) ||
+          data.description
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase())
+        ) {
+          return data;
+        }
+        return null;
+      })
+      .map((data, index) => {
+        return (
+          <Card key={index} className="productCards col-sm-3 m-3">
+            <div>
+              <img
+                className="card-img center grow"
+                alt="items"
+                src={data.picture}
                 id={data.id}
-                name="quantity"
-                min="1"
-                onChange={this.handleQuantity}
               />
+            </div>
+            <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p>
+            <span className="d-block ml-auto">#{data.price}</span>
+            <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
+              <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
+                {data.name}
+              </strong>
+              <small>{data.description}</small>
+            </Card.Body>
+            <div></div>
 
-              <Form.Control
-                onClick={() => this.addGiftToRegistry(data.id)}
-                id={data.id}
-                type="button"
-                className="col-8 p-1 mr-0 text-center"
-                style={{ background: "#6F64F8", color: "#FFFFFF" }}
-                value="Add to Registry"
-              />
-            </Form.Row>
-          </div>
-        </Card>
-      );
-    });
+            <div className=" col p-0 mb-0">
+              <Form.Row>
+                <Form.Control
+                  type="number"
+                  className="col-3 ml-2 p-1"
+                  id={data.id}
+                  name="quantity"
+                  min="1"
+                  onChange={this.handleQuantity}
+                />
+
+                <Form.Control
+                  onClick={() => this.addGiftToRegistry(data.id)}
+                  id={data.id}
+                  type="button"
+                  className="col-8 p-1 mr-0 text-center"
+                  style={{ background: "#6F64F8", color: "#FFFFFF" }}
+                  value="Add to Registry"
+                />
+              </Form.Row>
+            </div>
+          </Card>
+        );
+      });
 
     return (
       <div className="container-fluid">

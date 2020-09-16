@@ -46,15 +46,12 @@ export class ManageRegistry extends Component {
   errorNotify = () => toast.error("Request not processed", { autoClose: 2000 });
 
   handleFileUpload = () => {
-    const backgroundImg = new FormData();
-    backgroundImg.append(
-      "poster",
-      this.state.selectedFile
-      // this.state.selectedFile.name
-    );
     let slug = window.localStorage.slug;
+    const backgroundImg = new FormData();
+    backgroundImg.append("poster", this.state.selectedFile);
+    backgroundImg.append("event", slug);
     axios
-      .patch(`${util.API_BASE_URL}events/${slug}/`, backgroundImg, {
+      .post(`${util.API_BASE_URL}update-poster/`, backgroundImg, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((res) => {

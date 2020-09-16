@@ -174,7 +174,21 @@ export class Product extends Component {
           </div>
         </div>
         <div className="row">
-          {this.state.Products.map((data, index) => {
+          {this.state.Products.filter((data) => {
+            if (this.state.search == null) {
+              return data.item;
+            } else if (
+              data.item["name"]
+                .toLowerCase()
+                .includes(this.state.search.toLowerCase()) ||
+              data.item["description"]
+                .toLowerCase()
+                .includes(this.state.search.toLowerCase())
+            ) {
+              return data.item;
+            }
+            return null;
+          }).map((data, index) => {
             return (
               <Card key={index} className="productCards col-sm-3 m-3">
                 <div>

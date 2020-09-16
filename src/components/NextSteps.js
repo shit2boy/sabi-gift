@@ -30,26 +30,37 @@ export class NextSteps extends Component {
             )}{" "}
             <span className="text-right">+</span>
           </Card.Footer>
-          {/* <h4 className="card-img-overlay text-center o9 bg-transparent">
-              Done
-            </h4> */}
         </Card>
 
-        <Card
-          id="myCards"
-          className="shadow mb-3 grow"
-          style={{ width: "12rem" }}
-        >
-          <BsBell className="ml-2 mt-1" />
-
-          <Card.Body className="stepsCard2"></Card.Body>
-          <Card.Footer className="cardFooter">
-            <strong className="ml-1">2</strong>
-            <img className="ml-1 d-block pointer" src={Add} alt="step2" />{" "}
-            <span className="text-right">+</span>
-          </Card.Footer>
-        </Card>
         <SendInvite
+          isSabiPartner={true}
+          title="Invite Co-celebrant to your event "
+          placeholder="Enter the Partner email ... "
+          button={
+            <Card
+              id="myCards"
+              className="shadow mb-3 grow"
+              style={{ width: "12rem" }}
+            >
+              <BsBell className="ml-2 mt-1" />
+
+              <Card.Body className="stepsCard2"></Card.Body>
+              <Card.Footer className="cardFooter">
+                <strong className="ml-1">2</strong>
+                <img
+                  className="ml-1 d-block pointer"
+                  src={Add}
+                  alt="step2"
+                />{" "}
+                <span className="text-right">+</span>
+              </Card.Footer>
+            </Card>
+          }
+        />
+        <SendInvite
+          isSabiPartner={false}
+          title="Invite people to your event "
+          placeholder="Enter the Guest email ... "
           button={
             <Card
               id="myCards"

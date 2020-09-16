@@ -271,7 +271,7 @@ export class About extends Component {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           window.localStorage.setItem("slug", response.data.slug);
-          let event_link = `https://sabigift.netlify.app/regsistry/${window.localStorage.slug}/`;
+          let event_link = `https://sabigift.netlify.app/registry/${window.localStorage.slug}/`;
           axios
             .patch(
               `${util.API_BASE_URL}events/${window.localStorage.slug}`,

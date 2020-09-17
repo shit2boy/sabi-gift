@@ -4,6 +4,8 @@ import { Card, Modal } from "react-bootstrap";
 import axios from "axios";
 import util from "../util/util";
 import { StateContext } from "../Context";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default class AddCategory extends Component {
   static contextType = StateContext;
@@ -15,9 +17,13 @@ export default class AddCategory extends Component {
       itemByCategory: [],
       selectedCategory: [],
       itemCategories: this.props.categoryId,
+      quantity: 1,
     };
   }
 
+  notify = () => toast.success("Added to registry!", { autoClose: 2000 });
+  errorNotify = () =>
+    toast.error("Error! Request not processed", { autoClose: 2000 });
   setModalHide = () => {
     this.setState({ modalShow: false });
   };
@@ -26,21 +32,52 @@ export default class AddCategory extends Component {
     this.setState({ modalShow: true });
   };
 
-  addMoreCategoryToRegistry = (e) => {
-    let selectedArr = this.state.selectedCategory;
-    if (this.state.selectedCategory.indexOf(e.target.id) === -1) {
-      selectedArr.push(e.target.id);
-      this.setState({ selectedCategory: selectedArr });
-    } else {
-      selectedArr.splice(this.state.selectedCategory.indexOf(e.target.id), 1);
-      this.setState({ selectedCategory: selectedArr });
-    }
-    // console.log(this.state.selectedCategory);
+  addGiftToRegistry = (id) => {
+    // console.log("clicked" + id);
+    // let evtid = this.state.eventId;
+    let eventId = window.localStorage.eventIID;
+    let quantityNeeded = this.state.quantity;
+    console.log(quantityNeeded);
+    let addeditem = {
+      gifts: [Number(id)],
+      event: Number(eventId),
+      quantity: quantityNeeded,
+    };
+
+    axios
+      .post(`${util.API_BASE_URL}add-registry/`, addeditem, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+        },
+      })
+
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          this.notify();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.errorNotify();
+      });
   };
+
+  // addMoreCategoryToRegistry = (e) => {
+  //   let selectedArr = this.state.selectedCategory;
+  //   if (this.state.selectedCategory.indexOf(e.target.id) === -1) {
+  //     selectedArr.push(e.target.id);
+  //     this.setState({ selectedCategory: selectedArr });
+  //   } else {
+  //     selectedArr.splice(this.state.selectedCategory.indexOf(e.target.id), 1);
+  //     this.setState({ selectedCategory: selectedArr });
+  //   }
+  //   console.log(this.state.selectedCategory);
+  // };
 
   componentDidMount() {
     axios
-      .get(`${util.API_BASE_URL}registries/?cats=2`, {
+      .get(`${util.API_BASE_URL}registries/`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
 
@@ -80,35 +117,38 @@ export default class AddCategory extends Component {
               <div className="row justify-content-center">
                 {this.state.itemByCategory.map((item, index) => (
                   <div key={index} className="m-3 d-flex">
-                    <Card
-                      className="flex-fill"
-                      id="myCards"
-                      key={item.id}
-                      style={{
-                        width: "8rem",
-                        cursor: "pointer",
-                        border: "1px dotted",
-                      }}
-                    >
-                      <Card.Body
-                        onClick={this.addMoreCategoryToRegistry}
-                        className=""
-                        id={index}
+                    {this.props.category === item.cat && (
+                      <Card
+                        onClick={() => this.addGiftToRegistry(item.id)}
+                        className="flex-fill"
+                        id="myCards"
+                        key={item.id}
+                        style={{
+                          width: "8rem",
+                          cursor: "pointer",
+                          border: "1px dotted",
+                        }}
                       >
-                        <Card.Img
-                          className="center rounded-circle"
-                          alt="items"
-                          width="50px"
-                          src={item.picture}
-                        />
-                        <small className="text-center">{item.name}</small>
-                      </Card.Body>
-                    </Card>
+                        <Card.Body className="" id={index}>
+                          <Card.Img
+                            className="center rounded-circle"
+                            alt="items"
+                            width="50px"
+                            src={item.picture}
+                            id={index}
+                          />
+                          <small id={index} className="text-center">
+                            {item.name}
+                          </small>
+                        </Card.Body>
+                      </Card>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
           </Modal.Body>
+          <ToastContainer />
         </Modal>
       </div>
     );

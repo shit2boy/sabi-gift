@@ -70,16 +70,16 @@ class CheckList extends Component {
       <div className="container-fluid">
         <div className="row">
           {this.state.itemCategories.map((item) => (
-            <Card
+            <AddCategory
               key={item.id}
-              id="myCards"
-              className="col-sm m-3"
-              style={{ width: "8rem", cursor: "pointer" }}
-            >
-              <Card.Body>
-                <AddCategory
-                  registryItem={this.state.registryItem}
-                  button={
+              category={item.name}
+              button={
+                <Card
+                  id="myCards"
+                  className="col-sm m-3"
+                  style={{ width: "8rem", cursor: "pointer" }}
+                >
+                  <Card.Body>
                     <div className="center">
                       <img
                         className=" rounded-circle img-fluid"
@@ -88,16 +88,16 @@ class CheckList extends Component {
                         src={kitchen}
                       />
                     </div>
-                  }
-                />
-              </Card.Body>
-              <Card.Text className="text-center">
-                <small className="">{item.name}</small>
-                <strong className="p-1 d-block">
-                  {/* <AddCategory button="+" /> */}+
-                </strong>
-              </Card.Text>
-            </Card>
+                  </Card.Body>
+                  <Card.Text className="text-center">
+                    <small className="">{item.name}</small>
+                    <strong className="p-1 d-block">
+                      {/* <AddCategory button="+" /> */}+
+                    </strong>
+                  </Card.Text>
+                </Card>
+              }
+            />
           ))}
         </div>
       </div>

@@ -6,9 +6,9 @@ import axios from "axios";
 import util from "../util/util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Input } from "antd";
+import { Input, Tooltip } from "antd";
 import { BsFillGridFill, BsListUl } from "react-icons/bs";
-import { Card, Form } from "react-bootstrap";
+import { Card, Form, Table } from "react-bootstrap";
 import { StateContext } from "../Context";
 
 const { Search } = Input;
@@ -27,6 +27,7 @@ export class RegistryChecklist extends Component {
       quantity: {},
       filterData: [],
       search: null,
+      listDisplay: false,
     };
   }
 
@@ -279,7 +280,7 @@ export class RegistryChecklist extends Component {
                   showWishList={false}
                 /> */}
                 <div className="container-fluid">
-                  <div className="row mb-1">
+                  <div className="row mb-2">
                     <div className="col-8">
                       <small>7,618 results found in 5ms</small>
                     </div>
@@ -289,11 +290,21 @@ export class RegistryChecklist extends Component {
                         <option>item</option>
                         <option>item</option>
                       </select>
-                      <span className="p-2">
-                        <BsFillGridFill />
+                      <span className="pointer p-2">
+                        <BsFillGridFill
+                          size="25px"
+                          onClick={() => {
+                            this.setState({ listDisplay: false });
+                          }}
+                        />
                       </span>
-                      <span className=" p-2">
-                        <BsListUl />
+                      <span className="pointer p-2">
+                        <BsListUl
+                          size="25px"
+                          onClick={() => {
+                            this.setState({ listDisplay: true });
+                          }}
+                        />
                       </span>
                     </div>
                   </div>
@@ -305,10 +316,104 @@ export class RegistryChecklist extends Component {
                       />
                     </div>
                   </div>
-                  <div className="row">
-                    {items}
-                    <ToastContainer />
-                  </div>
+                  {!this.state.listDisplay && (
+                    <div className="row">
+                      {items}
+                      <ToastContainer />
+                    </div>
+                  )}
+
+                  {this.state.listDisplay && (
+                    <div className="row">
+                      <Table hover>
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Price</th>
+                            <th></th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        {this.state.allRegistryItem
+                          .filter((data) => {
+                            if (this.state.search == null) {
+                              return data;
+                            } else if (
+                              data.name
+                                .toLowerCase()
+                                .includes(this.state.search.toLowerCase()) ||
+                              data.description
+                                .toLowerCase()
+                                .includes(this.state.search.toLowerCase())
+                            ) {
+                              return data;
+                            }
+                            return null;
+                          })
+                          .map((data, index) => {
+                            return (
+                              <tbody key={index}>
+                                <tr>
+                                  <td></td>
+                                  <td>
+                                    <img
+                                      className=" img-fluid center grow"
+                                      src={data.picture}
+                                      width="90px"
+                                      alt="itemImage"
+                                    />
+                                  </td>
+                                  <td>{data.name}</td>
+                                  <td>{data.price}</td>
+                                  <td></td>
+                                  <td>
+                                    {" "}
+                                    <Form.Row>
+                                      <Tooltip
+                                        placement="top"
+                                        title="quantity"
+                                        color="#5F619F"
+                                      >
+                                        {" "}
+                                        <Form.Control
+                                          type="number"
+                                          className="col-3 p-2"
+                                          id={data.id}
+                                          name="quantity"
+                                          min="1"
+                                          onChange={this.handleQuantity}
+                                        />
+                                      </Tooltip>
+                                    </Form.Row>
+                                  </td>
+                                  <td>
+                                    <Form.Row>
+                                      <Form.Control
+                                        onClick={() =>
+                                          this.addGiftToRegistry(data.id)
+                                        }
+                                        id={data.id}
+                                        type="button"
+                                        className="p-2 mr-0 text-center"
+                                        style={{
+                                          background: "#6F64F8",
+                                          color: "#FFFFFF",
+                                        }}
+                                        value="Add to Registry"
+                                      />
+                                    </Form.Row>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            );
+                          })}
+                      </Table>
+
+                      <ToastContainer />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

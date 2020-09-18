@@ -21,9 +21,8 @@ export default class AddCategory extends Component {
     };
   }
 
-  notify = () => toast.success("Added to registry!", { autoClose: 2000 });
-  errorNotify = () =>
-    toast.error("Error! Request not processed", { autoClose: 2000 });
+  notify = (res) => toast.success(res, { autoClose: 2000 });
+  errorNotify = (res) => toast.error(res, { autoClose: 2000 });
   setModalHide = () => {
     this.setState({ modalShow: false });
   };
@@ -52,14 +51,14 @@ export default class AddCategory extends Component {
       })
 
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.status === 200) {
-          this.notify();
+          this.notify(res.data.success);
         }
       })
       .catch((err) => {
         console.log(err);
-        this.errorNotify();
+        this.errorNotify(err.data.invalid);
       });
   };
 

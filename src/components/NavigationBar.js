@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+import React, { Component } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import logo from "../images/landing/sabigift.png";
 import Login from "../pages/Login";
@@ -14,7 +14,7 @@ export class NavigationBar extends Component {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-auto" id="navItems">
             {/* <Nav.Link className="pv-2 ml-2 " href="/">HOME</Nav.Link> */}
-            <Nav.Link className="pv-2 ml-2 " href="#">
+            <Nav.Link className="pv-2 ml-2 " href="#howitworks">
               HOW IT WORKS
             </Nav.Link>
             <Nav.Link className="pv-2 ml-2 " href="/createRegistry">

@@ -35,10 +35,10 @@ export class AvailableItems extends Component {
                 ₦1000
               </Radio>
               <Radio style={radioStyle} value={2}>
-                ₦10-₦10000
+                ₦10 - ₦10000
               </Radio>
               <Radio style={radioStyle} value={3}>
-                ₦100-₦50000
+                ₦100 - ₦50000
               </Radio>
               <Radio style={radioStyle} value={4}>
                 ₦500000 All
@@ -57,7 +57,6 @@ export class AvailableItems extends Component {
               {storeProduct.map((item) => (
                 <Radio key={item.id} style={radioStyle} value={item.id}>
                   {item.name}
-                  {/* <div>{item.numberAvailable}</div> */}
                 </Radio>
               ))}
             </Radio.Group>
@@ -73,34 +72,6 @@ export class AvailableItems extends Component {
             </Radio.Group>
           </div>
           <hr />
-
-          {/* <p>Rating</p>
-              <div className='row col-10'>
-              <div className='row'>
-                <Rate className='col' allowHalf defaultValue={4.5} />
-                <span className='col-1'>8500</span>
-              </div>
-              <div className='row'>
-                <Rate  className='col' allowHalf defaultValue={3.} />
-                <span  className='col-1'> 3250 </span>
-              </div>
-              <div className='row'>
-                <Rate  className='col' allowHalf defaultValue={2.5} />
-                <span  className='col-1'>1120 </span>
-              </div>
-              <div className='row'>
-                <Rate className='col' allowHalf defaultValue={2.} />
-                <span className='col-1'>3320 </span>
-              </div>
-              <div className='row'>
-                <Rate className='col' allowHalf defaultValue={3.5} />
-                <span className='col-1'>5452</span>
-              </div>
-             </div>
-             </div>
-             <div className='text-center mt-2'>
-                <Button className='P-2' type='button' style={{background: '#6F64F8',color:'#ffffff',borderRadius:'8px'}}>CLEAR ALL FILTERS</Button>
-              </div> */}
         </div>
       </>
     );

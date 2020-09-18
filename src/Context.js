@@ -23,7 +23,7 @@ class ProductProvider extends Component {
 
   handleQuantityChange = (e) => {
     this.setState({ quantity: e.target.value });
-    // console.log(e.target.value);
+    console.log(e.target.value);
   };
 
   handleSelectOpt = (e) => {

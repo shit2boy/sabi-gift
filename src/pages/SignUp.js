@@ -86,7 +86,8 @@ export default class getstarted extends Component {
       });
   }
 
-  mapValueAndNext = () => {
+  mapValueAndNext = (e) => {
+    e.preventDefault();
     // console.log(this.state.formValue);
     // console.log(this.state.currentIndex);
     let value = this.state.formValue;

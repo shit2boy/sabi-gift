@@ -234,16 +234,16 @@ export class ManageRegistry extends Component {
       ? this.state.backgroundImage
       : `${backgroundimg}`;
     let manageReg = {
-      backgroundImage: `url(${imgUrl})`,
-      backgroundPosition: "center",
-      backgroundSize: "cover",
-      backgroundRepeat: "noRepeat",
+      background: `url(${imgUrl})`,
+      backgroundposition: "center",
+      backgroundsize: "cover",
+      backgroundrepeat: "noRepeat",
       width: "100%",
       position: "relative",
       /* height: 30%; */
       objectFit: "contain",
       borderRadius: "25px",
-      height: "250px",
+      height: "300px",
     };
 
     return (

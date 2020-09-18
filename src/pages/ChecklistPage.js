@@ -287,8 +287,8 @@ export class RegistryChecklist extends Component {
                     <div className="col d-none d-lg-block">
                       <select className="p-1">
                         <option>Default</option>
-                        <option>item</option>
-                        <option>item</option>
+                        <option>...</option>
+                        <option>...</option>
                       </select>
                       <span className="pointer p-2">
                         <BsFillGridFill

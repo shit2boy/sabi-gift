@@ -80,7 +80,7 @@ class EventType extends Component {
       ? this.state.backgroundImage
       : `${backgroundimg}`;
     const birthday = {
-      background: `transparent
+      backgroundImage: `transparent
       url(${imgUrl})`,
       borderRadius: "70px",
       display: "flex",

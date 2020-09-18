@@ -160,6 +160,7 @@ export class Product extends Component {
             </select>
             <span className="p-2 pointer">
               <BsFillGridFill
+                color={!this.state.listDisplay ? "#6F64F8" : ""}
                 onClick={() => {
                   this.setState({ listDisplay: false });
                 }}
@@ -168,6 +169,7 @@ export class Product extends Component {
             </span>
             <span className="pointer p-2">
               <BsListUl
+                color={this.state.listDisplay ? "#6F64F8" : ""}
                 onClick={() => {
                   this.setState({ listDisplay: true });
                 }}

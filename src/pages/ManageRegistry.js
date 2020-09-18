@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import SideBar from "../components/SideBar";
-// import { Card } from "react-bootstrap";
+// import { Spinner, Button } from "react-bootstrap";
 import DashboardNav from "../components/DashboardNav";
-// import kitchen from "../images/Sabi-storepage/kitchen.png";
 import CheckList from "../components/AddcheckList";
 import { BsPencil } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Product from "../components/Product";
-// import AddCategory from '../components/AddCategory'
-// import add from "../images/Sabi-storepage/Addicon.jpg";
 import axios from "axios";
 import util from "../util/util";
 import { ToastContainer, toast } from "react-toastify";
@@ -29,23 +26,24 @@ export class ManageRegistry extends Component {
       itemChecked: false,
       eventSlug: "",
       isLoggedIn: false,
-      selectedFile: null,
+      selectedFile: "",
       fileSelected: false,
       isPosterImg: false,
       backgroundImage: "",
+      uploadLoading: false,
     };
   }
 
   triggerInputFile = (e) => {
     this.setState({ selectedFile: e.target.files[0], fileSelected: true });
     console.log(this.state.selectedFile);
-    this.handleFileUpload();
   };
 
-  notify = () => toast.success("Upload success", { autoClose: 2000 });
-  errorNotify = () => toast.error("Request not processed", { autoClose: 2000 });
+  notify = (res) => toast.success(res, { autoClose: 2000 });
+  errorNotify = (res) => toast.error(res, { autoClose: 2000 });
 
   handleFileUpload = () => {
+    this.setState({ uploadLoading: true });
     let slug = window.localStorage.slug;
     const backgroundImg = new FormData();
     backgroundImg.append("poster", this.state.selectedFile);
@@ -56,16 +54,19 @@ export class ManageRegistry extends Component {
       })
       .then((res) => {
         if (res.status === 200) {
-          this.setState({ fileSelected: false });
-          let poster = res.data.poster;
-          console.log(poster);
-          this.notify();
+          this.setState({ fileSelected: false, uploadLoading: false });
+          // console.log(res.data);
+          this.notify(res.data.success);
         }
       })
       .catch((error) => {
         console.log(error);
-        this.errorNotify();
-        this.setState({ status: false });
+        this.errorNotify(error.message.error);
+        this.setState({
+          status: false,
+          fileSelected: false,
+          uploadLoading: false,
+        });
       });
   };
 
@@ -288,17 +289,23 @@ export class ManageRegistry extends Component {
                     type="file"
                     style={{ display: "none" }}
                     name="image"
-                    accept="image/*"
-                    multiple="false"
+                    accept="image/jpeg,image/png,image/gif,image/bmp"
                     onChange={this.triggerInputFile}
                   />
-                  {/* {this.state.fileSelected && (
+                  {this.state.fileSelected && !this.state.uploadLoading && (
                     <input
                       onClick={this.handleFileUpload}
                       type="button"
                       value="upload"
                     />
-                  )} */}
+                  )}
+                  {this.state.uploadLoading && (
+                    <input
+                      className="spinner-grow spinner-grow-sm"
+                      type="button"
+                      value="Uploading"
+                    />
+                  )}
                 </label>
                 <div className="hero-text">
                   {this.state.spouseName && (

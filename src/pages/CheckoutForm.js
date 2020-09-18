@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Col, Table, Alert } from "react-bootstrap";
+import { Form, Col, Table, Alert, Spinner } from "react-bootstrap";
 import sabigift from "../images/landing/sabigift.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -16,6 +16,7 @@ export default class CheckoutForm extends Component {
       customerId: false,
       errors: {},
       cartIds: [],
+      loading: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,6 +30,7 @@ export default class CheckoutForm extends Component {
   }
 
   handlePost = async () => {
+    this.setState({ loading: true });
     let formField = this.state.formField;
     let customer = new FormData();
     let authorization_url;
@@ -69,8 +71,9 @@ export default class CheckoutForm extends Component {
             axios
               .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
               .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res !== undefined) {
+                  this.setState({ loading: false });
                   window.location.href = authorization_url;
                 }
               });
@@ -82,6 +85,7 @@ export default class CheckoutForm extends Component {
     } catch (err) {
       // Handle Error Here
       console.log(err);
+      this.setState({ loading: false });
       Alert("Please check your connection and try again");
     }
   };
@@ -328,13 +332,27 @@ export default class CheckoutForm extends Component {
               </Table>
               <div className="text-center">
                 {/* <button onClick={this.handleSubmit}>pay</button> */}
-                <span
-                  onClick={this.handleSubmit}
-                  type="button"
-                  className="p-3 orderBtn"
-                >
-                  Place Order
-                </span>
+                {!this.state.loading && (
+                  <span
+                    onClick={this.handleSubmit}
+                    type="button"
+                    className="p-3 orderBtn"
+                  >
+                    Place Order
+                  </span>
+                )}
+                {this.state.loading && (
+                  <span type="button" className="p-3 orderBtn">
+                    <Spinner
+                      as="span"
+                      animation="grow"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                    Loading...
+                  </span>
+                )}
 
                 {/* {this.state.customerId ? (
                   <PaystackButton

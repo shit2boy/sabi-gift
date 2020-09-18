@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import { Row, Col, Button } from "react-bootstrap";
-// import AvailableItems from "./AvailableItems";
 import CashIcon from "../images/Sabi-storepage/cashFundIcon.svg";
 import DashboardNav from "./DashboardNav";
 import { BsGift } from "react-icons/bs";
-// import Product from "./Product";
 import RegistryBar from "./ProgressBar";
 import NextSteps from "./NextSteps";
 import SideBar from "./SideBar";
-// import CheckList from "./AddcheckList";
 import axios from "axios";
 import util from "../util/util";
 import { StateContext } from "../Context";
@@ -64,27 +61,6 @@ export class Dashboard extends Component {
         console.log(err);
       });
   }
-  // componentDidMount() {
-  //   axios
-  //     .get(`${util.API_BASE_URL}accounts/profile/`, {
-  //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-  //     })
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       if (res.data !== undefined) {
-  //         window.localStorage.setItem("name", res.data.first_name);
-  //         window.localStorage.setItem("image", res.data.photo);
-  //         window.localStorage.setItem("username", res.data.username);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       // console.log(err);
-  //       window.localStorage.removeItem("name");
-  //       window.localStorage.removeItem("image");
-  //       window.localStorage.removeItem("username");
-  //       window.location.href = "/";
-  //     });
-  // }
 
   render() {
     return (
@@ -166,28 +142,6 @@ export class Dashboard extends Component {
                 }
               />
             </div>
-            {/* <div className="mt-5 py-5">
-              <h5 className="">Your Registry Checklist</h5>
-              <div className="row justify-content-around">
-                <CheckList />
-              </div>
-            </div> */}
-            {/* <div className="mt-3 py-5 ">
-              <h5 className="mb-5 ">Add items to your Registry</h5>
-              <Row>
-                <Col xs md={3} lg={3} className="availableItem d-none d-lg-inline-block">
-                  <p>Filter</p>
-                  <div className="row">
-                    <div className="mx-auto">
-                      <AvailableItems />
-                    </div>
-                  </div>
-                </Col>
-                <Col xs md={9} lg={9}>
-                  <Product showWishList={false} />
-                </Col>
-              </Row>
-            </div> */}
           </Col>
         </Row>
       </div>

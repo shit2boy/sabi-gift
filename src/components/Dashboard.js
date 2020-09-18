@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 // import AvailableItems from "./AvailableItems";
+import CashIcon from "../images/Sabi-storepage/cashFundIcon.svg";
 import DashboardNav from "./DashboardNav";
-import { GiReceiveMoney } from "react-icons/gi";
 import { BsGift } from "react-icons/bs";
 // import Product from "./Product";
 import RegistryBar from "./ProgressBar";
@@ -122,7 +122,7 @@ export class Dashboard extends Component {
                       <small>Value of Cash gifts</small>
                     </div>
                     <div className="d-flex align-items-center p-3">
-                      <GiReceiveMoney size="30px" color="#E6E6E6" />
+                      <img src={CashIcon} width="35px" alt="icon" />
                       <div className="ml-3 align-items-center">
                         <span className="badge badge-pill badge-success">
                           cash

@@ -6,7 +6,7 @@ import axios from "axios";
 import util from "../util/util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Input, Tooltip } from "antd";
+import { Input } from "antd";
 import { BsFillGridFill, BsListUl } from "react-icons/bs";
 import { Card, Form, Table } from "react-bootstrap";
 import { StateContext } from "../Context";
@@ -292,6 +292,7 @@ export class RegistryChecklist extends Component {
                       </select>
                       <span className="pointer p-2">
                         <BsFillGridFill
+                          color={!this.state.listDisplay ? "#6F64F8" : ""}
                           size="25px"
                           onClick={() => {
                             this.setState({ listDisplay: false });
@@ -300,7 +301,8 @@ export class RegistryChecklist extends Component {
                       </span>
                       <span className="pointer p-2">
                         <BsListUl
-                          size="25px"
+                          color={this.state.listDisplay ? "#6F64F8" : ""}
+                          size="30px"
                           onClick={() => {
                             this.setState({ listDisplay: true });
                           }}
@@ -366,37 +368,26 @@ export class RegistryChecklist extends Component {
                                     />
                                   </td>
                                   <td>{data.name}</td>
-                                  <td>{data.price}</td>
+                                  <td>#{data.price}</td>
                                   <td></td>
-                                  <td>
-                                    {" "}
-                                    <Form.Row>
-                                      <Tooltip
-                                        placement="top"
-                                        title="quantity"
-                                        color="#5F619F"
-                                      >
-                                        {" "}
-                                        <Form.Control
-                                          type="number"
-                                          className="col-3 p-2"
-                                          id={data.id}
-                                          name="quantity"
-                                          min="1"
-                                          onChange={this.handleQuantity}
-                                        />
-                                      </Tooltip>
-                                    </Form.Row>
-                                  </td>
+
                                   <td>
                                     <Form.Row>
+                                      <Form.Control
+                                        type="number"
+                                        className="col-3 p-2"
+                                        id={data.id}
+                                        name="quantity"
+                                        min="1"
+                                        onChange={this.handleQuantity}
+                                      />
                                       <Form.Control
                                         onClick={() =>
                                           this.addGiftToRegistry(data.id)
                                         }
                                         id={data.id}
                                         type="button"
-                                        className="p-2 mr-0 text-center"
+                                        className="col-7 p-2 mr-0 text-center"
                                         style={{
                                           background: "#6F64F8",
                                           color: "#FFFFFF",

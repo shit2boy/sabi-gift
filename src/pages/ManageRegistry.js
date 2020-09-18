@@ -243,7 +243,7 @@ export class ManageRegistry extends Component {
       /* height: 30%; */
       objectFit: "contain",
       borderRadius: "25px",
-      height: "300px",
+      height: "250px",
     };
 
     return (
@@ -288,7 +288,8 @@ export class ManageRegistry extends Component {
                     type="file"
                     style={{ display: "none" }}
                     name="image"
-                    accept="image"
+                    accept="image/*"
+                    multiple="false"
                     onChange={this.triggerInputFile}
                   />
                   {/* {this.state.fileSelected && (

@@ -270,25 +270,21 @@ export class About extends Component {
       })
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
-          window.localStorage.setItem("slug", response.data.slug);
+          let slug = response.data.slug;
           let event_link = {
-            event_link: `https://sabigift.netlify.app/registry/${this.state.registryUrl}`,
+            event_link: `https://sabigift.netlify.app/registry/${slug}`,
           };
           axios
-            .patch(
-              `${util.API_BASE_URL}events/${window.localStorage.slug}/`,
-              event_link,
-              {
-                headers: {
-                  Authorization: "Token " + localStorage.getItem("token_id"),
-                  Accept: "application/json",
-                  "Content-Type": "application/json",
-                },
-              }
-            )
+            .patch(`${util.API_BASE_URL}events/${slug}/`, event_link, {
+              headers: {
+                Authorization: "Token " + localStorage.getItem("token_id"),
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            })
             .then((response) => {
               if (response.status === 200 || response.status === 201) {
-                window.location.href = "/manageregistry";
+                // window.location.href = "/manageregistry";
               }
             });
         }

@@ -26,14 +26,26 @@ export class DashboardNav extends Component {
   triggerInputFile = (e) => {
     this.setState({ selectedFile: e.target.files[0], fileSelected: true });
     console.log(this.state.selectedFile);
+    this.handleFileUpload(e);
   };
+  // handleImageUpload = (e) => {
+  //   const [file] = e.target.files;
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     const { current } = uploadedImage;
+  //     current.file = file;
+  //     reader.onload = (e) => {
+  //       current.src = e.target.result;
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   // notify = (res) => toast.success(res, { autoClose: 2000 });
   // errorNotify = (res) => toast.error(res, { autoClose: 2000 });
 
-  handleFileUpload = () => {
+  handleFileUpload = (e) => {
     this.setState({ uploading: true });
-    console.log("clicked");
     // let slug = window.localStorage.slug;
     // const backgroundImg = new FormData();
     // backgroundImg.append("poster", this.state.selectedFile);
@@ -95,34 +107,7 @@ export class DashboardNav extends Component {
                 </span>
               </Link>
             </Nav.Link>
-            {/* <Navbar><img className='rounded-circle shadow' width='70px' src={image} alt='userAvatar' /></Navbar> */}
-            <NavDropdown
-              title={
-                <label>
-                  <img
-                    className="rounded-circle shadow"
-                    width="70px"
-                    src={image}
-                    alt="userAvatar"
-                  />
-                  <input
-                    type="file"
-                    style={{ display: "none" }}
-                    name="image"
-                    accept="image/jpeg,image/png,image/gif,image/bmp"
-                    onChange={this.triggerInputFile}
-                  />
-                  {this.state.fileSelected && !this.state.uploadLoading && (
-                    <input
-                      onClick={this.handleFileUpload}
-                      type="button"
-                      value="upload"
-                    />
-                  )}
-                </label>
-              }
-              id="collasible-nav-dropdown"
-            >
+            <NavDropdown id="collasible-nav-dropdown">
               {/* <NavDropdown.Item href="#">Edit Profile</NavDropdown.Item> */}
 
               <NavDropdown.Item href="#">Contact Support</NavDropdown.Item>
@@ -131,6 +116,22 @@ export class DashboardNav extends Component {
                 <LogOut logout="Log out" />
               </NavDropdown.Item>
             </NavDropdown>
+
+            <label>
+              <img
+                className="rounded-circle shadow"
+                width="70px"
+                src={this.state.uploading ? this.state.selectedFile : image}
+                alt="userAvatar"
+              />
+              <input
+                type="file"
+                style={{ display: "none" }}
+                name="image"
+                accept="image/jpeg,image/png,image/gif,image/bmp"
+                onChange={(e) => this.triggerInputFile(e)}
+              />
+            </label>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

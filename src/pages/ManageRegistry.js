@@ -37,16 +37,18 @@ export class ManageRegistry extends Component {
   triggerInputFile = (e) => {
     this.setState({ selectedFile: e.target.files[0], fileSelected: true });
     console.log(this.state.selectedFile);
+    this.handleFileUpload(e);
   };
 
   notify = (res) => toast.success(res, { autoClose: 2000 });
   errorNotify = (res) => toast.error(res, { autoClose: 2000 });
 
-  handleFileUpload = () => {
+  handleFileUpload = (e) => {
     this.setState({ uploadLoading: true });
     let slug = window.localStorage.slug;
+    // let imageFile = this.state.selectedFile[0];
     const backgroundImg = new FormData();
-    backgroundImg.append("poster", this.state.selectedFile);
+    backgroundImg.append("poster", e.target.files[0]);
     backgroundImg.append("event", slug);
     axios
       .post(`${util.API_BASE_URL}update-poster/`, backgroundImg, {
@@ -290,22 +292,19 @@ export class ManageRegistry extends Component {
                     style={{ display: "none" }}
                     name="image"
                     accept="image/jpeg,image/png,image/gif,image/bmp"
-                    onChange={this.triggerInputFile}
+                    onChange={(e) => this.triggerInputFile(e)}
+                    // onClick={this.handleFileUpload}
                   />
-                  {this.state.fileSelected && !this.state.uploadLoading && (
-                    <input
-                      onClick={this.handleFileUpload}
-                      type="button"
-                      value="upload"
-                    />
-                  )}
-                  {this.state.uploadLoading && (
+                  {/* {this.state.fileSelected && !this.state.uploadLoading && (
+                    <input type="button" value="upload" />
+                  )} */}
+                  {/* {this.state.uploadLoading && (
                     <input
                       className="spinner-grow spinner-grow-sm"
                       type="button"
                       value="Uploading"
                     />
-                  )}
+                  )} */}
                 </label>
                 <div className="hero-text">
                   {this.state.spouseName && (

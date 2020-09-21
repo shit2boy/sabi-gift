@@ -240,7 +240,7 @@ export class About extends Component {
       });
   }
 
-  handleGiftSubmit = (event) => {
+  handleGiftSubmit = async (event) => {
     event.preventDefault();
     const gift = this.state.selectedgift;
     for (let i = 0; i < gift.length; i++) {
@@ -249,7 +249,7 @@ export class About extends Component {
     }
     let gifts = gift.map(Number);
 
-    console.log(gifts);
+    // console.log(gifts);
 
     let UserEventInfo = {
       event_owner: window.localStorage.userId,
@@ -258,9 +258,10 @@ export class About extends Component {
       event_type: window.localStorage.event_type,
       poster: "",
       title: `${window.localStorage.name}'s ${window.localStorage.event_date}`,
-      gifts: gifts,
+      // gifts: gifts,
     };
-    axios
+
+    await axios
       .post(`${util.API_BASE_URL}events/`, UserEventInfo, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token_id"),
@@ -271,6 +272,7 @@ export class About extends Component {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           let slug = response.data.slug;
+          let eventId = response.data.id;
           let event_link = {
             event_link: `https://sabigift.netlify.app/registry/${slug}`,
           };
@@ -284,7 +286,28 @@ export class About extends Component {
             })
             .then((response) => {
               if (response.status === 200 || response.status === 201) {
-                // window.location.href = "/manageregistry";
+                let addeditem = {
+                  gifts: gifts,
+                  event: Number(eventId),
+                  quantity: 1,
+                };
+                axios
+                  .post(`${util.API_BASE_URL}add-registry/`, addeditem, {
+                    headers: {
+                      Authorization:
+                        "Token " + localStorage.getItem("token_id"),
+                    },
+                  })
+
+                  .then((res) => {
+                    // console.log(res.data);
+                    if (res.status === 200) {
+                      window.location.href = "/manageregistry";
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
               }
             });
         }
@@ -302,10 +325,10 @@ export class About extends Component {
   };
   next = () => {
     if (this.state.currentIndex >= 4) {
-      // window.location.href = "/manageregistry";
+      window.location.href = "/manageregistry";
     }
     this.setState({ currentIndex: this.state.currentIndex + 1 });
-    console.log("clicked");
+    // console.log("clicked");
   };
   render() {
     const containerStyle = {

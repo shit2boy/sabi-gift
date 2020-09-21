@@ -185,7 +185,7 @@ export default class getstarted extends Component {
       newUserInfo.append("first_name", this.state.answers[0]);
       newUserInfo.append("email", formField["email"]);
       newUserInfo.append("password", formField["password"]);
-      newUserInfo.append("event_type", 2);
+      newUserInfo.append("event_type", 3);
       newUserInfo.append("event_date", this.state.eventDate);
       newUserInfo.append("no_guest", this.state.answers[2]);
       newUserInfo.append("spouse_name", "");

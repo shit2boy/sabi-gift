@@ -17,6 +17,9 @@ class CashGift extends Component {
     quantity: 0,
     addedToRegistry: false,
     cashOpt: true,
+    fundName: "",
+    price: "",
+    description: "",
   };
 
   setModalHide = () => {
@@ -31,14 +34,17 @@ class CashGift extends Component {
     console.log(e.target.value);
   };
 
-  addedToRegistry = () => {
-    this.setState({
-      quantity: this.state.quantity,
-    });
-    const { product, quantity } = this.state;
+  addToRegistry = async (e) => {
+    const cashGiftDetails = new FormData();
+    cashGiftDetails.append("name", this.state.fundName);
+    cashGiftDetails.append("description", this.state.description);
+    cashGiftDetails.append("price", this.state.price);
+    cashGiftDetails.append("owner", window.localStorage.userId);
+    cashGiftDetails.append("event", window.localStorage.slug);
+    cashGiftDetails.append("image", "");
 
     axios
-      .post(`${util.API_BASE_URL}registry/`, { product, quantity })
+      .post(`${util.API_BASE_URL}add-item/`, cashGiftDetails)
       .then((res) => {
         if (res.status === 200) {
           console.log(res);
@@ -86,6 +92,8 @@ class CashGift extends Component {
                       </Form.Label>
                       <Form.Control
                         onChange={this.handleChange}
+                        name="fundName"
+                        value={this.state.fundName}
                         type="text"
                         placeholder="Our NewlyWed fund"
                       />
@@ -113,6 +121,8 @@ class CashGift extends Component {
                         <FormControl
                           type="number"
                           placeholder="150000"
+                          name="price"
+                          value={this.state.price}
                           min="150000"
                           onChange={this.handleChange}
                           aria-label="Input group "
@@ -126,6 +136,8 @@ class CashGift extends Component {
                       <Form.Control
                         onChange={this.handleChange}
                         as="textarea"
+                        name="description"
+                        value={this.state.description}
                         rows="3"
                         placeholder="Tell your guest why you want this item..."
                       />
@@ -141,6 +153,9 @@ class CashGift extends Component {
                     <Button
                       className="mr-3 btn-outline-default"
                       variant="success"
+                      onClick={(e) => {
+                        this.addToRegistry(e);
+                      }}
                     >
                       Add to Registry
                     </Button>

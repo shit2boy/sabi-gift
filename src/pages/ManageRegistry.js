@@ -31,6 +31,7 @@ export class ManageRegistry extends Component {
       isPosterImg: false,
       backgroundImage: "",
       uploadLoading: false,
+      cashGift: [],
     };
   }
 
@@ -159,16 +160,16 @@ export class ManageRegistry extends Component {
         },
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data;
-          window.localStorage.setItem("slug", data.slug);
-          let eventSlug;
-          let eventIID;
-          let eventGifts;
           for (let i = 0; i < data.length; i++) {
-            eventSlug = data[data.length - 1].slug;
-            eventIID = data[data.length - 1].id;
+            // console.log(data[data.length - 1].slug);
+            window.localStorage.setItem("slug", data[data.length - 1].slug);
+            window.localStorage.setItem("eventIID", data[data.length - 1].id);
+            this.setState({ registryItem: data[data.length - 1].items });
+            this.setState({ cashItem: data[data.length - 1].cash_item });
+            console.log(this.state.registryItem);
             data[i].poster = data[data.length - 1].poster.replace(
               "image/upload/",
               ""
@@ -178,16 +179,8 @@ export class ManageRegistry extends Component {
               backgroundImage: data[i].poster,
               isPosterImg: true,
             });
-            window.localStorage.setItem("slug", eventSlug);
-            window.localStorage.setItem("eventIID", eventIID);
-            eventGifts = data[i].items;
-            // console.log(eventGifts);
           }
-          this.setState({ registryItem: eventGifts });
-          // console.log(this.state.registryItem);
-          this.setState({ eventSlug: eventSlug });
         }
-        // console.log(this.state.eventSlug);
       })
       .catch((err) => {
         // console.log(err);
@@ -339,6 +332,7 @@ export class ManageRegistry extends Component {
               Products={this.state.registryItem}
               showWishList={false}
               inRegistry={true}
+              cashGift={this.state.cashItem}
             />
             <ToastContainer />
             {/* {this.state.itemCategory.map((category, index) => (

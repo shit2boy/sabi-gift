@@ -28,6 +28,7 @@ export class Product extends Component {
       search: null,
       requestedQuantity: "",
       listDisplay: false,
+      cashGift: [],
     };
   }
 
@@ -58,6 +59,7 @@ export class Product extends Component {
   UNSAFE_componentWillReceiveProps(props) {
     // console.log(props.Products);
     this.setState({ Products: props.Products });
+    this.setState({ cashGift: props.cashGift });
   }
 
   getIndexOfProduct = (id) => {
@@ -179,7 +181,7 @@ export class Product extends Component {
           </div>
         </div>
         <div className="row mb-2">
-          <div className="col-sm-10">
+          <div className="col-sm-10 shadow">
             <Search
               placeholder="Search here"
               onChange={(e) => this.onSearch(e)}
@@ -307,6 +309,104 @@ export class Product extends Component {
                 </Card>
               );
             })}
+            {/* {this.state.cashGift.map((fundItem, index) => (
+              <Card key={index} className="productCards col-sm-3 m-3">
+                <div>
+                  <img
+                    className="card-img center grow"
+                    alt="items"
+                    src={fundItem.image}
+                    id={fundItem.id}
+                  />
+                </div>
+                <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p>
+                <span className="d-block ml-auto">#{fundItem.price}</span>
+                <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
+                  <strong
+                    className="d-block"
+                    style={{ textOverflow: "ellipsis" }}
+                  >
+                    {fundItem.name}
+                  </strong>
+                  <small>{fundItem.description}</small>
+                </Card.Body>
+
+                <div>
+                  <small className="ml-1">
+                    contributed : {fundItem.contributed}
+                  </small>
+                </div>
+
+                {this.props.showWishList && (
+                  <div className="col p-0 mb-0">
+                    <button
+                      type="button"
+                      id={fundItem.id}
+                      onClick={() => {
+                        this.addToCart(fundItem);
+                      }}
+                      className="col text-center p-2 border-0"
+                      style={{
+                        background: "#6F64F8",
+                        color: "#FFFFFF",
+                        borderBottomRightRadius: "8px",
+                      }}
+                      disabled={
+                        this.state.selectedIds.indexOf(fundItem.id) > -1
+                      }
+                    >
+                      {this.state.selectedIds.indexOf(fundItem.id) > -1
+                        ? "Item in a cart"
+                        : "Add to cart"}
+                    </button>
+                  </div>
+                )}
+
+                {!this.props.showWishList && !this.props.inRegistry && (
+                  <div className=" col p-0 mb-0">
+                    <Form.Row>
+                      <Form.Control
+                        type="number"
+                        className="col-3 ml-2 p-1"
+                        id={fundItem.id}
+                        name="quantity"
+                        min="1"
+                        onChange={this.handleQuantity}
+                      />
+
+                      <Form.Control
+                        onClick={() => this.addGiftToRegistry(fundItem.id)}
+                        id={fundItem.id}
+                        type="button"
+                        className="col-8 p-1 mr-0 text-center"
+                        style={{ background: "#6F64F8", color: "#FFFFFF" }}
+                        value="Add to Registry"
+                      />
+                    </Form.Row>
+                    <div>
+                      <small>contributed : {fundItem.id}</small>
+                    </div>
+                  </div>
+                )}
+                {this.props.inRegistry && (
+                  <div className=" col p-0 mb-0">
+                    <small
+                      onClick={() => this.removeItemFromRegistry(fundItem.id)}
+                      id={fundItem.id}
+                      type="button"
+                      className="col p-2 text-center"
+                      style={{
+                        background: "#6F64F8",
+                        color: "#FFFFFF",
+                        borderBottomRightRadius: "8px",
+                      }}
+                    >
+                      Remove from registry
+                    </small>
+                  </div>
+                )}
+              </Card>
+            ))} */}
 
             <ToastContainer />
           </div>

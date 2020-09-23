@@ -8,6 +8,8 @@ import {
   InputGroup,
   ButtonGroup,
 } from "react-bootstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import util from "../util/util";
 import axios from "axios";
 
@@ -33,7 +35,16 @@ class CashGift extends Component {
     this.setState({ [e.target.name]: e.target.value });
     // console.log(e.target.value);
   };
-
+  notify = () =>
+    toast.success("Gift created successfully", {
+      position: "top-center",
+      autoClose: 2000,
+    });
+  errorNotify = () =>
+    toast.error("Request not successful", {
+      position: "top-center",
+      autoClose: 2000,
+    });
   addToRegistry = async (e) => {
     const cashGiftDetails = new FormData();
     cashGiftDetails.append("name", this.state.fundName);
@@ -47,14 +58,15 @@ class CashGift extends Component {
       .post(`${util.API_BASE_URL}add-item/`, cashGiftDetails)
       .then((res) => {
         if (res.status === 200) {
-          console.log(res);
+          // console.log(res);
           this.setState({ addedToRegistry: true });
-
+          this.notify();
           // console.log('successfully ');
         }
       })
       .catch((error) => {
         console.log(error);
+        this.errorNotify();
       });
   };
 
@@ -156,6 +168,7 @@ class CashGift extends Component {
                       onClick={(e) => {
                         this.addToRegistry(e);
                       }}
+                      disabled={this.state.addedToRegistry}
                     >
                       Add to Registry
                     </Button>

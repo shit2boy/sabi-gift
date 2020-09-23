@@ -158,7 +158,7 @@ export class Product extends Component {
               id={data.id}
             />
           </div>
-          <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
+          <Card.Body style={{ minHeight: "60px", padding: "5px" }}>
             <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
               {data.name}
             </strong>
@@ -211,7 +211,6 @@ export class Product extends Component {
               >
                 Remove from registry
               </small>
-              {/* <AddToCart productId={item.id} image={item.picture} info={item.description} price={item.price} inStock={item.in_stock} button={<span type='button'className='p-1 col-6 text-center'style={{background:'#6F64F8',color : '#FFFFFF', borderBottomRightRadius:'8px'}}>Add to cart</span>}/> */}
             </div>
           )}
         </Card>
@@ -251,7 +250,7 @@ export class Product extends Component {
           </div>
         </div>
         <div className="row mb-2">
-          <div className="col-sm-10 ">
+          <div className="col-sm-10 col-lg-10 ">
             <Search
               className="shadow"
               placeholder="Search here"
@@ -260,7 +259,7 @@ export class Product extends Component {
           </div>
         </div>
         {!this.state.listDisplay && (
-          <div className="row">
+          <div className="row ">
             {this.state.Products.filter((data) => {
               if (this.state.search == null) {
                 return data.item;
@@ -277,7 +276,7 @@ export class Product extends Component {
               return null;
             }).map((data, index) => {
               return (
-                <Card key={index} className="productCards col-sm-3 m-3">
+                <Card key={index} className="productCards col-sm-3 m-4">
                   <div>
                     <img
                       className="card-img center grow"
@@ -286,7 +285,7 @@ export class Product extends Component {
                       id={data.item["id"]}
                     />
                   </div>
-                  <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p>
+                  {/* <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p> */}
                   <span className="d-block ml-auto">#{data.item["price"]}</span>
                   <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
                     <strong
@@ -380,7 +379,8 @@ export class Product extends Component {
                 </Card>
               );
             })}
-            {this.props.cashNeeded && cashItem}
+            {/* {this.props.cashNeeded && cashItem} */}
+            {cashItem}
             <ToastContainer />
           </div>
         )}

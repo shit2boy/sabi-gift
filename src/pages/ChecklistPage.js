@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input } from "antd";
 import { BsFillGridFill, BsListUl } from "react-icons/bs";
-import { Card, Form, Table } from "react-bootstrap";
+import { Card, Form, Table, ListGroup } from "react-bootstrap";
 import { StateContext } from "../Context";
 
 const { Search } = Input;
@@ -140,43 +140,6 @@ export class RegistryChecklist extends Component {
       });
   };
 
-  // addToReg = (e) => {
-  //   let item = [];
-  //   if (this.state.Registry.indexOf(e.target.id) === -1) {
-  //     item.push(e.target.id);
-  //     this.setState({ Registry: item, itemChecked: true });
-  //     for (let i = 0; i < item.length; i++) {
-  //       item[i] = item[i].replace("ddd", "");
-  //     }
-  //   }
-  //   let items = item.map(Number);
-  //   let addeditem = {
-  //     gifts: items,
-  //   };
-
-  //   axios
-  //     .patch(
-  //       `${util.API_BASE_URL}add-registries/${window.localStorage.eventId}/`,
-  //       addeditem,
-  //       {
-  //         headers: {
-  //           Authorization: "Token " + localStorage.getItem("token_id"),
-  //         },
-  //       }
-  //     )
-
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       if (res.status === 200) {
-  //         this.setState({ addSuccessfully: true });
-  //         this.notify();
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   componentDidMount() {
     axios
       .get(`${util.API_BASE_URL}registries/`, {
@@ -224,7 +187,7 @@ export class RegistryChecklist extends Component {
                 id={data.id}
               />
             </div>
-            <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p>
+            {/* <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p> */}
             <span className="d-block ml-auto">#{data.price}</span>
             <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
               <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
@@ -234,11 +197,11 @@ export class RegistryChecklist extends Component {
             </Card.Body>
             <div></div>
 
-            <div className=" col p-0 mb-0">
+            <ListGroup className="list-group-flush ">
               <Form.Row>
                 <Form.Control
                   type="number"
-                  className="col-3 ml-2 p-1"
+                  className="col-4 p-2"
                   id={data.id}
                   name="quantity"
                   min="1"
@@ -249,12 +212,12 @@ export class RegistryChecklist extends Component {
                   onClick={() => this.addGiftToRegistry(data.id)}
                   id={data.id}
                   type="button"
-                  className="col-8 p-1 mr-0 text-center"
+                  className="col-8 text-center"
                   style={{ background: "#6F64F8", color: "#FFFFFF" }}
                   value="Add to Registry"
                 />
               </Form.Row>
-            </div>
+            </ListGroup>
           </Card>
         );
       });

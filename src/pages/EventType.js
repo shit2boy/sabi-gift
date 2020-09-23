@@ -99,7 +99,7 @@ class EventType extends Component {
       objectFit: "contain",
       margin: "auto",
       opacity: "1",
-      height: "500px",
+      height: "400px",
     };
     return (
       <div className="container-fluid">
@@ -137,7 +137,7 @@ class EventType extends Component {
             <div className="col-3 d-none d-lg-block availableItem">
               <AvailableItems />
             </div>
-            <div className=" col">
+            <div className="col-9">
               <Product
                 Products={this.state.products}
                 showWishList={true}

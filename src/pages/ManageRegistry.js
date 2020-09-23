@@ -156,7 +156,7 @@ export class ManageRegistry extends Component {
               backgroundImage: data[i].poster,
               isPosterImg: true,
             });
-            if (this.state.cashGift.length !== 0) {
+            if (this.state.cashGift.length > 0) {
               this.setState({ cashNeeded: true });
             }
           }

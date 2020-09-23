@@ -57,7 +57,7 @@ class CashGift extends Component {
     axios
       .post(`${util.API_BASE_URL}add-item/`, cashGiftDetails)
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status === 200 || res.status === 201) {
           // console.log(res);
           this.setState({ addedToRegistry: true });
           this.notify();

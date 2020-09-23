@@ -39,7 +39,7 @@ class Login extends Component {
         }
       )
       .then((data) => {
-        if (data.status === 200) {
+        if (data !== undefined) {
           // console.log(data);
           window.localStorage.setItem("token_id", data.data.token);
           window.localStorage.setItem("username", data.data.email);

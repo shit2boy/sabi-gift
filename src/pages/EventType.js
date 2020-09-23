@@ -26,14 +26,16 @@ class EventType extends Component {
     dayLeftToEvent: "",
     isPosterImg: false,
     backgroundImage: "",
+    cashGift: [],
+    cashNeeded: false,
   };
-  componentDidMount() {
+  componentDidMount = async () => {
     if (!window.localStorage.token_id) {
       window.localStorage.clear();
     }
     const { handle } = this.props.match.params;
 
-    axios
+    await axios
       .get(`${util.API_BASE_URL}events/${handle}`, {
         headers: {
           Accept: "application/json",
@@ -57,7 +59,11 @@ class EventType extends Component {
             event_date: data.start_date,
             slug: data.slug,
             products: res.data.items,
+            cashGift: res.data.cash_item,
           });
+          if (this.state.cashGift.length !== 0) {
+            this.setState({ cashNeeded: true });
+          }
           window.localStorage.setItem("name", res.data.first_name);
 
           let event_date = this.state.event_date;
@@ -73,7 +79,7 @@ class EventType extends Component {
         // console.log(err);
         window.localStorage.removeItem("name");
       });
-  }
+  };
 
   render() {
     let imgUrl = this.state.isPosterImg
@@ -131,7 +137,12 @@ class EventType extends Component {
               <AvailableItems />
             </div>
             <div className=" col">
-              <Product Products={this.state.products} showWishList={true} />
+              <Product
+                Products={this.state.products}
+                showWishList={true}
+                cashItem={this.state.cashGift}
+                cashNeeded={this.state.cashNeeded}
+              />
             </div>
           </div>
         </div>

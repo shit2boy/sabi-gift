@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SideBar from "../components/SideBar";
-// import { Spinner, Button } from "react-bootstrap";
+// import { Card } from "react-bootstrap";
 import DashboardNav from "../components/DashboardNav";
 import CheckList from "../components/AddcheckList";
 import { BsPencil } from "react-icons/bs";
@@ -10,6 +10,7 @@ import axios from "axios";
 import util from "../util/util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 // import { Button } from "antd";
 import backgroundimg from "../images/Sabi-storepage/manageReg.png";
 
@@ -32,6 +33,7 @@ export class ManageRegistry extends Component {
       backgroundImage: "",
       uploadLoading: false,
       cashGift: [],
+      cashNeeded: false,
     };
   }
 
@@ -73,15 +75,15 @@ export class ManageRegistry extends Component {
       });
   };
 
-  componentDidMount() {
+  componentDidMount = async () => {
     window.localStorage.setItem("isLoggedIn", true);
-    axios
+    await axios
       .get(`${util.API_BASE_URL}accounts/profile/`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((res) => {
         // console.log(res.data);
-        if (res.data !== undefined) {
+        if (res.data !== 200) {
           window.localStorage.setItem("userId", res.data.id);
           window.localStorage.setItem("name", res.data.first_name);
           window.localStorage.setItem("spouseName", res.data.spouse_name);
@@ -126,33 +128,7 @@ export class ManageRegistry extends Component {
         console.log(err);
       });
 
-    // axios
-    //   .get(`${util.API_BASE_URL}registries/`, {
-    //     headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-    //   })
-
-    //   .then((res) => {
-    // console.log(res.data);
-    // if (res.data !== undefined) {
-    //   let data = res.data;
-    //   let category = [];
-
-    //   for (let i = 0; i < data.length; i++) {
-    //     data[i].picture = data[i].picture.replace("image/upload/", "");
-    //     if (data[i].cat === "Cooking") {
-    //       category.push(data[i].picture);
-    //     }
-    //   }
-
-    //   this.setState({ registryItem: res.data });
-    // console.log(this.state.registryItem);
-    //   }
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
-
-    axios
+    await axios
       .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
         headers: {
           Accept: "application/json",
@@ -168,8 +144,9 @@ export class ManageRegistry extends Component {
             window.localStorage.setItem("slug", data[data.length - 1].slug);
             window.localStorage.setItem("eventIID", data[data.length - 1].id);
             this.setState({ registryItem: data[data.length - 1].items });
-            this.setState({ cashItem: data[data.length - 1].cash_item });
-            console.log(this.state.registryItem);
+            this.setState({ cashGift: data[data.length - 1].cash_item });
+            // console.log(this.state.registryItem);
+            console.log(this.state.cashGift);
             data[i].poster = data[data.length - 1].poster.replace(
               "image/upload/",
               ""
@@ -179,6 +156,9 @@ export class ManageRegistry extends Component {
               backgroundImage: data[i].poster,
               isPosterImg: true,
             });
+            if (this.state.cashGift.length !== 0) {
+              this.setState({ cashNeeded: true });
+            }
           }
         }
       })
@@ -186,7 +166,7 @@ export class ManageRegistry extends Component {
         // console.log(err);
         this.setState({ emptyRegistry: true });
       });
-  }
+  };
 
   // addToReg = (e) => {
   //   let item = [];
@@ -200,30 +180,8 @@ export class ManageRegistry extends Component {
   //   let items = item.map(Number);
   //   let addeditem = {
   //     gifts: items,
-  //   };
-
-  // axios
-  //   .patch(
-  //     `${util.API_BASE_URL}add-registries/${window.localStorage.eventIID}/`,
-  //     addeditem,
-  //     {
-  //       headers: {
-  //         Authorization: "Token " + localStorage.getItem("token_id"),
-  //       },
-  //     }
-  //   )
-
-  //   .then((res) => {
-  //     console.log(res.data);
-  //     if (res.status === 200) {
-  //       this.setState({ addSuccessfully: true });
-  //       this.notify();
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-  // };
+  //   }
+  // }
 
   render() {
     let imgUrl = this.state.isPosterImg
@@ -332,78 +290,11 @@ export class ManageRegistry extends Component {
               Products={this.state.registryItem}
               showWishList={false}
               inRegistry={true}
-              cashGift={this.state.cashItem}
+              cashItem={this.state.cashGift}
+              cashNeeded={this.state.cashNeeded}
             />
+
             <ToastContainer />
-            {/* {this.state.itemCategory.map((category, index) => (
-              <div key={index} className="row" style={{ marginTop: "40px" }}>
-                <div className="col-sm-2">
-                  <Card
-                    id=""
-                    style={{
-                      width: "8rem",
-                      borderRadius: "25px",
-                      background: "#6668A3",
-                      boxShadow: "0px 30px 60px #BA2F4F41",
-                    }}
-                  >
-                    <Card.Body>
-                      <Card.Img
-                        className="center rounded-circle"
-                        alt="items"
-                        src={kitchen}
-                        width="100%"
-                      />
-                    </Card.Body>
-                    <Card.Text className="text-center">
-                      <small className="p-1">{category.name} Essentials</small>
-                      <strong className="d-block p-1">10</strong>
-                    </Card.Text>
-                  </Card>
-                </div>
-                <div
-                  className="col mb-5"
-                  style={{
-                    border: "1px solid #CBCBCB",
-                    borderRadius: "25px",
-                    opacity: "1",
-                  }}
-                >
-                  <div className="row">
-                    {this.state.registryItem.map((item, index) => (
-                      <div key={index} className="m-3 d-flex">
-                        {item.cat === category.name && (
-                          <Card
-                            className=" flex-fill"
-                            id=""
-                            key={index}
-                            style={{
-                              width: "8rem",
-                              cursor: "pointer", 
-                              // border: "1px dotted",
-                          //   }}
-                          // >
-                          //   <Card.Body className="grow hide-child">
-                          //     <Card.Img
-                          //       id={"ddd" + item.id}
-                          //       onClick={this.addToReg}
-                          //       className="center"
-                          //       alt="items"
-                          //       width="100%"
-                          //       src={item.picture}
-                          //     />
-                          //     <small className="child">{item.name}</small>
-                              {/* <Card.Img className="center rounded-circle" alt="items" width='40px' src={item} /> */}
-            {/* </Card.Body>
-                            <ToastContainer />
-                          </Card>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))} */}
           </div>
         </div>
       </div>

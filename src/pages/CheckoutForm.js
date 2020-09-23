@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Col, Table, Alert, Spinner } from "react-bootstrap";
+import { Form, Col, Table, Spinner } from "react-bootstrap";
 import sabigift from "../images/landing/sabigift.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -17,6 +17,7 @@ export default class CheckoutForm extends Component {
       errors: {},
       cartIds: [],
       loading: false,
+      cashInCart: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +28,12 @@ export default class CheckoutForm extends Component {
     this.setState({
       formField,
     });
+  }
+
+  componentDidMount() {
+    if (window.localStorage.CashCart_IDs) {
+      this.setState({ cashInCart: true });
+    }
   }
 
   handlePost = async () => {
@@ -54,6 +61,7 @@ export default class CheckoutForm extends Component {
         const customer_details = {
           customer_id: Number(window.localStorage.customer_id),
           carts: JSON.parse(newArr),
+          cash_carts: [],
         };
 
         axios
@@ -64,6 +72,7 @@ export default class CheckoutForm extends Component {
             return {
               ref_code: reference,
               items: JSON.parse(newArr),
+              custom_items: [],
               customers: window.localStorage.customer_id,
             };
           })
@@ -86,7 +95,73 @@ export default class CheckoutForm extends Component {
       // Handle Error Here
       console.log(err);
       this.setState({ loading: false });
-      Alert("Please check your connection and try again");
+    }
+  };
+  handleSubmitForCashGift = async () => {
+    if (this.validateForm()) {
+      this.setState({ loading: true });
+      let customerId;
+      let formField = this.state.formField;
+      let customer = new FormData();
+      let authorization_url;
+      let reference;
+      customer.append("first_name", formField["firstName"]);
+      customer.append("last_name", formField["lastName"]);
+      customer.append("mobile", formField["phone"]);
+      customer.append("email", formField["email"]);
+      customer.append("city", formField["city"]);
+      customer.append("street_address", formField["address"]);
+      customer.append("state", formField["state"]);
+      customer.append("zip_code", formField["zip"]);
+
+      try {
+        let res = await axios.post(`${util.API_BASE_URL}customers/`, customer);
+        // console.log(res.data);
+        if (res.data !== undefined) {
+          // window.localStorage.setItem("customer_id", res.data.id);
+          customerId = res.data.id;
+          this.setState({ customerId: true });
+          let newArr = window.localStorage.getItem("CashCart_IDs");
+          const customer_details = {
+            customer_id: customerId,
+            carts: [],
+            cash_carts: JSON.parse(newArr),
+          };
+          axios
+            .post(`${util.API_BASE_URL}init-payment/`, customer_details)
+            .then((res) => {
+              authorization_url = res.data.paystack.data.authorization_url;
+              reference = res.data.paystack.data.reference;
+              return {
+                ref_code: reference,
+                items: [],
+                custom_items: JSON.parse(newArr),
+                // customers: window.localStorage.customer_id,
+                customers: customerId,
+              };
+            })
+            .then((orderItemDetails) => {
+              axios
+                .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
+                .then((res) => {
+                  // console.log(res.data);
+                  if (res !== undefined) {
+                    this.setState({ loading: false });
+                    window.location.href = authorization_url;
+                  }
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+              this.setState({ loading: false });
+            });
+        }
+      } catch (err) {
+        // Handle Error Here
+        console.log(err);
+        this.setState({ loading: false });
+        window.localStorage.removeItem("CashCart_IDs");
+      }
     }
   };
 
@@ -318,7 +393,12 @@ export default class CheckoutForm extends Component {
                 <tbody>
                   <tr>
                     <td>Sub-total</td>
-                    <td>#{window.localStorage.getItem("sum")}</td>
+                    <td>
+                      #{" "}
+                      {this.state.cashInCart
+                        ? this.state.cashAmount
+                        : window.localStorage.getItem("sum")}
+                    </td>
                   </tr>
                   <tr>
                     <td>Shipping</td>
@@ -326,15 +406,23 @@ export default class CheckoutForm extends Component {
                   </tr>
                   <tr>
                     <td>Total</td>
-                    <td>#{window.localStorage.getItem("sum")}</td>
+                    <td>
+                      #{" "}
+                      {this.state.cashInCart
+                        ? this.state.cashAmount
+                        : window.localStorage.getItem("sum")}
+                    </td>
                   </tr>
                 </tbody>
               </Table>
               <div className="text-center">
-                {/* <button onClick={this.handleSubmit}>pay</button> */}
                 {!this.state.loading && (
                   <span
-                    onClick={this.handleSubmit}
+                    onClick={
+                      this.state.cashInCart
+                        ? this.handleSubmitForCashGift
+                        : this.handleSubmit
+                    }
                     type="button"
                     className="p-3 orderBtn"
                   >
@@ -353,21 +441,6 @@ export default class CheckoutForm extends Component {
                     Loading...
                   </span>
                 )}
-
-                {/* {this.state.customerId ? (
-                  <PaystackButton
-                    className="p-3 orderBtn"
-                    {...componentProps}
-                  />
-                ) : (
-                  <span
-                    onClick={this.handleSubmit}
-                    type="button"
-                    className="p-3 orderBtn"
-                  >
-                    Place Order
-                  </span>
-                )} */}
               </div>
             </div>
           </div>

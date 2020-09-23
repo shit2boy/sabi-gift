@@ -25,17 +25,18 @@ class EventType extends Component {
     slug: "",
     dayLeftToEvent: "",
     isPosterImg: false,
-    backgroundImage: "",
+    posterImage: "",
     cashGift: [],
     cashNeeded: false,
   };
-  componentDidMount = async () => {
-    if (!window.localStorage.token_id) {
-      window.localStorage.clear();
-    }
+  componentDidMount() {
+    // if (!window.localStorage.token_id) {
+    //   window.localStorage.clear();
+    // }
     const { handle } = this.props.match.params;
+    console.log(handle);
 
-    await axios
+    axios
       .get(`${util.API_BASE_URL}events/${handle}`, {
         headers: {
           Accept: "application/json",
@@ -50,10 +51,7 @@ class EventType extends Component {
           window.localStorage.setItem("event_owner", data.event_owner);
           window.localStorage.setItem("userId", data.event_owner_id);
           window.localStorage.setItem("event_id", data.id);
-          data.poster = data.poster.replace("image/upload/", "");
-          // console.log(data.poster);
           this.setState({
-            backgroundImage: data.poster,
             isPosterImg: true,
             event_type: data.event_type,
             event_date: data.start_date,
@@ -61,10 +59,15 @@ class EventType extends Component {
             products: res.data.items,
             cashGift: res.data.cash_item,
           });
+          // console.log(data.poster);
+
+          console.log(this.state);
           if (this.state.cashGift.length !== 0) {
             this.setState({ cashNeeded: true });
           }
-          window.localStorage.setItem("name", res.data.first_name);
+          // data.poster = data.poster.replace("image/upload/", "");
+          // this.setState({ posterImage: data.poster });
+          // window.localStorage.setItem("name", res.data.first_name);
 
           let event_date = this.state.event_date;
           let dateDifference =
@@ -79,12 +82,10 @@ class EventType extends Component {
         // console.log(err);
         window.localStorage.removeItem("name");
       });
-  };
+  }
 
   render() {
-    let imgUrl = this.state.isPosterImg
-      ? this.state.backgroundImage
-      : `${backgroundimg}`;
+    let imgUrl = `${backgroundimg}`;
     const birthday = {
       backgroundImage: `
       url(${imgUrl})`,

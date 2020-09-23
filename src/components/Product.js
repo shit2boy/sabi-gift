@@ -253,6 +253,7 @@ export class Product extends Component {
         <div className="row mb-2">
           <div className="col-sm-10 ">
             <Search
+              className="shadow"
               placeholder="Search here"
               onChange={(e) => this.onSearch(e)}
             />

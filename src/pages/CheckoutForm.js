@@ -274,7 +274,7 @@ export default class CheckoutForm extends Component {
                       type="text"
                       placeholder="First name"
                     />
-                    <span style={{ color: "red", font: "italic" }}>
+                    <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
                       {this.state.errors["firstName"]}
                     </span>
                   </Form.Group>
@@ -287,7 +287,7 @@ export default class CheckoutForm extends Component {
                       type="text"
                       placeholder="Last name"
                     />
-                    <span style={{ color: "red", font: "italic" }}>
+                    <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
                       {this.state.errors["lastName"]}
                     </span>
                   </Form.Group>
@@ -302,7 +302,7 @@ export default class CheckoutForm extends Component {
                       type="tel"
                       placeholder="0000-0000"
                     />
-                    <span style={{ color: "red", font: "italic" }}>
+                    <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
                       {this.state.errors["phone"]}
                     </span>
                   </Form.Group>
@@ -315,7 +315,7 @@ export default class CheckoutForm extends Component {
                       type="email"
                       placeholder="Enter Email Address"
                     />
-                    <span style={{ color: "red" }}>
+                    <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
                       {this.state.errors["email"]}
                     </span>
                   </Form.Group>
@@ -329,7 +329,7 @@ export default class CheckoutForm extends Component {
                       type="text"
                       placeholder="Address"
                     />
-                    <span style={{ color: "red", font: "italic" }}>
+                    <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
                       {this.state.errors["address"]}
                     </span>
                   </Form.Group>
@@ -344,7 +344,7 @@ export default class CheckoutForm extends Component {
                       placeholder="City"
                       required
                     />
-                    <span style={{ color: "red", font: "italic" }}>
+                    <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
                       {this.state.errors["city"]}
                     </span>
                   </Form.Group>
@@ -357,7 +357,7 @@ export default class CheckoutForm extends Component {
                       placeholder="State"
                       required
                     />
-                    <span style={{ color: "red", font: "italic" }}>
+                    <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
                       {this.state.errors["state"]}
                     </span>
                   </Form.Group>
@@ -369,7 +369,7 @@ export default class CheckoutForm extends Component {
                       type="text"
                       placeholder="33789"
                     />
-                    {/* <span style={{ color: "red",font : 'italic' }}>
+                    {/* <span style={{ color: '#dd2b0e', fontSize: "0.875rem" }}>
                             {this.state.errors["zip"]}
                           </span> */}
                   </Form.Group>

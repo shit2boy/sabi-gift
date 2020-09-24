@@ -79,7 +79,7 @@ export class About extends Component {
     let formIsValid = true;
     if (!formField["firstName"]) {
       formIsValid = false;
-      errors["firstName"] = "*Cannot be empty";
+      errors["firstName"] = "*This field is required.";
     }
     if (typeof formField["firstName"] !== "undefined") {
       if (!formField["firstName"].match(/^[a-zA-Z ]*$/)) {
@@ -89,7 +89,7 @@ export class About extends Component {
     }
     if (!formField["lastName"]) {
       formIsValid = false;
-      errors["lastName"] = "Cannot be empty";
+      errors["lastName"] = "*This field is required.";
     }
     if (typeof formField["lastName"] !== "undefined") {
       if (!formField["lastName"].match(/^[a-zA-Z ]*$/)) {
@@ -110,7 +110,7 @@ export class About extends Component {
     }
     if (!formField["address"]) {
       formIsValid = false;
-      errors["address"] = "*Cannot be empty";
+      errors["address"] = "*This field is required.";
     }
     // if (!formField["street"]) {
     //   formIsValid = false;
@@ -118,11 +118,11 @@ export class About extends Component {
     // }
     if (!formField["city"]) {
       formIsValid = false;
-      errors["city"] = "*Cannot be empty";
+      errors["city"] = "*This field is required.";
     }
     if (!formField["state"]) {
       formIsValid = false;
-      errors["state"] = "*Cannot be empty";
+      errors["state"] = "*This field is required.";
     }
     this.setState({ errors: errors });
     return formIsValid;
@@ -151,7 +151,7 @@ export class About extends Component {
           },
         })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response.status === 200)
             window.localStorage.setItem("userId", response.data.id);
           window.localStorage.setItem("event_type", response.data.event_type);
@@ -397,10 +397,12 @@ export class About extends Component {
                             name="firstName"
                             placeholder="Jimi"
                             pattern="[A-Za-z]"
-                            defaultValue={window.localStorage.name}
+                            value={window.localStorage.name}
                             required
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["firstName"]}
                           </span>
                         </Form.Group>
@@ -415,7 +417,9 @@ export class About extends Component {
                             pattern="[A-Za-z]"
                             required
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["lastName"]}
                           </span>
                         </Form.Group>
@@ -429,7 +433,9 @@ export class About extends Component {
                             name="Phone"
                             placeholder="0000 0000-0000"
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["Phone"]}
                           </span>
                         </Form.Group>
@@ -453,7 +459,9 @@ export class About extends Component {
                           name="address"
                           placeholder="14b wole Ariyo street"
                         />
-                        <span style={{ color: "red" }}>
+                        <span
+                          style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                        >
                           {this.state.errors["address"]}
                         </span>
                       </Form.Group>
@@ -466,7 +474,9 @@ export class About extends Component {
                             name="city"
                             placeholder="Lekki"
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["city"]}
                           </span>
                         </Form.Group>
@@ -479,7 +489,9 @@ export class About extends Component {
                             name="state"
                             placeholder="State"
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["state"]}
                           </span>
                         </Form.Group>

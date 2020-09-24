@@ -316,8 +316,10 @@ export class Setting extends Component {
                 <div className="col bg-white d-flex justify-content-between">
                   <button
                     type="button"
-                    onClick={this.back}
-                    className="btn btn-light rounded-pill px-5"
+                    onClick={() => {
+                      window.location.href = "/manageregistry";
+                    }}
+                    className="btn btn-light rounded-pill px-5 "
                   >
                     Back
                   </button>

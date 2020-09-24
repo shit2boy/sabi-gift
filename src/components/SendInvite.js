@@ -151,7 +151,9 @@ export default class SendInvite extends Component {
                         placeholder={this.props.placeholder}
                         required
                       />
-                      <span style={{ color: "red" }}>{this.state.error}</span>
+                      <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
+                        {this.state.error}
+                      </span>
                     </Form.Group>
                     {!this.props.isSabiPartner && (
                       <Button

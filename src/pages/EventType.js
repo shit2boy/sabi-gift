@@ -124,11 +124,13 @@ class EventType extends Component {
         <div className="mb-5">
           <div style={birthday}>
             <div className="text-center">
-              <h4>
+              <h4 className="text-white">
                 {" "}
                 {window.localStorage.event_owner}'s {this.state.event_type}{" "}
               </h4>
-              <p>{this.state.dayLeftToEvent} days Left</p>
+              <p className="text-white">
+                {this.state.dayLeftToEvent} days Left
+              </p>
             </div>
           </div>
         </div>

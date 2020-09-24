@@ -18,6 +18,7 @@ class AddCashToCart extends Component {
       addedToCart: false,
       amountNeeded: this.props.price,
       cashCompleted: false,
+      error: "",
     };
   }
   setModalHide = () => {
@@ -31,7 +32,7 @@ class AddCashToCart extends Component {
     this.setState({ [e.target.name]: e.target.value });
     // console.log(e.target.value);
   };
-  notify = () => toast.success("success", { autoClose: 2000 });
+  notify = () => toast.success("successfully created", { autoClose: 2000 });
   errorNotify = () =>
     toast.error("Inputed Amount exceed the amount needed", {
       position: "top-center",
@@ -51,15 +52,23 @@ class AddCashToCart extends Component {
   // };
   validateInputPrice = () => {
     let priceIsValid = true;
+    let error;
     let amountNeeded = this.state.amountNeeded;
     let inputAmount = this.state.price;
     if (inputAmount > amountNeeded) {
       priceIsValid = false;
+      this.errorNotify();
     }
     if (amountNeeded === 0) {
       priceIsValid = false;
+      this.errorNotify();
       this.setState({ cashCompleted: true });
     }
+    if (inputAmount === "") {
+      priceIsValid = false;
+      error = "*This field is required.";
+    }
+    this.setState({ error });
     return priceIsValid;
   };
   addCashToCart = async () => {
@@ -82,14 +91,15 @@ class AddCashToCart extends Component {
               "CashCart_IDs",
               JSON.stringify(res.data.CashCart_IDs)
             );
+            this.notify();
             window.location.href = "/checkout";
           }
         })
         .catch((error) => {
           console.log(error);
+          this.errorNotify();
         });
     }
-    this.errorNotify();
   };
 
   render() {
@@ -128,6 +138,9 @@ class AddCashToCart extends Component {
 
                     <Form.Group controlId="formBasicPassword">
                       <Form.Label>Total cash Amount:</Form.Label>
+                      <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
+                        <i>{this.state.error}</i>
+                      </span>
                       <InputGroup>
                         <InputGroup.Prepend>
                           <InputGroup.Text id="btnGroupAddon">

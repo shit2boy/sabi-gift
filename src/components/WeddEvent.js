@@ -156,7 +156,7 @@ export default class getstarted extends Component {
     }
     if (!formField["checked"]) {
       formIsValid = false;
-      errors["checked"] = "*check the box.";
+      errors["checked"] = "*Check the box.";
     }
 
     // if (typeof formField["password"] !== "undefined") {
@@ -171,7 +171,7 @@ export default class getstarted extends Component {
     // }
     if (formField["password"] !== formField["confirm_password"]) {
       formIsValid = false;
-      errors["confirm_password"] = "*password mismatch.";
+      errors["confirm_password"] = "*Password mismatch.";
     }
     this.setState({
       errors: errors,
@@ -453,7 +453,9 @@ export default class getstarted extends Component {
                             placeholder="Enter Email Address"
                             required
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["email"]}
                           </span>
                         </Form.Group>
@@ -468,7 +470,9 @@ export default class getstarted extends Component {
                             required
                             placeholder="*******"
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["password"]}
                           </span>
                         </Form.Group>
@@ -484,7 +488,9 @@ export default class getstarted extends Component {
                             placeholder="*********"
                             required
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["confirm_password"]}
                           </span>
                         </Form.Group>
@@ -497,7 +503,9 @@ export default class getstarted extends Component {
                           label="I have read the Privacy Policy and agree to the Terms of Service."
                           required
                         />
-                        <span style={{ color: "red" }}>
+                        <span
+                          style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                        >
                           {this.state.errors["checked"]}
                         </span>
                       </Form.Group>

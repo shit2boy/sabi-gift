@@ -432,7 +432,9 @@ export default class getstarted extends Component {
                             onChange={this.handleChange}
                             placeholder=" Email Address"
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["email"]}
                           </span>
                         </Form.Group>
@@ -446,7 +448,9 @@ export default class getstarted extends Component {
                             onChange={this.handleChange}
                             placeholder="*******"
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["password"]}
                           </span>
                         </Form.Group>
@@ -459,7 +463,9 @@ export default class getstarted extends Component {
                             type="password"
                             placeholder="*********"
                           />
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                          >
                             {this.state.errors["confirm_password"]}
                           </span>
                         </Form.Group>
@@ -471,7 +477,9 @@ export default class getstarted extends Component {
                           type="checkbox"
                           label="I have read the Privacy Policy and agree to the Terms of Service."
                         />
-                        <span style={{ color: "red" }}>
+                        <span
+                          style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                        >
                           {this.state.errors["checked"]}
                         </span>
                       </Form.Group>

@@ -1,0 +1,8 @@
+<svg id="_001" data-name="#001" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <rect id="矩形" width="48" height="48" fill="none"/>
+  <circle id="椭圆形" cx="2" cy="2" r="2" transform="translate(32 21)" fill="#fff"/>
+  <path id="路径" d="M28,0V16a5,5,0,0,1-5,5H0" transform="translate(12 23)" fill="none" stroke="#3d2a42" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"/>
+  <path id="路径-2" data-name="路径" d="M.5,0V13" transform="translate(7.5 23)" fill="none" stroke="#3d2a42" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"/>
+  <path id="路径-3" data-name="路径" d="M40,13,20,0,0,13" transform="translate(4 4)" fill="none" stroke="#3d2a42" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"/>
+  <path id="路径-4" data-name="路径" d="M0,8H0C0,4.226,4.226,0,8,0H8a2.25,2.25,0,0,1,2,2V8" transform="translate(19 28)" fill="none" stroke="#3d2a42" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"/>
+</svg>

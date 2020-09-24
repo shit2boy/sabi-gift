@@ -15,11 +15,12 @@ class ProductProvider extends Component {
     registryCategory: [],
     selected: [],
     cart_Ids: [],
+    cashAmount: null,
   };
 
-  updateContextState = (key, val) => {
-    this.setState({ [key]: val });
-  };
+  // updateContextState = (key, val) => {
+  //   this.setState({ [key]: val });
+  // };
 
   handleQuantityChange = (e) => {
     this.setState({ quantity: e.target.value });

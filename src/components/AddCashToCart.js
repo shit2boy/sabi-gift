@@ -50,6 +50,11 @@ class AddCashToCart extends Component {
   //   console.log(this.context.itemsInCart);
   //   console.log(this.state.price);
   // };
+
+  updateContextState = (key, val) => {
+    this.setState({ [key]: val });
+  };
+
   validateInputPrice = () => {
     let priceIsValid = true;
     let error;
@@ -73,6 +78,7 @@ class AddCashToCart extends Component {
   };
   addCashToCart = async () => {
     if (this.validateInputPrice()) {
+      window.localStorage.setItem("cashAmount", this.state.price);
       const cash_item = [
         {
           custom_item: this.state.cashItemId,

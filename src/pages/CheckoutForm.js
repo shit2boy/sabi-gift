@@ -396,7 +396,7 @@ export default class CheckoutForm extends Component {
                     <td>
                       #{" "}
                       {this.state.cashInCart
-                        ? this.state.cashAmount
+                        ? window.localStorage.getItem("cashAmount")
                         : window.localStorage.getItem("sum")}
                     </td>
                   </tr>
@@ -409,7 +409,7 @@ export default class CheckoutForm extends Component {
                     <td>
                       #{" "}
                       {this.state.cashInCart
-                        ? this.state.cashAmount
+                        ? window.localStorage.getItem("cashAmount")
                         : window.localStorage.getItem("sum")}
                     </td>
                   </tr>

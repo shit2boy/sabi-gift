@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <g id="_032" data-name="#032" opacity="0.217">
+    <rect id="矩形" width="48" height="48" fill="none"/>
+    <path id="椭圆形" d="M16,32A16,16,0,1,0,0,16,15.954,15.954,0,0,0,16,32Z" transform="translate(8 12)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="直线" d="M4,4,0,0Z" transform="translate(39 11)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="直线-2" data-name="直线" d="M0,4,4,0" transform="translate(5 11)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="直线-3" data-name="直线" d="M1,10V0" transform="translate(23 19)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="直线-4" data-name="直线" d="M0,1H10" transform="translate(19 5)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"/>
+    <circle id="椭圆形-2" data-name="椭圆形" cx="2" cy="2" r="2" transform="translate(22 27)" fill="#ff9f00"/>
+  </g>
+</svg>

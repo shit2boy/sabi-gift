@@ -1,0 +1,7 @@
+<svg id="_026" data-name="#026" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <rect id="矩形" width="48" height="48" fill="none"/>
+  <path id="路径" d="M6,26H5a5,5,0,0,1-5-5V5A5,5,0,0,1,5,0H31a5,5,0,0,1,5,5V21a5,5,0,0,1-5,5H17.342A5,5,0,0,0,13.5,27.8L10,32" transform="translate(6 8)" fill="none" stroke="#fdf5f7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"/>
+  <circle id="椭圆形" cx="2" cy="2" r="2" transform="translate(14 19)" fill="#fff"/>
+  <circle id="椭圆形-2" data-name="椭圆形" cx="2" cy="2" r="2" transform="translate(22 19)" fill="#fff"/>
+  <circle id="椭圆形-3" data-name="椭圆形" cx="2" cy="2" r="2" transform="translate(30 19)" fill="#fff"/>
+</svg>

@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Avatars from "../images/Sabi-storepage/Avatars.png";
+import home from "../images/sabi-icons/home.svg";
+import tracker from "../images/sabi-icons/tracker.svg";
+import file from "../images/sabi-icons/file.svg";
+import manage from "../images/sabi-icons/manage.svg";
+import checklist from "../images/sabi-icons/checklist.svg";
+import notification from "../images/sabi-icons/notification.svg";
 
-import { GrHome, GrFolder, GrBarChart } from "react-icons/gr";
-import { BsFolder, BsAlarm, BsBell } from "react-icons/bs";
+// import { GrHome, GrFolder, GrBarChart } from "react-icons/gr";
+// import { BsFolder, BsAlarm, BsBell } from "react-icons/bs";
 import { Tooltip } from "antd";
 
 export class SideBar extends Component {
@@ -11,8 +17,13 @@ export class SideBar extends Component {
     return (
       <div className="sidebarMenu">
         <div className="mt-3 text-center">
-          <Tooltip placement="left" title="notification" color="#5F619F">
-            <BsBell />
+          <Tooltip
+            className="mt-5 mb-2"
+            placement="left"
+            title="notification"
+            color="#5F619F"
+          >
+            <img src={notification} width="25px" alt="icon" />
           </Tooltip>
         </div>
         <div className="text-center mb-4">
@@ -23,33 +34,33 @@ export class SideBar extends Component {
             <Tooltip placement="left" title="overview" color="#5F619F">
               <Link className="active" to="/dashboard">
                 {" "}
-                <GrHome size="25px" />
+                <img src={home} width="35px" alt="icon" />
               </Link>
             </Tooltip>
           </div>
           <div className="py-4">
             <Tooltip placement="left" title="manage registry" color="#5F619F">
               <Link className="text-link active" to="manageRegistry">
-                <BsAlarm size="25px" />
+                <img src={manage} width="35px" alt="icon" />
               </Link>
             </Tooltip>
           </div>
           <div className="py-4">
             <Tooltip placement="left" title="checklist" color="#5F619F">
               <Link className="active" to="/checklist">
-                <GrFolder size="25px" />
+                <img src={checklist} width="35px" alt="icon" />
               </Link>
             </Tooltip>
           </div>
           <div className="py-4">
             <Tooltip placement="left" title="Track Gift" color="#5F619F">
               <Link className="active" to="/gifttracker">
-                <GrBarChart size="25px" />
+                <img src={tracker} width="35px" alt="icon" />
               </Link>
             </Tooltip>
           </div>
           <div className="py-4">
-            <BsFolder size="25px" />
+            <img src={file} width="35px" alt="icon" />
           </div>
         </div>
       </div>

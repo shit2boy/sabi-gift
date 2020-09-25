@@ -8,7 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input } from "antd";
 import { BsFillGridFill, BsListUl } from "react-icons/bs";
-import { Card, Form, Table, ListGroup } from "react-bootstrap";
+import { Card, Form, Table, ListGroup, Button } from "react-bootstrap";
+import CashGift from "../pages/CashGiftPage";
 import { StateContext } from "../Context";
 
 const { Search } = Input;
@@ -242,6 +243,15 @@ export class RegistryChecklist extends Component {
                   Products={this.state.allRegistryItem}
                   showWishList={false}
                 /> */}
+                <div className="mt-2">
+                  <CashGift
+                    button={
+                      <Button className="btn-outline-success" variant="default">
+                        Add Cash Fund
+                      </Button>
+                    }
+                  />
+                </div>
                 <div className="container-fluid">
                   <div className="row mb-2">
                     <div className="col-8">

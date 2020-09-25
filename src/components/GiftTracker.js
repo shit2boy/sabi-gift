@@ -113,7 +113,7 @@ export class GiftTracker extends Component {
         <DashboardNav />
         <hr className="mt-0 mb-0" />
         <div className="row mt-4">
-          <div className="col-1 ml-4 justify-content-center ">
+          <div className="col-1 ml-4 justify-content-center d-none d-lg-block">
             <SideBar />
           </div>
           <div className="col-10 mx-auto px-2">

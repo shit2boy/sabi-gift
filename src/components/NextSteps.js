@@ -25,9 +25,9 @@ export class NextSteps extends Component {
             {window.localStorage.event_type && (
               <img className="ml-1 d-block pointer" src={addItem} alt="step1" />
             )}{" "}
-            {!window.localStorage.event_type && (
+            {/* {!window.localStorage.event_type && (
               <p className="ml-1 d-block">Done</p>
-            )}{" "}
+            )}{" "} */}
             <span className="text-right">+</span>
           </Card.Footer>
         </Card>
@@ -93,7 +93,7 @@ export class NextSteps extends Component {
 
           <Card.Body className="stepsCard4"></Card.Body>
           <Card.Footer className="cardFooter">
-            <Link className="text-link" to="/createregistry">
+            <Link className="text-link" to="/manageregistry">
               <strong className="ml-1">4</strong>
               <img
                 className="ml-1 d-block pointer"

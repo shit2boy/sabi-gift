@@ -133,7 +133,7 @@ export class Dashboard extends Component {
 
               <NextSteps />
             </div>
-            <div className="mt-lg-5">
+            {/* <div className="mt-lg-5">
               <CashGift
                 button={
                   <Button className="btn-outline-success" variant="default">
@@ -141,7 +141,7 @@ export class Dashboard extends Component {
                   </Button>
                 }
               />
-            </div>
+            </div> */}
           </Col>
         </Row>
       </div>

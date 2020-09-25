@@ -26,6 +26,7 @@ export class About extends Component {
       border: " ",
       selected: false,
       selectedgift: [],
+      spouseName: "",
       backgroundColor: "",
       bestSellingItems: [],
       selectedRegistryType: [],
@@ -161,6 +162,7 @@ export class About extends Component {
           // alert(response.statusText);
           this.setState({
             currentIndex: this.state.currentIndex + 1,
+            spouseName: response.data.spouse_name,
             signUpResponse: {
               successful: true,
               message: "Registry Successful",
@@ -256,8 +258,9 @@ export class About extends Component {
       start_date: window.localStorage.event_date,
       start_time: "07:00:00",
       event_type: window.localStorage.event_type,
+      spouse_name: this.state.spouseName,
       poster: "",
-      title: `${window.localStorage.name}'s ${window.localStorage.event_date}`,
+      title: `${window.localStorage.name}'s ${window.localStorage.event_type}`,
       // gifts: gifts,
     };
 

@@ -400,7 +400,7 @@ export class About extends Component {
                             name="firstName"
                             placeholder="Jimi"
                             pattern="[A-Za-z]"
-                            value={window.localStorage.name}
+                            defaultValue={window.localStorage.name}
                             required
                           />
                           <span

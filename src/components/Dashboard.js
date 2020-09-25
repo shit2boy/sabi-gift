@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import CashIcon from "../images/Sabi-storepage/cashFundIcon.svg";
 import DashboardNav from "./DashboardNav";
 import { BsGift } from "react-icons/bs";
@@ -9,7 +9,7 @@ import SideBar from "./SideBar";
 import axios from "axios";
 import util from "../util/util";
 import { StateContext } from "../Context";
-import CashGift from "../pages/CashGiftPage";
+// import CashGift from "../pages/CashGiftPage";
 
 const date = new Date();
 const formatDate = { day: "numeric", year: "numeric", month: "long" };

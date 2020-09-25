@@ -127,7 +127,7 @@ export class GiftTracker extends Component {
             {this.state.trackedItems.map((item, index) => (
               <div
                 key={index}
-                className="d-flex justify-content-between"
+                className=" row d-flex justify-content-between"
                 style={styles}
               >
                 <div className="d-flex align-items-center">

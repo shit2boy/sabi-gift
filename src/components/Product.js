@@ -41,14 +41,15 @@ export class Product extends Component {
   };
 
   addToCart = (data) => {
+    // let qty = this.context.quantity
     let itemsInCart = this.context.itemsInCart;
     itemsInCart.push(data);
     let selectedIds = this.state.selectedIds;
     selectedIds.push(data.item["id"]);
     this.setState({
       selectedIds: selectedIds,
-      quantity: this.state.quantity + 1,
     });
+    this.context.handleQuantityChange();
   };
 
   onSearch = (event) => {
@@ -78,7 +79,7 @@ export class Product extends Component {
     let eventId = window.localStorage.eventIID;
     let quantityNeeded = this.state.quantity;
     this.setState({ quantity: quantityNeeded });
-    console.log(quantityNeeded);
+    // console.log(quantityNeeded);
     this.setState({ gift: id });
     let addeditem = {
       gifts: [Number(this.state.gift)],

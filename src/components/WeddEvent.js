@@ -525,10 +525,9 @@ export default class getstarted extends Component {
               </div>
               <div className="text-center">
                 {this.state.currentIndex >= 0 && this.state.currentIndex <= 3 && (
-                  <Button
-                    type=""
+                  <span
                     onClick={() => this.goBack()}
-                    className="px-5 btn-outline-dark"
+                    className="px-5 py-2 "
                     style={{
                       background: "#ffffff",
                       border: "2px solid #DDDDDD",
@@ -536,7 +535,7 @@ export default class getstarted extends Component {
                     }}
                   >
                     BACK
-                  </Button>
+                  </span>
                 )}
                 {this.state.currentIndex === 4 && (
                   <div className=" d-flex justify-content-around">

@@ -86,11 +86,11 @@ export class ManageRegistry extends Component {
         if (res.data !== 200) {
           window.localStorage.setItem("userId", res.data.id);
           window.localStorage.setItem("name", res.data.first_name);
-          window.localStorage.setItem("spouseName", res.data.spouse_name);
+          // window.localStorage.setItem("spouseName", res.data.spouse_name);
           window.localStorage.setItem("event_date", res.data.event_date);
           window.localStorage.setItem("username", res.data.username);
         }
-        this.setState({ spouseName: window.localStorage.spouseName });
+        this.setState({ spouseName: res.data.spouse_name });
         let event_date = window.localStorage.event_date;
         let dateDifference =
           new Date(event_date).getTime() - new Date().getTime(); //Future date - current date
@@ -260,8 +260,8 @@ export class ManageRegistry extends Component {
                 <div className="hero-text">
                   {this.state.spouseName && (
                     <h2 className="py-3 text-white">
-                      {window.localStorage.name} &{" "}
-                      {window.localStorage.spouseName}'s wedding
+                      {window.localStorage.name} & {this.state.spouseName}'s
+                      wedding
                     </h2>
                   )}
                   {!this.state.spouseName && (

@@ -22,19 +22,22 @@ class EventType extends Component {
     products: [],
     user: null,
     event_owner: "",
+    spouseName: "",
     slug: "",
     dayLeftToEvent: "",
     isPosterImg: false,
     posterImage: "",
     cashGift: [],
     cashNeeded: false,
+    quantity: null,
   };
   componentDidMount() {
-    // if (!window.localStorage.token_id) {
-    //   window.localStorage.clear();
-    // }
+    if (!window.localStorage.token_id) {
+      window.localStorage.clear();
+    }
+
     const { handle } = this.props.match.params;
-    console.log(handle);
+    // console.log(handle);
 
     axios
       .get(`${util.API_BASE_URL}events/${handle}`, {
@@ -53,6 +56,7 @@ class EventType extends Component {
           window.localStorage.setItem("event_id", data.id);
           this.setState({
             isPosterImg: true,
+            spouseName: data.spouse_name,
             event_type: data.event_type,
             event_date: data.start_date,
             slug: data.slug,
@@ -61,7 +65,7 @@ class EventType extends Component {
           });
           // console.log(data.poster);
 
-          console.log(this.state);
+          // console.log(this.state);
           if (this.state.cashGift.length !== 0) {
             this.setState({ cashNeeded: true });
           }
@@ -124,12 +128,18 @@ class EventType extends Component {
         <div className="mb-5">
           <div style={birthday}>
             <div className="text-center">
-              <h4 className="text-white">
-                {" "}
-                {window.localStorage.event_owner}'s {this.state.event_type}{" "}
-              </h4>
+              {this.state.spouseName && (
+                <h4 className="text-white">
+                  {window.localStorage.event_owner} & {this.state.spouseName}
+                </h4>
+              )}
+              {!this.state.spouseName && (
+                <h4 className="text-white">
+                  {window.localStorage.event_owner}'s {this.state.event_type}
+                </h4>
+              )}
               <p className="text-white">
-                {this.state.dayLeftToEvent} days Left
+                {this.state.event_date} ({this.state.dayLeftToEvent} days Left)
               </p>
             </div>
           </div>

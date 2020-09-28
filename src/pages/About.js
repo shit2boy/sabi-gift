@@ -517,14 +517,14 @@ export class About extends Component {
                 </div>
               </div>
               <div className="row p-4" style={{ background: "#ffffff" }}>
-                <div className="col bg-white d-flex justify-content-between">
-                  <button
+                <div className="col bg-white d-flex justify-content-end">
+                  {/* <button
                     type="button"
                     onClick={this.back}
                     className="btn btn-light rounded-pill px-5"
                   >
                     Back
-                  </button>
+                  </button> */}
                   <button
                     type="submit"
                     onClick={this.handleSubmit}

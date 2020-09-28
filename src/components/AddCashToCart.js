@@ -32,8 +32,9 @@ class AddCashToCart extends Component {
     this.setState({ [e.target.name]: e.target.value });
     // console.log(e.target.value);
   };
-  notify = () => toast.success("successfully created", { autoClose: 2000 });
-  errorNotify = () =>
+  notify = () =>
+    toast.success("Donation successful. Thanks! ", { autoClose: 2000 });
+  AmountExceededNotify = () =>
     toast.error("Inputed Amount exceed the amount needed", {
       position: "top-center",
       autoClose: 2000,
@@ -58,18 +59,18 @@ class AddCashToCart extends Component {
   validateInputPrice = () => {
     let priceIsValid = true;
     let error;
-    let amountNeeded = this.state.amountNeeded;
+    let amountNeeded = this.props.price;
     let inputAmount = this.state.price;
     if (inputAmount > amountNeeded) {
       priceIsValid = false;
-      this.errorNotify();
+      this.AmountExceededNotify();
     }
-    if (amountNeeded === 0) {
-      priceIsValid = false;
-      this.errorNotify();
-      this.setState({ cashCompleted: true });
-    }
-    if (inputAmount === "") {
+    // if (amountNeeded <= 0) {
+    //   priceIsValid = false;
+    //   this.errorNotify();
+    //   this.setState({ cashCompleted: true });
+    // }
+    if (!inputAmount) {
       priceIsValid = false;
       error = "*This field is required.";
     }
@@ -103,7 +104,6 @@ class AddCashToCart extends Component {
         })
         .catch((error) => {
           console.log(error);
-          this.errorNotify();
         });
     }
   };

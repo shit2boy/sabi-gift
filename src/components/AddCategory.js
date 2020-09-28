@@ -58,7 +58,7 @@ export default class AddCategory extends Component {
       })
       .catch((err) => {
         console.log(err);
-        this.errorNotify(err.data.invalid);
+        // this.errorNotify();
       });
   };
 

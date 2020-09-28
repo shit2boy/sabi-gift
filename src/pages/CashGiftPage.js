@@ -6,7 +6,7 @@ import {
   FormControl,
   Button,
   InputGroup,
-  ButtonGroup,
+  // ButtonGroup,
 } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,8 +20,9 @@ class CashGift extends Component {
     addedToRegistry: false,
     cashOpt: true,
     fundName: "",
-    price: "",
+    price: null,
     description: "",
+    error: "",
   };
 
   setModalHide = () => {
@@ -35,6 +36,26 @@ class CashGift extends Component {
     this.setState({ [e.target.name]: e.target.value });
     // console.log(e.target.value);
   };
+
+  validateInput = () => {
+    let inputIsValid = true;
+    let error;
+    if (!this.state.fundName) {
+      inputIsValid = false;
+      error = "*This field is required.";
+    }
+    if (!this.state.price) {
+      inputIsValid = false;
+      error = "*This field is required.";
+    }
+    if (!this.state.description) {
+      inputIsValid = false;
+      error = "*This field is required.";
+    }
+    this.setState({ error });
+    return inputIsValid;
+  };
+
   notify = () =>
     toast.success("Gift created successfully", {
       position: "top-center",
@@ -46,28 +67,30 @@ class CashGift extends Component {
       autoClose: 2000,
     });
   addToRegistry = async (e) => {
-    const cashGiftDetails = new FormData();
-    cashGiftDetails.append("name", this.state.fundName);
-    cashGiftDetails.append("description", this.state.description);
-    cashGiftDetails.append("price", this.state.price);
-    cashGiftDetails.append("owner", window.localStorage.userId);
-    cashGiftDetails.append("event", window.localStorage.slug);
-    cashGiftDetails.append("image", "");
+    if (this.validateInput()) {
+      const cashGiftDetails = new FormData();
+      cashGiftDetails.append("name", this.state.fundName);
+      cashGiftDetails.append("description", this.state.description);
+      cashGiftDetails.append("price", this.state.price);
+      cashGiftDetails.append("owner", window.localStorage.userId);
+      cashGiftDetails.append("event", window.localStorage.slug);
+      cashGiftDetails.append("image", "");
 
-    axios
-      .post(`${util.API_BASE_URL}add-item/`, cashGiftDetails)
-      .then((res) => {
-        if (res.status === 200 || res.status === 201) {
-          // console.log(res);
-          this.setState({ addedToRegistry: true });
-          this.notify();
-          // console.log('successfully ');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        this.errorNotify();
-      });
+      axios
+        .post(`${util.API_BASE_URL}add-item/`, cashGiftDetails)
+        .then((res) => {
+          if (res.status === 200 || res.status === 201) {
+            // console.log(res);
+            this.setState({ addedToRegistry: true });
+            this.notify();
+            // console.log('successfully ');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.errorNotify();
+        });
+    }
   };
 
   render() {
@@ -109,18 +132,21 @@ class CashGift extends Component {
                         type="text"
                         placeholder="Our NewlyWed fund"
                       />
+                      <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
+                        <i>{this.state.error}</i>
+                      </span>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
-                      <Form.Label>LET GUESTS CONTRIBUTE:</Form.Label>
-                      <ButtonGroup aria-label="Basic example">
+                      {/* <Form.Label>LET GUESTS CONTRIBUTE:</Form.Label> */}
+                      {/* <ButtonGroup aria-label="Basic example">
                         <Button variant={this.state.cashOpt ? "success" : ""}>
                           Any Amount
                         </Button>
                         <Button variant={!this.state.cashOpt ? "success" : ""}>
                           Fixed Amounts
                         </Button>
-                      </ButtonGroup>
+                      </ButtonGroup> */}
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                       <Form.Label>Total cash Amount:</Form.Label>
@@ -140,6 +166,11 @@ class CashGift extends Component {
                           aria-label="Input group "
                           aria-describedby="btnGroupAddon"
                         />
+                        <span
+                          style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
+                        >
+                          <i>{this.state.error}</i>
+                        </span>
                       </InputGroup>
                     </Form.Group>
 
@@ -153,12 +184,16 @@ class CashGift extends Component {
                         rows="3"
                         placeholder="Tell your guest why you want this item..."
                       />
+                      <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
+                        <i>{this.state.error}</i>
+                      </span>
                     </Form.Group>
                   </div>
                   <div className="d-flex justify-content-lg-end">
                     <Button
                       className="mr-3 btn-outline-success"
                       variant="default"
+                      onClick={this.setModalHide}
                     >
                       cancel
                     </Button>

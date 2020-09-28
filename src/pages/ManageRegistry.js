@@ -137,8 +137,9 @@ export class ManageRegistry extends Component {
         },
       })
       .then((res) => {
-        console.log(res.data);
-        if (res.data !== undefined) {
+        // console.log(res.data);
+
+        if (res.data !== undefined && res.data.length > 0) {
           let data = res.data;
           for (let i = 0; i < data.length; i++) {
             // console.log(data[data.length - 1].slug);
@@ -161,6 +162,8 @@ export class ManageRegistry extends Component {
               this.setState({ cashNeeded: true });
             }
           }
+        } else {
+          window.location.href = "/updateprofile";
         }
       })
       .catch((err) => {
@@ -189,10 +192,10 @@ export class ManageRegistry extends Component {
       ? this.state.backgroundImage
       : `${backgroundimg}`;
     let manageReg = {
-      background: `url(${imgUrl})`,
-      backgroundposition: "center",
-      backgroundsize: "cover",
-      backgroundrepeat: "noRepeat",
+      backgroundImage: `url(${imgUrl})`,
+      backgroundPosition: "center center",
+      backgroundSize: "cover",
+      backgroundRepeat: "noRepeat",
       width: "100%",
       position: "relative",
       /* height: 30%; */

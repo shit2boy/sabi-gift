@@ -524,7 +524,20 @@ export default class getstarted extends Component {
                 )}
               </div>
               <div className="text-center">
-                {this.state.currentIndex >= 0 && this.state.currentIndex <= 3 && (
+                {this.state.currentIndex <= 0 && (
+                  <span
+                    onClick={() => (window.location.href = "/createregistry")}
+                    className="px-5 py-2 "
+                    style={{
+                      background: "#ffffff",
+                      border: "2px solid #DDDDDD",
+                      borderRadius: "50px",
+                    }}
+                  >
+                    BACK
+                  </span>
+                )}
+                {this.state.currentIndex >= 1 && this.state.currentIndex <= 3 && (
                   <span
                     onClick={() => this.goBack()}
                     className="px-5 py-2 "

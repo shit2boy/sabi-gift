@@ -27,7 +27,7 @@ export default class getstarted extends Component {
       noOfGuests: 0,
       currentIndex: 0,
       formValue: "",
-      eventDate: "",
+      eventDate: null,
       formField: {},
       eventType: "",
       message: "",
@@ -88,6 +88,33 @@ export default class getstarted extends Component {
     // Can not select days before today and today
     return current && current.valueOf() < Date.now();
   };
+  mapEventdateAndNext = (e) => {
+    e.preventDefault();
+    if (this.state.eventDate !== null) {
+      this.setState({
+        currentIndex: this.state.currentIndex + 1,
+      });
+    }
+  };
+
+  validateField() {
+    let errors = {};
+    let fieldIsValid = true;
+    if (!this.state.formValue) {
+      fieldIsValid = false;
+      errors["firstName"] = "*This field is required.";
+    }
+    // if (typeof this.state.formValue !== "undefined") {
+    //   if (!this.state.formValue.match(/^[a-zA-Z ]*$/)) {
+    //     fieldIsValid = false;
+    //     errors["firstName"] = "*Please enter alphabet characters only.";
+    //   }
+    // }
+
+    this.setState({ errors: errors });
+    console.log(fieldIsValid);
+    return fieldIsValid;
+  }
 
   mapValueAndNext = (e) => {
     e.preventDefault();
@@ -105,15 +132,14 @@ export default class getstarted extends Component {
     answers[currentIndex] = value;
     this.setState({ answers: answers });
     // console.dir(this.state);
-    // console.log(answers);
-    if (value.length >= 3 || this.state.eventDate !== "") {
+    console.log(answers);
+    if (this.validateField()) {
       this.setState({ currentIndex: currentIndex + 1 });
       this.setState({ formValue: this.state.answers[currentIndex + 1] });
+      // }
+      // console.log("current index" + this.state.currentIndex);
     }
-
-    // console.log("current index" + this.state.currentIndex);
   };
-
   goBack = () => {
     // // console.log(this.state);
     // console.log("current index " + this.state.currentIndex);
@@ -134,6 +160,7 @@ export default class getstarted extends Component {
   validateForm() {
     let formField = this.state.formField;
     let errors = {};
+    console.log("called");
     let formIsValid = true;
     if (!formField["email"]) {
       formIsValid = false;
@@ -324,7 +351,9 @@ export default class getstarted extends Component {
                           <Button
                             type="submit"
                             className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
-                            onClick={(e) => this.mapValueAndNext(e)}
+                            onClick={(e) => {
+                              this.mapEventdateAndNext(e);
+                            }}
                             style={{ background: "#AAAAAA" }}
                           >
                             Next
@@ -344,12 +373,16 @@ export default class getstarted extends Component {
                     {/* <h2>Yay, we love weddings! <br/>First off ... what's your name?</h2> */}
                     <div className="mt-4">
                       <form>
+                        <p style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
+                          {this.state.errors["firstName"]}
+                        </p>
                         <input
                           value={this.state.formValue}
                           onChange={(e) =>
                             this.setState({ formValue: e.target.value })
                           }
                           className="p-2"
+                          name="firstName"
                           type="text"
                           placeholder="Enter Name"
                           pattern="[A-Za-z]"
@@ -390,17 +423,22 @@ export default class getstarted extends Component {
                     {/* <h2>Yay, we love weddings! <br/>First off ... what's your name?</h2> */}
                     <div className="mt-4">
                       <form>
+                        <p style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
+                          {this.state.errors["firstName"]}
+                        </p>
                         <input
                           value={this.state.formValue}
                           onChange={(e) =>
                             this.setState({ formValue: e.target.value })
                           }
+                          name="firstName"
                           className="p-2"
-                          type="text"
+                          type="number"
                           placeholder="Enter Number of Guest"
                           pattern="[0-9]"
                           required
                         />
+
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
@@ -552,10 +590,10 @@ export default class getstarted extends Component {
                 )}
                 {this.state.currentIndex === 4 && (
                   <div className=" d-flex justify-content-around">
-                    <p>
+                    <div>
                       Already a member?
                       <Login signup={<span>Log in</span>} />
-                    </p>
+                    </div>
                     <Button
                       type="submit"
                       onClick={this.handleSubmit}

@@ -30,7 +30,7 @@ export default class getstarted extends Component {
       email: "",
       password: "",
       confirm: "",
-      eventDate: "",
+      eventDate: null,
       eventType: "",
       errors: "",
       isLogged: "",
@@ -43,21 +43,6 @@ export default class getstarted extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.dateChange = this.dateChange.bind(this);
   }
-  handleChange(e) {
-    let formField = this.state.formField;
-    formField[e.target.name] = e.target.value;
-    this.setState({
-      formField,
-    });
-  }
-  dateChange(date, dateString) {
-    this.setState({ eventDate: dateString });
-    console.log(date, dateString);
-  }
-  disabledDate = (current) => {
-    // Can not select days before today and today
-    return current && current.valueOf() < Date.now();
-  };
 
   componentDidMount() {
     if (window.localStorage.token_id) {
@@ -82,8 +67,52 @@ export default class getstarted extends Component {
         // console.log(this.state.eventType);
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
+  }
+
+  handleChange(e) {
+    let formField = this.state.formField;
+    formField[e.target.name] = e.target.value;
+    this.setState({
+      formField,
+    });
+  }
+  dateChange(date, dateString) {
+    this.setState({ eventDate: dateString });
+    // console.log(date, dateString);
+  }
+  disabledDate = (current) => {
+    // Can not select days before today and today
+    return current && current.valueOf() < Date.now();
+  };
+
+  mapEventdateAndNext = (e) => {
+    e.preventDefault();
+    if (this.state.eventDate !== null) {
+      this.setState({
+        currentIndex: this.state.currentIndex + 1,
+      });
+    }
+  };
+
+  validateField() {
+    let errors = {};
+    let fieldIsValid = true;
+    if (!this.state.formValue) {
+      fieldIsValid = false;
+      errors["firstName"] = "*This field is required.";
+    }
+    // if (typeof this.state.formValue !== "undefined") {
+    //   if (!this.state.formValue.match(/^[a-zA-Z ]*$/)) {
+    //     fieldIsValid = false;
+    //     errors["firstName"] = "*Please enter alphabet characters only.";
+    //   }
+    // }
+
+    this.setState({ errors: errors });
+    console.log(fieldIsValid);
+    return fieldIsValid;
   }
 
   mapValueAndNext = (e) => {
@@ -93,17 +122,11 @@ export default class getstarted extends Component {
     let value = this.state.formValue;
     let currentIndex = this.state.currentIndex;
 
-    // if (this.state.currentIndex > 2) {
-    //   this.setState({ currentIndex: currentIndex + 1 });
-    //   return;
-    // }
-
     let answers = this.state.answers;
     answers[currentIndex] = value;
     this.setState({ answers: answers });
-    // console.dir(this.state);
     // console.log(answers);
-    if (value.length >= 3 || this.state.eventDate !== "") {
+    if (this.validateField()) {
       this.setState({ currentIndex: currentIndex + 1 });
       this.setState({ formValue: this.state.answers[currentIndex + 1] });
     }
@@ -313,7 +336,9 @@ export default class getstarted extends Component {
                           <Button
                             type="submit"
                             className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
-                            onClick={(e) => this.mapValueAndNext(e)}
+                            onClick={(e) => {
+                              this.mapEventdateAndNext(e);
+                            }}
                             style={{ background: "#AAAAAA" }}
                           >
                             Next
@@ -333,6 +358,9 @@ export default class getstarted extends Component {
 
                     <div className="mt-4">
                       <form>
+                        <p style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
+                          {this.state.errors["firstName"]}
+                        </p>
                         <input
                           value={this.state.formValue}
                           onChange={(e) =>
@@ -341,6 +369,7 @@ export default class getstarted extends Component {
                           className="p-2"
                           type="text"
                           required
+                          name="firstName"
                           pattern="[A-Za-z]"
                           placeholder="Enter Name"
                         />
@@ -378,6 +407,9 @@ export default class getstarted extends Component {
 
                     <div className="mt-4">
                       <form>
+                        <p style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
+                          {this.state.errors["firstName"]}
+                        </p>
                         <input
                           value={this.state.formValue}
                           onChange={(e) =>
@@ -385,14 +417,15 @@ export default class getstarted extends Component {
                           }
                           className="p-2"
                           required
-                          type="text"
+                          name="firstName"
+                          type="number"
                           pattern="[0-9]"
                           placeholder="Number of Guest"
                         />
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn p-2 rounded-pill btn-outline-light"
+                            className="registryBtn p-2 rounded-pill btn-outline-light "
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -512,10 +545,10 @@ export default class getstarted extends Component {
                   </span>
                 )}
                 {this.state.currentIndex >= 1 && this.state.currentIndex <= 2 && (
-                  <Button
+                  <span
                     type="submit"
                     onClick={() => this.goBack()}
-                    className="px-5 btn-outline-dark"
+                    className="px-5 py-2"
                     style={{
                       background: "#ffffff",
                       border: "2px solid #DDDDDD",
@@ -523,14 +556,14 @@ export default class getstarted extends Component {
                     }}
                   >
                     BACK
-                  </Button>
+                  </span>
                 )}
                 {this.state.currentIndex === 3 && (
                   <div className=" d-flex justify-content-between">
-                    <p>
+                    <div>
                       Already a member?
                       <Login signup={<span>Log in</span>} />
-                    </p>
+                    </div>
                     <Button
                       onClick={this.handleSubmit}
                       className="px-5 btn-outline-dark pointer"

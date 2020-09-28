@@ -18,7 +18,7 @@ class EventType extends Component {
   state = {
     date: date.toLocaleDateString(undefined, formatDate),
     event_type: "",
-    event_date: "",
+    event_date: null,
     products: [],
     user: null,
     event_owner: "",
@@ -28,10 +28,10 @@ class EventType extends Component {
     isPosterImg: false,
     cashGift: [],
     cashNeeded: false,
-    backgroundImage: "",
+    backgroundImage: null,
     quantity: null,
   };
-  componentDidMount() {
+  async componentDidMount() {
     if (!window.localStorage.token_id) {
       window.localStorage.clear();
     }
@@ -39,7 +39,7 @@ class EventType extends Component {
     const { handle } = this.props.match.params;
     // console.log(handle);
 
-    axios
+    await axios
       .get(`${util.API_BASE_URL}events/${handle}`, {
         headers: {
           Accept: "application/json",
@@ -89,7 +89,10 @@ class EventType extends Component {
   }
 
   render() {
-    let imgUrl = `${backgroundimg}`;
+    let imgUrl = this.state.isPosterImg
+      ? this.state.backgroundImage
+      : `${backgroundimg}`;
+    // let imgUrl = `${backgroundimg}`;
     const poster = {
       backgroundImage: `
       url(${imgUrl})`,
@@ -125,9 +128,9 @@ class EventType extends Component {
             </Link>
           </div>
         </div>
-        <div className="mb-5">
+        <div className="mb-5" style={poster}>
           {/* <div > */}
-          <div style={poster} className="text-center">
+          <div className="text-center">
             {this.state.spouseName && (
               <h4 className="text-white">
                 {window.localStorage.event_owner} & {this.state.spouseName}

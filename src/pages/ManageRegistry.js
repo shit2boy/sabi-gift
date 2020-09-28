@@ -188,9 +188,10 @@ export class ManageRegistry extends Component {
   // }
 
   render() {
-    let imgUrl = this.state.isPosterImg
+    const newLocal = this.state.isPosterImg
       ? this.state.backgroundImage
       : `${backgroundimg}`;
+    let imgUrl = newLocal;
     let manageReg = {
       backgroundImage: `url(${imgUrl})`,
       backgroundPosition: "center center",

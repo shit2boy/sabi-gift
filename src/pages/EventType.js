@@ -28,7 +28,7 @@ class EventType extends Component {
     isPosterImg: false,
     cashGift: [],
     cashNeeded: false,
-    backgroundImage: null,
+    poster: null,
     quantity: null,
   };
   async componentDidMount() {
@@ -55,7 +55,6 @@ class EventType extends Component {
           window.localStorage.setItem("userId", data.event_owner_id);
           window.localStorage.setItem("event_id", data.id);
           this.setState({
-            isPosterImg: true,
             spouseName: data.spouse_name,
             event_type: data.event_type,
             event_date: data.start_date,
@@ -70,7 +69,7 @@ class EventType extends Component {
             this.setState({ cashNeeded: true });
           }
           data.poster = data.poster.replace("image/upload/", "");
-          this.setState({ backgroundImage: data.poster });
+          this.setState({ poster: data.poster, isPosterImg: true });
           window.localStorage.setItem("name", res.data.first_name);
 
           let event_date = this.state.event_date;
@@ -91,27 +90,16 @@ class EventType extends Component {
   render() {
     let imgUrl = this.newMethod();
     const poster = {
-      // backgroundImage: `
-      // url(${imgUrl})`,
-      // borderRadius: "70px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      // backgroundPosition: "center",
-      // backgroundSize: "cover",
-      // backgroundRepeat: "no-repeat",
-      // objectFit: "contain",
-      // margin: "auto",
       opacity: "1",
-      // height: "400px",
-
       backgroundImage: `url(${imgUrl})`,
       backgroundPosition: "center center",
       backgroundSize: "cover",
       backgroundRepeat: "noRepeat",
       width: "100%",
       position: "relative",
-      /* height: 30%; */
       objectFit: "contain",
       borderRadius: "65px",
       height: "400px",
@@ -175,9 +163,7 @@ class EventType extends Component {
   }
 
   newMethod() {
-    return this.state.isPosterImg
-      ? this.state.backgroundImage
-      : `${backgroundimg}`;
+    return this.state.isPosterImg ? this.state.poster : `${backgroundimg}`;
   }
 }
 export default EventType;

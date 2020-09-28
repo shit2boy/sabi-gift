@@ -6,8 +6,10 @@ import image from "../images/Sabi-storepage/image.png";
 import settingIcon from "../images/Sabi-storepage/settingIcon.svg";
 import previewIcon from "../images/Sabi-storepage/previewIcon.svg";
 import LogOut from "./LogOut";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import util from "../util/util";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 let style = {
   borderBottom: "1px solid #dddddd",
@@ -25,53 +27,38 @@ export class DashboardNav extends Component {
 
   triggerInputFile = (e) => {
     this.setState({ selectedFile: e.target.files[0], fileSelected: true });
-    console.log(this.state.selectedFile);
+    // console.log(this.state.selectedFile);
     this.handleFileUpload(e);
   };
-  // handleImageUpload = (e) => {
-  //   const [file] = e.target.files;
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     const { current } = uploadedImage;
-  //     current.file = file;
-  //     reader.onload = (e) => {
-  //       current.src = e.target.result;
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
 
-  // notify = (res) => toast.success(res, { autoClose: 2000 });
-  // errorNotify = (res) => toast.error(res, { autoClose: 2000 });
+  notify = (res) => toast.success(res, { autoClose: 2000 });
+  errorNotify = (res) => toast.error(res, { autoClose: 2000 });
 
   handleFileUpload = (e) => {
     this.setState({ uploading: true });
-    // let slug = window.localStorage.slug;
-    // const backgroundImg = new FormData();
-    // backgroundImg.append("poster", this.state.selectedFile);
-    // backgroundImg.append("event", slug);
-    // axios
-    //   .post(`${util.API_BASE_URL}update-poster/`, backgroundImg, {
-    //     headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-    //   })
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       this.setState({ fileSelected: false, uploadLoading: false });
-    //       // console.log(res.data);
-    //       this.notify(res.data.success);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     this.errorNotify(error.message.error);
-    //     this.setState({
-    //       status: false,
-    //       fileSelected: false,
-    //       uploadLoading: false,
-    //     });
-    //   });
+    const backgroundImg = new FormData();
+    backgroundImg.append("photo", e.target.files[0]);
+    axios
+      .patch(`${util.API_BASE_URL}accounts/profile/`, backgroundImg, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({ fileSelected: false });
+          // console.log(res.data);
+          this.notify(res.data.success);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.errorNotify(error.message.error);
+        this.setState({
+          uploading: false,
+        });
+      });
   };
   render() {
+    // let profileImage= this.state.imageProfile ? `${image}`
     return (
       <Navbar collapseOnSelect expand="lg" bg="white" style={style}>
         <Navbar.Brand href="/manageregistry">
@@ -119,9 +106,13 @@ export class DashboardNav extends Component {
 
             <label>
               <img
-                className="rounded-circle shadow"
+                className="rounded-circle"
                 width="70px"
-                src={this.state.uploading ? this.state.selectedFile : image}
+                src={
+                  this.state.uploading
+                    ? URL.createObjectURL(this.state.selectedFile)
+                    : image
+                }
                 alt="userAvatar"
               />
               <input

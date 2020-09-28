@@ -163,7 +163,9 @@ class EventType extends Component {
   }
 
   newMethod() {
-    return this.state.isPosterImg ? this.state.poster : `${backgroundimg}`;
+    return this.state.isPosterImg && this.state.poster !== ""
+      ? this.state.poster
+      : `${backgroundimg}`;
   }
 }
 export default EventType;

@@ -59,18 +59,14 @@ class AddCashToCart extends Component {
   validateInputPrice = () => {
     let priceIsValid = true;
     let error;
-    let amountNeeded = this.props.price;
-    let inputAmount = this.state.price;
+    let amountNeeded = Number(this.props.price);
+    let inputAmount = Number(this.state.price);
     if (inputAmount > amountNeeded) {
       priceIsValid = false;
       this.AmountExceededNotify();
     }
-    // if (amountNeeded <= 0) {
-    //   priceIsValid = false;
-    //   this.errorNotify();
-    //   this.setState({ cashCompleted: true });
-    // }
-    if (!inputAmount) {
+
+    if (!inputAmount || inputAmount <= 0) {
       priceIsValid = false;
       error = "*This field is required.";
     }

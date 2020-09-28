@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SideBar from "../components/SideBar";
-// import { Card } from "react-bootstrap";
+import { ProgressBar } from "react-bootstrap";
 import DashboardNav from "../components/DashboardNav";
 import CheckList from "../components/AddcheckList";
 import { BsPencil } from "react-icons/bs";
@@ -31,7 +31,8 @@ export class ManageRegistry extends Component {
       fileSelected: false,
       isPosterImg: false,
       backgroundImage: "",
-      uploadLoading: false,
+      uploading: false,
+      progress: null,
       cashGift: [],
       cashNeeded: false,
     };
@@ -50,19 +51,28 @@ export class ManageRegistry extends Component {
     this.setState({ uploadLoading: true });
     let slug = window.localStorage.slug;
     // let imageFile = this.state.selectedFile[0];
+
     const backgroundImg = new FormData();
     backgroundImg.append("poster", e.target.files[0]);
     backgroundImg.append("event", slug);
     axios
       .post(`${util.API_BASE_URL}update-poster/`, backgroundImg, {
+        onUploadProgress: (progressEvent) => {
+          this.setState({
+            progress: Math.round(
+              (progressEvent.loaded / progressEvent.total) * 100
+            ),
+            uploading: true,
+          });
+        },
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       })
       .then((res) => {
         if (res.status === 200) {
-          this.setState({ fileSelected: false, uploadLoading: false });
+          this.setState({ fileSelected: false, uploading: false });
           // console.log(res.data);
           this.notify(res.data.success);
-          window.location.reload();
+          // window.location.reload();
         }
       })
       .catch((error) => {
@@ -148,7 +158,7 @@ export class ManageRegistry extends Component {
             this.setState({ registryItem: data[data.length - 1].items });
             this.setState({ cashGift: data[data.length - 1].cash_item });
             // console.log(this.state.registryItem);
-            console.log(this.state.cashGift);
+            // console.log(this.state.cashGift);
             data[i].poster = data[data.length - 1].poster.replace(
               "image/upload/",
               ""
@@ -241,8 +251,17 @@ export class ManageRegistry extends Component {
               </div>
 
               <div className=" text-center mt-4" style={manageReg}>
+                {this.state.uploading && (
+                  <ProgressBar
+                    animated
+                    striped
+                    variant="success"
+                    now={this.state.progress}
+                  />
+                )}
                 <label className="btn bg-white">
-                  <BsPencil />
+                  {!this.state.uploading && <BsPencil />}
+
                   <input
                     type="file"
                     style={{ display: "none" }}

@@ -89,23 +89,31 @@ class EventType extends Component {
   }
 
   render() {
-    let imgUrl = this.state.isPosterImg
-      ? this.state.backgroundImage
-      : `${backgroundimg}`;
-    // let imgUrl = `${backgroundimg}`;
+    let imgUrl = this.newMethod();
     const poster = {
-      backgroundImage: `
-      url(${imgUrl})`,
-      borderRadius: "70px",
+      // backgroundImage: `
+      // url(${imgUrl})`,
+      // borderRadius: "70px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      backgroundPosition: "center",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      objectFit: "contain",
-      margin: "auto",
+      // backgroundPosition: "center",
+      // backgroundSize: "cover",
+      // backgroundRepeat: "no-repeat",
+      // objectFit: "contain",
+      // margin: "auto",
       opacity: "1",
+      // height: "400px",
+
+      backgroundImage: `url(${imgUrl})`,
+      backgroundPosition: "center center",
+      backgroundSize: "cover",
+      backgroundRepeat: "noRepeat",
+      width: "100%",
+      position: "relative",
+      /* height: 30%; */
+      objectFit: "contain",
+      borderRadius: "65px",
       height: "400px",
     };
     return (
@@ -129,23 +137,23 @@ class EventType extends Component {
           </div>
         </div>
         <div className="mb-5" style={poster}>
-          {/* <div > */}
-          <div className="text-center">
-            {this.state.spouseName && (
-              <h4 className="text-white">
-                {window.localStorage.event_owner} & {this.state.spouseName}
-              </h4>
-            )}
-            {!this.state.spouseName && (
-              <h4 className="text-white">
-                {window.localStorage.event_owner}'s {this.state.event_type}
-              </h4>
-            )}
-            <p className="text-white">
-              {this.state.event_date} ({this.state.dayLeftToEvent} days Left)
-            </p>
+          <div>
+            <div className="text-center">
+              {this.state.spouseName && (
+                <h4 className="text-white text-capitalize ">
+                  {window.localStorage.event_owner} & {this.state.spouseName}
+                </h4>
+              )}
+              {!this.state.spouseName && (
+                <h4 className="text-white">
+                  {window.localStorage.event_owner}'s {this.state.event_type}
+                </h4>
+              )}
+              <p className="text-white">
+                {this.state.event_date} ({this.state.dayLeftToEvent} days Left)
+              </p>
+            </div>
           </div>
-          {/* </div> */}
         </div>
         <div className="container mt-5 ">
           <div className="row">
@@ -164,6 +172,12 @@ class EventType extends Component {
         </div>
       </div>
     );
+  }
+
+  newMethod() {
+    return this.state.isPosterImg
+      ? this.state.backgroundImage
+      : `${backgroundimg}`;
   }
 }
 export default EventType;

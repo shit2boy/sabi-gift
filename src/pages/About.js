@@ -16,7 +16,12 @@ export class About extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formField: {},
+      firstName: "",
+      lastName: "",
+      street: "",
+      city: "",
+      Phone: "",
+      state: "",
       currentIndex: 0,
       signUpResponse: { successful: false, message: "" },
       registryType: [],
@@ -38,10 +43,8 @@ export class About extends Component {
   }
 
   handleChange(e) {
-    let formField = this.state.formField;
-    formField[e.target.name] = e.target.value;
     this.setState({
-      formField,
+      [e.target.name]: e.target.value,
     });
     // console.log(formField);
   }
@@ -75,41 +78,41 @@ export class About extends Component {
   };
 
   validateForm() {
-    let formField = this.state.formField;
+    // let formField = this.state.formField;
     let errors = {};
     let formIsValid = true;
-    if (!formField["firstName"]) {
+    if (!this.state.firstName) {
       formIsValid = false;
       errors["firstName"] = "*This field is required.";
     }
-    if (typeof formField["firstName"] !== "undefined") {
-      if (!formField["firstName"].match(/^[a-zA-Z ]*$/)) {
+    if (typeof this.state.firstName !== "undefined") {
+      if (!this.state.firstName.match(/^[a-zA-Z ]*$/)) {
         formIsValid = false;
         errors["firstName"] = "*Please enter alphabet characters only.";
       }
     }
-    if (!formField["lastName"]) {
+    if (!this.state.lastName) {
       formIsValid = false;
       errors["lastName"] = "*This field is required.";
     }
-    if (typeof formField["lastName"] !== "undefined") {
-      if (!formField["lastName"].match(/^[a-zA-Z ]*$/)) {
+    if (typeof this.state.lastName !== "undefined") {
+      if (!this.state.lastName.match(/^[a-zA-Z ]*$/)) {
         formIsValid = false;
         errors["lastName"] = "*Please enter alphabet characters only.";
       }
     }
-    if (!formField["Phone"]) {
+    if (!this.state.Phone) {
       formIsValid = false;
       errors["Phone"] = "*Please enter your mobile no.";
     }
 
-    if (typeof formField["Phone"] !== "undefined") {
-      if (!formField["Phone"].match(/^[0-9]{11}$/)) {
+    if (typeof this.state.Phone !== "undefined") {
+      if (!this.state.Phone.match(/^[0-9]{11}$/)) {
         formIsValid = false;
         errors["Phone"] = "*Please enter valid mobile no.";
       }
     }
-    if (!formField["address"]) {
+    if (!this.state.address) {
       formIsValid = false;
       errors["address"] = "*This field is required.";
     }
@@ -117,11 +120,11 @@ export class About extends Component {
     //   formIsValid = false;
     //   errors["street"] = "Cannot be empty";
     // }
-    if (!formField["city"]) {
+    if (!this.state.city) {
       formIsValid = false;
       errors["city"] = "*This field is required.";
     }
-    if (!formField["state"]) {
+    if (!this.state.state) {
       formIsValid = false;
       errors["state"] = "*This field is required.";
     }
@@ -134,12 +137,12 @@ export class About extends Component {
     if (this.validateForm()) {
       let formField = this.state.formField;
       const newUserInfo = new FormData();
-      newUserInfo.append("first_name", formField["firstName"]);
-      newUserInfo.append("last_name", formField["lastName"]);
-      newUserInfo.append("mobile", formField["Phone"]);
-      newUserInfo.append("street", formField["address"]);
-      newUserInfo.append("lga", formField["city"]);
-      newUserInfo.append("city", formField["city"]);
+      newUserInfo.append("first_name", this.state.firstName);
+      newUserInfo.append("last_name", this.state.lastName);
+      newUserInfo.append("mobile", this.state.Phone);
+      newUserInfo.append("street", this.state.address);
+      newUserInfo.append("state", this.state.state);
+      newUserInfo.append("city", this.state.city);
       newUserInfo.append("gender", undefined);
       newUserInfo.append("photo", "");
 
@@ -150,7 +153,7 @@ export class About extends Component {
           },
         })
         .then((response) => {
-          // console.log(response);
+          console.log(response);
           if (response.status === 200)
             window.localStorage.setItem("userId", response.data.id);
           window.localStorage.setItem("event_type", response.data.event_type);
@@ -183,6 +186,7 @@ export class About extends Component {
         // console.log(res.data);
         if (res.data !== undefined) {
           window.localStorage.setItem("name", res.data.first_name);
+          this.setState({ firstName: res.data.first_name });
         }
       })
       .catch((err) => {
@@ -396,9 +400,10 @@ export class About extends Component {
                             onChange={this.handleChange}
                             type="text"
                             name="firstName"
+                            // value={this.state.formField['firstName']}
                             placeholder="Jimi"
                             pattern="[A-Za-z]"
-                            defaultValue={window.localStorage.name}
+                            value={this.state.firstName}
                             required
                           />
                           <span
@@ -414,6 +419,7 @@ export class About extends Component {
                             onChange={this.handleChange}
                             type="text"
                             name="lastName"
+                            value={this.state.lastName}
                             placeholder="Fola"
                             pattern="[A-Za-z]"
                             required
@@ -432,6 +438,7 @@ export class About extends Component {
                             onChange={this.handleChange}
                             type="tel"
                             name="Phone"
+                            value={this.state.Phone}
                             placeholder="0000 0000-0000"
                           />
                           <span
@@ -445,6 +452,7 @@ export class About extends Component {
                           <Form.Label>Alt Phone</Form.Label>
                           <Form.Control
                             onChange={this.handleChange}
+                            value={this.state.AltPhone}
                             type="tel"
                             name="AltPhone"
                             placeholder="0000-0000-0000"
@@ -458,6 +466,7 @@ export class About extends Component {
                           onChange={this.handleChange}
                           type="text"
                           name="address"
+                          value={this.state.address}
                           placeholder="14b wole Ariyo street"
                         />
                         <span
@@ -471,6 +480,7 @@ export class About extends Component {
                           <Form.Label>City</Form.Label>
                           <Form.Control
                             onChange={this.handleChange}
+                            value={this.state.city}
                             type="text"
                             name="city"
                             placeholder="Lekki"
@@ -488,6 +498,7 @@ export class About extends Component {
                             onChange={this.handleChange}
                             type="text"
                             name="state"
+                            value={this.state.state}
                             placeholder="State"
                           />
                           <span

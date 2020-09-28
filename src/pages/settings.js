@@ -36,8 +36,6 @@ export class Setting extends Component {
   }
 
   handleChange(e) {
-    // let formField = this.state.formField;
-
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -79,14 +77,14 @@ export class Setting extends Component {
         errors["Phone"] = "*Please enter valid mobile no.";
       }
     }
-    if (!this.state.address) {
-      formIsValid = false;
-      errors["address"] = "*Cannot be empty";
-    }
-    // if (!formField["street"]) {
+    // if (!this.state.address) {
     //   formIsValid = false;
-    //   errors["street"] = "Cannot be empty";
+    //   errors["address"] = "*Cannot be empty";
     // }
+    if (!this.state.street) {
+      formIsValid = false;
+      errors["street"] = "Cannot be empty";
+    }
     if (!this.state.city) {
       formIsValid = false;
       errors["city"] = "*Cannot be empty";
@@ -111,8 +109,8 @@ export class Setting extends Component {
       newUserInfo.append("first_name", this.state.firstName);
       newUserInfo.append("last_name", this.state.lastName);
       newUserInfo.append("mobile", this.state.Phone);
-      newUserInfo.append("street", this.state.street);
-      newUserInfo.append("lga", this.state.city);
+      newUserInfo.append("street", this.state.address);
+      newUserInfo.append("state", this.state.state);
       newUserInfo.append("city", this.state.city);
       newUserInfo.append("gender", undefined);
       newUserInfo.append("photo", "");
@@ -268,7 +266,7 @@ export class Setting extends Component {
                         <Form.Control
                           onChange={this.handleChange}
                           type="text"
-                          name="address"
+                          name="street"
                           value={this.state.street}
                         />
                         <span style={{ color: "red" }}>

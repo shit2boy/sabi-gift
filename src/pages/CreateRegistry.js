@@ -89,6 +89,7 @@ export class CreateRegistry extends Component {
                           <button
                             onClick={this.handleEvent}
                             key={type.id}
+                            id={type.id}
                             className="eventItem"
                           >
                             <img

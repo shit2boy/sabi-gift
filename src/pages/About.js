@@ -135,7 +135,6 @@ export class About extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.validateForm()) {
-      // let formField = this.state.formField;
       const newUserInfo = new FormData();
       newUserInfo.append("first_name", this.state.firstName);
       newUserInfo.append("last_name", this.state.lastName);

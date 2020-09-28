@@ -26,9 +26,9 @@ class EventType extends Component {
     slug: "",
     dayLeftToEvent: "",
     isPosterImg: false,
-    posterImage: "",
     cashGift: [],
     cashNeeded: false,
+    backgroundImage: "",
     quantity: null,
   };
   componentDidMount() {
@@ -69,9 +69,9 @@ class EventType extends Component {
           if (this.state.cashGift.length !== 0) {
             this.setState({ cashNeeded: true });
           }
-          // data.poster = data.poster.replace("image/upload/", "");
-          // this.setState({ posterImage: data.poster });
-          // window.localStorage.setItem("name", res.data.first_name);
+          data.poster = data.poster.replace("image/upload/", "");
+          this.setState({ backgroundImage: data.poster });
+          window.localStorage.setItem("name", res.data.first_name);
 
           let event_date = this.state.event_date;
           let dateDifference =
@@ -90,7 +90,7 @@ class EventType extends Component {
 
   render() {
     let imgUrl = `${backgroundimg}`;
-    const birthday = {
+    const poster = {
       backgroundImage: `
       url(${imgUrl})`,
       borderRadius: "70px",
@@ -126,23 +126,23 @@ class EventType extends Component {
           </div>
         </div>
         <div className="mb-5">
-          <div style={birthday}>
-            <div className="text-center">
-              {this.state.spouseName && (
-                <h4 className="text-white">
-                  {window.localStorage.event_owner} & {this.state.spouseName}
-                </h4>
-              )}
-              {!this.state.spouseName && (
-                <h4 className="text-white">
-                  {window.localStorage.event_owner}'s {this.state.event_type}
-                </h4>
-              )}
-              <p className="text-white">
-                {this.state.event_date} ({this.state.dayLeftToEvent} days Left)
-              </p>
-            </div>
+          {/* <div > */}
+          <div style={poster} className="text-center">
+            {this.state.spouseName && (
+              <h4 className="text-white">
+                {window.localStorage.event_owner} & {this.state.spouseName}
+              </h4>
+            )}
+            {!this.state.spouseName && (
+              <h4 className="text-white">
+                {window.localStorage.event_owner}'s {this.state.event_type}
+              </h4>
+            )}
+            <p className="text-white">
+              {this.state.event_date} ({this.state.dayLeftToEvent} days Left)
+            </p>
           </div>
+          {/* </div> */}
         </div>
         <div className="container mt-5 ">
           <div className="row">

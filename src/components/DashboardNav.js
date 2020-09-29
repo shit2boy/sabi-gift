@@ -94,7 +94,7 @@ export class DashboardNav extends Component {
                 </span>
               </Link>
             </Nav.Link>
-            <NavDropdown id="collasible-nav-dropdown">
+            <NavDropdown id="collasible-nav-dropdown" title="">
               {/* <NavDropdown.Item href="#">Edit Profile</NavDropdown.Item> */}
 
               <NavDropdown.Item href="#">Contact Support</NavDropdown.Item>

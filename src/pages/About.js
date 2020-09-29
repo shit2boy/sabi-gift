@@ -22,6 +22,8 @@ export class About extends Component {
       city: "",
       Phone: "",
       state: "",
+      eventType: "",
+      title: "",
       currentIndex: 0,
       signUpResponse: { successful: false, message: "" },
       registryType: [],
@@ -29,6 +31,7 @@ export class About extends Component {
       errorMessage: "",
       errors: {},
       border: " ",
+      eventId: null,
       selected: false,
       selectedgift: [],
       spouseName: "",
@@ -186,10 +189,21 @@ export class About extends Component {
         if (res.data !== undefined) {
           window.localStorage.setItem("name", res.data.first_name);
           this.setState({ firstName: res.data.first_name });
+          if (res.data.completed) {
+            this.setState({ currentIndex: 1 });
+            window.localStorage.setItem("userId", res.data.id);
+            window.localStorage.setItem("event_type", res.data.event_type);
+            window.localStorage.setItem("event_date", res.data.event_date);
+            window.localStorage.setItem("name", res.data.first_name);
+            this.setState({
+              spouseName: res.data.spouse_name,
+              title: res.data.title,
+            });
+          }
         }
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
 
     this.setState({ selectedRegistryType: event });
@@ -243,17 +257,8 @@ export class About extends Component {
       });
   }
 
-  handleGiftSubmit = async (event) => {
-    event.preventDefault();
-    const gift = this.state.selectedgift;
-    for (let i = 0; i < gift.length; i++) {
-      gift[i] = gift[i].replace("k", "");
-      // console.log(gift[i]);
-    }
-    let gifts = gift.map(Number);
-
-    // console.log(gifts);
-
+  createEvent = async (e) => {
+    e.preventDefault();
     let UserEventInfo = {
       event_owner: window.localStorage.userId,
       start_date: window.localStorage.event_date,
@@ -261,8 +266,7 @@ export class About extends Component {
       event_type: window.localStorage.event_type,
       spouse_name: this.state.spouseName,
       poster: "",
-      title: `${window.localStorage.name}'s ${window.localStorage.event_type}`,
-      // gifts: gifts,
+      title: `${this.state.first_name}'s ${this.state.title}`,
     };
 
     await axios
@@ -276,7 +280,7 @@ export class About extends Component {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           let slug = response.data.slug;
-          let eventId = response.data.id;
+          this.setState({ eventId: response.data.id });
           let event_link = {
             event_link: `https://sabigift.netlify.app/registry/${slug}`,
           };
@@ -288,36 +292,52 @@ export class About extends Component {
                 "Content-Type": "application/json",
               },
             })
-            .then((response) => {
-              if (response.status === 200 || response.status === 201) {
-                let addeditem = {
-                  gifts: gifts,
-                  event: Number(eventId),
-                  quantity: 1,
-                };
-                axios
-                  .post(`${util.API_BASE_URL}add-registry/`, addeditem, {
-                    headers: {
-                      Authorization:
-                        "Token " + localStorage.getItem("token_id"),
-                    },
-                  })
-
-                  .then((res) => {
-                    // console.log(res.data);
-                    if (res.status === 200) {
-                      window.location.href = "/manageregistry";
-                    }
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  });
+            .then((res) => {
+              if (res.status === 200) {
+                // window.location.href = "/manageregistry";
+                this.next();
               }
+            })
+            .catch((err) => {
+              console.log(err);
             });
         }
       })
-      .catch((error) => {
-        console.dir(error);
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  handleGiftSubmit = async (event) => {
+    event.preventDefault();
+    const gift = this.state.selectedgift;
+    for (let i = 0; i < gift.length; i++) {
+      gift[i] = gift[i].replace("k", "");
+      // console.log(gift[i]);
+    }
+    let gifts = gift.map(Number);
+
+    // console.log(gifts);
+    let addeditem = {
+      gifts: gifts,
+      event: Number(this.state.eventId),
+      quantity: 1,
+    };
+    axios
+      .post(`${util.API_BASE_URL}add-registry/`, addeditem, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+        },
+      })
+
+      .then((res) => {
+        // console.log(res.data);
+        if (res.status === 200) {
+          window.location.href = "/manageregistry";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -696,10 +716,10 @@ export class About extends Component {
                   </button>
                   <button
                     to=""
-                    onClick={this.next}
+                    onClick={this.createEvent}
                     className="btn btn-dark rounded-pill px-5"
                   >
-                    Next
+                    Complete
                   </button>
                 </div>
               </div>

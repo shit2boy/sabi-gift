@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FindEvent } from "./Modal";
+import Findevent from "./Modal";
 const Banner = () => {
   return (
     <div className="banner ">
@@ -16,8 +16,10 @@ const Banner = () => {
         >
           Create a registry
         </Link>
+        <Findevent />
         {/* <Link href='/Find' className='text-white bg-success p-2 bannerBtn'>Find an Event</Link> */}
-        <FindEvent />
+        {/* <Findevent /> */}
+        {/* <Findevent/> */}
       </div>
     </div>
   );

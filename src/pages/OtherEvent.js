@@ -213,10 +213,10 @@ export default class OtherEvent extends Component {
       newUserInfo.append("first_name", this.state.answers[0]);
       newUserInfo.append("email", formField["email"]);
       newUserInfo.append("password", formField["password"]);
-      newUserInfo.append("event_type", 2);
+      newUserInfo.append("event_type", "");
       newUserInfo.append("event_date", this.state.eventDate);
       newUserInfo.append("no_guest", this.state.answers[3]);
-      newUserInfo.append("spouse_name", this.state.answers[1]);
+      newUserInfo.append("spouse_name", "");
       newUserInfo.append("photo", "");
       window.localStorage.setItem("event_date", this.state.eventDate);
       axios

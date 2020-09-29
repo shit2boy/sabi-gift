@@ -23,6 +23,9 @@ class CashGift extends Component {
     price: null,
     description: "",
     error: "",
+    selectedFile: null,
+    fileSelected: false,
+    uploading: false,
   };
 
   setModalHide = () => {
@@ -35,6 +38,35 @@ class CashGift extends Component {
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
     // console.log(e.target.value);
+  };
+
+  triggerInputFile = (e) => {
+    this.setState({ selectedFile: e.target.files[0], fileSelected: true });
+    // console.log(this.state.selectedFile);
+    this.handleFileUpload(e);
+  };
+  handleFileUpload = (e) => {
+    this.setState({ uploading: true });
+    const backgroundImg = new FormData();
+    backgroundImg.append("photo", e.target.files[0]);
+    axios
+      .patch(`${util.API_BASE_URL}accounts/profile/`, backgroundImg, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({ fileSelected: false });
+          // console.log(res.data);
+          this.notify(res.data.success);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.errorNotify(error.message.error);
+        this.setState({
+          uploading: false,
+        });
+      });
   };
 
   validateInput = () => {
@@ -110,12 +142,26 @@ class CashGift extends Component {
               <div className="row justify-content-center">
                 <div className="col">
                   <div className="shadow">
-                    <img
-                      src={cashFund}
-                      width="100px"
-                      className="card-img center"
-                      alt="cashFund"
-                    />
+                    <label>
+                      <img
+                        src={
+                          this.state.uploading
+                            ? URL.createObjectURL(this.state.selectedFile)
+                            : cashFund
+                        }
+                        width="100px"
+                        className="card-img center"
+                        alt="cashFund"
+                      />
+
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        name="image"
+                        accept="image/jpeg,image/png,image/gif,image/bmp"
+                        onChange={(e) => this.triggerInputFile(e)}
+                      />
+                    </label>
                   </div>
                 </div>
                 <div className=" col-lg pa2">

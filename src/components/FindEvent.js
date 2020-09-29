@@ -14,7 +14,8 @@ export class FindEvent extends Component {
     this.setState({ searchedValue: event.target.value });
     console.log(this.state.searchedValue);
   };
-  async handleSearch() {
+  handleSearch = async (e) => {
+    e.preventDefault();
     let searchWord = this.state.searchedValue;
     try {
       axios
@@ -25,12 +26,9 @@ export class FindEvent extends Component {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   render() {
-    // const filteredItems = items.filter((item) =>
-    //   item.includes(this.state.searchedValue)
-    // );
     return (
       <div>
         <form className="container">
@@ -38,16 +36,17 @@ export class FindEvent extends Component {
             <div class="col-sm-8 br-1">
               <input
                 type="text"
-                class="form-control"
+                class="form-control br"
                 onChange={this.onSearch}
                 value={this.state.searchedValue}
                 placeholder="Victor's Birthday"
               />
             </div>
             <button
+              onClick={this.handleSearch}
               type="submit"
-              class="btn p-2"
-              style={{ backgroundColor: "#6F64F8" }}
+              class="btn p-2 "
+              style={{ backgroundColor: "#58B852" }}
             >
               Find
             </button>

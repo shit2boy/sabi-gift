@@ -20,7 +20,7 @@ export class NavigationBar extends Component {
             <Nav.Link className="pv-2 ml-2 " href="/createRegistry">
               CREATE REGISTRY
             </Nav.Link>
-            <Nav.Link className="pv-3 ml-2 " href="/createRegistry">
+            <Nav.Link className="pv-3 ml-2 " href="/Find-event">
               FIND AN EVENT
             </Nav.Link>
           </Nav>

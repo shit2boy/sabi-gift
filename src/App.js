@@ -43,7 +43,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/Dashboard" component={Dashboard} />
-            <Route exact path="/Find" component={FindRegistry} />
+            <Route exact path="/Find-event" component={FindRegistry} />
             <Route exact path="/" component={Home} />
             <Route path="/createRegistry" component={CreateRegistry} />
             <Route path="/registration" component={SignUp} />

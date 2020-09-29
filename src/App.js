@@ -23,6 +23,7 @@ import Spinner from "react-bootstrap/Spinner";
 import CartItem from "./pages/CartItem";
 import EditRegistryUrl from "./pages/EditRegistryUrl";
 import CashGift from "./pages/CashGiftPage";
+import OtherEvent from "./pages/OtherEvent";
 
 const Home = lazy(() => import("./pages/Home"));
 const ManageRegistry = lazy(() => import("./pages/ManageRegistry"));
@@ -59,6 +60,7 @@ function App() {
             <Route path="/payout/" component={ThankYouPage} />
             <Route path="/editprofile" component={Setting} />
             <Route path="/sign in" component={Login} />
+            <Route path="/notlisted-event" component={OtherEvent} />
             <Route path="/editurl" component={EditRegistryUrl} />
             <Route path="/cash-funds" component={CashGift} />
             <Route path="/cart" component={CartItem} />

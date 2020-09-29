@@ -25,7 +25,7 @@ export class CreateRegistry extends Component {
         "content-type": "multipart/form-data",
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data !== undefined) {
           // const typeList = res.data
           let data = res.data.results;
@@ -89,27 +89,32 @@ export class CreateRegistry extends Component {
                           <button
                             onClick={this.handleEvent}
                             key={type.id}
-                            id={type.id}
+                            id={type.name}
                             className="eventItem"
                           >
                             <img
                               src={type.image}
                               width="40px"
-                              alt={type.name}
-                              id={type.id}
+                              alt={type.slug}
+                              id={type.name}
                             />
-                            <p id={type.id}>{type.name}</p>
+                            <p id={type.name}>{type.name}</p>
                           </button>
                         ))}
 
                         <button
                           onClick={this.handleEvent}
                           className="eventItem"
-                          id="0"
+                          id="other"
                         >
-                          <img src={ring} alt="undefine" width="40px" />
+                          <img
+                            src={ring}
+                            alt="eventAvatar"
+                            id="other"
+                            width="40px"
+                          />
 
-                          <p>Not on list</p>
+                          <p id="other">Not on list</p>
                         </button>
                       </div>
                       <p className="py-4">
@@ -133,7 +138,7 @@ export class CreateRegistry extends Component {
                     >
                       Back
                     </Link>
-                    {this.state.eventType === "2" && (
+                    {this.state.eventType === "Wedding" && (
                       <Link
                         to="/getstarted"
                         className=" text-link btn btn-dark rounded-pill px-5"
@@ -141,9 +146,17 @@ export class CreateRegistry extends Component {
                         Next
                       </Link>
                     )}
-                    {this.state.eventType === "3" && (
+                    {this.state.eventType === "Birthday" && (
                       <Link
                         to="/registration"
+                        className=" text-link btn btn-dark rounded-pill px-5"
+                      >
+                        Next
+                      </Link>
+                    )}
+                    {this.state.eventType === "other" && (
+                      <Link
+                        to="/notlisted-event"
                         className=" text-link btn btn-dark rounded-pill px-5"
                       >
                         Next

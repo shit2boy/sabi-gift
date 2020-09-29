@@ -211,6 +211,7 @@ export default class getstarted extends Component {
       newUserInfo.append("event_type", 3);
       newUserInfo.append("event_date", this.state.eventDate);
       newUserInfo.append("no_guest", this.state.answers[2]);
+      newUserInfo.append("title", "birthday");
       newUserInfo.append("spouse_name", "");
       newUserInfo.append("photo", "");
       window.localStorage.setItem("event_date", this.state.eventDate);

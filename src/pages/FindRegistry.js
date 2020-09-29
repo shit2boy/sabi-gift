@@ -15,26 +15,45 @@ export class FindRegistry extends Component {
     successful: false,
   };
 
+  validateForm() {
+    let error;
+    let formIsValid = true;
+    if (!this.state.searchedValue) {
+      formIsValid = false;
+      error = "*This field is required.";
+    }
+    if (typeof this.state.searchedValue !== "undefined") {
+      if (!this.state.searchedValue.match(/^[a-zA-Z ]*$/)) {
+        formIsValid = false;
+        error = "*Please enter alphabet characters only.";
+      }
+    }
+    this.setState({ error: error });
+    return formIsValid;
+  }
+
   onSearch = (event) => {
     this.setState({ searchedValue: event.target.value });
     console.log(this.state.searchedValue);
   };
   handleSearch = async (e) => {
     e.preventDefault();
-    let searchWord = this.state.searchedValue;
-    try {
-      axios
-        .get(`${util.API_BASE_URL}events/?search=${searchWord}`)
-        .then((res) => {
-          //   console.log(res.data);
-          this.setState({
-            result: res.data,
-            searchedValue: "",
-            successful: true,
+    if (this.validateForm()) {
+      let searchWord = this.state.searchedValue;
+      try {
+        axios
+          .get(`${util.API_BASE_URL}events/?search=${searchWord}`)
+          .then((res) => {
+            //   console.log(res.data);
+            this.setState({
+              result: res.data,
+              searchedValue: "",
+              successful: true,
+            });
           });
-        });
-    } catch (error) {
-      console.log(error);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   render() {
@@ -57,7 +76,7 @@ export class FindRegistry extends Component {
                   value={this.state.searchedValue}
                   placeholder="Victor's Birthday"
                 />
-                <span style={{ color: "red" }}>{this.state.errors}</span>
+                <span style={{ color: "red" }}>{this.state.error}</span>
               </Form.Group>
               <Form.Group as={Col} md={2} controlId="btn">
                 <button

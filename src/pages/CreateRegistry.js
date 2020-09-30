@@ -6,6 +6,7 @@ import { Steps } from "antd";
 import { ProductConsumer, StateContext } from "../Context";
 import axios from "axios";
 import util from "../util/util";
+import Spinner from "../components/spinner";
 
 const { Step } = Steps;
 
@@ -16,6 +17,7 @@ export class CreateRegistry extends Component {
     this.state = {
       eventType: "",
       eventTypeList: [],
+      loading: false,
     };
   }
 
@@ -32,7 +34,7 @@ export class CreateRegistry extends Component {
           for (let i = 0; i < data.length; i++) {
             data[i].image = data[i].image.replace("image/upload/", "");
           }
-          this.setState({ eventTypeList: data });
+          this.setState({ eventTypeList: data, loading: true });
         }
       })
       .catch((err) => {
@@ -47,6 +49,9 @@ export class CreateRegistry extends Component {
   };
 
   render() {
+    const { loading } = this.state;
+
+    if (!loading) return <Spinner />;
     return (
       <ProductConsumer>
         {(value) => (

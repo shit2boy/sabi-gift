@@ -10,6 +10,7 @@ import axios from "axios";
 import util from "../util/util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "../components/spinner";
 
 // import { Button } from "antd";
 import backgroundimg from "../images/Sabi-storepage/manageReg.png";
@@ -35,6 +36,7 @@ export class ManageRegistry extends Component {
       progress: null,
       cashGift: [],
       cashNeeded: false,
+      loading: false,
     };
   }
 
@@ -112,7 +114,7 @@ export class ManageRegistry extends Component {
         this.setState({ dayLeftToEvent: daysTillEventday });
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
         window.localStorage.removeItem("name");
         window.localStorage.removeItem("spouseName");
         window.localStorage.removeItem("username");
@@ -121,23 +123,23 @@ export class ManageRegistry extends Component {
         window.location.href = "/";
       });
 
-    axios
-      .get(`${util.API_BASE_URL}categories/`, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      })
+    // axios
+    //   .get(`${util.API_BASE_URL}categories/`, {
+    //     headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+    //   })
 
-      .then((response) => {
-        // console.log(res.data);
-        if (response.data !== undefined) {
-          let data = response.data.results;
+    //   .then((response) => {
+    //     // console.log(res.data);
+    //     if (response.data !== undefined) {
+    //       let data = response.data.results;
 
-          this.setState({ itemCategory: data });
-          //   console.log(this.state.itemCategory);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //       this.setState({ itemCategory: data });
+    //       //   console.log(this.state.itemCategory);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     await axios
       .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
@@ -157,6 +159,8 @@ export class ManageRegistry extends Component {
             window.localStorage.setItem("eventIID", data[data.length - 1].id);
             this.setState({ registryItem: data[data.length - 1].items });
             this.setState({ cashGift: data[data.length - 1].cash_item });
+            this.setState({ loading: true });
+
             // console.log(this.state.registryItem);
             // console.log(this.state.cashGift);
             data[i].poster = data[data.length - 1].poster.replace(
@@ -215,6 +219,10 @@ export class ManageRegistry extends Component {
       height: "250px",
     };
 
+    // const itemCategory = this.context.regCategory;
+    const { loading } = this.state;
+
+    if (!loading) return <Spinner />;
     return (
       <div className="container-fluid">
         <DashboardNav />

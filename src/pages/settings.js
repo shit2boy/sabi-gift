@@ -29,6 +29,7 @@ export class Setting extends Component {
       street: "",
       city: "",
       Phone: "",
+      altPhone: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -109,7 +110,7 @@ export class Setting extends Component {
       newUserInfo.append("first_name", this.state.firstName);
       newUserInfo.append("last_name", this.state.lastName);
       newUserInfo.append("mobile", this.state.Phone);
-      newUserInfo.append("street", this.state.address);
+      newUserInfo.append("street", this.state.street);
       newUserInfo.append("state", this.state.state);
       newUserInfo.append("city", this.state.city);
       newUserInfo.append("gender", undefined);
@@ -256,6 +257,7 @@ export class Setting extends Component {
                             onChange={this.handleChange}
                             type="tel"
                             name="AltPhone"
+                            value={this.state.altPhone}
                             placeholder="0000-0000-0000"
                             required
                           />

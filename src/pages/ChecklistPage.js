@@ -11,6 +11,7 @@ import { BsFillGridFill, BsListUl } from "react-icons/bs";
 import { Card, Form, Table, ListGroup, Button } from "react-bootstrap";
 import CashGift from "../pages/CashGiftPage";
 import { StateContext } from "../Context";
+import Spinner from "../components/spinner";
 
 const { Search } = Input;
 export class RegistryChecklist extends Component {
@@ -29,6 +30,7 @@ export class RegistryChecklist extends Component {
       filterData: [],
       search: null,
       listDisplay: false,
+      loading: false,
     };
   }
 
@@ -142,28 +144,27 @@ export class RegistryChecklist extends Component {
   };
 
   componentDidMount() {
-    axios
-      .get(`${util.API_BASE_URL}registries/`, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      })
-
-      .then((response) => {
-        // console.log(response.data);
-        if (response.data !== undefined) {
-          let data = response.data;
-          for (let i = 0; i < data.length; i++) {
-            data[i].picture = data[i].picture.replace("image/upload/", "");
-          }
-          this.setState({ allRegistryItem: data });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //   axios
+    //     .get(`${util.API_BASE_URL}registries/`, {
+    //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+    //     })
+    //     .then((response) => {
+    //       // console.log(response.data);
+    //       if (response.data !== undefined) {
+    //         let data = response.data;
+    //         for (let i = 0; i < data.length; i++) {
+    //           data[i].picture = data[i].picture.replace("image/upload/", "");
+    //         }
+    //         this.setState({ allRegistryItem: data, loading: true });
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
   }
 
   render() {
-    const items = this.state.allRegistryItem
+    const items = this.context.storeproduct
       .filter((data) => {
         if (this.state.search == null) {
           return data;
@@ -222,7 +223,9 @@ export class RegistryChecklist extends Component {
           </Card>
         );
       });
+    const { loading } = this.context;
 
+    if (!loading) return <Spinner />;
     return (
       <div className="container-fluid">
         <DashboardNav />
@@ -236,7 +239,7 @@ export class RegistryChecklist extends Component {
             <p>This is where you manage your registry items.</p>
             <div className="row mt-5">
               <div className=" col-3 d-none d-md-block d-lg-block availableItem">
-                <AvailableItems />
+                <AvailableItems category={this.state.allRegistryItem} />
               </div>
               <div className="col">
                 {/* <Product

@@ -29,6 +29,7 @@ export class Product extends Component {
       requestedQuantity: "",
       listDisplay: false,
       cashGift: [],
+      disablebtn: false,
     };
   }
 
@@ -186,7 +187,7 @@ export class Product extends Component {
             <small className="ml-1">Requested : {data.item.qty[0]}</small>
           </div>
 
-          {this.props.showWishList && (
+          {this.props.showWishList && data.item.qty[0] > 0 && (
             <div className="col p-0 mb-0">
               <button
                 type="button"
@@ -200,11 +201,31 @@ export class Product extends Component {
                   color: "#FFFFFF",
                   borderBottomRightRadius: "8px",
                 }}
-                disabled={this.state.selectedIds.indexOf(data.item["id"]) > -1}
+                disabled={
+                  this.state.selectedIds.indexOf(data.item["id"]) > -1 ||
+                  data.item.qty[0] <= 0
+                }
               >
                 {this.state.selectedIds.indexOf(data.item["id"]) > -1
                   ? "Item in a cart"
                   : "Add to cart"}
+              </button>
+            </div>
+          )}
+          {this.props.showWishList && data.item.qty[0] <= 0 && (
+            <div className="col p-0 mb-0">
+              {" "}
+              <button
+                className="col text-center p-2 border-0"
+                style={{
+                  background: "#6F64F8",
+                  color: "#FFFFFF",
+                  borderBottomRightRadius: "8px",
+                }}
+                disabled={data.item.qty[0] <= 0}
+              >
+                {" "}
+                Request completed{" "}
               </button>
             </div>
           )}

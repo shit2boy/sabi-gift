@@ -24,6 +24,11 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
     // console.log(this.state.email);
   }
+  componentDidMount() {
+    if (window.localStorage.token_id) {
+      window.location.href = "/manageregistry";
+    }
+  }
 
   onSubmit(e) {
     e.preventDefault();

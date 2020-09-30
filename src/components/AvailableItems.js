@@ -4,10 +4,13 @@ import { storeProduct } from "../storeProduct";
 import "antd/dist/antd.css";
 import { Radio } from "antd";
 import Slider from "./Slider";
+import { StateContext } from "../Context";
 
 export class AvailableItems extends Component {
+  static contextType = StateContext;
   state = {
     value: 1,
+    itemsCategory: [],
   };
 
   onChange = (e) => {
@@ -24,6 +27,7 @@ export class AvailableItems extends Component {
       lineHeight: "30px",
     };
     const { value } = this.state;
+    const { regCategory } = this.context;
 
     return (
       <>
@@ -54,7 +58,7 @@ export class AvailableItems extends Component {
           <p className="pt-4">Category</p>
           <div className="row col-10">
             <Radio.Group onChange={this.onChange} value={value}>
-              {storeProduct.map((item) => (
+              {regCategory.map((item) => (
                 <Radio key={item.id} style={radioStyle} value={item.id}>
                   {item.name}
                 </Radio>

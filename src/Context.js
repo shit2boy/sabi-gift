@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { ProductItems } from "./components/imageData";
-// import axios from "axios";
-// import util from "./util/util";
+import axios from "axios";
+import util from "./util/util";
 
 const StateContext = React.createContext();
 
@@ -16,11 +16,52 @@ class ProductProvider extends Component {
     selected: [],
     cart_Ids: [],
     cashAmount: null,
+    loading: false,
+    regCategory: [],
+    storeproduct: [],
   };
 
   // updateContextState = (key, val) => {
   //   this.setState({ [key]: val });
   // };
+
+  async componentDidMount() {
+    await axios
+      .get(`${util.API_BASE_URL}registries/`, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+
+      .then((response) => {
+        // console.log(response.data);
+        if (response.data !== undefined) {
+          let data = response.data;
+          for (let i = 0; i < data.length; i++) {
+            data[i].picture = data[i].picture.replace("image/upload/", "");
+          }
+          this.setState({ storeproduct: data, loading: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    await axios
+      .get(`${util.API_BASE_URL}categories/`, {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      })
+
+      .then((response) => {
+        // console.log(res.data);
+        if (response.data !== undefined) {
+          let data = response.data.results;
+
+          this.setState({ regCategory: data });
+          //   console.log(this.state.itemCategory);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   handleQuantityChange = (e) => {
     this.setState({

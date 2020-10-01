@@ -72,7 +72,7 @@ export class ManageRegistry extends Component {
           this.setState({ fileSelected: false, uploading: false });
           // console.log(res.data);
           this.notify(res.data.success);
-          // window.location.reload();
+          window.location.reload();
         }
       })
       .catch((error) => {

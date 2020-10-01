@@ -309,6 +309,7 @@ export class Product extends Component {
                 itemId={data.id}
                 price={data.price}
                 name={data.name}
+                data={data}
                 button={
                   <button
                     type="button"

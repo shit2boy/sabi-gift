@@ -25,6 +25,9 @@ export class SideBar extends Component {
   // };
   render() {
     const { isChecklist, isManage, isOverview, isTracker } = this.props;
+    const active = {
+      border: "1px solid grey",
+    };
     return (
       <div className="sidebarMenu">
         <div className="mt-3 text-center">
@@ -48,9 +51,14 @@ export class SideBar extends Component {
               title="overview"
               color="#5F619F"
             >
-              <Link className="active" to="/dashboard">
+              <Link to="/dashboard">
                 {" "}
-                <img src={home} width="35px" alt="icon" />
+                <img
+                  src={home}
+                  width="35px"
+                  alt="icon"
+                  style={isOverview ? null : { opacity: "0.4" }}
+                />
               </Link>
             </Tooltip>
           </div>
@@ -61,8 +69,13 @@ export class SideBar extends Component {
               title="manage registry"
               color="#5F619F"
             >
-              <Link className="text-link active" to="manageRegistry">
-                <img src={manage} width="35px" alt="icon" />
+              <Link className="text-link active" to="/manageRegistry">
+                <img
+                  src={manage}
+                  width="35px"
+                  alt="icon"
+                  style={isManage ? active : null}
+                />
               </Link>
             </Tooltip>
           </div>
@@ -74,7 +87,12 @@ export class SideBar extends Component {
               color="#5F619F"
             >
               <Link className="active" to="/checklist">
-                <img src={checklist} width="35px" alt="icon" />
+                <img
+                  src={checklist}
+                  width="35px"
+                  alt="icon"
+                  style={isChecklist ? active : null}
+                />
               </Link>
             </Tooltip>
           </div>
@@ -86,7 +104,12 @@ export class SideBar extends Component {
               color="#5F619F"
             >
               <Link className="active" to="/gifttracker">
-                <img src={tracker} width="35px" alt="icon" />
+                <img
+                  src={tracker}
+                  width="35px"
+                  alt="icon"
+                  style={isTracker ? active : null}
+                />
               </Link>
             </Tooltip>
           </div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
 import sabigift from "../images/landing/sabigift.png";
+import cashFund from "../images/Sabi-storepage/cashFund.jpg";
 import util from "../util/util";
 import axios from "axios";
 import { GrCart } from "react-icons/gr";
@@ -18,6 +19,7 @@ export default class CartItem extends Component {
       quantityObject: {},
       amount: "",
       itemsInCart: [],
+      cashInCart: [],
       totalSum: 0,
     };
     this.handleSumbitCart = this.handleSumbitCart.bind(this);
@@ -67,16 +69,35 @@ export default class CartItem extends Component {
     this.setState({ itemsInCart: products });
     this.amountToPyay();
   };
+  deleteFromCashCart = (value) => {
+    let products = this.context.cashInCart;
+    // products.indexOf(value);
+    products.splice(products.indexOf(value), 1);
+    this.setState({ cashInCart: products });
+    // this.amountToPyay();
+  };
 
   componentDidMount() {
     // console.log(props.Products);
-    this.setState({ itemsInCart: this.context.itemsInCart });
+    this.setState({
+      itemsInCart: this.context.itemsInCart,
+      cashInCart: this.context.cashInCart,
+    });
     setTimeout(() => this.amountToPyay(), 300);
   }
   handleSumbitCart() {
-    let cart = this.state.productIdInCart;
+    // let cart = this.state.productIdInCart;
+    let cart = [
+      {
+        item: 18,
+        quantity: 5,
+        custom_item: 7,
+        item_price: 23000,
+        evt: 54,
+      },
+    ];
     axios
-      .post(`${util.API_BASE_URL}cart/create-cart/`, cart, {
+      .post(`${util.API_BASE_URL}cart/create-carts/`, cart, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -184,6 +205,47 @@ export default class CartItem extends Component {
                     className="pointer"
                     onClick={() => {
                       this.removeFromCart(inCart);
+                    }}
+                  >
+                    delete Item
+                  </td>
+                </tr>
+              ))}
+              {this.state.cashInCart.map((inCart, index) => (
+                <tr key={index}>
+                  <td>{index}</td>
+                  <td>
+                    {" "}
+                    <img
+                      src={cashFund}
+                      width="80px"
+                      alt="cashFromGuest"
+                      className="m-4"
+                    />
+                  </td>
+                  <td>{inCart.description}</td>
+                  <td className="text-center">
+                    {/* <input
+                      type="number"
+                      name={"quantity" + inCart.id}
+                      min="1"
+                      max={inCart.price}
+                      value={
+                        this.state.quantityObject["quantity" + inCart.id] ===
+                          undefined ||
+                        isNaN(this.state.quantityObject["quantity" + inCart.id])
+                          ? 1
+                          : this.state.quantityObject["quantity" + inCart.id]
+                      }
+                      onChange={this.handleQuantityChange}
+                    /> */}
+                  </td>
+                  <td>#{this.context.cashDonated["cash" + inCart.id]}</td>
+                  <td>#{this.context.cashDonated["cash" + inCart.id]}</td>
+                  <td
+                    className="pointer"
+                    onClick={() => {
+                      this.deleteFromCashCart(inCart);
                     }}
                   >
                     delete Item

@@ -25,6 +25,7 @@ export default class AddCategory extends Component {
   errorNotify = (res) => toast.error(res, { autoClose: 2000 });
   setModalHide = () => {
     this.setState({ modalShow: false });
+    window.location.reload();
   };
 
   setModalShow = () => {

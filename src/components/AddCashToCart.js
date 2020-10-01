@@ -13,11 +13,11 @@ class AddCashToCart extends Component {
     super(props);
     this.state = {
       modalShow: false,
-      price: "",
       cashItemId: this.props.itemId,
       addedToCart: false,
       amountNeeded: this.props.price,
       cashCompleted: false,
+      selectedIds: [],
       error: "",
     };
   }
@@ -28,12 +28,11 @@ class AddCashToCart extends Component {
   setModalShow = () => {
     this.setState({ modalShow: true });
   };
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-    // console.log(e.target.value);
-  };
-  notify = () =>
-    toast.success("Donation successful. Thanks! ", { autoClose: 2000 });
+  // handleChange = (e) => {
+  //   this.setState({ [e.target.name]: e.target.value });
+  //   // console.log(e.target.value);
+  // };
+  notify = () => toast.success("Added to cart. Thanks! ", { autoClose: 2000 });
   AmountExceededNotify = () =>
     toast.error("Inputed Amount exceed the amount needed", {
       position: "top-center",
@@ -60,7 +59,9 @@ class AddCashToCart extends Component {
     let priceIsValid = true;
     let error;
     let amountNeeded = Number(this.props.price);
-    let inputAmount = Number(this.state.price);
+    let inputAmount = Number(
+      this.context.cashDonated["cash" + this.props.itemId]
+    );
     if (inputAmount > amountNeeded) {
       priceIsValid = false;
       this.AmountExceededNotify();
@@ -73,6 +74,22 @@ class AddCashToCart extends Component {
     this.setState({ error });
     return priceIsValid;
   };
+
+  addToCart = (data) => {
+    if (this.validateInputPrice()) {
+      let cashInCart = this.context.cashInCart;
+      cashInCart.push(data);
+      let selectedIds = this.state.selectedIds;
+      selectedIds.push(this.props.itemId);
+      this.setState({
+        selectedIds: selectedIds,
+      });
+      this.context.handleQuantityChange();
+      this.notify();
+      this.setModalHide();
+    }
+  };
+
   addCashToCart = async () => {
     if (this.validateInputPrice()) {
       window.localStorage.setItem("cashAmount", this.state.price);
@@ -105,6 +122,7 @@ class AddCashToCart extends Component {
   };
 
   render() {
+    const { handleCashDonated } = this.context;
     return (
       <>
         <span onClick={() => this.setModalShow(true)}>
@@ -152,10 +170,9 @@ class AddCashToCart extends Component {
                         <FormControl
                           type="number"
                           placeholder="150000"
-                          name="price"
-                          value={this.state.price}
+                          name={"cash" + this.props.itemId}
                           min="150000"
-                          onChange={this.handleChange}
+                          onChange={handleCashDonated}
                           aria-label="Input group "
                         />
                       </InputGroup>
@@ -164,7 +181,11 @@ class AddCashToCart extends Component {
                   <Button
                     className="mr-3 btn-outline-default"
                     variant="success"
-                    onClick={this.addCashToCart}
+                    // onClick={this.addCashToCart}
+                    id={this.props.itemId}
+                    onClick={() => {
+                      this.addToCart(this.props.data);
+                    }}
                     disabled={
                       this.state.addedToCart || this.state.cashCompleted
                     }

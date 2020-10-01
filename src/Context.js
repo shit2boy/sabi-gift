@@ -9,8 +9,11 @@ class ProductProvider extends Component {
   state = {
     products: [],
     quantity: 0,
+    quantityObject: {},
     amountToPay: 0,
     itemsInCart: [],
+    cashInCart: [],
+    cashDonated: {},
     clicked: false,
     registryCategory: [],
     selected: [],
@@ -26,17 +29,26 @@ class ProductProvider extends Component {
     backgroundImage: "",
     isPosterImg: false,
     cashNeeded: false,
-    active: false,
   };
 
   // updateContextState = (key, val) => {
   //   this.setState({ [key]: val });
   // };
 
-  activeOnclick = () => {
-    const { active } = this.state;
-    this.setState({ active: !active });
-    console.log("see me");
+  handleCashDonated = (e) => {
+    let cashDonated = this.state.cashDonated;
+    cashDonated[e.target.name] = isNaN(e.target.value) ? 1 : e.target.value;
+    this.setState({ cashDonated: cashDonated });
+    // this.amountToPyay();
+    console.log(typeof e.target.value);
+  };
+
+  handleQuantityChange = (e) => {
+    let quantityObject = this.state.quantityObject;
+    quantityObject[e.target.name] = isNaN(e.target.value) ? 1 : e.target.value;
+    this.setState({ quantityObject: quantityObject });
+    this.amountToPyay();
+    // console.log(e.target.value);
   };
 
   async componentDidMount() {
@@ -244,7 +256,7 @@ class ProductProvider extends Component {
           resetSortToDefault: this.resetSortToDefault,
           sortByCategory: this.sortByCategory,
           // sortByCategry: this.sortByCategry,
-          activeOnclick: this.activeOnclick,
+          handleCashDonated: this.handleCashDonated,
         }}
       >
         {this.props.children}

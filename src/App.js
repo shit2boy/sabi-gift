@@ -19,11 +19,12 @@ import SendInvite from "./components/SendInvite";
 import ActivateAcoount from "./pages/ActivateAcoount";
 import Setting from "./pages/settings";
 import ThankYouPage from "./pages/ThankYouPage";
-import Spinner from "react-bootstrap/Spinner";
+// import Spinner from "react-bootstrap/Spinner";
 import CartItem from "./pages/CartItem";
 import EditRegistryUrl from "./pages/EditRegistryUrl";
 import CashGift from "./pages/CashGiftPage";
 import OtherEvent from "./pages/OtherEvent";
+import Spinner from "./components/spinner";
 
 const Home = lazy(() => import("./pages/Home"));
 const ManageRegistry = lazy(() => import("./pages/ManageRegistry"));
@@ -34,9 +35,10 @@ function App() {
     <Fragment>
       <Suspense
         fallback={
-          <Spinner className="loader" animation="border" role="status">
-            <span className="sr-only">Loading...</span>
-          </Spinner>
+          // <Spinner className="loader" animation="border" role="status">
+          //   <span className="sr-only">Loading...</span>
+          // </Spinner>
+          <Spinner />
         }
       >
         {/* <Suspense fallback={<div className="spinner center"><h3>Loading...</h3></div>} > */}

@@ -11,15 +11,16 @@ import util from "../util/util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "../components/spinner";
+import { StateContext } from "../Context";
 
 // import { Button } from "antd";
 import backgroundimg from "../images/Sabi-storepage/manageReg.png";
 
 export class ManageRegistry extends Component {
+  static contextType = StateContext;
   constructor() {
     super();
     this.state = {
-      registryItem: [],
       spouseName: "",
       dayLeftToEvent: "",
       itemCategory: [],
@@ -30,12 +31,9 @@ export class ManageRegistry extends Component {
       isLoggedIn: false,
       selectedFile: "",
       fileSelected: false,
-      isPosterImg: false,
-      backgroundImage: "",
       uploading: false,
       progress: null,
-      cashGift: [],
-      cashNeeded: false,
+
       loading: false,
     };
   }
@@ -97,7 +95,7 @@ export class ManageRegistry extends Component {
       .then((res) => {
         // console.log(res.data);
         if (res.data !== 200) {
-          window.localStorage.setItem("userId", res.data.id);
+          // window.localStorage.setItem("userId", res.data.id);
           window.localStorage.setItem("name", res.data.first_name);
           // window.localStorage.setItem("spouseName", res.data.spouse_name);
           window.localStorage.setItem("event_date", res.data.event_date);
@@ -141,49 +139,49 @@ export class ManageRegistry extends Component {
     //     console.log(err);
     //   });
 
-    await axios
-      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        // console.log(res.data);
+    // await axios
+    //   .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //   })
+    //   .then((res) => {
+    //     // console.log(res.data);
 
-        if (res.data !== undefined && res.data.length > 0) {
-          let data = res.data;
-          for (let i = 0; i < data.length; i++) {
-            // console.log(data[data.length - 1].slug);
-            window.localStorage.setItem("slug", data[data.length - 1].slug);
-            window.localStorage.setItem("eventIID", data[data.length - 1].id);
-            this.setState({ registryItem: data[data.length - 1].items });
-            this.setState({ cashGift: data[data.length - 1].cash_item });
-            this.setState({ loading: true });
+    //     if (res.data !== undefined && res.data.length > 0) {
+    //       let data = res.data;
+    //       for (let i = 0; i < data.length; i++) {
+    //         // console.log(data[data.length - 1].slug);
+    //         window.localStorage.setItem("slug", data[data.length - 1].slug);
+    //         window.localStorage.setItem("eventIID", data[data.length - 1].id);
+    //         this.setState({ registryItem: data[data.length - 1].items });
+    //         this.setState({ cashGift: data[data.length - 1].cash_item });
+    //         this.setState({ loading: true });
 
-            // console.log(this.state.registryItem);
-            // console.log(this.state.cashGift);
-            data[i].poster = data[data.length - 1].poster.replace(
-              "image/upload/",
-              ""
-            );
-            // console.log(data[i].poster);
-            this.setState({
-              backgroundImage: data[i].poster,
-              isPosterImg: true,
-            });
-            if (this.state.cashGift.length > 0) {
-              this.setState({ cashNeeded: true });
-            }
-          }
-        } else {
-          window.location.href = "/updateprofile";
-        }
-      })
-      .catch((err) => {
-        // console.log(err);
-        this.setState({ emptyRegistry: true });
-      });
+    //         // console.log(this.state.registryItem);
+    //         // console.log(this.state.cashGift);
+    //         data[i].poster = data[data.length - 1].poster.replace(
+    //           "image/upload/",
+    //           ""
+    //         );
+    //         // console.log(data[i].poster);
+    //         this.setState({
+    //           backgroundImage: data[i].poster,
+    //           isPosterImg: true,
+    //         });
+    //         if (this.state.cashGift.length > 0) {
+    //           this.setState({ cashNeeded: true });
+    //         }
+    //       }
+    //     } else {
+    //       window.location.href = "/updateprofile";
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     // console.log(err);
+    //     this.setState({ emptyRegistry: true });
+    //   });
   };
 
   // addToReg = (e) => {
@@ -202,9 +200,17 @@ export class ManageRegistry extends Component {
   // }
 
   render() {
-    const newLocal = this.state.isPosterImg
-      ? this.state.backgroundImage
-      : `${backgroundimg}`;
+    const {
+      userRegistry,
+      cashNeeded,
+      cashGift,
+      backgroundImage,
+      isPosterImg,
+      loading,
+    } = this.context;
+    if (userRegistry === []) window.location.href = "/updateprofile";
+    // console.log(userRegistry);
+    const newLocal = isPosterImg ? backgroundImage : `${backgroundimg}`;
     let imgUrl = newLocal;
     let manageReg = {
       backgroundImage: `url(${imgUrl})`,
@@ -219,16 +225,13 @@ export class ManageRegistry extends Component {
       height: "250px",
     };
 
-    // const itemCategory = this.context.regCategory;
-    const { loading } = this.state;
-
     if (!loading) return <Spinner />;
     return (
       <div className="container-fluid">
         <DashboardNav />
         <div className="row mt-5">
           <div className="col-1 d-none d-lg-block">
-            <SideBar />
+            <SideBar isManage="true" />
           </div>
           <div className="col ml-3 mb-3">
             <div className="row ">
@@ -313,17 +316,17 @@ export class ManageRegistry extends Component {
             </div>
             <div className="mt-4 row">
               <div className="col">
-                <CheckList itemCategorires={this.state.itemCategory} />
+                <CheckList />
               </div>
             </div>
 
             <h5 className="mt-4">Add items to your registry</h5>
             <Product
-              Products={this.state.registryItem}
+              Products={userRegistry}
               showWishList={false}
               inRegistry={true}
-              cashItem={this.state.cashGift}
-              cashNeeded={this.state.cashNeeded}
+              cashItem={cashGift}
+              cashNeeded={cashNeeded}
             />
 
             <ToastContainer />

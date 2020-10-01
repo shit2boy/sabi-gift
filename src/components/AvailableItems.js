@@ -3,7 +3,7 @@ import { storeProduct } from "../storeProduct";
 // import { Button } from "react-bootstrap";
 import "antd/dist/antd.css";
 import { Radio } from "antd";
-import Slider from "./Slider";
+// import Slider from "./Slider";
 import { StateContext } from "../Context";
 
 export class AvailableItems extends Component {
@@ -14,7 +14,6 @@ export class AvailableItems extends Component {
   };
 
   onChange = (e) => {
-    console.log("radio checked", e.target.value);
     this.setState({
       value: e.target.value,
     });
@@ -27,7 +26,12 @@ export class AvailableItems extends Component {
       lineHeight: "30px",
     };
     const { value } = this.state;
-    const { regCategory } = this.context;
+    const {
+      regCategory,
+      // resetSortToDefault,
+      // sortByPrice,
+      // sortByCategory,
+    } = this.context;
 
     return (
       <>
@@ -35,31 +39,59 @@ export class AvailableItems extends Component {
           <p className=" pt-4">Multi Range</p>
           <div className="row col-10">
             <Radio.Group>
-              <Radio style={radioStyle} value={1}>
-                ₦1000
+              <Radio
+                onClick={() => {
+                  this.props.sort(1000, 9000);
+                }}
+                style={radioStyle}
+                value={2}
+              >
+                ₦1000- ₦9000
               </Radio>
-              <Radio style={radioStyle} value={2}>
-                ₦10 - ₦10000
+              <Radio
+                onClick={() => {
+                  this.props.sort(10000, 25000);
+                }}
+                style={radioStyle}
+                value={3}
+              >
+                ₦10000 - ₦25000
               </Radio>
-              <Radio style={radioStyle} value={3}>
-                ₦100 - ₦50000
+              <Radio
+                onClick={() => {
+                  this.props.sort(30000, 49000);
+                }}
+                style={radioStyle}
+                value={4}
+              >
+                ₦30000 - ₦50000
               </Radio>
-              <Radio style={radioStyle} value={4}>
+              <Radio onClick={this.props.default} style={radioStyle} value={5}>
                 ₦500000 All
               </Radio>
-              <Radio style={radioStyle} value={5}>
+              <Radio onClick={this.props.default} style={radioStyle} value={1}>
                 All
               </Radio>
             </Radio.Group>
           </div>
-          <div className="row col-10">
+          {/* <div className="row col-10">
             <Slider />
-          </div>
+          </div> */}
           <p className="pt-4">Category</p>
           <div className="row col-10">
             <Radio.Group onChange={this.onChange} value={value}>
               {regCategory.map((item) => (
-                <Radio key={item.id} style={radioStyle} value={item.id}>
+                <Radio
+                  onClick={() => {
+                    this.props.sortByCat(item.id);
+                  }}
+                  // onClick={(e) => {
+                  //   sortByCategory(item.id);
+                  // }}
+                  key={item.id}
+                  style={radioStyle}
+                  value={item.id}
+                >
                   {item.name}
                 </Radio>
               ))}

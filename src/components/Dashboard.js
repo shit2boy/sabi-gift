@@ -69,7 +69,7 @@ export class Dashboard extends Component {
         {/* <hr className="mt-0 mb-0" /> */}
         <Row className="mt-4 mb-3">
           <Col xs={1} md={1} lg={1} className=" d-none d-lg-block ">
-            <SideBar />
+            <SideBar isOverview="true" />
           </Col>
           <Col className=" content">
             <div className="row justify-content-center">

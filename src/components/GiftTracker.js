@@ -114,7 +114,7 @@ export class GiftTracker extends Component {
         <hr className="mt-0 mb-0" />
         <div className="row mt-4">
           <div className="col-1 ml-4 justify-content-center d-none d-lg-block">
-            <SideBar />
+            <SideBar isTracker="true" />
           </div>
           <div className="col-10 mx-auto px-2">
             <h2>Gift Tracker</h2>

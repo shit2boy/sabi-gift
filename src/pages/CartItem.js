@@ -53,9 +53,8 @@ export default class CartItem extends Component {
       this.setState({ productIdInCart: productIdInCart });
       console.log(this.state.productIdInCart);
     }
-    let sumTotal = sum + this.context.totalcash;
     this.setState({ totalSum: sum });
-    window.localStorage.setItem("sum", sumTotal);
+    window.localStorage.setItem("sum", this.state.totalSum);
   };
 
   handleQuantityChange = (e) => {

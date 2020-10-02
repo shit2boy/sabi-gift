@@ -20,7 +20,7 @@ class CashGift extends Component {
     addedToRegistry: false,
     cashOpt: true,
     fundName: "",
-    price: null,
+    price: "",
     description: "",
     error: "",
     selectedFile: null,
@@ -116,7 +116,7 @@ class CashGift extends Component {
             // this.setState({ addedToRegistry: true });
             this.notify();
             // console.log('successfully ');
-            this.setState({ fundName: "", price: null, description: "" });
+            this.setState({ fundName: "", price: "", description: "" });
           }
         })
         .catch((error) => {
@@ -222,7 +222,7 @@ class CashGift extends Component {
                     </Form.Group>
 
                     <Form.Group controlId="exampleForm.ControlTextarea1">
-                      <Form.Label>NOTE FOR YOUR GUESTS (optional)</Form.Label>
+                      <Form.Label>NOTE FOR YOUR GUESTS</Form.Label>
                       <Form.Control
                         onChange={this.handleChange}
                         as="textarea"

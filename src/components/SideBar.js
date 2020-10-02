@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Avatars from "../images/Sabi-storepage/Avatars.png";
 import home from "../images/sabi-icons/home.svg";
-import tracker from "../images/sabi-icons/tracker.svg";
+import tracker from "../images/sabi-icons/track.png";
 import file from "../images/sabi-icons/file.svg";
-import manage from "../images/sabi-icons/manage.svg";
-import checklist from "../images/sabi-icons/checklist.svg";
+import manage from "../images/sabi-icons/manag.png";
+import checklist from "../images/sabi-icons/check.png";
 import notification from "../images/sabi-icons/notification.svg";
 import { StateContext } from "../Context";
 
@@ -25,9 +25,9 @@ export class SideBar extends Component {
   // };
   render() {
     const { isChecklist, isManage, isOverview, isTracker } = this.props;
-    const active = {
-      border: "2px solid grey",
-    };
+    // const active = {
+    //   border: "2px solid grey",
+    // };
     return (
       <div className="sidebarMenu">
         <div className="mt-3 text-center">
@@ -74,7 +74,7 @@ export class SideBar extends Component {
                   src={manage}
                   width="35px"
                   alt="icon"
-                  style={isManage ? active : null}
+                  style={isManage ? null : { opacity: "0.4" }}
                 />
               </Link>
             </Tooltip>
@@ -91,7 +91,7 @@ export class SideBar extends Component {
                   src={checklist}
                   width="35px"
                   alt="icon"
-                  style={isChecklist ? active : null}
+                  style={isChecklist ? null : { opacity: "0.4" }}
                 />
               </Link>
             </Tooltip>
@@ -108,7 +108,7 @@ export class SideBar extends Component {
                   src={tracker}
                   width="35px"
                   alt="icon"
-                  style={isTracker ? active : null}
+                  style={isTracker ? null : { opacity: "0.4" }}
                 />
               </Link>
             </Tooltip>

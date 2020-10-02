@@ -120,8 +120,42 @@ export class Product extends Component {
     // let evtid = this.state.eventId;
     let eventId = window.localStorage.eventIID;
     this.setState({ gift: id });
+    let gift = Number(this.state.gift);
     let addeditem = {
-      gifts: Number(this.state.gift),
+      gifts: gift,
+      event: Number(eventId),
+    };
+
+    axios
+      .post(`${util.API_BASE_URL}remove-registry/`, addeditem, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+        },
+      })
+
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          this.setState({ addSuccessfully: true });
+          let products = this.state.Products;
+          products.splice(this.getIndexOfProduct(id), 1);
+          this.setState({ Products: products });
+          this.successNotify();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.errorNotify();
+      });
+  };
+  removeCashFromRegistry = (id) => {
+    // console.log("clicked" + id);
+    // let evtid = this.state.eventId;
+    let eventId = window.localStorage.eventIID;
+    this.setState({ gift: id });
+    let gift = Number(this.state.gift);
+    let addeditem = {
+      cash: gift,
       event: Number(eventId),
     };
 
@@ -295,7 +329,7 @@ export class Product extends Component {
             </strong>
             <span className="d-block ml-auto">
               {" "}
-              #{data.price} <small>Still Needed </small>
+              #{data.price} <small>Needed </small>
             </span>
           </Card.Body>
 
@@ -331,7 +365,7 @@ export class Product extends Component {
           {this.props.inRegistry && (
             <div className=" col p-0 mb-0">
               <small
-                onClick={() => this.removeItemFromRegistry(data.id)}
+                onClick={() => this.removeCashFromRegistry(data.id)}
                 id={data.id}
                 type="button"
                 className="col p-2 text-center"

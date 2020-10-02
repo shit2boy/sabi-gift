@@ -95,7 +95,7 @@ export class ManageRegistry extends Component {
       .then((res) => {
         // console.log(res.data);
         if (res.data !== 200) {
-          if (!res.data.complete) window.location.href = "/updateprofile";
+          // if (!res.data.complete) window.location.href = "/updateprofile";
           // window.localStorage.setItem("userId", res.data.id);
           window.localStorage.setItem("name", res.data.first_name);
           // window.localStorage.setItem("spouseName", res.data.spouse_name);

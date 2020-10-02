@@ -82,7 +82,7 @@ class ProductProvider extends Component {
       // console.log(cart);
     }
     this.setState({ totalcash: sum });
-    console.log(this.state.totalcash);
+    // console.log(this.state.totalcash);
   };
 
   async componentDidMount() {

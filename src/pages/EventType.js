@@ -8,6 +8,7 @@ import util from "../util/util";
 import axios from "axios";
 import { GrCart } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import Spinner from "../components/spinner";
 
 const date = new Date();
 const formatDate = { day: "numeric", year: "numeric", month: "long" };
@@ -30,7 +31,64 @@ class EventType extends Component {
     cashNeeded: false,
     poster: null,
     quantity: null,
+    loading: false,
   };
+
+  resetSortToDefault = (e) => {
+    e.preventDefault();
+    this.setState({ storeproduct: this.state.defaultbtn });
+  };
+
+  sortByPrice = async (min, max) => {
+    await axios
+      .get(
+        `${util.API_BASE_URL}registries/?min_price=${min}&max_price=${max}`,
+        {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
+          },
+        }
+      )
+
+      .then((response) => {
+        // console.log(response.data);
+        if (response.data !== undefined) {
+          let data = response.data;
+          for (let i = 0; i < data.length; i++) {
+            data[i].picture = data[i].picture.replace("image/upload/", "");
+          }
+          this.setState({ products: data, loading: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  sortByCategory = async (catId) => {
+    // this.setState({ loading: false });
+    await axios
+      .get(`${util.API_BASE_URL}registries/?flt_cat=${catId}`, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+        },
+      })
+
+      .then((response) => {
+        // console.log(response.data);
+        if (response.data !== undefined) {
+          let data = response.data;
+          for (let i = 0; i < data.length; i++) {
+            data[i].picture = data[i].picture.replace("image/upload/", "");
+          }
+          this.setState({ products: data, loading: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   async componentDidMount() {
     if (!window.localStorage.token_id) {
       window.localStorage.clear();
@@ -61,6 +119,7 @@ class EventType extends Component {
             slug: data.slug,
             products: res.data.items,
             cashGift: res.data.cash_item,
+            loading: true,
           });
           // console.log(data.poster);
 
@@ -104,6 +163,13 @@ class EventType extends Component {
       borderRadius: "65px",
       height: "400px",
     };
+    const {
+      loading,
+      //   resetSortToDefault,
+      //   sortByCategory,
+      //   sortByPrice,
+    } = this.state;
+    if (!loading) return <Spinner />;
     return (
       <div className="container-fluid">
         <div className="mb-4 d-flex justify-content-between">
@@ -146,7 +212,11 @@ class EventType extends Component {
         <div className="container mt-5 ">
           <div className="row">
             <div className="col-3 d-none d-lg-block availableItem">
-              <AvailableItems />
+              <AvailableItems
+              // sort={sortByPrice}
+              // default={resetSortToDefault}
+              // sortByCat={sortByCategory}
+              />
             </div>
             <div className="col-9">
               <Product

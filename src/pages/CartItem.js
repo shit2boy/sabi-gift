@@ -21,6 +21,7 @@ export default class CartItem extends Component {
       itemsInCart: [],
       cashInCart: [],
       totalSum: 0,
+      cashIdInCart: [],
     };
     this.handleSumbitCart = this.handleSumbitCart.bind(this);
   }
@@ -43,15 +44,18 @@ export default class CartItem extends Component {
       cart = {
         item: cart.item["id"],
         quantity: quantity,
+        custom_item: "",
+        item_price: "",
         evt: Number(window.localStorage.event_id),
       };
 
       productIdInCart.push(cart);
       this.setState({ productIdInCart: productIdInCart });
-      // console.log(this.state.productIdInCart);
+      console.log(this.state.productIdInCart);
     }
+    let sumTotal = sum + this.context.totalcash;
     this.setState({ totalSum: sum });
-    window.localStorage.setItem("sum", sum);
+    window.localStorage.setItem("sum", sumTotal);
   };
 
   handleQuantityChange = (e) => {
@@ -84,18 +88,15 @@ export default class CartItem extends Component {
       cashInCart: this.context.cashInCart,
     });
     setTimeout(() => this.amountToPyay(), 300);
+    setTimeout(() => this.context.totalCashContributed(), 300);
   }
   handleSumbitCart() {
-    // let cart = this.state.productIdInCart;
-    let cart = [
-      {
-        item: 18,
-        quantity: 5,
-        custom_item: 7,
-        item_price: 23000,
-        evt: 54,
-      },
-    ];
+    let cart = [];
+    let cartItem = this.state.productIdInCart;
+    let cartCash = this.context.cashIdInCart;
+    cart = cartItem.concat(cartCash);
+    // console.log(cartItem);
+
     axios
       .post(`${util.API_BASE_URL}cart/create-carts/`, cart, {
         headers: {
@@ -109,7 +110,7 @@ export default class CartItem extends Component {
             "cartList",
             JSON.stringify(response.data.Cart_IDs)
           );
-
+          console.log(response);
           window.location.href = "/checkout";
         }
       })
@@ -133,7 +134,7 @@ export default class CartItem extends Component {
                 className=" badge badge-danger"
                 style={{ color: "white", font: "16px", position: "absolute" }}
               >
-                {this.state.Itemsquantity}
+                {this.state.Itemsquantity + this.context.allcashGift}
               </span>
               <GrCart size="40px" />
             </Link>
@@ -156,7 +157,7 @@ export default class CartItem extends Component {
             <tbody>
               {this.state.itemsInCart.map((inCart, index) => (
                 <tr key={index}>
-                  <td>{index}</td>
+                  <td>{index + 1}</td>
                   <td>
                     {" "}
                     <img
@@ -213,7 +214,7 @@ export default class CartItem extends Component {
               ))}
               {this.state.cashInCart.map((inCart, index) => (
                 <tr key={index}>
-                  <td>{index}</td>
+                  <td></td>
                   <td>
                     {" "}
                     <img
@@ -259,7 +260,7 @@ export default class CartItem extends Component {
                 <td></td>
                 <td></td>
                 <td>Total</td>
-                <td>#{this.state.totalSum}</td>
+                <td>#{this.state.totalSum + this.context.totalcash}</td>
               </tr>
             </tbody>
           </Table>

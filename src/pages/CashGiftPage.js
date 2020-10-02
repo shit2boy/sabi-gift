@@ -113,9 +113,10 @@ class CashGift extends Component {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             // console.log(res);
-            this.setState({ addedToRegistry: true });
+            // this.setState({ addedToRegistry: true });
             this.notify();
             // console.log('successfully ');
+            this.setState({ fundName: "", price: null, description: "" });
           }
         })
         .catch((error) => {

@@ -61,9 +61,8 @@ export default class CheckoutForm extends Component {
         const customer_details = {
           customer_id: Number(window.localStorage.customer_id),
           carts: JSON.parse(newArr),
-          cash_carts: [],
         };
-
+        // console.log(typeof customer_details.carts);
         axios
           .post(`${util.API_BASE_URL}init-payment/`, customer_details)
           .then((res) => {
@@ -97,73 +96,73 @@ export default class CheckoutForm extends Component {
       this.setState({ loading: false });
     }
   };
-  handleSubmitForCashGift = async () => {
-    if (this.validateForm()) {
-      this.setState({ loading: true });
-      let customerId;
-      let formField = this.state.formField;
-      let customer = new FormData();
-      let authorization_url;
-      let reference;
-      customer.append("first_name", formField["firstName"]);
-      customer.append("last_name", formField["lastName"]);
-      customer.append("mobile", formField["phone"]);
-      customer.append("email", formField["email"]);
-      customer.append("city", formField["city"]);
-      customer.append("street_address", formField["address"]);
-      customer.append("state", formField["state"]);
-      customer.append("zip_code", formField["zip"]);
+  // handleSubmitForCashGift = async () => {
+  //   if (this.validateForm()) {
+  //     this.setState({ loading: true });
+  //     let customerId;
+  //     let formField = this.state.formField;
+  //     let customer = new FormData();
+  //     let authorization_url;
+  //     let reference;
+  //     customer.append("first_name", formField["firstName"]);
+  //     customer.append("last_name", formField["lastName"]);
+  //     customer.append("mobile", formField["phone"]);
+  //     customer.append("email", formField["email"]);
+  //     customer.append("city", formField["city"]);
+  //     customer.append("street_address", formField["address"]);
+  //     customer.append("state", formField["state"]);
+  //     customer.append("zip_code", formField["zip"]);
 
-      try {
-        let res = await axios.post(`${util.API_BASE_URL}customers/`, customer);
-        // console.log(res.data);
-        if (res.data !== undefined) {
-          // window.localStorage.setItem("customer_id", res.data.id);
-          customerId = res.data.id;
-          this.setState({ customerId: true });
-          let newArr = window.localStorage.getItem("CashCart_IDs");
-          const customer_details = {
-            customer_id: customerId,
-            carts: [],
-            cash_carts: JSON.parse(newArr),
-          };
-          axios
-            .post(`${util.API_BASE_URL}init-payment/`, customer_details)
-            .then((res) => {
-              authorization_url = res.data.paystack.data.authorization_url;
-              reference = res.data.paystack.data.reference;
-              return {
-                ref_code: reference,
-                items: [],
-                custom_items: JSON.parse(newArr),
-                // customers: window.localStorage.customer_id,
-                customers: customerId,
-              };
-            })
-            .then((orderItemDetails) => {
-              axios
-                .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
-                .then((res) => {
-                  // console.log(res.data);
-                  if (res !== undefined) {
-                    this.setState({ loading: false });
-                    window.location.href = authorization_url;
-                  }
-                });
-            })
-            .catch((err) => {
-              console.log(err);
-              this.setState({ loading: false });
-            });
-        }
-      } catch (err) {
-        // Handle Error Here
-        console.log(err);
-        this.setState({ loading: false });
-        window.localStorage.removeItem("CashCart_IDs");
-      }
-    }
-  };
+  //     try {
+  //       let res = await axios.post(`${util.API_BASE_URL}customers/`, customer);
+  //       // console.log(res.data);
+  //       if (res.data !== undefined) {
+  //         // window.localStorage.setItem("customer_id", res.data.id);
+  //         customerId = res.data.id;
+  //         this.setState({ customerId: true });
+  //         let newArr = window.localStorage.getItem("CashCart_IDs");
+  //         const customer_details = {
+  //           customer_id: customerId,
+  //           carts: [],
+  //           cash_carts: JSON.parse(newArr),
+  //         };
+  //         axios
+  //           .post(`${util.API_BASE_URL}init-payment/`, customer_details)
+  //           .then((res) => {
+  //             authorization_url = res.data.paystack.data.authorization_url;
+  //             reference = res.data.paystack.data.reference;
+  //             return {
+  //               ref_code: reference,
+  //               items: [],
+  //               // custom_items: JSON.parse(newArr),
+  //               // customers: window.localStorage.customer_id,
+  //               customers: customerId,
+  //             };
+  //           })
+  //           .then((orderItemDetails) => {
+  //             axios
+  //               .post(`${util.API_BASE_URL}make-order/`, orderItemDetails)
+  //               .then((res) => {
+  //                 // console.log(res.data);
+  //                 if (res !== undefined) {
+  //                   this.setState({ loading: false });
+  //                   window.location.href = authorization_url;
+  //                 }
+  //               });
+  //           })
+  //           .catch((err) => {
+  //             console.log(err);
+  //             this.setState({ loading: false });
+  //           });
+  //       }
+  //     } catch (err) {
+  //       // Handle Error Here
+  //       console.log(err);
+  //       this.setState({ loading: false });
+  //       window.localStorage.removeItem("CashCart_IDs");
+  //     }
+  //   }
+  // };
 
   validateForm = () => {
     let formField = this.state.formField;
@@ -418,11 +417,7 @@ export default class CheckoutForm extends Component {
               <div className="text-center">
                 {!this.state.loading && (
                   <span
-                    onClick={
-                      this.state.cashInCart
-                        ? this.handleSubmitForCashGift
-                        : this.handleSubmit
-                    }
+                    onClick={this.handleSubmit}
                     type="button"
                     className="p-3 orderBtn"
                   >
@@ -430,7 +425,11 @@ export default class CheckoutForm extends Component {
                   </span>
                 )}
                 {this.state.loading && (
-                  <span type="button" className="p-3 orderBtn">
+                  <span
+                    type="button"
+                    style={{ fontSize: "0.875rem" }}
+                    className="p-3 orderBtn"
+                  >
                     <Spinner
                       as="span"
                       animation="grow"

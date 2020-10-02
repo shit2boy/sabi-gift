@@ -26,7 +26,7 @@ export class SideBar extends Component {
   render() {
     const { isChecklist, isManage, isOverview, isTracker } = this.props;
     const active = {
-      border: "1px solid grey",
+      border: "2px solid grey",
     };
     return (
       <div className="sidebarMenu">

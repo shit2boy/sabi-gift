@@ -26,9 +26,12 @@ class ProductProvider extends Component {
     userAllEvent: [],
     userRegistry: [],
     cashGift: [],
+    totalcash: 0,
     backgroundImage: "",
     isPosterImg: false,
     cashNeeded: false,
+    allcashGift: 0,
+    cashIdInCart: [],
   };
 
   // updateContextState = (key, val) => {
@@ -39,8 +42,8 @@ class ProductProvider extends Component {
     let cashDonated = this.state.cashDonated;
     cashDonated[e.target.name] = isNaN(e.target.value) ? 1 : e.target.value;
     this.setState({ cashDonated: cashDonated });
-    // this.amountToPyay();
-    console.log(typeof e.target.value);
+    this.totalCashContributed();
+    console.log(cashDonated);
   };
 
   handleQuantityChange = (e) => {
@@ -49,6 +52,36 @@ class ProductProvider extends Component {
     this.setState({ quantityObject: quantityObject });
     this.amountToPyay();
     // console.log(e.target.value);
+  };
+
+  totalCashContributed = () => {
+    let sum = 0;
+    let cashIdInCart = [];
+    // let cart = {};
+    for (let i = 0; i < this.state.cashInCart.length; i++) {
+      this.setState({ allcashGift: this.state.cashInCart.length });
+      let cart = this.state.cashInCart[i];
+      this.setState({ cashIdInCart: cashIdInCart });
+      // console.log(this.state.productIdInCart);
+      // let quantity =
+      //   this.state.quantityObject["quantity" + cart.item["id"]] === undefined
+      //     ? 1
+      //     : parseInt(this.state.quantityObject["quantity" + cart.item["id"]]);
+      let price = parseFloat(this.state.cashDonated["cash" + cart.id]);
+      sum = sum + price;
+      cart = {
+        custom_item: cart.id,
+        item: "",
+        quantity: "",
+        item_price: price,
+        evt: Number(window.localStorage.event_id),
+      };
+      cashIdInCart.push(cart);
+      this.setState({ cashIdInCart: cashIdInCart });
+      // console.log(this.state.cashIdInCart);
+      // console.log(cart);
+    }
+    this.setState({ totalcash: sum });
   };
 
   async componentDidMount() {
@@ -250,7 +283,7 @@ class ProductProvider extends Component {
         value={{
           ...this.state,
           handleSelectOpt: this.handleSelectOpt,
-          // handleEventType: this.handleEventType,
+          totalCashContributed: this.totalCashContributed,
           handleQuantityChange: this.handleQuantityChange,
           sortByPrice: this.sortByPrice,
           resetSortToDefault: this.resetSortToDefault,

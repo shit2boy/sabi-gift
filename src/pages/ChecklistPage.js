@@ -75,10 +75,10 @@ export class RegistryChecklist extends Component {
     let eventId = window.localStorage.eventIID;
     let quantityNeeded = this.state.quantity;
     this.setState({ quantity: quantityNeeded });
-    console.log(quantityNeeded);
-    this.setState({ gift: id });
+    // console.log(quantityNeeded);
+    // this.setState({ gift: id });
     let addeditem = {
-      gifts: [Number(this.state.gift)],
+      gifts: [Number(id)],
       event: Number(eventId),
       quantity: Number(quantityNeeded["quantity"]),
     };
@@ -114,9 +114,9 @@ export class RegistryChecklist extends Component {
     // console.log("clicked" + id);
     // let evtid = this.state.eventId;
     let eventId = window.localStorage.eventIID;
-    this.setState({ gift: id });
+    // this.setState({ gift: id });
     let addeditem = {
-      gifts: Number(this.state.gift),
+      gifts: Number(id),
       event: Number(eventId),
     };
 
@@ -213,7 +213,7 @@ export class RegistryChecklist extends Component {
 
                 <Form.Control
                   onClick={() => this.addGiftToRegistry(data.id)}
-                  id={data.id}
+                  // id={data.id}
                   type="button"
                   className="col-8 text-center"
                   style={{ background: "#6F64F8", color: "#FFFFFF" }}
@@ -366,7 +366,7 @@ export class RegistryChecklist extends Component {
                                         onClick={() =>
                                           this.addGiftToRegistry(data.id)
                                         }
-                                        id={data.id}
+                                        // id={data.id}
                                         type="button"
                                         className="col-7 p-2 mr-0 text-center"
                                         style={{

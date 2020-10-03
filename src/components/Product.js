@@ -84,9 +84,9 @@ export class Product extends Component {
     let quantityNeeded = this.state.quantity;
     this.setState({ quantity: quantityNeeded });
     // console.log(quantityNeeded);
-    this.setState({ gift: id });
+    // this.setState({ gift: id });
     let addeditem = {
-      gifts: [Number(this.state.gift)],
+      gifts: [Number(id)],
       event: Number(eventId),
       quantity: Number(quantityNeeded["quantity"]),
     };
@@ -122,8 +122,8 @@ export class Product extends Component {
     // console.log("clicked" + id);
     // let evtid = this.state.eventId;
     let eventId = window.localStorage.eventIID;
-    this.setState({ gift: id });
-    let gift = Number(this.state.gift);
+    // this.setState({ gift: id });
+    let gift = Number(id);
     let addeditem = {
       gifts: gift,
       event: Number(eventId),
@@ -155,8 +155,8 @@ export class Product extends Component {
     // console.log("clicked" + id);
     // let evtid = this.state.eventId;
     let eventId = window.localStorage.eventIID;
-    this.setState({ gift: id });
-    let gift = Number(this.state.gift);
+    // this.setState({ gift: id });
+    let gift = Number(id);
     let addeditem = {
       cash: gift,
       event: Number(eventId),
@@ -281,7 +281,7 @@ export class Product extends Component {
 
                 <Form.Control
                   onClick={() => this.addGiftToRegistry(data.item["id"])}
-                  id={data.item["id"]}
+                  // id={data.item["id"]}
                   type="button"
                   className="col-8 p-1 mr-0 text-center"
                   style={{ background: "#6F64F8", color: "#FFFFFF" }}
@@ -297,7 +297,7 @@ export class Product extends Component {
             <div className=" col p-0 mb-0">
               <small
                 onClick={() => this.removeItemFromRegistry(data.item["id"])}
-                id={data.item["id"]}
+                // id={data.item["id"]}
                 type="button"
                 className="col p-2 text-center"
                 style={{
@@ -373,7 +373,7 @@ export class Product extends Component {
             <div className=" col p-0 mb-0">
               <small
                 onClick={() => this.removeCashFromRegistry(data.id)}
-                id={data.id}
+                // id={data.id}
                 type="button"
                 className="col p-2 text-center"
                 style={{
@@ -528,7 +528,7 @@ export class Product extends Component {
                                 onClick={() =>
                                   this.addGiftToRegistry(data.item["id"])
                                 }
-                                id={data.item["id"]}
+                                // id={data.item["id"]}
                                 type="button"
                                 className="col-8 p-1 mr-0 text-center"
                                 style={{
@@ -549,7 +549,7 @@ export class Product extends Component {
                               onClick={() =>
                                 this.removeItemFromRegistry(data.item["id"])
                               }
-                              id={data.item["id"]}
+                              // id={data.item["id"]}
                               type="button"
                               className="col p-2 text-center"
                               style={{

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import ring from "../images/landing/ring.svg";
+// import ring from "../images/landing/ring.svg";
 import { Steps } from "antd";
 import { ProductConsumer, StateContext } from "../Context";
 import axios from "axios";
@@ -29,16 +29,17 @@ export class CreateRegistry extends Component {
       .then((res) => {
         console.log(res.data);
         if (res.data !== undefined) {
+          // this.setState({ loading: true });
           // const typeList = res.data
           let data = res.data.results;
           for (let i = 0; i < data.length; i++) {
             data[i].image = data[i].image.replace("image/upload/", "");
+            this.setState({ eventTypeList: data, loading: true });
           }
-          this.setState({ eventTypeList: data, loading: true });
         }
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
   }
 
@@ -107,7 +108,7 @@ export class CreateRegistry extends Component {
                           </button>
                         ))}
 
-                        <button
+                        {/* <button
                           onClick={this.handleEvent}
                           className="eventItem"
                           id="other"
@@ -120,7 +121,7 @@ export class CreateRegistry extends Component {
                           />
 
                           <p id="other">Not on list</p>
-                        </button>
+                        </button> */}
                       </div>
                       <p className="py-4">
                         Choose the category that matches your event. If your
@@ -159,7 +160,7 @@ export class CreateRegistry extends Component {
                         Next
                       </Link>
                     )}
-                    {this.state.eventType === "other" && (
+                    {this.state.eventType === "Others" && (
                       <Link
                         to="/notlisted-event"
                         className=" text-link btn btn-dark rounded-pill px-5"

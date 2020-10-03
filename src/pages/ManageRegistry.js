@@ -122,23 +122,29 @@ export class ManageRegistry extends Component {
         window.location.href = "/";
       });
 
-    // axios
-    //   .get(`${util.API_BASE_URL}categories/`, {
-    //     headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-    //   })
+    axios
+      .get(
+        `${util.API_BASE_URL}check-user-event/?user=${window.localStorage.userId}&have_event=have_event/`,
+        {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
+          },
+        }
+      )
 
-    //   .then((response) => {
-    //     // console.log(res.data);
-    //     if (response.data !== undefined) {
-    //       let data = response.data.results;
-
-    //       this.setState({ itemCategory: data });
-    //       //   console.log(this.state.itemCategory);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+      .then((response) => {
+        // console.log(res.data);
+        if (response.data !== undefined) {
+          let data = response.data.success;
+          console.log(data);
+          if (data !== "User have an Event.") {
+            window.location.href = "/updateprofile";
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     // await axios
     //   .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {

@@ -77,8 +77,11 @@ class AddCashToCart extends Component {
 
   addToCart = (data) => {
     if (this.validateInputPrice()) {
+      // let itemsInCart = [];
       let cashInCart = this.context.cashInCart;
       cashInCart.push(data);
+      // window.localStorage.setItem("cashInCart", JSON.stringify(cashInCart));
+      // window.localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
       let selectedIds = this.state.selectedIds;
       selectedIds.push(this.props.itemId);
       this.setState({
@@ -143,7 +146,11 @@ class AddCashToCart extends Component {
                 <div className="col">
                   <div className="shadow">
                     <img
-                      src={cashFund}
+                      src={
+                        this.props.image === "" || this.props.image === null
+                          ? cashFund
+                          : this.props.image.replace("image/upload/", "")
+                      }
                       width="100px"
                       className="card-img center"
                       alt="cashFund"
@@ -184,7 +191,10 @@ class AddCashToCart extends Component {
                     // onClick={this.addCashToCart}
                     id={this.props.itemId}
                     onClick={() => {
-                      this.addToCart(this.props.data);
+                      this.context.addToCart(
+                        this.props.data,
+                        this.props.itemId
+                      );
                     }}
                     disabled={
                       this.state.addedToCart || this.state.cashCompleted

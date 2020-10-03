@@ -136,7 +136,7 @@ export class ManageRegistry extends Component {
         // console.log(res.data);
         if (response.data !== undefined) {
           let data = response.data.success;
-          console.log(data);
+          // console.log(data);
           if (data !== "User have an Event.") {
             window.location.href = "/updateprofile";
           }

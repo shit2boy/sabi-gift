@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BsPencil } from "react-icons/bs";
 import util from "../util/util";
 import axios from "axios";
 
@@ -43,31 +44,32 @@ class CashGift extends Component {
   triggerInputFile = (e) => {
     this.setState({ selectedFile: e.target.files[0], fileSelected: true });
     // console.log(this.state.selectedFile);
-    this.handleFileUpload(e);
-  };
-  handleFileUpload = (e) => {
     this.setState({ uploading: true });
-    const backgroundImg = new FormData();
-    backgroundImg.append("photo", e.target.files[0]);
-    axios
-      .patch(`${util.API_BASE_URL}accounts/profile/`, backgroundImg, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          this.setState({ fileSelected: false });
-          // console.log(res.data);
-          this.notify(res.data.success);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        this.errorNotify(error.message.error);
-        this.setState({
-          uploading: false,
-        });
-      });
+    // this.handleFileUpload(e);
   };
+  // handleFileUpload = (e) => {
+  // this.setState({ uploading: true });
+  // const backgroundImg = new FormData();
+  // backgroundImg.append("image", e.target.files[0]);
+  // axios
+  //   .patch(`${util.API_BASE_URL}add-item/`, backgroundImg, {
+  //     headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+  //   })
+  //   .then((res) => {
+  //     if (res.status === 200) {
+  //       this.setState({ fileSelected: false });
+  //       // console.log(res.data);
+  //       this.notify(res.data.success);
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //     this.errorNotify(error.message.error);
+  //     this.setState({
+  //       uploading: false,
+  //     });
+  //   });
+  // };
 
   validateInput = () => {
     let inputIsValid = true;
@@ -106,7 +108,7 @@ class CashGift extends Component {
       cashGiftDetails.append("price", this.state.price);
       cashGiftDetails.append("owner", window.localStorage.userId);
       cashGiftDetails.append("event", window.localStorage.slug);
-      cashGiftDetails.append("image", "");
+      cashGiftDetails.append("image", this.state.selectedFile);
 
       axios
         .post(`${util.API_BASE_URL}add-item/`, cashGiftDetails)
@@ -144,6 +146,7 @@ class CashGift extends Component {
                 <div className="col">
                   <div className="shadow">
                     <label>
+                      <BsPencil />
                       <img
                         src={
                           this.state.uploading
@@ -154,6 +157,16 @@ class CashGift extends Component {
                         className="card-img center"
                         alt="cashFund"
                       />
+                      {/* {this.state.uploading && <img
+                        src={
+                          this.state.uploading
+                            ? URL.createObjectURL(this.state.selectedFile)
+                            : cashFund
+                        }
+                        width="100px"
+                        className="card-img center"
+                        alt="cashFund"
+                      />} */}
 
                       <input
                         type="file"

@@ -30,6 +30,8 @@ export class Product extends Component {
       listDisplay: false,
       cashGift: [],
       disablebtn: false,
+      isPosterImg: false,
+      cashCardImage: null,
     };
   }
 
@@ -45,6 +47,7 @@ export class Product extends Component {
     // let qty = this.context.quantity
     let itemsInCart = this.context.itemsInCart;
     itemsInCart.push(data);
+    window.localStorage.setItem("cartItem", JSON.stringify(data));
     let selectedIds = this.state.selectedIds;
     selectedIds.push(data.item["id"]);
     this.setState({
@@ -319,7 +322,11 @@ export class Product extends Component {
             <img
               className="card-img center grow"
               alt="items"
-              src={cashFund}
+              src={
+                data.image === "" || data.image === null
+                  ? cashFund
+                  : data.image.replace("image/upload/", "")
+              }
               id={data.id}
             />
           </div>

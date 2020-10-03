@@ -10,18 +10,21 @@ import axios from "axios";
 import util from "../util/util";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { StateContext } from "../Context";
 
 let style = {
   borderBottom: "1px solid #dddddd",
 };
 
 export class DashboardNav extends Component {
+  static contextType = StateContext;
   constructor() {
     super();
     this.state = {
       selectedFile: null,
       fileSelected: false,
       uploading: false,
+      profileImage: "",
     };
   }
 
@@ -105,16 +108,32 @@ export class DashboardNav extends Component {
             </NavDropdown>
 
             <label>
-              <img
-                className="rounded-circle"
-                width="70px"
-                src={
-                  this.state.uploading
-                    ? URL.createObjectURL(this.state.selectedFile)
-                    : image
-                }
-                alt="userAvatar"
-              />
+              {!this.state.uploading && (
+                <img
+                  className="rounded-circle"
+                  width="70px"
+                  src={
+                    this.context.profileImage === "" ||
+                    this.context.profileImage === null
+                      ? image
+                      : this.context.profileImage.replace("image/upload/", "")
+                  }
+                  alt="userAvatar"
+                />
+              )}
+              {this.state.uploading && (
+                <img
+                  className="rounded-circle"
+                  width="70px"
+                  src={
+                    this.state.uploading
+                      ? URL.createObjectURL(this.state.selectedFile)
+                      : image
+                  }
+                  alt="userAvatar"
+                />
+              )}
+
               <input
                 type="file"
                 style={{ display: "none" }}

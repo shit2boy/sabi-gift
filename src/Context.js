@@ -7,6 +7,7 @@ const StateContext = React.createContext();
 
 class ProductProvider extends Component {
   state = {
+    profileImage: null,
     products: [],
     quantity: 0,
     quantityObject: {},
@@ -93,6 +94,8 @@ class ProductProvider extends Component {
       .then((res) => {
         // console.log(res.data);
         if (res.data !== 200) {
+          this.setState({ profileImage: res.data.photo });
+          console.log(this.state.profileImage);
           window.localStorage.setItem("userId", res.data.id);
         }
       })

@@ -44,10 +44,11 @@ export class Product extends Component {
   };
 
   addToCart = (data) => {
-    // let qty = this.context.quantity
-    let itemsInCart = this.context.itemsInCart;
-    itemsInCart.push(data);
-    window.localStorage.setItem("cartItem", JSON.stringify(data));
+    // let itemsInCart = this.context.itemsInCart;
+    // itemsInCart.push(data);
+    let InCart = this.context.inCart;
+    InCart["product"].push(data);
+    window.localStorage.setItem("InCart", JSON.stringify(InCart));
     let selectedIds = this.state.selectedIds;
     selectedIds.push(data.item["id"]);
     this.setState({
@@ -55,6 +56,18 @@ export class Product extends Component {
     });
     this.context.handleQuantityChange();
   };
+  // addToCart = (data) => {
+  //   // let qty = this.context.quantity
+  //   let itemsInCart = this.context.itemsInCart;
+  //   itemsInCart.push(data);
+  //   window.localStorage.setItem("cartItem", JSON.stringify(data));
+  //   let selectedIds = this.state.selectedIds;
+  //   selectedIds.push(data.item["id"]);
+  //   this.setState({
+  //     selectedIds: selectedIds,
+  //   });
+  //   this.context.handleQuantityChange();
+  // };
 
   onSearch = (event) => {
     let keyword = event.target.value;
@@ -350,6 +363,7 @@ export class Product extends Component {
                 itemId={data.id}
                 price={data.price}
                 name={data.name}
+                image={data.image}
                 data={data}
                 button={
                   <button
@@ -491,7 +505,7 @@ export class Product extends Component {
                               type="button"
                               id={data.item["id"]}
                               onClick={() => {
-                                this.addToCart(data);
+                                this.addToCart(data, data.item["id"]);
                               }}
                               className="col text-center p-2 border-0"
                               style={{

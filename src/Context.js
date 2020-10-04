@@ -33,6 +33,8 @@ class ProductProvider extends Component {
     cashNeeded: false,
     allcashGift: 0,
     cashIdInCart: [],
+    selectedIds: [],
+    inCart: { product: [], cash: [] },
   };
 
   // updateContextState = (key, val) => {
@@ -44,7 +46,7 @@ class ProductProvider extends Component {
     cashDonated[e.target.name] = isNaN(e.target.value) ? 1 : e.target.value;
     this.setState({ cashDonated: cashDonated });
     this.totalCashContributed();
-    console.log(cashDonated);
+    // console.log(cashDonated);
   };
 
   handleQuantityChange = (e) => {
@@ -55,20 +57,38 @@ class ProductProvider extends Component {
     // console.log(e.target.value);
   };
 
+  // addToCart = (data, id) => {
+  // if (this.validateInputPrice()) {
+  // // let itemsInCart = [];
+  // let InCart = this.state.inCart;
+  // InCart["product"].push(data);
+  // window.localStorage.setItem("InCart", JSON.stringify(InCart));
+  // let selectedIds = this.state.selectedIds;
+  // selectedIds.push(id);
+  // this.setState({
+  //   selectedIds: selectedIds,
+  // });
+  // this.state.handleQuantityChange();
+  // this.setState({ quantity: this.state.quantity + 1 });
+  // };
+
   totalCashContributed = () => {
     let sum = 0;
     let cashIdInCart = [];
+    let price;
     // let cart = {};
-    for (let i = 0; i < this.state.cashInCart.length; i++) {
-      this.setState({ allcashGift: this.state.cashInCart.length });
-      let cart = this.state.cashInCart[i];
+    for (let i = 0; i < this.state.inCart["cash"].length; i++) {
+      this.setState({ allcashGift: this.state.inCart["cash"].length });
+      let cart = this.state.inCart["cash"][i];
+
       this.setState({ cashIdInCart: cashIdInCart });
       // console.log(this.state.productIdInCart);
       // let quantity =
       //   this.state.quantityObject["quantity" + cart.item["id"]] === undefined
       //     ? 1
       //     : parseInt(this.state.quantityObject["quantity" + cart.item["id"]]);
-      let price = parseFloat(this.state.cashDonated["cash" + cart.id]);
+      price = parseFloat(this.state.cashDonated["cash" + cart.id]);
+      console.log(price);
       sum = sum + price;
       cart = {
         custom_item: cart.id,
@@ -83,6 +103,7 @@ class ProductProvider extends Component {
       // console.log(cart);
     }
     this.setState({ totalcash: sum });
+    window.localStorage.setItem("cashAmount", this.state.totalcash);
     // console.log(this.state.totalcash);
   };
 
@@ -95,7 +116,7 @@ class ProductProvider extends Component {
         // console.log(res.data);
         if (res.data !== 200) {
           this.setState({ profileImage: res.data.photo });
-          console.log(this.state.profileImage);
+          // console.log(this.state.profileImage);
           window.localStorage.setItem("userId", res.data.id);
         }
       })
@@ -294,6 +315,7 @@ class ProductProvider extends Component {
           sortByCategory: this.sortByCategory,
           // sortByCategry: this.sortByCategry,
           handleCashDonated: this.handleCashDonated,
+          addToCart: this.addToCart,
         }}
       >
         {this.props.children}

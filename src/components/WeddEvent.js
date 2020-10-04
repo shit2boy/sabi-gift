@@ -473,7 +473,7 @@ export default class getstarted extends Component {
                     </div>
                   </div>
                 )}
-                {this.state.currentIndex === 4 && (
+                {this.state.currentIndex === 4 && !this.state.isLogged && (
                   <div className="">
                     <h2>
                       Good News! You can create <br />a free registry on

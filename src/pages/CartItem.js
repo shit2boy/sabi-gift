@@ -54,7 +54,7 @@ export default class CartItem extends Component {
       console.log(this.state.productIdInCart);
     }
     this.setState({ totalSum: sum });
-    window.localStorage.setItem("sum", this.state.totalSum);
+    window.localStorage.setItem("total", this.state.totalSum);
   };
 
   handleQuantityChange = (e) => {
@@ -82,19 +82,24 @@ export default class CartItem extends Component {
 
   componentDidMount() {
     // console.log(props.Products);
+    let cartItems = JSON.parse(window.localStorage.getItem("InCart"));
+    // console.log(cartItems);
     this.setState({
-      itemsInCart: this.context.itemsInCart,
-      cashInCart: this.context.cashInCart,
+      // itemsInCart: this.context.itemsInCart,
+      itemsInCart: cartItems["product"],
+      cashInCart: cartItems["cash"],
     });
+
     setTimeout(() => this.amountToPyay(), 300);
-    setTimeout(() => this.context.totalCashContributed(), 300);
+    setTimeout(() => this.context.totalCashContributed(), 1000);
   }
   handleSumbitCart() {
     let cart = [];
     let cartItem = this.state.productIdInCart;
     let cartCash = this.context.cashIdInCart;
     cart = cartItem.concat(cartCash);
-    // console.log(cartItem);
+    console.log(cartItem);
+    console.log(cartCash);
 
     axios
       .post(`${util.API_BASE_URL}cart/create-carts/`, cart, {
@@ -217,7 +222,11 @@ export default class CartItem extends Component {
                   <td>
                     {" "}
                     <img
-                      src={cashFund}
+                      src={
+                        inCart.image === "" || inCart.image === null
+                          ? cashFund
+                          : inCart.image.replace("image/upload/", "")
+                      }
                       width="80px"
                       alt="cashFromGuest"
                       className="m-4"

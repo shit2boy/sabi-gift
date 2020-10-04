@@ -78,10 +78,11 @@ class AddCashToCart extends Component {
   addToCart = (data) => {
     if (this.validateInputPrice()) {
       // let itemsInCart = [];
-      let cashInCart = this.context.cashInCart;
-      cashInCart.push(data);
-      // window.localStorage.setItem("cashInCart", JSON.stringify(cashInCart));
-      // window.localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+      // let cashInCart = this.context.cashInCart;
+      // cashInCart.push(data);
+      let InCart = this.context.inCart;
+      InCart["cash"].push(data);
+      window.localStorage.setItem("InCart", JSON.stringify(InCart));
       let selectedIds = this.state.selectedIds;
       selectedIds.push(this.props.itemId);
       this.setState({
@@ -191,10 +192,7 @@ class AddCashToCart extends Component {
                     // onClick={this.addCashToCart}
                     id={this.props.itemId}
                     onClick={() => {
-                      this.context.addToCart(
-                        this.props.data,
-                        this.props.itemId
-                      );
+                      this.addToCart(this.props.data);
                     }}
                     disabled={
                       this.state.addedToCart || this.state.cashCompleted

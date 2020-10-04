@@ -33,7 +33,7 @@ export default class getstarted extends Component {
       eventDate: null,
       eventType: "",
       errors: "",
-      isLogged: "",
+      isLogged: false,
       formField: {},
       message: "",
       errorMessage: [],
@@ -448,7 +448,7 @@ export default class getstarted extends Component {
                   </div>
                 )}
 
-                {this.state.currentIndex === 3 && (
+                {this.state.currentIndex === 3 && !this.state.isLogged && (
                   <div className="">
                     <h2>
                       Good News! You can create <br />a free registry on

@@ -7,6 +7,7 @@ import { Steps } from "antd";
 import { StateContext } from "../Context";
 import axios from "axios";
 import util from "../util/util";
+import Spinner from "../components/spinner";
 // import LogOut from "../components/LogOut";
 
 const { Step } = Steps;
@@ -39,6 +40,7 @@ export class About extends Component {
       bestSellingItems: [],
       selectedRegistryType: [],
       registryCategories: [],
+      loading: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -198,6 +200,7 @@ export class About extends Component {
             this.setState({
               spouseName: res.data.spouse_name,
               title: res.data.title,
+              loading: true,
             });
           }
         }
@@ -207,8 +210,8 @@ export class About extends Component {
       });
 
     this.setState({ selectedRegistryType: event });
-    let type = this.state.selectedRegistryType;
-    console.log(type);
+    // let type = this.state.selectedRegistryType;
+    // console.log(type);
     axios
       .get(`${util.API_BASE_URL}categories/`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
@@ -368,6 +371,7 @@ export class About extends Component {
       // backgroundColor: "red",
       cursor: "pointer",
     };
+    if (this.state.loading) return <Spinner />;
     return (
       <div className="container-fluid">
         <div className="row">

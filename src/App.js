@@ -25,6 +25,7 @@ import EditRegistryUrl from "./pages/EditRegistryUrl";
 import CashGift from "./pages/CashGiftPage";
 import OtherEvent from "./pages/OtherEvent";
 import Spinner from "./components/spinner";
+import VerifyPartner from "./pages/verify_coSabiPartner";
 
 const Home = lazy(() => import("./pages/Home"));
 const ManageRegistry = lazy(() => import("./pages/ManageRegistry"));
@@ -51,6 +52,7 @@ function App() {
             <Route path="/registration" component={SignUp} />
             <Route path="/updateprofile" component={About} />
             <Route path="/verification/" component={ActivateAcoount} />
+            <Route path="/Verify-partner/" component={VerifyPartner} />
             <Route path="/checklist" component={RegistryChecklist} />
             <Route path="/manageregistry" component={ManageRegistry} />
             <Route path="/giftTracker" component={GiftTracker} />

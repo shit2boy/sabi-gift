@@ -109,50 +109,50 @@ class ProductProvider extends Component {
         window.localStorage.removeItem("userId");
       });
 
-    await axios
-      .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        // console.log(res.data);
+    // await axios
+    //   .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //   })
+    //   .then((res) => {
+    //     // console.log(res.data);
 
-        if (res.data !== undefined && res.data.length > 0) {
-          let data = res.data;
-          this.setState({ userAllEvent: data });
-          for (let i = 0; i < data.length; i++) {
-            // console.log(data[data.length - 1].slug);
-            window.localStorage.setItem("slug", data[data.length - 1].slug);
-            window.localStorage.setItem("eventIID", data[data.length - 1].id);
-            this.setState({ userRegistry: data[data.length - 1].items });
-            this.setState({ cashGift: data[data.length - 1].cash_item });
-            this.setState({ loading: true });
+    //   //   if (res.data !== undefined && res.data.length > 0) {
+    //   //     let data = res.data;
+    //   //     this.setState({ userAllEvent: data });
+    //   //     for (let i = 0; i < data.length; i++) {
+    //   //       // console.log(data[data.length - 1].slug);
+    //   //       window.localStorage.setItem("slug", data[data.length - 1].slug);
+    //   //       window.localStorage.setItem("eventIID", data[data.length - 1].id);
+    //   //       this.setState({ userRegistry: data[data.length - 1].items });
+    //   //       this.setState({ cashGift: data[data.length - 1].cash_item });
+    //   //       this.setState({ loading: true });
 
-            // console.log(this.state.registryItem);
-            // console.log(this.state.cashGift);
-            data[i].poster = data[data.length - 1].poster.replace(
-              "image/upload/",
-              ""
-            );
-            // console.log(data[i].poster);
-            this.setState({
-              backgroundImage: data[i].poster,
-              isPosterImg: true,
-            });
-            if (this.state.cashGift.length > 0) {
-              this.setState({ cashNeeded: true });
-            }
-          }
-          // } else {
-          //   window.location.href = "/updateprofile";
-          // }
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //   //       // console.log(this.state.registryItem);
+    //   //       // console.log(this.state.cashGift);
+    //   //       data[i].poster = data[data.length - 1].poster.replace(
+    //   //         "image/upload/",
+    //   //         ""
+    //   //       );
+    //   //       // console.log(data[i].poster);
+    //   //       this.setState({
+    //   //         backgroundImage: data[i].poster,
+    //   //         isPosterImg: true,
+    //   //       });
+    //   //       if (this.state.cashGift.length > 0) {
+    //   //         this.setState({ cashNeeded: true });
+    //   //       }
+    //   //     }
+    //   //     // } else {
+    //   //     //   window.location.href = "/updateprofile";
+    //   //     // }
+    //   //   }
+    //   // })
+    //   // .catch((err) => {
+    //   //   console.log(err);
+    //   // });
 
     await axios
       .get(`${util.API_BASE_URL}registries/`, {

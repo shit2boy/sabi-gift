@@ -205,14 +205,6 @@ class EventType extends Component {
       // sortByPrice,
     } = this.state;
     if (!loading) return <Spinner />;
-    const products = (
-      <Product
-        Products={this.state.products}
-        showWishList={true}
-        cashItem={this.state.cashGift}
-        cashNeeded={this.state.cashNeeded}
-      />
-    );
     return (
       <div className="container-fluid">
         <div className="mb-4 d-flex justify-content-between">
@@ -261,7 +253,14 @@ class EventType extends Component {
                 sortByCat={this.sortByCategory}
               />
             </div>
-            <div className="col-9">{products}</div>
+            <div className="col-9">
+              <Product
+                Products={this.state.products}
+                showWishList={true}
+                cashItem={this.state.cashGift}
+                cashNeeded={this.state.cashNeeded}
+              />
+            </div>
           </div>
         </div>
       </div>

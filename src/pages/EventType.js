@@ -40,18 +40,18 @@ class EventType extends Component {
     //   window.localStorage.clear();
     // }
 
-    const { handle } = this.props.match.params;
+    // const { handle } = this.props.match.params;
     // console.log(handle);
 
     await axios
-      .get(`${util.API_BASE_URL}events/${handle}`, {
+      .get(`${util.API_BASE_URL}events/${window.localStorage.slug}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data;
           window.localStorage.setItem("slug", data.slug);
@@ -70,7 +70,7 @@ class EventType extends Component {
           });
           // console.log(data.poster);
 
-          // console.log(this.state);
+          console.log(this.state);
           if (this.state.cashGift.length !== 0) {
             this.setState({ cashNeeded: true });
           }

@@ -37,7 +37,7 @@ class VerifyPartner extends Component {
         if (response !== undefined) {
           console.log(response.data.error);
           console.log(response.data);
-          if (response.data.error === "Invitation link has expired") {
+          if (response.data.error === "Invitation link has expired.") {
             this.setState({ expiredLink: true });
           }
         }

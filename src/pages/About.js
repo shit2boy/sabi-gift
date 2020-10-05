@@ -7,7 +7,7 @@ import { Steps } from "antd";
 import { StateContext } from "../Context";
 import axios from "axios";
 import util from "../util/util";
-import Spinner from "../components/spinner";
+// import Spinner from "../components/spinner";
 // import LogOut from "../components/LogOut";
 
 const { Step } = Steps;
@@ -371,7 +371,7 @@ export class About extends Component {
       // backgroundColor: "red",
       cursor: "pointer",
     };
-    if (this.state.loading) return <Spinner />;
+    // if (this.state.loading) return <Spinner />;
     return (
       <div className="container-fluid">
         <div className="row">

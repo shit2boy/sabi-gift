@@ -72,7 +72,9 @@ class VerifyPartner extends Component {
               {this.state.expiredLink ? (
                 <p>Invitation Link expired</p>
               ) : (
-                <p>Thank You for your Order</p>
+                <p>
+                  Thank You for Accepting the invitation to Co-manage this Event
+                </p>
               )}
             </div>
           </Modal.Body>

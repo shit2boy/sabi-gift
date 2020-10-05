@@ -77,6 +77,18 @@ export class Product extends Component {
   UNSAFE_componentWillReceiveProps(props) {
     // console.log(props.cashGift);
     this.setState({ Products: props.Products, cashGift: props.cashItem });
+    console.log(props.Products);
+    console.log(props.cashItem);
+    console.log(this.state.Products);
+    console.log(this.state.cashItem);
+  }
+  componentDidMount(props) {
+    // console.log(props.cashGift);
+    // this.setState({ Products: props.Products, cashGift: props.cashItem });
+    console.log(props.Products);
+    console.log(props.cashItem);
+    console.log(this.state.Products);
+    console.log(this.state.cashItem);
   }
 
   getIndexOfProduct = (id) => {
@@ -408,7 +420,7 @@ export class Product extends Component {
     return (
       <div className="container-fluid">
         <div className="row mb-2">
-          <div className="col-8">
+          <div className="col-8 ">
             <small>7,618 results found in 5ms</small>
           </div>
           <div className="col d-none d-lg-block">

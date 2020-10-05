@@ -346,7 +346,7 @@ export class Product extends Component {
 
     const cashItem = this.state.cashGift.map((data, index) => {
       return (
-        <Card key={index} className="productCards col-sm-3 m-3">
+        <Card key={index} className="productCards col-sm col-md m-3">
           <div>
             <img
               className="card-img center grow"

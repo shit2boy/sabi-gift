@@ -40,11 +40,11 @@ class EventType extends Component {
     //   window.localStorage.clear();
     // }
 
-    // const { handle } = this.props.match.params;
+    const { handle } = this.props.match.params;
     // console.log(handle);
 
     await axios
-      .get(`${util.API_BASE_URL}events/${window.localStorage.slug}`, {
+      .get(`${util.API_BASE_URL}events/${handle}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

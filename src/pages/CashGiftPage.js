@@ -24,7 +24,7 @@ class CashGift extends Component {
     price: "",
     description: "",
     error: "",
-    selectedFile: null,
+    selectedFile: "",
     fileSelected: false,
     uploading: false,
   };

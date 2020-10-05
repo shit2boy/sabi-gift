@@ -83,7 +83,7 @@ export class AvailableItems extends Component {
               {regCategory.map((item) => (
                 <Radio
                   onClick={() => {
-                    this.props.sortByCat(item.id);
+                    this.props.sortByCat(item.name);
                   }}
                   // onClick={(e) => {
                   //   sortByCategory(item.id);

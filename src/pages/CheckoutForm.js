@@ -18,6 +18,7 @@ export default class CheckoutForm extends Component {
       cartIds: [],
       loading: false,
       cashInCart: false,
+      sum: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,6 +35,7 @@ export default class CheckoutForm extends Component {
     if (window.localStorage.CashCart_IDs) {
       this.setState({ cashInCart: true });
     }
+    // let sum = Number(window.localStorage.getItem("sum"));
   }
 
   handlePost = async () => {
@@ -63,6 +65,7 @@ export default class CheckoutForm extends Component {
           carts: JSON.parse(newArr),
         };
         // console.log(typeof customer_details.carts);
+
         axios
           .post(`${util.API_BASE_URL}init-payment/`, customer_details)
           .then((res) => {
@@ -392,12 +395,7 @@ export default class CheckoutForm extends Component {
                 <tbody>
                   <tr>
                     <td>Sub-total</td>
-                    <td>
-                      #{" "}
-                      {this.state.cashInCart
-                        ? window.localStorage.getItem("cashAmount")
-                        : window.localStorage.getItem("sum")}
-                    </td>
+                    <td>#{window.localStorage.totalSum}</td>
                   </tr>
                   <tr>
                     <td>Shipping</td>
@@ -405,12 +403,7 @@ export default class CheckoutForm extends Component {
                   </tr>
                   <tr>
                     <td>Total</td>
-                    <td>
-                      #{" "}
-                      {this.state.cashInCart
-                        ? window.localStorage.getItem("cashAmount")
-                        : window.localStorage.getItem("sum")}
-                    </td>
+                    <td>#{window.localStorage.totalSum}</td>
                   </tr>
                 </tbody>
               </Table>

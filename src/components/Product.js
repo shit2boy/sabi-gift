@@ -216,17 +216,18 @@ export class Product extends Component {
     }).map((data, index) => {
       return (
         <Card key={index} className="productCards col-sm-3 m-4">
-          <div>
+          <div className="card-img">
             <img
-              className="card-img center grow"
+              className="center grow"
               alt="items"
               src={data.item["picture"]}
               id={data.item["id"]}
+              width="100%"
             />
           </div>
           {/* <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p> */}
-          <span className="d-block ml-auto">#{data.item["price"]}</span>
-          <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
+          <span className="ml-auto">#{data.item["price"]}</span>
+          <Card.Body style={{ minHeight: "50px", paddingLeft: "10px" }}>
             <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
               {data.item["name"]}
             </strong>
@@ -343,7 +344,7 @@ export class Product extends Component {
               id={data.id}
             />
           </div>
-          <Card.Body style={{ minHeight: "60px", padding: "5px" }}>
+          <Card.Body style={{ minHeight: "70px", padding: "5px" }}>
             <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
               {data.name}
             </strong>

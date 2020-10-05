@@ -32,67 +32,13 @@ class EventType extends Component {
     poster: null,
     quantity: null,
     loading: false,
-  };
-
-  resetSortToDefault = (e) => {
-    e.preventDefault();
-    this.setState({ storeproduct: this.state.defaultbtn });
-  };
-
-  sortByPrice = async (min, max) => {
-    await axios
-      .get(
-        `${util.API_BASE_URL}registries/?min_price=${min}&max_price=${max}`,
-        {
-          headers: {
-            Authorization: "Token " + localStorage.getItem("token_id"),
-          },
-        }
-      )
-
-      .then((response) => {
-        // console.log(response.data);
-        if (response.data !== undefined) {
-          let data = response.data;
-          for (let i = 0; i < data.length; i++) {
-            data[i].picture = data[i].picture.replace("image/upload/", "");
-          }
-          this.setState({ products: data, loading: true });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  sortByCategory = async (catId) => {
-    // this.setState({ loading: false });
-    await axios
-      .get(`${util.API_BASE_URL}registries/?flt_cat=${catId}`, {
-        headers: {
-          Authorization: "Token " + localStorage.getItem("token_id"),
-        },
-      })
-
-      .then((response) => {
-        // console.log(response.data);
-        if (response.data !== undefined) {
-          let data = response.data;
-          for (let i = 0; i < data.length; i++) {
-            data[i].picture = data[i].picture.replace("image/upload/", "");
-          }
-          this.setState({ products: data, loading: true });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    resetFilter: null,
   };
 
   async componentDidMount() {
-    if (!window.localStorage.token_id) {
-      window.localStorage.clear();
-    }
+    // if (!window.localStorage.token_id) {
+    //   window.localStorage.clear();
+    // }
 
     const { handle } = this.props.match.params;
     // console.log(handle);
@@ -118,6 +64,7 @@ class EventType extends Component {
             event_date: data.start_date,
             slug: data.slug,
             products: res.data.items,
+            resetFilter: res.data.items,
             cashGift: res.data.cash_item,
             loading: true,
           });
@@ -141,10 +88,98 @@ class EventType extends Component {
         }
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
         window.localStorage.removeItem("name");
       });
   }
+
+  resetSortToDefault = (e) => {
+    e.preventDefault();
+    this.setState({ products: this.state.resetFilter });
+    console.log("reset", this.state.products);
+  };
+
+  sortByCategory = (event) => {
+    const newList = this.state.products.filter((data) => {
+      if (event === data.item["cat"]) {
+        return data;
+      }
+      return data;
+    });
+    this.setState({ products: newList });
+    console.log(newList);
+    // return event === item.item["cat"];
+  };
+
+  // sortByPrice=(cat)=>{
+  //   const items = this.state.products
+  //       .filter((data) => {
+  //         if (cat === null) {
+  //           return data;
+  //         } else if (
+  //           data.name.toLowerCase().includes(this.state.search.toLowerCase()) ||
+  //           data.description
+  //             .toLowerCase()
+  //             .includes(this.state.search.toLowerCase())
+  //         ) {
+  //           return data;
+  //         }
+  //         return null;
+  //       })
+  // }
+
+  // sortByPrice = async (min, max) => {
+  //   await axios
+  //     .get(
+  //       `${util.API_BASE_URL}registries/?min_price=${min}&max_price=${max}`,
+  //       {
+  //         headers: {
+  //           Authorization: "Token " + localStorage.getItem("token_id"),
+  //         },
+  //       }
+  //     )
+
+  //     .then((response) => {
+  //       // console.log(response.data);
+  //       if (response.data !== undefined) {
+  //         let data = response.data;
+  //         // for (let i = 0; i < data.length; i++) {
+  //         //   data[i].picture = data[i].picture.replace("image/upload/", "");
+  //         // }
+  //         this.setState({ products: data, loading: true });
+  //         console.log("price", this.state.products);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  // sortByCategory = async (catId) => {
+  //   // this.setState({ loading: false });
+  //   await axios
+  //     .get(`${util.API_BASE_URL}registries/?flt_cat=${catId}`, {
+  //       headers: {
+  //         Authorization: "Token " + localStorage.getItem("token_id"),
+  //       },
+  //     })
+
+  //     .then((response) => {
+  //       // console.log(response.data);
+  //       if (response.data !== undefined) {
+  //         let data = response.data;
+  //         // for (let i = 0; i < data.length; i++) {
+  //         //   data[i].picture = data[i].picture.replace("image/upload/", "");
+  //         // }
+
+  //         this.setState({ products: data, loading: true });
+  //         console.log("cat", this.state.products);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   render() {
     let imgUrl = this.newMethod();
@@ -165,11 +200,19 @@ class EventType extends Component {
     };
     const {
       loading,
-      //   resetSortToDefault,
-      //   sortByCategory,
-      //   sortByPrice,
+      // resetSortToDefault,
+      // sortByCategory,
+      // sortByPrice,
     } = this.state;
     if (!loading) return <Spinner />;
+    const products = (
+      <Product
+        Products={this.state.products}
+        showWishList={true}
+        cashItem={this.state.cashGift}
+        cashNeeded={this.state.cashNeeded}
+      />
+    );
     return (
       <div className="container-fluid">
         <div className="mb-4 d-flex justify-content-between">
@@ -213,19 +256,12 @@ class EventType extends Component {
           <div className="row">
             <div className="col-3 d-none d-lg-block availableItem">
               <AvailableItems
-              // sort={sortByPrice}
-              // default={resetSortToDefault}
-              // sortByCat={sortByCategory}
+                sort={this.sortByPrice}
+                default={this.resetSortToDefault}
+                sortByCat={this.sortByCategory}
               />
             </div>
-            <div className="col-9">
-              <Product
-                Products={this.state.products}
-                showWishList={true}
-                cashItem={this.state.cashGift}
-                cashNeeded={this.state.cashNeeded}
-              />
-            </div>
+            <div className="col-9">{products}</div>
           </div>
         </div>
       </div>

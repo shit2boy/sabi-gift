@@ -21,18 +21,23 @@ export default class CartItem extends Component {
       itemsInCart: [],
       cashInCart: [],
       totalSum: 0,
+      cashQty: 0,
       cashIdInCart: [],
+      // cashDonated: [],
     };
-    this.handleSumbitCart = this.handleSumbitCart.bind(this);
   }
 
   amountToPyay = () => {
-    let sum = 0;
+    let totalSum = 0;
+    let itemSum = 0;
+    let cashSum = 0;
     let productIdInCart = [];
-    // let cart = {};
+    let cashIdInCart = [];
+    let cart = {};
+    let cashCart = {};
     for (let i = 0; i < this.state.itemsInCart.length; i++) {
       this.setState({ Itemsquantity: this.state.itemsInCart.length });
-      let cart = this.state.itemsInCart[i];
+      cart = this.state.itemsInCart[i];
       this.setState({ productIdInCart: productIdInCart });
       // console.log(this.state.productIdInCart);
       let quantity =
@@ -40,7 +45,7 @@ export default class CartItem extends Component {
           ? 1
           : parseInt(this.state.quantityObject["quantity" + cart.item["id"]]);
       let price = parseFloat(cart.item["price"]);
-      sum = sum + price * quantity;
+      itemSum = itemSum + price * quantity;
       cart = {
         item: cart.item["id"],
         quantity: quantity,
@@ -51,11 +56,69 @@ export default class CartItem extends Component {
 
       productIdInCart.push(cart);
       this.setState({ productIdInCart: productIdInCart });
-      console.log(this.state.productIdInCart);
+      // console.log(this.state.productIdInCart);
     }
-    this.setState({ totalSum: sum });
-    window.localStorage.setItem("total", this.state.totalSum);
+    for (let i = 0; i < this.state.cashInCart.length; i++) {
+      this.setState({ cashQty: this.state.cashInCart.length });
+      cashCart = this.state.cashInCart[i];
+      // this.setState({ cashIdInCart: cashIdInCart });
+      // console.log(this.state.productIdInCart);
+      // let quantity =
+      //   this.state.quantityObject["quantity" + cart.item["id"]] === undefined
+      //     ? 1
+      //     : parseInt(this.state.quantityObject["quantity" + cart.item["id"]]);
+      let price = parseFloat(cashCart.amountToContribute);
+      console.log(price);
+      console.log(cashCart.amountToContribute);
+      cashSum = cashSum + price;
+      cashCart = {
+        item: "",
+        quantity: "",
+        custom_item: cashCart.id,
+        item_price: price,
+        evt: Number(window.localStorage.event_id),
+      };
+
+      cashIdInCart.push(cashCart);
+      this.setState({ cashIdInCart: cashIdInCart });
+      console.log(this.state.cashIdInCart);
+    }
+    totalSum = totalSum + itemSum + cashSum;
+    this.setState({ totalSum: totalSum });
+    window.localStorage.setItem("totalSum", this.state.totalSum);
   };
+  // cashContributed = () => {
+  // let sum = 0;
+  // let productIdInCart = [];
+  // let cart = {};
+  // for (let i = 0; i < this.state.cashInCart.length; i++) {
+  // this.setState({ Itemsquantity: this.state.itemsInCart.length });
+  // let cart = this.state.cashInCart[i];
+  // console.log(cart.amountToContribute);
+  // this.setState({ productIdInCart: productIdInCart });
+  // console.log(this.state.productIdInCart);
+  // let quantity =
+  //   this.state.quantityObject["quantity" + cart.item["id"]] === undefined
+  //     ? 1
+  //     : parseInt(this.state.quantityObject["quantity" + cart.item["id"]]);
+  // let price = parseFloat(cart.amountToContribute);
+  // console.log(price);
+  // sum = sum + price;
+  // cart = {
+  //   item: cart.item["id"],
+  //   quantity: quantity,
+  //   custom_item: "",
+  //   item_price: "",
+  //   evt: Number(window.localStorage.event_id),
+  // };
+
+  // productIdInCart.push(cart);
+  // this.setState({ productIdInCart: productIdInCart });
+  // console.log(sum);
+  // }
+  // this.setState({ cashSum: sum });
+  // window.localStorage.setItem("cashSum", this.state.cashSum);
+  // };
 
   handleQuantityChange = (e) => {
     let quantityObject = this.state.quantityObject;
@@ -66,21 +129,22 @@ export default class CartItem extends Component {
   };
 
   removeFromCart = (value) => {
-    let products = this.context.itemsInCart;
+    let products = this.state.itemsInCart;
     // products.indexOf(value);
     products.splice(products.indexOf(value), 1);
     this.setState({ itemsInCart: products });
     this.amountToPyay();
   };
   deleteFromCashCart = (value) => {
-    let products = this.context.cashInCart;
+    let products = this.state.cashInCart;
     // products.indexOf(value);
     products.splice(products.indexOf(value), 1);
     this.setState({ cashInCart: products });
-    // this.amountToPyay();
+    this.amountToPyay();
+    // this.context.totalCashContributed();
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     // console.log(props.Products);
     let cartItems = JSON.parse(window.localStorage.getItem("InCart"));
     // console.log(cartItems);
@@ -91,15 +155,15 @@ export default class CartItem extends Component {
     });
 
     setTimeout(() => this.amountToPyay(), 300);
-    setTimeout(() => this.context.totalCashContributed(), 1000);
+    // setTimeout(() => this.context.totalCashContributed(), 300);
   }
-  handleSumbitCart() {
+  handleSumbitCart = () => {
     let cart = [];
     let cartItem = this.state.productIdInCart;
-    let cartCash = this.context.cashIdInCart;
+    let cartCash = this.state.cashIdInCart;
     cart = cartItem.concat(cartCash);
-    console.log(cartItem);
-    console.log(cartCash);
+    // console.log(cartItem);
+    // console.log(cartCash);
 
     axios
       .post(`${util.API_BASE_URL}cart/create-carts/`, cart, {
@@ -121,7 +185,7 @@ export default class CartItem extends Component {
       .catch((error) => {
         console.dir(error);
       });
-  }
+  };
 
   render() {
     return (
@@ -138,7 +202,7 @@ export default class CartItem extends Component {
                 className=" badge badge-danger"
                 style={{ color: "white", font: "16px", position: "absolute" }}
               >
-                {this.state.Itemsquantity + this.context.allcashGift}
+                {this.state.Itemsquantity + this.state.cashQty}
               </span>
               <GrCart size="40px" />
             </Link>
@@ -249,8 +313,9 @@ export default class CartItem extends Component {
                       onChange={this.handleQuantityChange}
                     /> */}
                   </td>
-                  <td>#{this.context.cashDonated["cash" + inCart.id]}</td>
-                  <td>#{this.context.cashDonated["cash" + inCart.id]}</td>
+
+                  <td>#{inCart.amountToContribute}</td>
+                  <td>#{inCart.amountToContribute}</td>
                   <td
                     className="pointer"
                     onClick={() => {
@@ -268,7 +333,7 @@ export default class CartItem extends Component {
                 <td></td>
                 <td></td>
                 <td>Total</td>
-                <td>#{this.state.totalSum + this.context.totalcash}</td>
+                <td>#{this.state.totalSum}</td>
               </tr>
             </tbody>
           </Table>

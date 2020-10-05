@@ -36,6 +36,10 @@ class Login extends Component {
       .then((data) => {
         // console.log(data);
         this.setModalShow();
+        window.localStorage.removeItem("InCart");
+        window.localStorage.removeItem("totalSum");
+        window.localStorage.removeItem("cartList");
+        window.localStorage.removeItem("customer_id");
       })
       .catch((error) => {
         console.log(error);

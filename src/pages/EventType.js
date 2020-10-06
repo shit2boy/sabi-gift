@@ -51,7 +51,7 @@ class EventType extends Component {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data !== undefined) {
           let data = res.data;
           window.localStorage.setItem("slug", data.slug);
@@ -68,9 +68,7 @@ class EventType extends Component {
             cashGift: res.data.cash_item,
             loading: true,
           });
-          // console.log(data.poster);
-
-          console.log(this.state);
+          // console.log(data.poster);;
           if (this.state.cashGift.length !== 0) {
             this.setState({ cashNeeded: true });
           }
@@ -244,8 +242,8 @@ class EventType extends Component {
             </div>
           </div>
         </div>
-        <div className="container mt-5 ">
-          <div className="row">
+        <div className=" container-fluid mt-5 ">
+          <div className="row ml-auto">
             <div className="col-3 d-none d-lg-block availableItem">
               <AvailableItems
                 sort={this.sortByPrice}
@@ -253,7 +251,7 @@ class EventType extends Component {
                 sortByCat={this.sortByCategory}
               />
             </div>
-            <div className="col-9">
+            <div className=" col-sm-3">
               <Product
                 Products={this.state.products}
                 showWishList={true}

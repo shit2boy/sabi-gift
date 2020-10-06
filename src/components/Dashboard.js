@@ -65,17 +65,17 @@ export class Dashboard extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="">
         <DashboardNav />
         {/* <hr className="mt-0 mb-0" /> */}
-        <Row className="mt-4 mb-3">
+        <Row className="container-fluid mt-5 mb-3">
           <Col xs={1} md={1} lg={1} className=" d-none d-lg-block ">
             <SideBar isOverview="true" />
           </Col>
           <Col className=" content">
             <div className="row justify-content-center">
               <div
-                className="col-sm-5 text-left backgrndImg"
+                className="col-sm-5 mb-3 text-left backgrndImg"
                 style={{
                   width: "400px",
                   height: "125px",
@@ -134,7 +134,7 @@ export class Dashboard extends Component {
 
               <NextSteps />
             </div>
-            <div className="mt-lg-5">
+            <div className="mt-lg-5 mb-5">
               <Link
                 to="/createregistry"
                 className="btn-outline-success pa3 border-1 text-link"

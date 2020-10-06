@@ -28,12 +28,10 @@ export class GiftTracker extends Component {
   }
 
   errorNotify = () =>
-    toast.error("Error processing your request!", { autoClose: 2000 });
+    toast.error("Gift already Converted as Cash!", { autoClose: 2000 });
   notify = () => toast.success("Item  converted to Cash!", { autoClose: 2000 });
 
   convertToCredit = (id) => {
-    console.log("clicked" + id);
-
     let itemConvert = this.state.trackedItems;
     itemConvert.push(id);
     this.setState({
@@ -54,9 +52,9 @@ export class GiftTracker extends Component {
       })
       .then((response) => {
         if (response.status === 200 || response.status === 201)
-          console.log(response);
-        // let itemConvert = this.state.trackedItems;
-        itemConvert.splice(this.state.trackedItems.indexOf(id), 1);
+          // console.log(response);
+          // let itemConvert = this.state.trackedItems;
+          itemConvert.splice(this.state.trackedItems.indexOf(id), 1);
         this.setState({ itemConvert: itemConvert });
         this.setState({ giftConverted: true });
         this.notify();

@@ -104,7 +104,7 @@ export class Dashboard extends Component {
                         <span className="badge badge-pill badge-success">
                           cash
                         </span>
-                        <p>{this.state.giftRecieved}</p>
+                        <p>{this.state.cashRecieved}</p>
                       </div>
                     </div>
                   </div>
@@ -121,7 +121,7 @@ export class Dashboard extends Component {
                         <span className="badge badge-pill badge-primary">
                           Gifts
                         </span>
-                        <p>{this.state.cashRecieved}</p>
+                        <p> {this.state.giftRecieved}</p>
                       </div>
                     </div>
                   </div>

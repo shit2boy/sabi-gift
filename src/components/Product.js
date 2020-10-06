@@ -279,7 +279,7 @@ export class Product extends Component {
                 disabled={data.item.qty[0] <= 0}
               >
                 {" "}
-                Request completed{" "}
+                Request complete{" "}
               </button>
             </div>
           )}

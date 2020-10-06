@@ -58,11 +58,11 @@ class AddCashToCart extends Component {
   validateInputPrice = () => {
     let priceIsValid = true;
     let error;
-    let amountNeeded = Number(this.props.price);
+    let balance = Number(this.props.balance);
     let inputAmount = Number(
       this.context.cashDonated["cash" + this.props.itemId]
     );
-    if (inputAmount > amountNeeded) {
+    if (inputAmount > balance) {
       priceIsValid = false;
       this.AmountExceededNotify();
     }

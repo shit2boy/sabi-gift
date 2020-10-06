@@ -372,6 +372,7 @@ export class Product extends Component {
                 price={data.price}
                 name={data.name}
                 image={data.image}
+                completed={data.completed}
                 data={data}
                 button={
                   <button

@@ -198,9 +198,7 @@ class AddCashToCart extends Component {
                         this.context.cashDonated["cash" + this.props.itemId]
                       );
                     }}
-                    disabled={
-                      this.state.addedToCart || this.state.cashCompleted
-                    }
+                    disabled={this.state.addedToCart || this.props.completed}
                   >
                     Contribute
                   </Button>

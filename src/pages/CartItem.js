@@ -81,7 +81,7 @@ export default class CartItem extends Component {
 
       cashIdInCart.push(cashCart);
       this.setState({ cashIdInCart: cashIdInCart });
-      console.log(this.state.cashIdInCart);
+      // console.log(this.state.cashIdInCart);
     }
     totalSum = totalSum + itemSum + cashSum;
     this.setState({ totalSum: totalSum });
@@ -164,6 +164,7 @@ export default class CartItem extends Component {
     cart = cartItem.concat(cartCash);
     // console.log(cartItem);
     // console.log(cartCash);
+    window.localStorage.setItem("totalSum", this.state.totalSum);
 
     axios
       .post(`${util.API_BASE_URL}cart/create-carts/`, cart, {

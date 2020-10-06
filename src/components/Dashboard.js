@@ -9,6 +9,7 @@ import SideBar from "./SideBar";
 import axios from "axios";
 import util from "../util/util";
 import { StateContext } from "../Context";
+import { Link } from "react-router-dom";
 // import CashGift from "../pages/CashGiftPage";
 
 const date = new Date();
@@ -133,15 +134,15 @@ export class Dashboard extends Component {
 
               <NextSteps />
             </div>
-            {/* <div className="mt-lg-5">
-              <CashGift
-                button={
-                  <Button className="btn-outline-success" variant="default">
-                    Add Cash Fund
-                  </Button>
-                }
-              />
-            </div> */}
+            <div className="mt-lg-5">
+              <Link
+                to="/createregistry"
+                className="btn-outline-success pa3 border-1 text-link"
+                variant="success"
+              >
+                Create new event
+              </Link>
+            </div>
           </Col>
         </Row>
       </div>

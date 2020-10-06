@@ -210,6 +210,7 @@ export class ManageRegistry extends Component {
     const {
       userRegistry,
       cashNeeded,
+      userEvent_link,
       cashGift,
       backgroundImage,
       isPosterImg,
@@ -260,8 +261,9 @@ export class ManageRegistry extends Component {
               >
                 <h6 className="py-2">YOUR REGISTRY URL</h6>
                 <p>
-                  https://sabigift.netlify.app/registry/
-                  {window.localStorage.slug}{" "}
+                  {/* https://sabigift.netlify.app/registry/
+                  {window.localStorage.slug}{" "} */}
+                  {userEvent_link}
                   <Link to="/editurl">
                     <BsPencil className="ml-2" color="black" size="25px" />
                   </Link>

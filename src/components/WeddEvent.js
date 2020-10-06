@@ -4,13 +4,14 @@ import sabigift from "../images/landing/sabigift.png";
 import { Steps, DatePicker } from "antd";
 import { Form, Button, Col } from "react-bootstrap";
 import Login from "../pages/Login";
-
+import { StateContext } from "../Context";
 import axios from "axios";
 import util from "../util/util";
 
 const { Step } = Steps;
 
 export default class getstarted extends Component {
+  static contextType = StateContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +45,7 @@ export default class getstarted extends Component {
 
   componentDidMount() {
     if (window.localStorage.token_id) {
-      this.setState({ isLogged: true });
+      this.setState({ isLogged: true, currentIndex: 1 });
     }
     axios
       .get(`${util.API_BASE_URL}event-types/`, {
@@ -82,6 +83,9 @@ export default class getstarted extends Component {
 
   dateChange(date, dateString) {
     this.setState({ eventDate: dateString });
+    if (this.state.isLogged) {
+      window.localStorage.setItem("evnt_date", dateString);
+    }
     // console.log(date, dateString);
   }
   disabledDate = (current) => {
@@ -132,11 +136,15 @@ export default class getstarted extends Component {
     answers[currentIndex] = value;
     this.setState({ answers: answers });
     // console.dir(this.state);
-    // console.log(answers);
+    console.log(this.state.answers);
     if (this.validateField()) {
       this.setState({ currentIndex: currentIndex + 1 });
       this.setState({ formValue: this.state.answers[currentIndex + 1] });
       // }
+      if (this.state.isLogged) {
+        window.localStorage.setItem("spouse_Nam", this.state.answers[1]);
+        window.localStorage.setItem("Type_Event", 2);
+      }
       // console.log("current index" + this.state.currentIndex);
     }
   };
@@ -319,18 +327,27 @@ export default class getstarted extends Component {
               >
                 {this.state.currentIndex === 2 && (
                   <div>
-                    {(
-                      "Hey " +
-                      this.state.answers[0] +
-                      " " +
-                      "and " +
-                      this.state.answers[1] +
-                      this.state.questions[2]
-                    )
-                      .split("\n")
-                      .map((text, index) => (
-                        <h2 key={index}>{text}</h2>
-                      ))}
+                    {!this.state.isLogged
+                      ? (
+                          "Hey " +
+                          this.state.answers[0] +
+                          " " +
+                          "and " +
+                          this.state.answers[1] +
+                          this.state.questions[2]
+                        )
+                          .split("\n")
+                          .map((text, index) => <h2 key={index}>{text}</h2>)
+                      : (
+                          "Hey " +
+                          window.localStorage.name +
+                          " " +
+                          "and " +
+                          this.state.answers[1] +
+                          this.state.questions[2]
+                        )
+                          .split("\n")
+                          .map((text, index) => <h2 key={index}>{text}</h2>)}
                     <div className="mt-4">
                       <form>
                         <DatePicker
@@ -352,9 +369,14 @@ export default class getstarted extends Component {
                           <Button
                             type="submit"
                             className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
-                            onClick={(e) => {
-                              this.mapEventdateAndNext(e);
-                            }}
+                            onClick={
+                              this.state.isLogged
+                                ? (e) =>
+                                    this.setState({
+                                      currentIndex: this.state.currentIndex + 1,
+                                    })
+                                : (e) => this.mapEventdateAndNext(e)
+                            }
                             style={{ background: "#AAAAAA" }}
                           >
                             Next
@@ -452,9 +474,13 @@ export default class getstarted extends Component {
                         )}
                         {this.state.currentIndex > 0 && (
                           <Button
-                            type="submit"
                             className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
-                            onClick={(e) => this.mapValueAndNext(e)}
+                            onClick={
+                              this.state.isLogged
+                                ? (e) =>
+                                    (window.location.href = "/updateprofile")
+                                : (e) => this.mapValueAndNext(e)
+                            }
                             style={{ background: "#AAAAAA" }}
                           >
                             Next
@@ -473,7 +499,7 @@ export default class getstarted extends Component {
                     </div>
                   </div>
                 )}
-                {this.state.currentIndex === 4 && !this.state.isLogged && (
+                {this.state.currentIndex === 4 && (
                   <div className="">
                     <h2>
                       Good News! You can create <br />a free registry on

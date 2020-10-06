@@ -96,7 +96,7 @@ class EventType extends Component {
   resetSortToDefault = (e) => {
     e.preventDefault();
     this.setState({ products: this.state.resetFilter });
-    console.log("reset", this.state.products);
+    // console.log("reset", this.state.products);
   };
 
   sortByCategory = (event) => {
@@ -107,7 +107,7 @@ class EventType extends Component {
       return data;
     });
     this.setState({ products: newList });
-    console.log(newList);
+    // console.log(newList);
     // return event === item.item["cat"];
   };
 

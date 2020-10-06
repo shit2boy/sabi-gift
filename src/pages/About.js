@@ -262,16 +262,29 @@ export class About extends Component {
 
   createEvent = async (e) => {
     e.preventDefault();
-    let UserEventInfo = {
-      event_owner: window.localStorage.userId,
-      start_date: window.localStorage.event_date,
-      start_time: "07:00:00",
-      event_type: window.localStorage.event_type,
-      spouse_name: this.state.spouseName,
-      poster: "",
-      title: `${window.localStorage.name}'s ${this.state.title}`,
-    };
-
+    let UserEventInfo;
+    if (window.localStorage.isLoggedIn) {
+      UserEventInfo = {
+        event_owner: window.localStorage.userId,
+        start_date: window.localStorage.evnt_date,
+        start_time: "07:00:00",
+        event_type: window.localStorage.Type_Event,
+        spouse_name: window.localStorage.spouse_Nam,
+        poster: "",
+        title: `${window.localStorage.name}'s ${window.localStorage.title}`,
+      };
+    } else {
+      UserEventInfo = {
+        event_owner: window.localStorage.userId,
+        start_date: window.localStorage.event_date,
+        start_time: "07:00:00",
+        event_type: window.localStorage.event_type,
+        spouse_name: this.state.spouseName,
+        poster: "",
+        title: `${window.localStorage.name}'s ${this.state.title}`,
+      };
+    }
+    // console.log(UserEventInfo);
     await axios
       .post(`${util.API_BASE_URL}events/`, UserEventInfo, {
         headers: {
@@ -297,6 +310,11 @@ export class About extends Component {
             })
             .then((res) => {
               if (res.status === 200) {
+                window.localStorage.removeItem("evnt_date");
+                window.localStorage.removeItem("Type_Event");
+                window.localStorage.removeItem("spouse_Nam");
+                window.localStorage.removeItem("evnt_date");
+                window.localStorage.removeItem("title");
                 // window.location.href = "/manageregistry";
                 this.next();
               }

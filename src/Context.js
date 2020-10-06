@@ -27,19 +27,42 @@ class ProductProvider extends Component {
     userAllEvent: [],
     userRegistry: [],
     cashGift: [],
-    // cashSum: 0,
+    userEvent_link: "",
     backgroundImage: "",
     isPosterImg: false,
     cashNeeded: false,
-    // allcashGift: 0,
-    // cashIdInCart: [],
     selectedIds: [],
     inCart: { product: [], cash: [] },
+    formValue: "",
+    answers: ["", "", ""],
+    currentIndex: 0,
   };
 
   // updateContextState = (key, val) => {
   //   this.setState({ [key]: val });
   // };
+
+  mapValueForLoggedUser = (e) => {
+    e.preventDefault();
+    // console.log(this.state.formValue);
+    // console.log(this.state.currentIndex);
+    let value = this.state.formValue;
+    let currentIndex = this.state.currentIndex;
+
+    // if (this.state.currentIndex > 3 ) {
+    //   this.setState({ currentIndex: currentIndex + 1 });
+    //   return;
+    // }
+
+    let answers = this.state.answers;
+    answers[currentIndex] = value;
+    this.setState({ answers: answers });
+    // console.dir(this.state);
+    console.log(answers);
+    console.log(this.state.formValue);
+    this.setState({ currentIndex: currentIndex + 1 });
+    this.setState({ formValue: this.state.answers[currentIndex + 1] });
+  };
 
   handleCashDonated = (e) => {
     let cashDonated = this.state.cashDonated;
@@ -127,10 +150,11 @@ class ProductProvider extends Component {
             window.localStorage.setItem("slug", data[data.length - 1].slug);
             window.localStorage.setItem("eventIID", data[data.length - 1].id);
             this.setState({ userRegistry: data[data.length - 1].items });
+            this.setState({ userEvent_link: data[data.length - 1].event_link });
             this.setState({ cashGift: data[data.length - 1].cash_item });
             this.setState({ loading: true });
 
-            // console.log(this.state.registryItem);
+            console.log(this.state.userEvent_link);
             // console.log(this.state.cashGift);
             data[i].poster = data[data.length - 1].poster.replace(
               "image/upload/",
@@ -300,7 +324,7 @@ class ProductProvider extends Component {
           sortByCategory: this.sortByCategory,
           // sortByCategry: this.sortByCategry,
           handleCashDonated: this.handleCashDonated,
-          addToCart: this.addToCart,
+          mapValueForLoggedUser: this.mapValueForLoggedUser,
         }}
       >
         {this.props.children}

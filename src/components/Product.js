@@ -74,24 +74,12 @@ export class Product extends Component {
     this.setState({ search: keyword });
   };
 
-  // UNSAFE_componentWillReceiveProps(props) {
-  //   // console.log(props.cashGift);
-  //   this.setState({ Products: props.Products, cashGift: props.cashItem });
-  //   console.log(this.props.Products);
-  //   console.log(this.props.cashItem);
-  //   console.log(this.state.Products);
-  //   console.log(this.state.cashGift);
-  // }
   componentDidMount() {
     // console.log(props.cashGift);
     this.setState({
       Products: this.props.Products,
       cashGift: this.props.cashItem,
     });
-    console.log(this.props.Products);
-    console.log(this.props.cashItem);
-    // console.log(this.state.Products);
-    // console.log(this.state.cashItem);
   }
 
   getIndexOfProduct = (id) => {

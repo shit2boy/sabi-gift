@@ -251,7 +251,7 @@ class EventType extends Component {
                 sortByCat={this.sortByCategory}
               />
             </div>
-            <div className=" col-sm-3">
+            <div className=" col">
               <Product
                 Products={this.state.products}
                 showWishList={true}

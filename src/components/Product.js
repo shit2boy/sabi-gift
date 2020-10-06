@@ -416,7 +416,7 @@ export class Product extends Component {
 
     return (
       <div className="container-fluid">
-        <div className="row mb-2">
+        <div className="row ml-auto mb-2">
           <div className="col-8 ">
             <small>7,618 results found in 5ms</small>
           </div>
@@ -447,7 +447,7 @@ export class Product extends Component {
           </div>
         </div>
         <div className="row mb-2">
-          <div className="col-sm-10 col-lg-10 ">
+          <div className="col-11 ">
             <Search
               className="shadow"
               placeholder="Search here"

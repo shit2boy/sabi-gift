@@ -235,9 +235,9 @@ export class ManageRegistry extends Component {
 
     if (!loading) return <Spinner />;
     return (
-      <div className="container-fluid">
+      <div className="">
         <DashboardNav />
-        <div className="row mt-5">
+        <div className=" container-fluid row mt-5">
           <div className="col-1 d-none d-lg-block">
             <SideBar isManage="true" />
           </div>
@@ -329,7 +329,7 @@ export class ManageRegistry extends Component {
               </div>
             </div>
 
-            <h5 className="mt-4">Add items to your registry</h5>
+            <h5 className="mt-5 mb-4">Add items to your registry</h5>
             <Product
               Products={userRegistry}
               showWishList={false}

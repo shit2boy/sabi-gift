@@ -353,7 +353,11 @@ export class Product extends Component {
             </strong>
             <span className="d-block ml-auto">
               {" "}
-              #{data.price} <small>Needed </small>
+              #{data.price} <small> </small>
+            </span>
+            <span className="d-block ml-auto">
+              {" "}
+              <small>Balance </small> #{data.balance}
             </span>
           </Card.Body>
 

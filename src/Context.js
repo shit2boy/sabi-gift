@@ -140,7 +140,7 @@ class ProductProvider extends Component {
         },
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
 
         if (res.data !== undefined && res.data.length > 0) {
           let data = res.data;

@@ -351,13 +351,12 @@ export class Product extends Component {
             <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
               {data.name}
             </strong>
-            <span className="d-block ml-auto">
+            {/* <span className="d-block ml-auto">
               {" "}
               #{data.price} <small> </small>
-            </span>
+            </span> */}
             <span className="d-block ml-auto">
-              {" "}
-              <small>Balance </small> #{data.balance}
+              #{data.balance} <small>Needed </small>
             </span>
           </Card.Body>
 
@@ -458,7 +457,6 @@ export class Product extends Component {
         {!this.state.listDisplay && (
           <div className="row ">
             {productItems}
-            {/* {this.props.cashNeeded && cashItem} */}
             {cashItem}
             <ToastContainer />
           </div>

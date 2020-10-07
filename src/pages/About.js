@@ -281,7 +281,7 @@ export class About extends Component {
         event_type: window.localStorage.event_type,
         spouse_name: this.state.spouseName,
         poster: "",
-        title: `${window.localStorage.name}'s ${this.state.title}`,
+        title: `${this.state.title}`,
       };
     }
     // console.log(UserEventInfo);

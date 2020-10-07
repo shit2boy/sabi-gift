@@ -29,6 +29,7 @@ class EventType extends Component {
     isPosterImg: false,
     cashGift: [],
     cashNeeded: false,
+    title: "",
     poster: null,
     quantity: null,
     loading: false,
@@ -63,6 +64,7 @@ class EventType extends Component {
             event_type: data.event_type,
             event_date: data.start_date,
             slug: data.slug,
+            title: data.title,
             products: res.data.items,
             resetFilter: res.data.items,
             cashGift: res.data.cash_item,
@@ -226,16 +228,12 @@ class EventType extends Component {
         <div className="mb-5" style={poster}>
           <div>
             <div className="text-center">
-              {this.state.spouseName && (
+              {/* {this.state.spouseName && (
                 <h4 className="text-white text-capitalize ">
                   {window.localStorage.event_owner} & {this.state.spouseName}
                 </h4>
-              )}
-              {!this.state.spouseName && (
-                <h4 className="text-white">
-                  {window.localStorage.event_owner}'s {this.state.event_type}
-                </h4>
-              )}
+              )} */}
+              <h4 className="text-white text-capitalize">{this.state.title}</h4>
               <p className="text-white">
                 {this.state.event_date} ({this.state.dayLeftToEvent} days Left)
               </p>

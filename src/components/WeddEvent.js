@@ -136,7 +136,7 @@ export default class getstarted extends Component {
     answers[currentIndex] = value;
     this.setState({ answers: answers });
     // console.dir(this.state);
-    console.log(this.state.answers);
+    // console.log(this.state.answers);
     if (this.validateField()) {
       this.setState({ currentIndex: currentIndex + 1 });
       this.setState({ formValue: this.state.answers[currentIndex + 1] });
@@ -225,7 +225,10 @@ export default class getstarted extends Component {
       newUserInfo.append("password", formField["password"]);
       newUserInfo.append("event_type", 2);
       newUserInfo.append("event_date", this.state.eventDate);
-      newUserInfo.append("title", "Wedding");
+      newUserInfo.append(
+        "title",
+        `${this.state.answers[0]} & ${this.state.answers[1]}'s Wedding`
+      );
       newUserInfo.append("no_guest", this.state.answers[3]);
       newUserInfo.append("spouse_name", this.state.answers[1]);
       newUserInfo.append("photo", "");

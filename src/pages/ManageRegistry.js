@@ -102,7 +102,7 @@ export class ManageRegistry extends Component {
           window.localStorage.setItem("event_date", res.data.event_date);
           window.localStorage.setItem("username", res.data.username);
         }
-        this.setState({ spouseName: res.data.spouse_name });
+        this.setState({ title: res.data.title });
         let event_date = window.localStorage.event_date;
         let dateDifference =
           new Date(event_date).getTime() - new Date().getTime(); //Future date - current date
@@ -263,7 +263,11 @@ export class ManageRegistry extends Component {
                 <p>
                   {/* https://sabigift.netlify.app/registry/
                   {window.localStorage.slug}{" "} */}
-                  {userEvent_link}
+                  <a href={userEvent_link} target="blank">
+                    {" "}
+                    https://sabigift.netlify.app/registry/
+                    {window.localStorage.slug}
+                  </a>
                   <Link to="/editurl">
                     <BsPencil className="ml-2" color="black" size="25px" />
                   </Link>
@@ -302,17 +306,12 @@ export class ManageRegistry extends Component {
                   )} */}
                 </label>
                 <div className="hero-text">
-                  {this.state.spouseName && (
-                    <h2 className="py-3 text-white">
-                      {window.localStorage.name} & {this.state.spouseName}'s
-                      wedding
-                    </h2>
-                  )}
-                  {!this.state.spouseName && (
+                  <h2 className="py-3 text-white"> {this.state.title}</h2>
+                  {/* {!this.state.spouseName && (
                     <h2 className="py-3 text-white">
                       {window.localStorage.name}'s birthday
                     </h2>
-                  )}
+                  )} */}
                   <h5 className="py-4 text-white">
                     {window.localStorage.event_date} (
                     {this.state.dayLeftToEvent} days Left)

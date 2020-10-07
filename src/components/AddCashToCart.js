@@ -162,7 +162,7 @@ class AddCashToCart extends Component {
                 <div className=" col-lg pa2">
                   <div className="">
                     <h3 className="text-center">{this.props.name}</h3>
-                    <p>Amount needed : #{this.props.price}</p>
+                    <p>Amount needed : #{this.props.balance}</p>
                     <hr />
 
                     <Form.Group controlId="formBasicPassword">

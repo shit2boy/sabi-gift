@@ -82,6 +82,7 @@ export default class getstarted extends Component {
     this.setState({ eventDate: dateString });
     if (this.state.isLogged) {
       window.localStorage.setItem("evnt_date", dateString);
+      window.localStorage.setItem("title", "Birthday");
     }
     // console.log(date, dateString);
   }
@@ -97,9 +98,6 @@ export default class getstarted extends Component {
         currentIndex: this.state.currentIndex + 1,
       });
       window.localStorage.setItem("Type_Event", 3);
-      if (this.state.isLogged) {
-        window.localStorage.setItem("title", "Birthday");
-      }
     }
   };
 

@@ -156,7 +156,7 @@ class ProductProvider extends Component {
             this.setState({ title: data[data.length - 1].title });
             this.setState({ loading: true });
 
-            console.log(this.state.userEvent_link);
+            // console.log(this.state.userEvent_link);
             // console.log(this.state.cashGift);
             data[i].poster = data[data.length - 1].poster.replace(
               "image/upload/",
@@ -257,7 +257,7 @@ class ProductProvider extends Component {
       return data;
     });
     this.setState({ products: newList });
-    console.log(newList);
+    // console.log(newList);
     // return event === item.item["cat"];
   };
   // sortByCategory = async (catId) => {

@@ -102,7 +102,7 @@ export class ManageRegistry extends Component {
           window.localStorage.setItem("event_date", res.data.event_date);
           window.localStorage.setItem("username", res.data.username);
         }
-        this.setState({ title: res.data.title });
+        this.setState({ title: res.data.spouse_name });
         let event_date = window.localStorage.event_date;
         let dateDifference =
           new Date(event_date).getTime() - new Date().getTime(); //Future date - current date
@@ -212,6 +212,7 @@ export class ManageRegistry extends Component {
       cashNeeded,
       userEvent_link,
       cashGift,
+      title,
       backgroundImage,
       isPosterImg,
       loading,
@@ -306,7 +307,7 @@ export class ManageRegistry extends Component {
                   )} */}
                 </label>
                 <div className="hero-text">
-                  <h2 className="py-3 text-white"> {this.state.title}</h2>
+                  <h2 className="py-3 text-white"> {title}</h2>
                   {/* {!this.state.spouseName && (
                     <h2 className="py-3 text-white">
                       {window.localStorage.name}'s birthday

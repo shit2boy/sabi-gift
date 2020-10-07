@@ -134,6 +134,9 @@ export default class getstarted extends Component {
       this.setState({ currentIndex: currentIndex + 1 });
       this.setState({ formValue: this.state.answers[currentIndex + 1] });
     }
+    if (this.state.isLogged) {
+      window.localStorage.setItem("title", "Wedding");
+    }
   };
 
   goBack = () => {

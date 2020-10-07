@@ -274,19 +274,7 @@ export class About extends Component {
         poster: "",
         title: `${window.localStorage.name}'s ${window.localStorage.title}`,
       };
-    } else if (
-      !window.localStorage.isLoggedIn &&
-      window.localStorage.token_id
-    ) {
-      UserEventInfo = {
-        event_owner: window.localStorage.userId,
-        start_date: window.localStorage.event_date,
-        start_time: "07:00:00",
-        event_type: window.localStorage.event_type,
-        spouse_name: this.state.spouseName,
-        poster: "",
-        title: this.state.title,
-      };
+    } else {
       UserEventInfo = {
         event_owner: window.localStorage.userId,
         start_date: window.localStorage.event_date,

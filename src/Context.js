@@ -125,6 +125,7 @@ class ProductProvider extends Component {
         if (res.data !== 200) {
           this.setState({ profileImage: res.data.photo });
           // console.log(this.state.profileImage);
+          this.setState({ title: res.data.title });
           window.localStorage.setItem("userId", res.data.id);
         }
       })
@@ -153,7 +154,7 @@ class ProductProvider extends Component {
             this.setState({ userRegistry: data[data.length - 1].items });
             this.setState({ userEvent_link: data[data.length - 1].event_link });
             this.setState({ cashGift: data[data.length - 1].cash_item });
-            this.setState({ title: data[data.length - 1].title });
+
             this.setState({ loading: true });
 
             // console.log(this.state.userEvent_link);

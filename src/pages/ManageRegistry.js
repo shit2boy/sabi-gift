@@ -137,6 +137,7 @@ export class ManageRegistry extends Component {
           let data = response.data.success;
           // console.log(data);
           if (data !== "User have an Event.") {
+            window.localStorage.setItem("isLoggedIn", false);
             window.location.href = "/updateprofile";
           }
         }

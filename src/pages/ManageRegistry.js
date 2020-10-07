@@ -264,11 +264,9 @@ export class ManageRegistry extends Component {
                 <p>
                   {/* https://sabigift.netlify.app/registry/
                   {window.localStorage.slug}{" "} */}
-                  <a href={userEvent_link} target="blank">
-                    {" "}
-                    https://sabigift.netlify.app/registry/
-                    {window.localStorage.slug}
-                  </a>
+                  <Link to={userEvent_link} target="blank">
+                    {userEvent_link}
+                  </Link>
                   <Link to="/editurl">
                     <BsPencil className="ml-2" color="black" size="25px" />
                   </Link>

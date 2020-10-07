@@ -202,6 +202,7 @@ export class About extends Component {
               title: res.data.title,
               loading: true,
             });
+            console.log(this.state.title);
           }
         }
       })

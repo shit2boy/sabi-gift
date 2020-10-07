@@ -97,6 +97,9 @@ export default class getstarted extends Component {
         currentIndex: this.state.currentIndex + 1,
       });
       window.localStorage.setItem("Type_Event", 3);
+      if (this.state.isLogged) {
+        window.localStorage.setItem("title", "Birthday");
+      }
     }
   };
 
@@ -115,7 +118,7 @@ export default class getstarted extends Component {
     // }
 
     this.setState({ errors: errors });
-    console.log(fieldIsValid);
+    // console.log(fieldIsValid);
     return fieldIsValid;
   }
 
@@ -133,9 +136,6 @@ export default class getstarted extends Component {
     if (this.validateField()) {
       this.setState({ currentIndex: currentIndex + 1 });
       this.setState({ formValue: this.state.answers[currentIndex + 1] });
-    }
-    if (this.state.isLogged) {
-      window.localStorage.setItem("title", "Wedding");
     }
   };
 

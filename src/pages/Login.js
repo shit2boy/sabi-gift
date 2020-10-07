@@ -47,6 +47,8 @@ class Login extends Component {
         if (data !== undefined) {
           // console.log(data);
           window.localStorage.setItem("token_id", data.data.token);
+          window.localStorage.setItem("isLoggedIn", true);
+
           // window.localStorage.setItem("username", data.data.email);
           // window.localStorage.setItem("username", data.data.spouse_name);
           window.location.href = "/manageregistry";

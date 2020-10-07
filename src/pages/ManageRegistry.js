@@ -87,7 +87,6 @@ export class ManageRegistry extends Component {
   };
 
   componentDidMount = async () => {
-    window.localStorage.setItem("isLoggedIn", true);
     await axios
       .get(`${util.API_BASE_URL}accounts/profile/`, {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },

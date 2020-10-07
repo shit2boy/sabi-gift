@@ -130,7 +130,7 @@ export default class getstarted extends Component {
     let answers = this.state.answers;
     answers[currentIndex] = value;
     this.setState({ answers: answers });
-    console.log(this.state.answers);
+    // console.log(this.state.answers);
     if (this.validateField()) {
       this.setState({ currentIndex: currentIndex + 1 });
       this.setState({ formValue: this.state.answers[currentIndex + 1] });
@@ -151,7 +151,7 @@ export default class getstarted extends Component {
     if (this.state.currentIndex <= 3) {
       this.setState({ currentIndex: this.state.currentIndex - 1 });
       this.setState({ formValue: formValue });
-      console.log(this.state.formValue);
+      // console.log(this.state.formValue);
     }
   };
 

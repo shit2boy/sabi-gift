@@ -97,7 +97,7 @@ export default class getstarted extends Component {
       this.setState({
         currentIndex: this.state.currentIndex + 1,
       });
-      window.localStorage.setItem("Type_Event", 3);
+      window.localStorage.setItem("Type_Event", 2);
     }
   };
 

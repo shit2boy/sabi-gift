@@ -143,7 +143,7 @@ export default class getstarted extends Component {
       // }
       if (this.state.isLogged) {
         window.localStorage.setItem("spouse_Nam", this.state.answers[1]);
-        window.localStorage.setItem("Type_Event", 2);
+        window.localStorage.setItem("Type_Event", 1);
         window.localStorage.setItem("title", "Wedding");
       }
       // console.log("current index" + this.state.currentIndex);

@@ -32,6 +32,7 @@ export class About extends Component {
       errorMessage: "",
       errors: {},
       border: " ",
+      event_date: "",
       eventId: null,
       selected: false,
       selectedgift: [],
@@ -200,6 +201,7 @@ export class About extends Component {
             this.setState({
               spouseName: res.data.spouse_name,
               title: res.data.title,
+              event_date: res.data.event_date,
               loading: true,
             });
             console.log(this.state.title);
@@ -277,8 +279,8 @@ export class About extends Component {
     } else {
       UserEventInfo = {
         event_owner: window.localStorage.userId,
-        start_date: window.localStorage.event_date,
-        start_time: "07:00:00",
+        start_date: this.state.event_date,
+        start_time: "07:10:00",
         event_type: window.localStorage.event_type,
         spouse_name: this.state.spouseName,
         poster: "",

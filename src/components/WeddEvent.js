@@ -78,7 +78,7 @@ export default class getstarted extends Component {
     this.setState({
       formField,
     });
-    console.log(formField);
+    // console.log(formField);
   }
 
   dateChange(date, dateString) {
@@ -86,7 +86,7 @@ export default class getstarted extends Component {
     if (this.state.isLogged) {
       window.localStorage.setItem("evnt_date", dateString);
     }
-    // console.log(date, dateString);
+    // console.log(dateString);
   }
   disabledDate = (current) => {
     // Can not select days before today and today

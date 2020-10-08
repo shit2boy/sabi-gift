@@ -204,7 +204,7 @@ export class About extends Component {
               event_date: res.data.event_date,
               loading: true,
             });
-            console.log(this.state.title);
+            console.log(this.state.event_date);
           }
         }
       })

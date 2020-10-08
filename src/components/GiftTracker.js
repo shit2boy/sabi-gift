@@ -54,8 +54,8 @@ export class GiftTracker extends Component {
         if (response.status === 200 || response.status === 201)
           // console.log(response);
           // let itemConvert = this.state.trackedItems;
-          itemConvert.splice(this.state.trackedItems.indexOf(id), 1);
-        this.setState({ itemConvert: itemConvert });
+          // itemConvert.splice(this.state.trackedItems.indexOf(id), 1);
+          this.setState({ itemConvert: itemConvert });
         this.setState({ giftConverted: true });
         this.notify();
       })

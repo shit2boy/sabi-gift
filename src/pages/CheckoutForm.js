@@ -55,7 +55,7 @@ export default class CheckoutForm extends Component {
 
     try {
       var res = await axios.post(`${util.API_BASE_URL}customers/`, customer);
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data !== undefined) {
         window.localStorage.setItem("customer_id", res.data.id);
         this.setState({ customerId: true });

@@ -32,11 +32,11 @@ export class GiftTracker extends Component {
   notify = () => toast.success("Item  converted to Cash!", { autoClose: 2000 });
 
   convertToCredit = (id) => {
-    let itemConvert = this.state.trackedItems;
-    itemConvert.push(id);
-    this.setState({
-      itemConvert: itemConvert,
-    });
+    // let itemConvert = [];
+    // itemConvert.push(id);
+    // this.setState({
+    //   itemConvert: itemConvert,
+    // });
 
     const convertedItemDetail = new FormData();
     convertedItemDetail.append("status", "converted to cash");
@@ -55,8 +55,8 @@ export class GiftTracker extends Component {
           // console.log(response);
           // let itemConvert = this.state.trackedItems;
           // itemConvert.splice(this.state.trackedItems.indexOf(id), 1);
-          this.setState({ itemConvert: itemConvert });
-        this.setState({ giftConverted: true });
+          // this.setState({ itemConvert: itemConvert });
+          this.setState({ giftConverted: true });
         this.notify();
       })
       .catch((error) => {

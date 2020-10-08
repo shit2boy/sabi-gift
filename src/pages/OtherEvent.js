@@ -78,7 +78,7 @@ export default class OtherEvent extends Component {
     this.setState({
       formField,
     });
-    console.log(formField);
+    // console.log(formField);
   }
 
   dateChange(date, dateString) {

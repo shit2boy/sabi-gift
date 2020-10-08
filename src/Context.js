@@ -304,7 +304,7 @@ class ProductProvider extends Component {
       selectedArrr.splice(this.state.selected.indexOf(e.target.id), 1);
       this.setState({ selected: selectedArrr });
     }
-    console.log(this.state.selected);
+    // console.log(this.state.selected);
     this.setState({ clicked: true });
   };
   // handleEventType = (e) => {

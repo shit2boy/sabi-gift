@@ -158,7 +158,7 @@ export class About extends Component {
           },
         })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response.status === 200)
             window.localStorage.setItem("userId", response.data.id);
           window.localStorage.setItem("event_type", response.data.event_type);

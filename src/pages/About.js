@@ -779,7 +779,7 @@ export class About extends Component {
                           id={"k" + item.id}
                           className="d-block text-dark"
                         >
-                          {item.name}
+                          {item.slug}
                         </strong>
                         {/* <small className="d-block">Description of gift</small> */}
                         <strong id={"k" + item.id} className="">

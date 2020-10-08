@@ -297,7 +297,7 @@ export default class CartItem extends Component {
                       className="m-4"
                     />
                   </td>
-                  <td>{inCart.description}</td>
+                  <td>{inCart.name}</td>
                   <td className="text-center">
                     {/* <input
                       type="number"

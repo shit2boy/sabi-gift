@@ -28,6 +28,8 @@ class ProductProvider extends Component {
     userRegistry: [],
     cashGift: [],
     title: "",
+    spouse_name: "",
+    event_date: "",
     userEvent_link: "",
     backgroundImage: "",
     isPosterImg: false,
@@ -126,6 +128,8 @@ class ProductProvider extends Component {
           this.setState({ profileImage: res.data.photo });
           // console.log(this.state.profileImage);
           this.setState({ title: res.data.title });
+          this.setState({ spouse_name: res.data.spouse_name });
+          this.setState({ event_date: res.data.event_date });
           window.localStorage.setItem("userId", res.data.id);
         }
       })

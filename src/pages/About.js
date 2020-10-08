@@ -279,10 +279,10 @@ export class About extends Component {
     } else {
       UserEventInfo = {
         event_owner: window.localStorage.userId,
-        start_date: this.state.event_date,
+        start_date: this.context.event_date,
         start_time: "07:10:00",
         event_type: window.localStorage.event_type,
-        spouse_name: this.state.spouseName,
+        spouse_name: this.context.spouseName,
         poster: "",
         title: `${this.context.title}`,
       };

@@ -142,13 +142,13 @@ class ProductProvider extends Component {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
 
         if (res.data !== undefined && res.data.length > 0) {
           let data = res.data;
           this.setState({ userAllEvent: data });
           for (let i = 0; i < data.length; i++) {
-            // console.log(data[data.length - 1].slug);
+            // console.log(data[data.length - 1]);
             window.localStorage.setItem("slug", data[data.length - 1].slug);
             window.localStorage.setItem("eventIID", data[data.length - 1].id);
             this.setState({ userRegistry: data[data.length - 1].items });

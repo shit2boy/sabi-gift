@@ -615,9 +615,14 @@ export class About extends Component {
                     <div className="col-10 row">
                       {this.state.registryType.map((type) => (
                         <div
-                          id={type.id}
+                          id={"dd" + type.id}
                           onClick={this.handleSelectedGiftType}
                           key={type.id}
+                          style={
+                            this.state.checked.indexOf("dd" + type.id) > -1
+                              ? containerStyle
+                              : unmarkedStyle
+                          }
                           // style={
                           //   this.state.selectedGiftType
                           //     ? containerStyle
@@ -627,18 +632,13 @@ export class About extends Component {
                         >
                           <div id={type.id} className="text-center">
                             <img
-                              style={
-                                this.state.checked.indexOf("dd" + type.id) > -1
-                                  ? containerStyle
-                                  : unmarkedStyle
-                              }
-                              id={type.id}
+                              id={"dd" + type.id}
                               src={type.image}
                               alt={type.name}
                               width="80px"
                             />{" "}
                           </div>
-                          <p className="text-center mb-0" id={type.id}>
+                          <p className="text-center mb-0" id={"dd" + type.id}>
                             {type.name}
                           </p>
                         </div>

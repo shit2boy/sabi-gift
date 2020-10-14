@@ -229,7 +229,14 @@ export class Product extends Component {
             />
           </div>
           {/* <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p> */}
-          <span className="ml-auto">#{data.item["price"]}</span>
+          <div style={{ position: "relative" }}>
+            <span
+              style={{ position: "absolute", top: "50%", right: "18px" }}
+              className="ml-auto"
+            >
+              #{data.item["price"]}
+            </span>
+          </div>
           <Card.Body style={{ minHeight: "50px", paddingLeft: "10px" }}>
             <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
               {data.item["name"]}
@@ -334,7 +341,7 @@ export class Product extends Component {
 
     const cashItem = this.state.cashGift.map((data, index) => {
       return (
-        <Card key={index} className="productCards col-sm-3 m-3">
+        <Card key={index} className="productCards col-sm-3 m-4">
           <div>
             <img
               className="card-img center grow"
@@ -347,7 +354,8 @@ export class Product extends Component {
               id={data.id}
             />
           </div>
-          <Card.Body style={{ minHeight: "70px", padding: "5px" }}>
+          <p></p>
+          <Card.Body style={{ minHeight: "50px", paddingLeft: "10px" }}>
             <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
               {data.name}
             </strong>
@@ -359,6 +367,7 @@ export class Product extends Component {
               #{data.balance} <small>Needed </small>
             </span>
           </Card.Body>
+          <p></p>
 
           {/* <div>
             <small className="ml-1">contributed : {data.contributed}</small>

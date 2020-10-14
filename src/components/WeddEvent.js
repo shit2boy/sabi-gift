@@ -143,7 +143,7 @@ export default class getstarted extends Component {
       // }
       if (this.state.isLogged) {
         window.localStorage.setItem("spouse_Nam", this.state.answers[1]);
-        window.localStorage.setItem("Type_Event", 1);
+        window.localStorage.setItem("Type_Event", 4);
         window.localStorage.setItem("title", "Wedding");
       }
       // console.log("current index" + this.state.currentIndex);
@@ -362,11 +362,11 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn p-2 rounded-pill btn-outline-light"
+                            className="registryBtn px-3 py-2 rounded-pill btn-outline-light"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
-                            GET STARTED
+                            Get started
                           </Button>
                         )}
                         {this.state.currentIndex > 0 && (
@@ -419,17 +419,17 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className=" registryBtn p-2 rounded-pill btn-outline-light"
+                            className=" registryBtn px-3 py-2 rounded-pill"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
-                            GET STARTED
+                            Get started
                           </Button>
                         )}
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
+                            className="registryBtn px-5 py-2 rounded-pill"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -473,7 +473,7 @@ export default class getstarted extends Component {
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
-                            GET STARTED
+                            Get started
                           </Button>
                         )}
                         {this.state.currentIndex > 0 && (

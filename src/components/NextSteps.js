@@ -18,72 +18,75 @@ export class NextSteps extends Component {
           className="shadow mb-3 grow"
           style={{ width: "12rem" }}
         >
-          <Link className=" text-link" to="/checklist">
-            <BsBell className="ml-2 mt-1" />
-            <Card.Body className="stepsCard"></Card.Body>
-            <Card.Footer className="cardFooter">
-              <strong className="ml-1">1</strong>
-              <img className="ml-1 d-block pointer" src={addItem} alt="step1" />
-              {/* {!window.localStorage.event_type && (
+          {/* <Link className=" text-link" to="/checklist"> */}
+          <BsBell className="ml-2 mt-1" />
+          <Card.Body className="stepsCard"></Card.Body>
+          <Card.Footer className="cardFooter">
+            <strong className="ml-1">1</strong>
+            <img className="ml-1 d-block pointer" src={addItem} alt="step1" />
+            {/* {!window.localStorage.event_type && (
               <p className="ml-1 d-block">Done</p>
             )}{" "} */}
-              <span className="text-right">+</span>
-            </Card.Footer>
-          </Link>
+            {/* <span className="text-right">+</span> */}
+          </Card.Footer>
+          {/* </Link> */}
         </Card>
+        <Card
+          id="myCards"
+          className="shadow mb-3 grow"
+          style={{ width: "12rem" }}
+        >
+          <SendInvite
+            isSabiPartner={true}
+            title="Invite Co-celebrant to your event "
+            placeholder="Enter the Partner email ... "
+            button={
+              <>
+                <BsBell className="ml-2 mt-1" />
 
-        <SendInvite
-          isSabiPartner={true}
-          title="Invite Co-celebrant to your event "
-          placeholder="Enter the Partner email ... "
-          button={
-            <Card
-              id="myCards"
-              className="shadow mb-3 grow"
-              style={{ width: "12rem" }}
-            >
-              <BsBell className="ml-2 mt-1" />
+                <Card.Body className="stepsCard2"></Card.Body>
+                <Card.Footer className="cardFooter">
+                  <strong className="ml-1">2</strong>
+                  <img
+                    className="ml-1 d-block pointer"
+                    src={Add}
+                    alt="step2"
+                  />{" "}
+                  {/* <span className="text-right">+</span> */}
+                </Card.Footer>
+              </>
+            }
+          />
+        </Card>
+        <Card
+          id="myCards"
+          className="shadow mb-3 grow"
+          style={{ width: "12rem" }}
+        >
+          <SendInvite
+            isSabiPartner={false}
+            title="Invite people to your event "
+            placeholder="Enter the Guest email ... "
+            button={
+              <>
+                <BsBell className="ml-2 mt-1" />
 
-              <Card.Body className="stepsCard2"></Card.Body>
-              <Card.Footer className="cardFooter">
-                <strong className="ml-1">2</strong>
-                <img
-                  className="ml-1 d-block pointer"
-                  src={Add}
-                  alt="step2"
-                />{" "}
-                <span className="text-right">+</span>
-              </Card.Footer>
-            </Card>
-          }
-        />
-        <SendInvite
-          isSabiPartner={false}
-          title="Invite people to your event "
-          placeholder="Enter the Guest email ... "
-          button={
-            <Card
-              id="myCards"
-              className="shadow mb-3 grow"
-              style={{ width: "12rem" }}
-            >
-              <BsBell className="ml-2 mt-1" />
+                <Card.Body className="stepsCard3"></Card.Body>
+                <Card.Footer className="cardFooter">
+                  <strong className="ml-1">3 </strong>
 
-              <Card.Body className="stepsCard3"></Card.Body>
-              <Card.Footer className="cardFooter">
-                <strong className="ml-1">3 </strong>
+                  <img
+                    className="ml-1 d-block pointer"
+                    src={invite}
+                    alt="step3"
+                  />
 
-                <img
-                  className="ml-1 d-block pointer"
-                  src={invite}
-                  alt="step3"
-                />
-
-                <span className="text-right">+</span>
-              </Card.Footer>
-            </Card>
-          }
-        />
+                  {/* <span className="text-right">+</span> */}
+                </Card.Footer>
+              </>
+            }
+          />
+        </Card>
         <Card
           id="myCards"
           className="shadow mb-3 grow"
@@ -100,7 +103,7 @@ export class NextSteps extends Component {
                 src={manage}
                 alt="step4"
               />{" "}
-              <span className="text-right">+</span>
+              {/* <span className="text-right">+</span> */}
             </Card.Footer>
           </Link>
         </Card>
@@ -119,7 +122,7 @@ export class NextSteps extends Component {
               src={setup}
               alt="step5"
             />{" "}
-            <span className="text-right">+</span>
+            {/* <span className="text-right">+</span> */}
           </Card.Footer>
         </Card>
       </div>

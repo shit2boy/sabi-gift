@@ -143,7 +143,7 @@ export default class OtherEvent extends Component {
     }
     if (this.state.isLogged) {
       window.localStorage.setItem("title", this.state.answers[1]);
-      window.localStorage.setItem("Type_Event", 4);
+      window.localStorage.setItem("Type_Event", 6);
     }
   };
 
@@ -358,16 +358,16 @@ export default class OtherEvent extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn p-2 rounded-pill btn-outline-light"
+                            className="registryBtn  py-2 px-3 rounded-pill"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
-                            GET STARTED
+                            Get started
                           </Button>
                         )}
                         {this.state.currentIndex > 0 && (
                           <Button
-                            className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
+                            className="registryBtn px-5 py-2 rounded-pill "
                             onClick={
                               this.state.isLogged
                                 ? (e) =>
@@ -414,17 +414,17 @@ export default class OtherEvent extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className=" registryBtn p-2 rounded-pill btn-outline-light"
+                            className=" registryBtn px-3 py-2 rounded-pill"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
-                            GET STARTED
+                            Get satrted
                           </Button>
                         )}
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
+                            className="registryBtn px-5 py-2 rounded-pill"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -468,7 +468,7 @@ export default class OtherEvent extends Component {
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
-                            GET STARTED
+                            Get started
                           </Button>
                         )}
                         {this.state.currentIndex > 0 && (

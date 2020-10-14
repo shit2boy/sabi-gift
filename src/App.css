@@ -57,11 +57,18 @@ input::placeholder {
   /* color: #888888; */
 }
 input:focus {
-  border: none;
+  /* border: none; */
+  outline: 0;
   border-color: #fffbfb;
 }
 input {
-  border-color: #cbcbcb;
+  /* border-color: #cbcbcb; */
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
   /* border: 1px; */
 }
 .loader {
@@ -262,9 +269,17 @@ Nav.Link {
   height: 0;
   /* padding: 38px 0 6px; */
 }
-
+/* .btn:hover {
+  color: #cbcbcb;
+} */
 .registryBtn {
   margin-left: 35px !important;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #707070 !important;
 }
 
 .rightside {

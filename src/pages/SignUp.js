@@ -213,7 +213,7 @@ export default class getstarted extends Component {
       newUserInfo.append("first_name", this.state.answers[0]);
       newUserInfo.append("email", formField["email"]);
       newUserInfo.append("password", formField["password"]);
-      newUserInfo.append("event_type", 2);
+      newUserInfo.append("event_type", 5);
       newUserInfo.append("event_date", this.state.eventDate);
       newUserInfo.append("no_guest", this.state.answers[2]);
       newUserInfo.append("title", `${this.state.answers[0]}'s birthday`);
@@ -337,11 +337,11 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn p-2 rounded-pill btn-outline-light"
+                            className="registryBtn px-3 py-2 rounded-pill "
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
-                            GET STARTED
+                            Get started
                           </Button>
                         )}
                         {this.state.currentIndex > 0 && (
@@ -392,17 +392,17 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn p-2 rounded-pill btn-outline-light"
+                            className="registryBtn py-2 px-3 rounded-pill"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
-                            GET STARTED
+                            Get started
                           </Button>
                         )}
                         {this.state.currentIndex > 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
+                            className="registryBtn px-3 py-2 rounded-pill "
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -441,16 +441,16 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn p-2 rounded-pill btn-outline-light "
+                            className="registryBtn px-3 py-2 rounded-pill"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
-                            GET STARTED
+                            Get started
                           </Button>
                         )}
                         {this.state.currentIndex > 0 && (
                           <Button
-                            className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
+                            className="registryBtn px-5 py-2 rounded-pill"
                             onClick={
                               this.state.isLogged
                                 ? (e) =>

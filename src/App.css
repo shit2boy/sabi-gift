@@ -42,11 +42,15 @@ h6 {
 }
 
 input:focus::placeholder {
-  color: transparent;
-  /* opacity: 0; */
+  /* color: transparent; */
+  opacity: 0.2 !important;
+  font-size: 12px;
 }
 input::placeholder {
-  opacity: 0.2;
+  opacity: 0.2 !important;
+  font-size: 12px;
+
+  /* color: #888888; */
 }
 
 .loader {
@@ -195,6 +199,10 @@ Nav.Link {
 .ant-picker {
   padding: 8px 20px;
 }
+.ant-steps-item-finish .ant-steps-item-icon {
+  background-color: #fff;
+  border-color: gray;
+}
 .ant-steps-item-wait .ant-steps-item-icon > .ant-steps-icon {
   display: none;
 }
@@ -209,6 +217,15 @@ Nav.Link {
   border-color: #ffffff;
   background: #707070;
 }
+.ant-steps-item-process .ant-steps-item-icon {
+  border-width: thick !important;
+}
+.ant-steps-item-finish .ant-steps-item-icon {
+  background-color: #fff;
+}
+.anticon svg {
+  color: gray;
+}
 .anticon .anticon-check .ant-steps-finish-icon {
   display: none;
 }
@@ -220,8 +237,19 @@ Nav.Link {
   position: absolute;
   top: 0;
   left: 16px;
-  width: 1px;
-  height: 0%;
+  width: 0px;
+  /* height: 0%; */
+}
+.ant-steps-vertical
+  > .ant-steps-item
+  > .ant-steps-item-container
+  > .ant-steps-item-tail {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  /* width: 1px; */
+  height: 0;
+  /* padding: 38px 0 6px; */
 }
 
 .registryBtn {
@@ -237,7 +265,7 @@ Nav.Link {
 }
 
 .rightSide {
-  background: #e2f3e1;
+  background: #eeeeee;
   opacity: 1;
   color: #888888;
   /* padding-left: 30px; */

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import account from "../images/landing/account.svg";
+import account from "../images/landing/accountIcon.svg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import util from "../util/util";

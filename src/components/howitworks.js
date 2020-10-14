@@ -27,13 +27,13 @@ const Howitworks = () => {
             </div>
             <div id="stepTitle">
               <p className="text-white id='title'">Add Wedding Gifts</p>
-              <small className="d-block">
+              <small className="d-block text-white">
                 Register for anything, from plates to airline gift cards, cash,
                 <br />
                 even gifts from other stores.
               </small>
             </div>
-            <div className=" text-center p-2 stepTag">
+            <div className=" text-center text-white p-2 stepTag">
               <p> 1</p>
               <p>
                 select

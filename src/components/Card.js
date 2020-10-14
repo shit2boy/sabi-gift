@@ -15,7 +15,7 @@ const Card = ({ image, title, content, footerTitle, footDescription }) => {
         </div>
         <div className="card-body" style={{ minHeight: "50px" }}>
           <h5 className="card-title">{title}</h5>
-          <p className="card-text">{content}</p>
+          <p className="card-text text-left">{content}</p>
         </div>
         <div className="card-footer">
           <h6 className="pointer">

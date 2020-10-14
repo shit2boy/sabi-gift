@@ -22,6 +22,7 @@ export class About extends Component {
       street: "",
       city: "",
       Phone: "",
+      checked: [],
       state: "",
       eventType: "",
       title: "",
@@ -54,7 +55,23 @@ export class About extends Component {
     });
     // console.log(formField);
   }
+  // handleSelectedGiftType = (e, id) => {
+  // this.setState({
+  // selectedGiftType: true,
+  // });
+  // console.log(this.state.selectedGiftType);
+  // };
   handleSelectedGiftType = (e) => {
+    let checkedoption = this.state.checked;
+    if (this.state.checked.indexOf(e.target.id) === -1) {
+      checkedoption.push(e.target.id);
+      this.setState({ checked: checkedoption });
+    } else {
+      checkedoption.splice(this.state.checked.indexOf(e.target.id), 1);
+      this.setState({ checked: checkedoption });
+    }
+    // console.log(this.state.checked);
+    // };
     this.setState({
       selectedGiftType: true,
     });
@@ -380,7 +397,7 @@ export class About extends Component {
   };
   render() {
     const containerStyle = {
-      border: "1px solid",
+      // border: "1px solid",
       backgroundColor: "#ffffff",
       cursor: "pointer",
     };
@@ -597,14 +614,24 @@ export class About extends Component {
                     <p className="py-4">Select the gift types</p>
                     <div className="col-10 row">
                       {this.state.registryType.map((type) => (
-                        <button
+                        <div
                           id={type.id}
                           onClick={this.handleSelectedGiftType}
                           key={type.id}
+                          // style={
+                          //   this.state.selectedGiftType
+                          //     ? containerStyle
+                          //     : unmarkedStyle
+                          // }
                           className="eventItem col-lg-3"
                         >
-                          <div className="text-center">
+                          <div id={type.id} className="text-center">
                             <img
+                              style={
+                                this.state.checked.indexOf("dd" + type.id) > -1
+                                  ? containerStyle
+                                  : unmarkedStyle
+                              }
                               id={type.id}
                               src={type.image}
                               alt={type.name}
@@ -614,7 +641,7 @@ export class About extends Component {
                           <p className="text-center mb-0" id={type.id}>
                             {type.name}
                           </p>
-                        </button>
+                        </div>
                       ))}
                     </div>
                     <div className="p-3">

@@ -469,7 +469,7 @@ export default class getstarted extends Component {
                         {this.state.currentIndex === 0 && (
                           <Button
                             type="submit"
-                            className="registryBtn p-2 rounded-pill btn-outline-light"
+                            className="registryBtn p-2 rounded-pill"
                             onClick={(e) => this.mapValueAndNext(e)}
                             style={{ background: "#AAAAAA" }}
                           >
@@ -478,7 +478,7 @@ export default class getstarted extends Component {
                         )}
                         {this.state.currentIndex > 0 && (
                           <Button
-                            className="registryBtn px-5 py-2 rounded-pill btn-outline-light"
+                            className="registryBtn px-5 py-2 rounded-pill"
                             onClick={
                               this.state.isLogged
                                 ? (e) =>
@@ -596,27 +596,28 @@ export default class getstarted extends Component {
                 {this.state.currentIndex <= 0 && (
                   <span
                     onClick={() => (window.location.href = "/createregistry")}
-                    className="px-5 py-2 "
+                    className="px-4 py-2 "
                     style={{
                       background: "#ffffff",
-                      border: "2px solid #DDDDDD",
+                      border: "1px solid #DDDDDD",
                       borderRadius: "50px",
                     }}
                   >
-                    BACK
+                    Back
                   </span>
                 )}
                 {this.state.currentIndex >= 1 && this.state.currentIndex <= 3 && (
                   <span
                     onClick={() => this.goBack()}
-                    className="px-5 py-2 "
+                    className="px-4 py-2 "
                     style={{
+                      cursor: "pointer",
                       background: "#ffffff",
-                      border: "2px solid #DDDDDD",
+                      border: "1px solid #DDDDDD",
                       borderRadius: "50px",
                     }}
                   >
-                    BACK
+                    Back
                   </span>
                 )}
                 {this.state.currentIndex === 4 && (
@@ -628,10 +629,11 @@ export default class getstarted extends Component {
                     <Button
                       type="submit"
                       onClick={this.handleSubmit}
-                      className="px-5 btn-outline-dark"
+                      className="px-5 py-2 "
                       style={{
+                        cursor: "pointer",
                         background: "#AAAAAA",
-                        border: "2px solid #DDDDDD",
+                        border: "1px solid #DDDDDD",
                         borderRadius: "50px",
                       }}
                     >

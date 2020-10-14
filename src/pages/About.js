@@ -796,17 +796,21 @@ export class About extends Component {
                         }
                         className="eventItem col-lg-3 text-center"
                       >
-                        <img
-                          src={item.picture}
-                          id={"k" + item.id}
-                          width="100px"
-                          alt={item.slug}
-                        />
+                        <div id={"k" + item.id}>
+                          {" "}
+                          <img
+                            className="rounded-circle"
+                            src={item.picture}
+                            id={"k" + item.id}
+                            width="100px"
+                            alt={item.slug}
+                          />
+                        </div>
                         <strong
                           id={"k" + item.id}
                           className="d-block text-dark"
                         >
-                          {item.slug}
+                          {item.name}
                         </strong>
                         {/* <small className="d-block">Description of gift</small> */}
                         <strong id={"k" + item.id} className="">

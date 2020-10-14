@@ -685,7 +685,7 @@ export class About extends Component {
                 >
                   <div className="">
                     <h2 id="header">
-                      What are somethings you <br /> enjoy doing together
+                      What are some things you <br /> enjoy doing together
                     </h2>
 
                     <p className="py-4">Select as many as you want</p>

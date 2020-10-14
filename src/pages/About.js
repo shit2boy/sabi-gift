@@ -445,7 +445,7 @@ export class About extends Component {
                             type="text"
                             name="firstName"
                             // value={this.state.formField['firstName']}
-                            placeholder="Jimi"
+                            placeholder="E.g Jimi"
                             pattern="[A-Za-z]"
                             value={this.state.firstName}
                             required
@@ -464,7 +464,7 @@ export class About extends Component {
                             type="text"
                             name="lastName"
                             value={this.state.lastName}
-                            placeholder="Fola"
+                            placeholder="E.g Fola"
                             pattern="[A-Za-z]"
                             required
                           />
@@ -483,7 +483,7 @@ export class About extends Component {
                             type="tel"
                             name="Phone"
                             value={this.state.Phone}
-                            placeholder="0000 0000-0000"
+                            placeholder="E.g 0000 0000-0000"
                           />
                           <span
                             style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
@@ -499,7 +499,7 @@ export class About extends Component {
                             value={this.state.AltPhone}
                             type="tel"
                             name="AltPhone"
-                            placeholder="0000-0000-0000"
+                            placeholder="E.g 0000-0000-0000"
                             required
                           />
                         </Form.Group>
@@ -511,7 +511,7 @@ export class About extends Component {
                           type="text"
                           name="address"
                           value={this.state.address}
-                          placeholder="14b wole Ariyo street"
+                          placeholder="E.g 14b wole Ariyo street"
                         />
                         <span
                           style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
@@ -527,7 +527,7 @@ export class About extends Component {
                             value={this.state.city}
                             type="text"
                             name="city"
-                            placeholder="Lekki"
+                            placeholder="E.g Lekki"
                           />
                           <span
                             style={{ color: "#dd2b0e", fontSize: "0.875rem" }}
@@ -543,7 +543,7 @@ export class About extends Component {
                             type="text"
                             name="state"
                             value={this.state.state}
-                            placeholder="State"
+                            placeholder="E.g State"
                           />
                           <span
                             style={{ color: "#dd2b0e", fontSize: "0.875rem" }}

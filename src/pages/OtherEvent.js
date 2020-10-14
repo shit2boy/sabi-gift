@@ -222,7 +222,7 @@ export default class OtherEvent extends Component {
       newUserInfo.append("first_name", this.state.answers[0]);
       newUserInfo.append("email", formField["email"]);
       newUserInfo.append("password", formField["password"]);
-      newUserInfo.append("event_type", 3);
+      newUserInfo.append("event_type", 6);
       newUserInfo.append(
         "title",
         `${this.state.answers[0]}'s ${this.state.answers[1]}`

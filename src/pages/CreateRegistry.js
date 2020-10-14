@@ -27,7 +27,7 @@ export class CreateRegistry extends Component {
         "content-type": "multipart/form-data",
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data !== undefined) {
           // this.setState({ loading: true });
           // const typeList = res.data

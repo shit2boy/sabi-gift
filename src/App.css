@@ -56,7 +56,14 @@ input::placeholder {
 
   /* color: #888888; */
 }
-
+input:focus {
+  border: none;
+  border-color: #fffbfb;
+}
+input {
+  border-color: #cbcbcb;
+  /* border: 1px; */
+}
 .loader {
   position: fixed;
   top: 50%;

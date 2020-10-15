@@ -212,7 +212,7 @@ export class ManageRegistry extends Component {
       cashNeeded,
       userEvent_link,
       cashGift,
-      title,
+      titles,
       backgroundImage,
       isPosterImg,
       loading,
@@ -303,7 +303,7 @@ export class ManageRegistry extends Component {
                   )} */}
                 </label>
                 <div className="hero-text">
-                  <h2 className="py-3 text-white"> {title}</h2>
+                  <h2 className="py-3 text-white"> {titles}</h2>
                   {/* {!this.state.spouseName && (
                     <h2 className="py-3 text-white">
                       {window.localStorage.name}'s birthday

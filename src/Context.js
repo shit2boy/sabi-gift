@@ -28,6 +28,7 @@ class ProductProvider extends Component {
     userRegistry: [],
     cashGift: [],
     title: "",
+    titles: "",
     spouse_name: "",
     event_date: "",
     userEvent_link: "",
@@ -159,9 +160,9 @@ class ProductProvider extends Component {
             window.localStorage.setItem("slug", data[data.length - 1].slug);
             window.localStorage.setItem("eventIID", data[data.length - 1].id);
             this.setState({ userRegistry: data[data.length - 1].items });
+            this.setState({ titles: data[data.length - 1].title });
             this.setState({ userEvent_link: data[data.length - 1].event_link });
             this.setState({ cashGift: data[data.length - 1].cash_item });
-
             this.setState({ loading: true });
 
             // console.log(this.state.userEvent_link);

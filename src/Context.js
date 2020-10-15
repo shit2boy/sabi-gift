@@ -149,8 +149,9 @@ class ProductProvider extends Component {
         // console.log(res.data);
 
         if (res.data !== undefined && res.data.length > 0) {
-          let data = res.data;
-
+          let returndata = res.data;
+          let data = returndata.sort((a, b) => a.id - b.id);
+          console.log(data);
           this.setState({ userAllEvent: data });
           for (let i = 0; i < data.length; i++) {
             console.log(data[data.length - 1]);

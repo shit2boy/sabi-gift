@@ -106,6 +106,7 @@ class EventType extends Component {
       if (cat === data.item["cat"]) {
         console.log(data);
         this.setState({ products: data });
+        console.log(this.state.products);
         // return data;
       }
       return this.state.products;

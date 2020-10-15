@@ -62,8 +62,8 @@ class ProductProvider extends Component {
     answers[currentIndex] = value;
     this.setState({ answers: answers });
     // console.dir(this.state);
-    console.log(answers);
-    console.log(this.state.formValue);
+    // console.log(answers);
+    // console.log(this.state.formValue);
     this.setState({ currentIndex: currentIndex + 1 });
     this.setState({ formValue: this.state.answers[currentIndex + 1] });
   };
@@ -152,11 +152,9 @@ class ProductProvider extends Component {
         if (res.data !== undefined && res.data.length > 0) {
           let returndata = res.data;
           let data = returndata.sort((a, b) => a.id - b.id);
-          console.log(data);
+          // console.log(data);
           this.setState({ userAllEvent: data });
           for (let i = 0; i < data.length; i++) {
-            console.log(data[data.length - 1]);
-            console.log(data.length - 1);
             window.localStorage.setItem("slug", data[data.length - 1].slug);
             window.localStorage.setItem("eventIID", data[data.length - 1].id);
             this.setState({ userRegistry: data[data.length - 1].items });

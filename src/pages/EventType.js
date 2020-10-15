@@ -196,9 +196,9 @@ class EventType extends Component {
           <div className="row ml-auto">
             <div className="col-3 d-none d-lg-block availableItem">
               <AvailableItems
-                sort={this.sortByPrice}
-                default={this.resetSortToDefault}
-                sortByCat={this.sortByCategory}
+              // sort={this.sortByPrice}
+              // default={this.resetSortToDefault}
+              // sortByCat={this.sortByCategory}
               />
             </div>
             <div className=" col">

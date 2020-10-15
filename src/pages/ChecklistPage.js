@@ -182,17 +182,26 @@ export class RegistryChecklist extends Component {
       .map((data, index) => {
         return (
           <Card key={index} className="productCards col-sm-3 m-3">
-            <div>
+            <div className="card-img">
               <img
                 className="card-img center grow"
                 alt="items"
+                width="100%"
                 src={data.picture}
                 id={data.id}
               />
             </div>
             {/* <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p> */}
-            <span className="d-block ml-auto">#{data.price}</span>
-            <Card.Body style={{ minHeight: "50px", padding: "5px" }}>
+            {/* <span className="d-block ml-auto">#{data.price}</span> */}
+            <div className="mb-4 mt-1" style={{ position: "relative" }}>
+              <span
+                style={{ position: "absolute", top: "50%", right: "18px" }}
+                className=""
+              >
+                #{data.price}
+              </span>
+            </div>
+            <Card.Body style={{ minHeight: "50px", paddingLeft: "10px" }}>
               <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
                 {data.name}
               </strong>

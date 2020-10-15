@@ -82,12 +82,12 @@ export class AvailableItems extends Component {
             <Radio.Group onChange={this.onChange} value={value}>
               {regCategory.map((item) => (
                 <Radio
-                  onClick={() => {
-                    this.props.sortByCat(item.name);
-                  }}
-                  // onClick={(e) => {
-                  //   sortByCategory(item.id);
+                  // onClick={() => {
+                  //   this.props.sortByCat(item.name);
                   // }}
+                  onClick={(e) => {
+                    this.props.sortByCat(item.id);
+                  }}
                   key={item.id}
                   style={radioStyle}
                   value={item.id}

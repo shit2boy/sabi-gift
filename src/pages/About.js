@@ -283,7 +283,7 @@ export class About extends Component {
   createEvent = async (e) => {
     e.preventDefault();
     let UserEventInfo;
-    if (window.localStorage.isLoggedIn === true) {
+    if (window.localStorage.userActive) {
       UserEventInfo = {
         event_owner: window.localStorage.userId,
         start_date: window.localStorage.evnt_date,

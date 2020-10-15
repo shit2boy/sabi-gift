@@ -38,10 +38,14 @@ const WhySabigift = () => {
               shipping and so much more. We made registering easy for couples
               and their guests, so all of you can enjoy this special time.
             </p>
-            <div style={{ marginTop: "60px" }}>
+            <div style={{ marginTop: "60px", color: "#ffffff" }}>
               <Link
                 to="/createRegistry"
-                style={{ backgroundColor: "#545871", borderRadius: "1.50rem" }}
+                style={{
+                  backgroundColor: "#545871",
+                  color: "#ffffff",
+                  borderRadius: "1.50rem",
+                }}
                 className="py-3 px-5 text-link text-white "
               >
                 Create a registry

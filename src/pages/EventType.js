@@ -99,14 +99,18 @@ class EventType extends Component {
     // console.log("reset", this.state.products);
   };
 
-  sortByCategory = (event) => {
-    const newList = this.state.products.filter((data) => {
-      if (event === data.item["cat"]) {
-        return data;
+  sortByCategory = (cat) => {
+    const { products } = this.state;
+    // let sortedProduct;
+    products.filter((data) => {
+      if (cat === data.item["cat"]) {
+        console.log(data);
+        this.setState({ products: data });
+        // return data;
       }
-      return data;
+      return this.state.products;
     });
-    this.setState({ products: newList });
+    // this.setState({ products: newList });
     // console.log(newList);
     // return event === item.item["cat"];
   };
@@ -127,59 +131,6 @@ class EventType extends Component {
   //         return null;
   //       })
   // }
-
-  // sortByPrice = async (min, max) => {
-  //   await axios
-  //     .get(
-  //       `${util.API_BASE_URL}registries/?min_price=${min}&max_price=${max}`,
-  //       {
-  //         headers: {
-  //           Authorization: "Token " + localStorage.getItem("token_id"),
-  //         },
-  //       }
-  //     )
-
-  //     .then((response) => {
-  //       // console.log(response.data);
-  //       if (response.data !== undefined) {
-  //         let data = response.data;
-  //         // for (let i = 0; i < data.length; i++) {
-  //         //   data[i].picture = data[i].picture.replace("image/upload/", "");
-  //         // }
-  //         this.setState({ products: data, loading: true });
-  //         console.log("price", this.state.products);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // sortByCategory = async (catId) => {
-  //   // this.setState({ loading: false });
-  //   await axios
-  //     .get(`${util.API_BASE_URL}registries/?flt_cat=${catId}`, {
-  //       headers: {
-  //         Authorization: "Token " + localStorage.getItem("token_id"),
-  //       },
-  //     })
-
-  //     .then((response) => {
-  //       // console.log(response.data);
-  //       if (response.data !== undefined) {
-  //         let data = response.data;
-  //         // for (let i = 0; i < data.length; i++) {
-  //         //   data[i].picture = data[i].picture.replace("image/upload/", "");
-  //         // }
-
-  //         this.setState({ products: data, loading: true });
-  //         console.log("cat", this.state.products);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   render() {
     let imgUrl = this.newMethod();

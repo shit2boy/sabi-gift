@@ -30,7 +30,7 @@ export class Dashboard extends Component {
     if (!window.localStorage.token_id) {
       window.location.href = "/";
     }
-
+    window.localStorage.setItem("userActive", true);
     axios
 
       .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {

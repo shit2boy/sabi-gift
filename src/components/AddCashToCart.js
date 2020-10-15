@@ -153,7 +153,7 @@ class AddCashToCart extends Component {
                           ? cashFund
                           : this.props.image.replace("image/upload/", "")
                       }
-                      width="100px"
+                      width="70px"
                       className="card-img center"
                       alt="cashFund"
                     />

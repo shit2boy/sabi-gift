@@ -106,6 +106,7 @@ Nav.Link {
   display: inline;
   background: var(--mainWhite);
   padding: 3rem;
+  margin-top: 0;
   text-align: center;
 }
 .banner h1 {
@@ -173,7 +174,7 @@ Nav.Link {
 }
 .stepIcon {
   align-self: center;
-  background: #f7eceb;
+  /* background: #f7eceb; */
 }
 .stepOutline {
   flex-direction: row;

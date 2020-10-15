@@ -182,7 +182,7 @@ export class RegistryChecklist extends Component {
       .map((data, index) => {
         return (
           <Card key={index} className="productCards col-sm-3 m-3">
-            <div className="card-img">
+            <div className="card-img p-4">
               <img
                 className="card-img center grow"
                 alt="items"
@@ -193,19 +193,25 @@ export class RegistryChecklist extends Component {
             </div>
             {/* <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p> */}
             {/* <span className="d-block ml-auto">#{data.price}</span> */}
-            <div className="mb-4 mt-1" style={{ position: "relative" }}>
+            {/* <div className="mb-4 mt-1" style={{ position: "relative" }}>
+             
+            </div> */}
+            <Card.Body style={{ minHeight: "50px", paddingLeft: "10px" }}>
+              <strong
+                className="d-block px-3"
+                style={{ textOverflow: "ellipsis" }}
+              >
+                {data.name}
+              </strong>
               <span
-                style={{ position: "absolute", top: "50%", right: "18px" }}
-                className=""
+                // style={{ position: "absolute", top: "50%", right: "18px" }}
+                className="d-block px-3 pb-0"
               >
                 #{data.price}
               </span>
-            </div>
-            <Card.Body style={{ minHeight: "50px", paddingLeft: "10px" }}>
-              <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
-                {data.name}
-              </strong>
-              <small>{data.description}</small>
+              <small style={{ fontSize: "11px" }} className="d-block px-3">
+                {data.description}
+              </small>
             </Card.Body>
             <div></div>
 

@@ -1,8 +1,11 @@
 import React from "react";
 import Box5 from "../images/landing/box5.png";
-import { FaRegHandPaper } from "react-icons/fa";
-import { FaHome } from "react-icons/fa";
-import { GrAddCircle } from "react-icons/gr";
+// import { FaRegHandPaper } from "react-icons/fa";
+// import { FaHome } from "react-icons/fa";
+import Gift from "../images/landing/giftiCons.svg";
+import Weddingicon from "../images/landing/weddingicon.svg";
+import addgifticon from "../images/landing/addgifticon.svg";
+// import { GrAddCircle } from "react-icons/gr";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -23,7 +26,8 @@ const Howitworks = () => {
             id="active"
           >
             <div className="rounded-circle stepIcon">
-              <GrAddCircle color="#EBD0CE" size="40px" />
+              {/* <GrAddCircle color="#EBD0CE" size="40px" /> */}
+              <img src={addgifticon} alt="icon" width="65px" />
             </div>
             <div id="stepTitle">
               <p className="text-white id='title'">Add Wedding Gifts</p>
@@ -44,7 +48,8 @@ const Howitworks = () => {
           </div>
           <div className="d-flex justify-content-around stepOutline">
             <div className="rounded-circle stepIcon">
-              <FaRegHandPaper color=" #EBD0CE" size="35px" />
+              {/* <FaRegHandPaper color=" #EBD0CE" size="35px" /> */}
+              <img src={Gift} alt="icon" width="65px" />
             </div>
             <div id="stepTitle">
               <p> Guests Buy You Gifts</p>
@@ -64,7 +69,8 @@ const Howitworks = () => {
             data-aos="fade-in"
           >
             <div className="rounded-circle stepIcon">
-              <FaHome color=" #EBD0CE" size="40px" />
+              {/* <FaHome color=" #EBD0CE" size="40px" /> */}
+              <img src={Weddingicon} alt="icon" width="65px" />
             </div>
             <div id="stepTitle">
               <p>Enjoy Newlywed Life </p>

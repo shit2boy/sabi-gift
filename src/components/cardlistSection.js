@@ -22,7 +22,7 @@ function CardlistSection() {
         </div>
 
         <div className="  mt-5" data-aos="fade-left">
-          <p className=" offset-3 text-left">
+          <p className=" offset-3 text-justify">
             Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
             <br />
             ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem Lorem ipsum <br />{" "}
@@ -43,7 +43,7 @@ function CardlistSection() {
             <Card
               image={present}
               title="Our Store has it all"
-              content="We are the only place with classic and unique wedding gifts,giftcards and Honeymoon funds all in one"
+              content="Only place with classic and unique wedding gifts, giftcards and honeymoon funds all in one."
               footerTitle="GET STARTED"
               footDescription="Sign Up Free"
             />

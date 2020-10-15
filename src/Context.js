@@ -29,6 +29,7 @@ class ProductProvider extends Component {
     cashGift: [],
     title: "",
     titles: "",
+    startDate: "",
     spouse_name: "",
     event_date: "",
     userEvent_link: "",
@@ -152,19 +153,20 @@ class ProductProvider extends Component {
         if (res.data !== undefined && res.data.length > 0) {
           let returndata = res.data;
           let data = returndata.sort((a, b) => a.id - b.id);
-          // console.log(data);
           this.setState({ userAllEvent: data });
+          console.log(this.state.userAllEvent);
           for (let i = 0; i < data.length; i++) {
             window.localStorage.setItem("slug", data[data.length - 1].slug);
             window.localStorage.setItem("eventIID", data[data.length - 1].id);
             this.setState({ userRegistry: data[data.length - 1].items });
             this.setState({ titles: data[data.length - 1].title });
+            this.setState({ startDate: data[data.length - 1].start_date });
             this.setState({ userEvent_link: data[data.length - 1].event_link });
             this.setState({ cashGift: data[data.length - 1].cash_item });
             this.setState({ loading: true });
 
             // console.log(this.state.userEvent_link);
-            // console.log(this.state.cashGift);
+            // console.log(this.state.startDate);
             data[i].poster = data[data.length - 1].poster.replace(
               "image/upload/",
               ""

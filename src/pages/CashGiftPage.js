@@ -139,12 +139,17 @@ class CashGift extends Component {
           show={this.state.modalShow}
           onHide={() => this.setModalHide(false)}
         >
-          <Modal.Header closeButton></Modal.Header>
+          <Modal.Header className="text-center" closeButton>
+            <span style={{ fontSize: "24px" }} className="mx-auto">
+              {" "}
+              Add cash fund
+            </span>
+          </Modal.Header>
           <Modal.Body className=" ">
             <div className="container">
               <div className="row justify-content-center">
                 <div className="col">
-                  <div className="shadow">
+                  <div className=" w-70 justify-content-center align-content-center p-3 mx-auto">
                     <label>
                       <BsPencil />
                       <img
@@ -153,7 +158,7 @@ class CashGift extends Component {
                             ? URL.createObjectURL(this.state.selectedFile)
                             : cashFund
                         }
-                        width="100px"
+                        width="70px"
                         className="card-img center"
                         alt="cashFund"
                       />
@@ -178,9 +183,8 @@ class CashGift extends Component {
                     </label>
                   </div>
                 </div>
-                <div className=" col-lg pa2">
+                <div className=" col-lg ">
                   <div className="">
-                    <h3>Add cash fund</h3>
                     <Form.Group controlId="mail">
                       <Form.Label>
                         ITEM NAME<span style={{ color: "red" }}>*</span>

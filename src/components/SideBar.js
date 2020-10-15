@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Avatars from "../images/Sabi-storepage/Avatars.png";
+// import image from "../images/Sabi-storepage/image.png";
 import home from "../images/sabi-icons/home.svg";
 import tracker from "../images/sabi-icons/track.png";
 import file from "../images/sabi-icons/file.svg";
@@ -40,13 +40,13 @@ export class SideBar extends Component {
             <img src={notification} width="25px" alt="icon" />
           </Tooltip>
         </div>
-        <div className="text-center mb-4">
-          <img src={Avatars} width="35px" alt="userImage" />
-        </div>
+        {/* <div className="text-center mb-4">
+          <img src={image} width="35px" alt="userImage" />
+        </div> */}
         <div className="text-center">
           <div className="py-4 o">
             <Tooltip
-              visible={isOverview ? true : false}
+              // visible={isOverview ? true : false}
               placement="left"
               title="overview"
               color="#5F619F"
@@ -64,7 +64,7 @@ export class SideBar extends Component {
           </div>
           <div className="py-4">
             <Tooltip
-              visible={isManage ? true : false}
+              // visible={isManage ? true : false}
               placement="left"
               title="manage registry"
               color="#5F619F"
@@ -81,7 +81,7 @@ export class SideBar extends Component {
           </div>
           <div className="py-4">
             <Tooltip
-              visible={isChecklist ? true : false}
+              // visible={isChecklist ? true : false}
               placement="left"
               title="checklist"
               color="#5F619F"
@@ -98,7 +98,7 @@ export class SideBar extends Component {
           </div>
           <div className="py-4">
             <Tooltip
-              visible={isTracker ? true : false}
+              // visible={isTracker ? true : false}
               placement="left"
               title="Track Gift"
               color="#5F619F"

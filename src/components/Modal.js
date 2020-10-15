@@ -74,17 +74,20 @@ export default class Findevent extends Component {
         </button>
         <Modal
           size="lg"
+          className=" p-4"
           aria-labelledby="contained-modal-title-vcenter"
           centered
           show={this.state.modalShow}
           onHide={() => this.setModalHide(false)}
         >
-          <Modal.Header closeButton>
-            <Modal.Title id="findevent">
-              <h2>Find an event Registry or Website</h2>
-            </Modal.Title>
+          <Modal.Header className="text-center pl-4" closeButton>
+            {/* <Modal.Title id="findevent"> */}
+            <h2 className=" offset-1 text-center">
+              Find an event Registry or Website
+            </h2>
+            {/* </Modal.Title> */}
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className=" pl-5 p-3 mt-4 mb-3">
             <Form onSubmit={this.handleSearch}>
               <Form.Row>
                 <Form.Group as={Col} controlId="Fname">
@@ -103,7 +106,11 @@ export default class Findevent extends Component {
                     type="button"
                     onClick={this.handleSearch}
                     className="btn px-2"
-                    style={{ backgroundColor: "#58B852", width: "90px" }}
+                    style={{
+                      backgroundColor: "#58B852",
+                      color: "white",
+                      width: "90px",
+                    }}
                   >
                     Find
                   </button>

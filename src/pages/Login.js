@@ -97,14 +97,12 @@ class Login extends Component {
           onHide={() => this.setModalHide(false)}
         >
           <Modal.Header closeButton>
-            <Modal.Title
-              id="contained-modal-title-vcenter"
-              className="text-center"
-            >
-              {this.state.modalTitle}
-            </Modal.Title>
+            {/* <Modal.Title */}
+            {/* id="contained-modal-title-vcenter" className="text-center" > */}
+            {this.state.modalTitle}
+            {/* </Modal.Title> */}
           </Modal.Header>
-          <Modal.Body className=" ">
+          <Modal.Body className=" p-4">
             <Form noValidate onSubmit={this.onSubmit}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -168,7 +166,9 @@ class Login extends Component {
                   </Link>
                 </span>
               </div>
-              <small style={{ color: "#223564", opacity: "1" }}>
+              <small
+                style={{ color: "#223564", fontSize: " 10px", opacity: "1" }}
+              >
                 This site is protected by reCAPTCHA and the Google Privacy
                 Policy and Terms of Service apply.
               </small>

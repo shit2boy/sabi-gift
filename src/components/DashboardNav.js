@@ -25,6 +25,7 @@ export class DashboardNav extends Component {
       fileSelected: false,
       uploading: false,
       profileImage: "",
+      eventLink: "",
     };
   }
 
@@ -76,27 +77,29 @@ export class DashboardNav extends Component {
             <Nav.Link href="/giftTracker">Gift Tracker</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="#">
-              <span className="row">
+            <div>
+              <span className="row d-block">
                 {" "}
                 {window.localStorage.name}'s registry
               </span>
               {/* <span className="mr-2"> */}
-              <Link className="text-link mr-2" to="/editprofile">
+              <Link className=" text-link p-2" to="/editprofile">
                 <img src={settingIcon} alt="icon" />
                 <small>setting</small>
               </Link>
               {/* </span> */}
-              <Link
-                className="text-link"
-                to={{ pathname: `registry/${window.localStorage.slug}` }}
+              <a
+                className=" text-link"
+                href={this.context.userEvent_link}
+                target="blank"
+                // to={{ pathname: `registry/${window.localStorage.slug}` } }
               >
                 <span>
                   <img src={previewIcon} alt="icon" />
                   <small>Preview</small>
                 </span>
-              </Link>
-            </Nav.Link>
+              </a>
+            </div>
             <NavDropdown id="collasible-nav-dropdown" title="">
               {/* <NavDropdown.Item href="#">Edit Profile</NavDropdown.Item> */}
 

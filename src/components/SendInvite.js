@@ -127,8 +127,8 @@ export default class SendInvite extends Component {
           show={this.state.modalShow}
           onHide={() => this.setModalHide(false)}
         >
-          <Modal.Header closeButton>
-            <p>{this.props.title}</p>
+          <Modal.Header className="text-center" closeButton>
+            <span className="pl-4">{this.props.title}</span>
           </Modal.Header>
           <Modal.Body className=" ">
             <div className="container">
@@ -157,7 +157,7 @@ export default class SendInvite extends Component {
                     </Form.Group>
                     {!this.props.isSabiPartner && (
                       <Button
-                        className="mt-5 w-100"
+                        className="mt-3 w-100"
                         variant="success"
                         type="submit"
                         style={{ background: "#58B852", color: "#ffffff" }}
@@ -167,7 +167,7 @@ export default class SendInvite extends Component {
                     )}
                     {this.props.isSabiPartner && (
                       <Button
-                        className="w-100 mt-5"
+                        className="w-100 mt-3"
                         variant="success"
                         type="submit"
                         style={{ background: "#58B852", color: "#ffffff" }}

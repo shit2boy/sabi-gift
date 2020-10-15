@@ -80,6 +80,7 @@ export class Product extends Component {
       Products: this.props.Products,
       cashGift: this.props.cashItem,
     });
+    console.log("dff", this.state.Products);
   }
 
   getIndexOfProduct = (id) => {
@@ -219,9 +220,9 @@ export class Product extends Component {
     }).map((data, index) => {
       return (
         <Card key={index} className="productCards col-sm-3 m-4">
-          <div className="card-img">
+          <div className=" p-4 ">
             <img
-              className="center grow"
+              className="card-img center grow"
               alt="items"
               src={data.item["picture"]}
               id={data.item["id"]}
@@ -229,23 +230,26 @@ export class Product extends Component {
             />
           </div>
           {/* <p className="card-img-overlay text-danger text-left mt-0 ml-0"></p> */}
-          <div style={{ position: "relative" }}>
-            <span
-              style={{ position: "absolute", top: "50%", right: "18px" }}
-              className="ml-auto"
-            >
-              #{data.item["price"]}
-            </span>
-          </div>
+          {/* <div style={{ position: "relative" }}>
+           
+          </div> */}
           <Card.Body style={{ minHeight: "50px", paddingLeft: "10px" }}>
-            <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
+            <strong
+              className="d-block px-3 pb-0"
+              style={{ textOverflow: "ellipsis" }}
+            >
               {data.item["name"]}
             </strong>
-            <small>{data.item["description"]}</small>
+            <span className="px-3 py-0 mb-0 d-block">
+              #{data.item["price"]}
+            </span>
+            <small className=" d-block px-3" style={{ fontSize: "11px" }}>
+              {data.item["description"]}
+            </small>
           </Card.Body>
 
-          <div>
-            <small className="ml-1">Requested : {data.item.qty[0]}</small>
+          <div className="p-1">
+            <small className=" p-3">Requested : {data.item.qty[0]}</small>
           </div>
 
           {this.props.showWishList && data.item.qty[0] > 0 && (
@@ -342,7 +346,7 @@ export class Product extends Component {
     const cashItem = this.state.cashGift.map((data, index) => {
       return (
         <Card key={index} className="productCards col-sm-3 m-4">
-          <div>
+          <div className="p-3">
             <img
               className="card-img center grow"
               alt="items"
@@ -356,16 +360,24 @@ export class Product extends Component {
           </div>
           <p></p>
           <Card.Body style={{ minHeight: "50px", paddingLeft: "10px" }}>
-            <strong className="d-block" style={{ textOverflow: "ellipsis" }}>
+            <strong
+              className="d-block p-3"
+              style={{ textOverflow: "ellipsis" }}
+            >
               {data.name}
             </strong>
             {/* <span className="d-block ml-auto">
               {" "}
               #{data.price} <small> </small>
             </span> */}
-            <span className="d-block ml-auto">
-              #{data.balance} <small>Needed </small>
-            </span>
+            <div style={{ position: "relative" }}>
+              <span
+                className="d-block ml-auto "
+                style={{ position: "absolute", top: "50%", left: "18px" }}
+              >
+                #{data.balance} <small>Needed </small>
+              </span>
+            </div>
           </Card.Body>
           <p></p>
 

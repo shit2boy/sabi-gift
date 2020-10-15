@@ -423,13 +423,13 @@ export class Product extends Component {
     });
 
     return (
-      <div className="container-fluid">
-        <div className="row ml-auto mb-2">
+      <div className="container-fluid mb-5">
+        <div className="row ml-auto mb-3 ">
           <div className="col-8 ">
             <small>7,618 results found in 5ms</small>
           </div>
           <div className="col d-none d-lg-block">
-            <select className="p-1">
+            <select className="p-2">
               <option>Default</option>
               <option>item</option>
               <option>item</option>
@@ -440,7 +440,7 @@ export class Product extends Component {
                 onClick={() => {
                   this.setState({ listDisplay: false });
                 }}
-                size="25px"
+                size="30px"
               />
             </span>
             <span className="pointer p-2">
@@ -449,7 +449,7 @@ export class Product extends Component {
                 onClick={() => {
                   this.setState({ listDisplay: true });
                 }}
-                size="25px"
+                size="30px"
               />
             </span>
           </div>

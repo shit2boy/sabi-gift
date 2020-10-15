@@ -252,7 +252,7 @@ export class ManageRegistry extends Component {
                 <p>This is where you manage your registry items.</p>
               </div>
             </div>
-            {userAllEvent.length > 0 && (
+            {/* {userAllEvent.length > 0 && (
               <div className="row justify-content-center">
                 <p className="pointer">select the event to view</p>
                 {userAllEvent.map((event, index) => (
@@ -268,7 +268,7 @@ export class ManageRegistry extends Component {
                   </p>
                 ))}
               </div>
-            )}
+            )} */}
             <div className="row mt-5 ">
               <div
                 className="col-12 text-center shadow"

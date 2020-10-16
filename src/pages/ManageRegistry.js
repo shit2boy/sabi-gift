@@ -262,6 +262,7 @@ export class ManageRegistry extends Component {
                     <Button
                       variant="outline-success"
                       className=""
+                      size="sm"
                       onClick={() => {
                         this.context.eventSelected(event);
                       }}

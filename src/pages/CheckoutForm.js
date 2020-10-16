@@ -253,11 +253,11 @@ export default class CheckoutForm extends Component {
       <>
         <div className=" container-fluid mb-5">
           <div className="row">
-            <Link to="/Dashboard" className="mt-3">
+            <Link to="/cart" className="mt-3">
               <img src={sabigift} width="70px" alt="logo" />
             </Link>
           </div>
-          <div className="row mt-4">
+          <div className="row mt-4 mb-2">
             <h3 className="pl-5">Check out</h3>
           </div>
           <div className="row justify-content-center">

@@ -155,7 +155,7 @@ class ProductProvider extends Component {
           let returndata = res.data;
           let data = returndata.sort((a, b) => a.id - b.id);
           this.setState({ userAllEvent: data });
-          console.log(this.state.userAllEvent);
+          // console.log(this.state.userAllEvent);
           for (let i = 0; i < data.length; i++) {
             window.localStorage.setItem("slug", data[data.length - 1].slug);
             window.localStorage.setItem("eventIID", data[data.length - 1].id);
@@ -169,13 +169,13 @@ class ProductProvider extends Component {
               "image/upload/",
               ""
             );
-            console.log(data[i].poster);
+            // console.log(data[i].poster);
             this.setState({
               backgroundImage: data[i].poster,
               isPosterImg: true,
             });
-            console.log(this.state.isPosterImg);
-            console.log(this.state.backgroundImage);
+            // console.log(this.state.isPosterImg);
+            // console.log(this.state.backgroundImage);
 
             if (this.state.cashGift.length > 0) {
               this.setState({ cashNeeded: true });
@@ -229,9 +229,9 @@ class ProductProvider extends Component {
   }
 
   eventSelected = (reg) => {
-    console.log("call me");
     const { userAllEvent } = this.state;
     let regEvent = [];
+    let poster;
     userAllEvent.map((event) => {
       if (reg === event) {
         // item.push(e.target.id);
@@ -250,20 +250,24 @@ class ProductProvider extends Component {
       this.setState({ startDate: regEvent[i].start_date });
       this.setState({ userEvent_link: regEvent[i].event_link });
       this.setState({ cashGift: regEvent[i].cash_item });
-      // this.setState({ loading: true });
+      this.setState({ loading: true });
       this.setState({
-        backgroundImage: regEvent.poster,
-        isPosterImg: true,
+        backgroundImage: regEvent[i].poster,
+        // isPosterImg: true,
       });
-      // if (this.state.cashGift.length > 0) {
-      //   this.setState({ cashNeeded: true });
-      // }
-      console.log(regEvent[i].items);
+      // console.log(this.state.backgroundImage);
+      if (this.state.backgroundImage !== null) {
+        poster = this.state.backgroundImage.replace("image/upload/", "");
+      }
+      this.setState({
+        backgroundImage: poster,
+        // isPosterImg: true,
+      });
+      console.log(this.state.backgroundImage);
     }
 
-    console.log(regEvent);
-    console.log(this.state.userRegistry);
-    console.log(typeof this.state.userRegistry);
+    // console.log(regEvent);
+    // console.log(this.state.userRegistry);
   };
 
   resetSortToDefault = (e) => {

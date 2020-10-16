@@ -192,7 +192,7 @@ export default class CartItem extends Component {
     return (
       <div className="container">
         <div className="mb-4 d-flex justify-content-between">
-          <a href="/registry">
+          <a href={`registry/${window.localStorage.slug}`}>
             {" "}
             <img src={sabigift} alt="logo" width="75px" />{" "}
           </a>
@@ -342,7 +342,7 @@ export default class CartItem extends Component {
           <div className=" mt-4 mb-5 text-center ">
             {/* <Link className="text-link" to="/checkout"> */}
             <Link
-              to={{ pathname: `registry/${window.localStorage.slug}` }}
+              to={`registry/${window.localStorage.slug}`}
               // onClick={this.handleSumbitCart}
               className="p-3 bg-success text-white pointer text-link mr-4"
               style={{ border: "1px solid" }}

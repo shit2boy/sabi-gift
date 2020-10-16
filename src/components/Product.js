@@ -83,13 +83,13 @@ export class Product extends Component {
     // console.log(this.props.Products);
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.Products !== prevState.Products) {
+    if (this.props.Products !== prevState.Products) {
       // console.log("pokemons state has changed.");
       this.setState({
         Products: this.props.Products,
         cashGift: this.props.cashItem,
       });
-      console.log(this.state.cashGift);
+      // console.log(this.state.cashGift);
     }
   }
 

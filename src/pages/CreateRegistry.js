@@ -92,7 +92,7 @@ export class CreateRegistry extends Component {
                       <p className="py-4">Select the Event type</p>
                       <div className="row col-10">
                         {this.state.eventTypeList.map((type) => (
-                          <button
+                          <div
                             onClick={this.handleEvent}
                             key={type.id}
                             id={type.name}
@@ -105,7 +105,7 @@ export class CreateRegistry extends Component {
                               id={type.name}
                             />
                             <p id={type.name}>{type.name}</p>
-                          </button>
+                          </div>
                         ))}
 
                         {/* <button

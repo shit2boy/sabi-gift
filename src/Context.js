@@ -41,6 +41,7 @@ class ProductProvider extends Component {
     formValue: "",
     answers: ["", "", ""],
     currentIndex: 0,
+    userRegistries: [],
   };
 
   // updateContextState = (key, val) => {
@@ -164,18 +165,18 @@ class ProductProvider extends Component {
             this.setState({ userEvent_link: data[data.length - 1].event_link });
             this.setState({ cashGift: data[data.length - 1].cash_item });
             this.setState({ loading: true });
-
-            // console.log(this.state.userEvent_link);
-            // console.log(this.state.startDate);
             data[i].poster = data[data.length - 1].poster.replace(
               "image/upload/",
               ""
             );
-            // console.log(data[i].poster);
+            console.log(data[i].poster);
             this.setState({
               backgroundImage: data[i].poster,
               isPosterImg: true,
             });
+            console.log(this.state.isPosterImg);
+            console.log(this.state.backgroundImage);
+
             if (this.state.cashGift.length > 0) {
               this.setState({ cashNeeded: true });
             }
@@ -226,6 +227,44 @@ class ProductProvider extends Component {
         console.log(err);
       });
   }
+
+  eventSelected = (reg) => {
+    console.log("call me");
+    const { userAllEvent } = this.state;
+    let regEvent = [];
+    userAllEvent.map((event) => {
+      if (reg === event) {
+        // item.push(e.target.id);
+        regEvent.push(event);
+      }
+      return regEvent;
+    });
+    this.setState({ userRegistries: regEvent });
+    // data = this.state.userRegistries;
+    // data = regEvent;
+    for (let i = 0; i < regEvent.length; i++) {
+      window.localStorage.setItem("slug", regEvent[i].slug);
+      window.localStorage.setItem("eventIID", regEvent[i].id);
+      this.setState({ userRegistry: regEvent[i].items });
+      this.setState({ titles: regEvent[i].title });
+      this.setState({ startDate: regEvent[i].start_date });
+      this.setState({ userEvent_link: regEvent[i].event_link });
+      this.setState({ cashGift: regEvent[i].cash_item });
+      // this.setState({ loading: true });
+      this.setState({
+        backgroundImage: regEvent.poster,
+        isPosterImg: true,
+      });
+      // if (this.state.cashGift.length > 0) {
+      //   this.setState({ cashNeeded: true });
+      // }
+      console.log(regEvent[i].items);
+    }
+
+    console.log(regEvent);
+    console.log(this.state.userRegistry);
+    console.log(typeof this.state.userRegistry);
+  };
 
   resetSortToDefault = (e) => {
     e.preventDefault();
@@ -330,6 +369,7 @@ class ProductProvider extends Component {
           handleSelectOpt: this.handleSelectOpt,
           // totalCashContributed: this.totalCashContributed,
           handleQuantityChange: this.handleQuantityChange,
+          eventSelected: this.eventSelected,
           sortByPrice: this.sortByPrice,
           resetSortToDefault: this.resetSortToDefault,
           sortByCategory: this.sortByCategory,

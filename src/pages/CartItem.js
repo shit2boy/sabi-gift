@@ -210,7 +210,7 @@ export default class CartItem extends Component {
           </div>
         </div>
         <hr />
-        <div className="row mt-5 justify-content-center">
+        <div className="row mt-5 mb-3 justify-content-center">
           <Table hover>
             <thead>
               <tr>
@@ -339,8 +339,16 @@ export default class CartItem extends Component {
             </tbody>
           </Table>
 
-          <div className=" mt-4 text-center ">
+          <div className=" mt-4 mb-5 text-center ">
             {/* <Link className="text-link" to="/checkout"> */}
+            <Link
+              to={{ pathname: `registry/${window.localStorage.slug}` }}
+              // onClick={this.handleSumbitCart}
+              className="p-3 bg-success text-white pointer text-link mr-4"
+              style={{ border: "1px solid" }}
+            >
+              Continue Shopping
+            </Link>
             <span
               onClick={this.handleSumbitCart}
               className="p-3 bg-success text-white pointer"

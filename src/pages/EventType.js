@@ -168,7 +168,7 @@ class EventType extends Component {
             {" "}
             <Link to="/cart">
               <span
-                className="badge-danger"
+                className=" badge badge-danger"
                 style={{ color: "white", font: "16px", position: "absolute" }}
               >
                 {this.context.quantity}

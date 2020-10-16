@@ -257,12 +257,12 @@ export default class CheckoutForm extends Component {
               <img src={sabigift} width="70px" alt="logo" />
             </Link>
           </div>
-          <div className="row col">
-            <h3>Check out</h3>
+          <div className="row mt-4">
+            <h3 className="pl-5">Check out</h3>
           </div>
           <div className="row justify-content-center">
             <div
-              className="col-7 mx-auto p-3"
+              className="col-7 mx-auto p-4"
               style={{ border: "1px solid #707070", borderRadius: "30px" }}
             >
               <Form onSubmit={this.handleSubmit}>
@@ -392,7 +392,7 @@ export default class CheckoutForm extends Component {
               }}
             >
               <Table className="p-2 center ">
-                <tbody>
+                <tbody className="p-3 mt-3">
                   <tr>
                     <td>Sub-total</td>
                     <td>#{window.localStorage.totalSum}</td>

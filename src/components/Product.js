@@ -80,7 +80,17 @@ export class Product extends Component {
       Products: this.props.Products,
       cashGift: this.props.cashItem,
     });
-    console.log("dff", this.state.Products);
+    // console.log(this.props.Products);
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.Products !== prevState.Products) {
+      // console.log("pokemons state has changed.");
+      this.setState({
+        Products: this.props.Products,
+        cashGift: this.props.cashItem,
+      });
+      console.log(this.state.cashGift);
+    }
   }
 
   getIndexOfProduct = (id) => {

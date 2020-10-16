@@ -314,21 +314,22 @@ export class Setting extends Component {
               </div>
               <div className="row p-4" style={{ background: "#ffffff" }}>
                 <div className="col bg-white d-flex justify-content-between">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      window.location.href = "/manageregistry";
-                    }}
+                  <Link
+                    to="/manageregistry"
+                    // type="button"
+                    // onClick={() => {
+                    //   window.location.href = "/manageregistry";
+                    // }}
                     className="btn btn-light rounded-pill px-5 "
                   >
                     Back
-                  </button>
+                  </Link>
                   <button
                     type="submit"
                     onClick={this.handleSubmit}
                     className="btn btn-dark rounded-pill px-5"
                   >
-                    Next
+                    Update
                   </button>
                 </div>
               </div>

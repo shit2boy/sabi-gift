@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SideBar from "../components/SideBar";
-import { ProgressBar } from "react-bootstrap";
+import { ProgressBar, Button } from "react-bootstrap";
 import DashboardNav from "../components/DashboardNav";
 import CheckList from "../components/AddcheckList";
 import { BsPencil } from "react-icons/bs";
@@ -252,21 +252,45 @@ export class ManageRegistry extends Component {
                 <p>This is where you manage your registry items.</p>
               </div>
             </div>
+            {userAllEvent.length > 0 && (
+              <div className="row">
+                <span className="mx-auto">
+                  <strong className="d-block p-3">
+                    select the event to view
+                  </strong>
+                  {userAllEvent.map((event, index) => (
+                    <Button
+                      variant="outline-success"
+                      className=""
+                      onClick={() => {
+                        this.context.eventSelected(event);
+                      }}
+                      id={event.id}
+                      key={index}
+                    >
+                      {event.title}
+                    </Button>
+                  ))}
+                </span>
+              </div>
+            )}
             {/* {userAllEvent.length > 0 && (
-              <div className="row justify-content-center">
-                <p className="pointer">select the event to view</p>
-                {userAllEvent.map((event, index) => (
-                  <p
-                    className="d-block"
-                    onClick={() => {
-                      this.eventSelected(event.id);
-                    }}
-                    id={event.id}
-                    key={index}
-                  >
-                    {event.id}
-                  </p>
-                ))}
+              <div className="row">
+                <span className="mx-auto">
+                  <small>select the event to view</small>
+                  {userAllEvent.map((event, index) => (
+                    <span
+                      className="d-block pointer"
+                      onClick={() => {
+                        this.context.eventSelected(event);
+                      }}
+                      id={event.id}
+                      key={index}
+                    >
+                      {event.title}
+                    </span>
+                  ))}
+                </span>
               </div>
             )} */}
             <div className="row mt-5 ">

@@ -50,6 +50,21 @@ export class CreateRegistry extends Component {
   };
 
   render() {
+    // style={
+    //   this.context.selected.indexOf(
+    //     "ddd" + category.id
+    //   ) > -1
+    //     ? containerStyle
+    //     : unmarkedStyle
+    // }
+    // const containerStyle = {
+    //   backgroundColor: "#ffffff",
+    //   cursor: "pointer",
+    // };
+    // const unmarkedStyle = {
+    //   backgroundColor: "#f7f7f7",
+    //   cursor: "pointer",
+    // };
     const { loading } = this.state;
 
     if (!loading) return <Spinner />;

@@ -12,33 +12,34 @@ const WhySabigift = () => {
   return (
     <div className="container-fluid mt-4 ">
       <div className="row no-gutters">
-        <div className="col-sm coupleImg" data-aos="fade-left">
-          <div>
-            {" "}
-            <img className="img-fluid" src={coupleImage} alt="coupleImage" />
-          </div>
+        <div className="col-sm" data-aos="fade-left">
+          {/* <div> */} <img className="" src={coupleImage} alt="coupleImage" />
+          {/* </div> */}
         </div>
         <div
           className="col-sm"
-          style={{ backgroundColor: "#D2F5D9" }}
+          style={{ backgroundColor: "#D2F5D9", position: "relative" }}
           data-aos="fade-right"
         >
           <div className=" why">
-            <h3 style={{ marginBottom: "30px" }}>Why we built SabiGifts</h3>
+            <h3>Why we built SabiGifts</h3>
 
-            <p className="text-justify">
+            <p className="firstPara pt-5 text-justify">
               No store had everything couples wanted. And no place recognized
               what engaged couple crave in a registry while planning their
-              weddings{" "}
+              weddings.{" "}
             </p>
-            <p className="text-justify mt-4">
+            <p className=" secondPara text-justify pt-4">
               So we talked to tons of couples and built what they wanted: One
               store with gifts, gift cards, and cash funds. Smart ways to
               personalize their registry to delight guests. Flexible (and free)
               shipping and so much more. We made registering easy for couples
               and their guests, so all of you can enjoy this special time.
             </p>
-            <div style={{ marginTop: "60px", color: "#ffffff" }}>
+            <div
+              className="createReg"
+              style={{ marginTop: "60px", color: "#ffffff" }}
+            >
               <Link
                 to="/createRegistry"
                 style={{

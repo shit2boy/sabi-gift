@@ -12,6 +12,7 @@ import "aos/dist/aos.css";
 const Howitworks = () => {
   AOS.init({
     duration: 2000,
+    // disable: "mobile",
   });
   return (
     <div className="container-fluid mt-4">
@@ -25,7 +26,7 @@ const Howitworks = () => {
             className="d-flex justify-content-around stepOutline"
             id="active"
           >
-            <div className="rounded-circle stepIcon">
+            <div className="rounded-circle d-none d-lg-inline stepIcon">
               {/* <GrAddCircle color="#EBD0CE" size="40px" /> */}
               <img src={addgifticon} alt="icon" width="65px" />
             </div>
@@ -46,8 +47,8 @@ const Howitworks = () => {
               </p>
             </div>
           </div>
-          <div className="d-flex justify-content-around stepOutline">
-            <div className="rounded-circle stepIcon">
+          <div className="d-flex justify-content-around  stepOutline">
+            <div className="rounded-circle stepIcon d-none d-lg-inline">
               {/* <FaRegHandPaper color=" #EBD0CE" size="35px" /> */}
               <img src={Gift} alt="icon" width="65px" />
             </div>
@@ -65,10 +66,10 @@ const Howitworks = () => {
             </div>
           </div>
           <div
-            className="d-flex stepOutline justify-content-around mb-4"
+            className=" d-flex stepOutline justify-content-around mb-4"
             data-aos="fade-in"
           >
-            <div className="rounded-circle stepIcon">
+            <div className="rounded-circle stepIcon d-none d-lg-inline">
               {/* <FaHome color=" #EBD0CE" size="40px" /> */}
               <img src={Weddingicon} alt="icon" width="65px" />
             </div>
@@ -87,7 +88,7 @@ const Howitworks = () => {
         </div>
 
         <div className="col-sm" data-aos="fade-right">
-          <img className="img-fluid " src={Box5} alt="giftDisplay" />
+          <img className="img-fluid p-2" src={Box5} alt="giftDisplay" />
         </div>
       </div>
       <p

@@ -9,19 +9,20 @@ import "aos/dist/aos.css";
 function CardlistSection() {
   AOS.init({
     duration: 2000,
+    // disable: "mobile",
   });
 
   return (
-    <section className="mt-5 mb-5">
-      <div className=" container cardTitle">
-        <div className="header text-center">
+    <>
+      <div className=" container mt-5 mb-5 cardTitle">
+        <div className=" text-center">
           <h2>
             A whole new way to gift, <br />
             when it matters
           </h2>
         </div>
 
-        <div className="  mt-5" data-aos="fade-left">
+        <div className="text-center  mt-5">
           <p className=" offset-3 text-justify">
             Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
             <br />
@@ -68,7 +69,7 @@ function CardlistSection() {
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 }
 

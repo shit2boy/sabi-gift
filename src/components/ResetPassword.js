@@ -17,6 +17,7 @@ export const ResetPassword = () => {
   };
   const notify = () =>
     toast.success("Reset Password link sent", { autoClose: 2000 });
+
   const handleReset = () => {
     Axios.post(`${util.API_BASE_URL}accounts/send-reset-password-link/`, {
       ...data,
@@ -80,7 +81,7 @@ export const ResetPassword = () => {
               type="submit"
               style={{ background: "#58B852", color: "#ffffff" }}
             >
-              Log In
+              Reset Password
             </Button>
             <div className="text-center mt-5">
               <span className="d-block mt-2">

@@ -13,6 +13,7 @@ export default class NewPassword extends Component {
       timestamp: "",
       signature: "",
       password: "",
+      confirmPassword: "",
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
@@ -120,12 +121,23 @@ export default class NewPassword extends Component {
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>New Password</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="password"
                     name="password"
                     // readOnly
                     onChange={this.changeHandler}
                     value={this.state.password}
                     placeholder="New Password"
+                  />
+                </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Confirm new Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="confirmPassword"
+                    // readOnly
+                    onChange={this.changeHandler}
+                    value={this.state.confirmPassword}
+                    placeholder="Confirm Password"
                   />
                 </Form.Group>
                 <Button

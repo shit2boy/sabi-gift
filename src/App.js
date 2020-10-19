@@ -10,6 +10,7 @@ import About from "./pages/About";
 import GiftTracker from "./components/GiftTracker";
 import EventType from "./pages/EventType";
 // import ManageRegistry from './pages/ManageRegistry';
+import NewPassword from "./pages/NewPassword";
 import CheckoutForm from "./pages/CheckoutForm";
 import RegistryChecklist from "./pages/ChecklistPage";
 import getstarted from "./components/WeddEvent";
@@ -52,6 +53,7 @@ function App() {
             <Route path="/registration" component={SignUp} />
             <Route path="/updateprofile" component={About} />
             <Route path="/verification/" component={ActivateAcoount} />
+            <Route path="/newpassword/" component={NewPassword} />
             <Route path="/Verify-partner/" component={VerifyPartner} />
             <Route path="/checklist" component={RegistryChecklist} />
             <Route path="/manageregistry" component={ManageRegistry} />

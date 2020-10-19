@@ -3,6 +3,8 @@ import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import util from "../util/util";
+// import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ResetPassword = () => {
   const [validated, setValidated] = useState(false);
@@ -13,16 +15,17 @@ export const ResetPassword = () => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-
+  const notify = () =>
+    toast.success("Reset Password link sent", { autoClose: 2000 });
   const handleReset = () => {
     Axios.post(`${util.API_BASE_URL}accounts/send-reset-password-link/`, {
       ...data,
     })
-      // {headers:{ Authorization: 'Token ' + localStorage.getItem('token_id')} })
       .then((res) => {
         // console.log(res.data.detail);
         if (res.status === 200) {
-          alert("Reset Password link sent");
+          //   alert("Reset Password link sent");
+          notify();
         }
       })
       .catch((err) => {

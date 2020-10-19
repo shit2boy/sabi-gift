@@ -24,9 +24,11 @@ export const ResetPassword = () => {
     })
       .then((res) => {
         // console.log(res.data.detail);
+        console.log(res.status);
+        notify();
         if (res.status === 200) {
-          //   alert("Reset Password link sent");
-          notify();
+          alert("Reset Password link sent");
+          //   notify();
         }
       })
       .catch((err) => {

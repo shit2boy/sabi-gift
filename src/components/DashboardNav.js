@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import image from "../images/Sabi-storepage/image.png";
+import account from "../images/landing/accountIcon.svg";
+// import image from "../images/Sabi-storepage/image.png";
 import settingIcon from "../images/Sabi-storepage/settingIcon.svg";
 import previewIcon from "../images/Sabi-storepage/previewIcon.svg";
 import LogOut from "./LogOut";
@@ -118,7 +119,7 @@ export class DashboardNav extends Component {
                   src={
                     this.context.profileImage === "" ||
                     this.context.profileImage === null
-                      ? image
+                      ? account
                       : this.context.profileImage.replace("image/upload/", "")
                   }
                   alt="userAvatar"
@@ -131,7 +132,7 @@ export class DashboardNav extends Component {
                   src={
                     this.state.uploading
                       ? URL.createObjectURL(this.state.selectedFile)
-                      : image
+                      : account
                   }
                   alt="userAvatar"
                 />

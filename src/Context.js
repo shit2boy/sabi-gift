@@ -2,6 +2,8 @@ import React, { Component } from "react";
 // import { ProductItems } from "./components/imageData";
 import axios from "axios";
 import util from "./util/util";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const StateContext = React.createContext();
 
@@ -360,6 +362,77 @@ class ProductProvider extends Component {
   //   console.log(this.state.eventType);
   // };
 
+  notify = (res) => toast.success(res, { autoClose: 2000 });
+
+  getIndexOfProduct = (id) => {
+    for (let i = 0; i < this.state.userRegistry.length; i++) {
+      if (this.state.userRegistry[i].item["name"] === id) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+
+  addGiftToRegistryFromCategory = (id, item, name) => {
+    // console.log("clicked" + id);
+    // let evtid = this.state.eventId;
+    let eventId = window.localStorage.eventIID;
+    // console.log(quantityNeeded);
+    let addeditem = {
+      gifts: [Number(id)],
+      event: Number(eventId),
+      quantity: 1,
+    };
+
+    axios
+      .post(`${util.API_BASE_URL}add-registry/`, addeditem, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+        },
+      })
+
+      .then((res) => {
+        // console.log(res.data);
+        if (res.status === 200) {
+          this.notify(res.data.success);
+
+          // axios
+          //   .get(
+          //     `${util.API_BASE_URL}events/?user=${window.localStorage.userId}`,
+          //     {
+          //       headers: {
+          //         Authorization: "Token " + localStorage.getItem("token_id"),
+          //       },
+          //     }
+          //   )
+          //   .then((res) => {
+          //     if (res.data !== undefined && res.data.length > 0) {
+          //       let returndata = res.data;
+          //       let data = returndata.sort((a, b) => a.id - b.id);
+          //       // console.log(this.state.userAllEvent);
+          //       for (let i = 0; i < data.length; i++) {
+          //         this.setState({ userRegistry: data[data.length - 1].items });
+          //       }
+          //     }
+          //   });
+
+          let arrObj = {};
+          let itemSelected = this.state.userRegistry;
+          arrObj["item"] = item;
+          if (this.getIndexOfProduct(name) === -1) {
+            itemSelected.push(arrObj);
+            this.setState({ userRegistry: itemSelected });
+          }
+
+          // console.log(this.state.userRegistry);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   getItemId = (id) => {
     const product = this.state.products.find((item) => item.id === id);
     return product;
@@ -374,6 +447,7 @@ class ProductProvider extends Component {
           // totalCashContributed: this.totalCashContributed,
           handleQuantityChange: this.handleQuantityChange,
           eventSelected: this.eventSelected,
+          addGiftToRegistryFromCategory: this.addGiftToRegistryFromCategory,
           sortByPrice: this.sortByPrice,
           resetSortToDefault: this.resetSortToDefault,
           sortByCategory: this.sortByCategory,

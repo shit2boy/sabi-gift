@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import util from "../util/util";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const ResetPassword = () => {
@@ -24,11 +24,9 @@ export const ResetPassword = () => {
     })
       .then((res) => {
         // console.log(res.data.detail);
-        console.log(res.status);
-        notify();
         if (res.status === 200) {
-          alert("Reset Password link sent");
-          //   notify();
+          //   alert("Reset Password link sent");
+          notify();
         }
       })
       .catch((err) => {
@@ -110,6 +108,7 @@ export const ResetPassword = () => {
             </small>
           </Form>
         </div>
+        <ToastContainer />
       </div>
     </div>
   );

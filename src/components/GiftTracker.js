@@ -25,7 +25,7 @@ export class GiftTracker extends Component {
       giftTrackerId: "",
       giftTracker: false,
       itemConvert: [],
-      trackedCash:[],
+      trackedCash: [],
     };
   }
 
@@ -85,12 +85,12 @@ export class GiftTracker extends Component {
         // console.log(res.data.results);
         if (res.data.results !== undefined) {
           let data = res.data.results;
-          
+
           for (let i = 0; i < data.length; i++) {
             trackedGift = data[i].registry;
             trackedCash = data[i].custom_gift;
             this.setState({ giftTrackerId: data[i].id });
-            if (trackedGift.length >= 1) {
+            if (trackedGift.length >= 1 || trackedCash.length >= 1) {
               this.setState({ giftTracker: true });
             }
           }
@@ -187,8 +187,8 @@ export class GiftTracker extends Component {
               >
                 <div className="d-flex align-items-center">
                   <img
-                     src={
-                      item.image === "" || item.image === 'null'
+                    src={
+                      item.image === "" || item.image === "null"
                         ? cashFund
                         : item.image
                     }
@@ -196,7 +196,7 @@ export class GiftTracker extends Component {
                     alt="giftFromGuest"
                     className="m-4"
                   />
-                 
+
                   <div className="ml-2">
                     <h5>{item.name}</h5>
                     <p>{item.description}</p>

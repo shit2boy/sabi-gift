@@ -4,7 +4,7 @@ import { Card, Modal } from "react-bootstrap";
 import axios from "axios";
 import util from "../util/util";
 import { StateContext } from "../Context";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default class AddCategory extends Component {
@@ -17,51 +17,48 @@ export default class AddCategory extends Component {
       itemByCategory: [],
       selectedCategory: [],
       itemCategories: this.props.categoryId,
-      quantity: 1,
     };
   }
 
-  notify = (res) => toast.success(res, { autoClose: 2000 });
+  // notify = (res) => toast.success(res, { autoClose: 2000 });
   errorNotify = (res) => toast.error(res, { autoClose: 2000 });
   setModalHide = () => {
     this.setState({ modalShow: false });
-    window.location.reload();
+    // window.location.reload();
   };
 
   setModalShow = () => {
     this.setState({ modalShow: true });
   };
 
-  addGiftToRegistry = (id) => {
-    // console.log("clicked" + id);
-    // let evtid = this.state.eventId;
-    let eventId = window.localStorage.eventIID;
-    let quantityNeeded = this.state.quantity;
-    console.log(quantityNeeded);
-    let addeditem = {
-      gifts: [Number(id)],
-      event: Number(eventId),
-      quantity: quantityNeeded,
-    };
+  // addGiftToRegistry = (id) => {
+  //   // console.log("clicked" + id);
+  //   // let evtid = this.state.eventId;
+  //   let eventId = window.localStorage.eventIID;
+  //   console.log(quantityNeeded);
+  //   let addeditem = {
+  //     gifts: [Number(id)],
+  //     event: Number(eventId),
+  //     quantity: 1,
+  //   };
 
-    axios
-      .post(`${util.API_BASE_URL}add-registry/`, addeditem, {
-        headers: {
-          Authorization: "Token " + localStorage.getItem("token_id"),
-        },
-      })
+  //   axios
+  //     .post(`${util.API_BASE_URL}add-registry/`, addeditem, {
+  //       headers: {
+  //         Authorization: "Token " + localStorage.getItem("token_id"),
+  //       },
+  //     })
 
-      .then((res) => {
-        // console.log(res.data);
-        if (res.status === 200) {
-          this.notify(res.data.success);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        // this.errorNotify();
-      });
-  };
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       if (res.status === 200) {
+  //         this.notify(res.data.success);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   // addMoreCategoryToRegistry = (e) => {
   //   let selectedArr = this.state.selectedCategory;
@@ -119,7 +116,13 @@ export default class AddCategory extends Component {
                   <div key={index} className="m-3 d-flex">
                     {this.props.category === item.cat && (
                       <Card
-                        onClick={() => this.addGiftToRegistry(item.id)}
+                        onClick={() =>
+                          this.context.addGiftToRegistryFromCategory(
+                            item.id,
+                            item,
+                            item.name
+                          )
+                        }
                         className="flex-fill"
                         id="myCards"
                         key={item.id}
@@ -148,7 +151,7 @@ export default class AddCategory extends Component {
               </div>
             </div>
           </Modal.Body>
-          <ToastContainer />
+          {/* <ToastContainer /> */}
         </Modal>
       </div>
     );

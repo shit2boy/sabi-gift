@@ -68,8 +68,8 @@ export default class CartItem extends Component {
       //     ? 1
       //     : parseInt(this.state.quantityObject["quantity" + cart.item["id"]]);
       let price = parseFloat(cashCart.amountToContribute);
-      console.log(price);
-      console.log(cashCart.amountToContribute);
+      // console.log(price);
+      // console.log(cashCart.amountToContribute);
       cashSum = cashSum + price;
       cashCart = {
         item: "",
@@ -130,18 +130,28 @@ export default class CartItem extends Component {
 
   removeFromCart = (value) => {
     let products = this.state.itemsInCart;
+    let InCart = JSON.parse(window.localStorage.getItem("InCart"));
+
     // products.indexOf(value);
     products.splice(products.indexOf(value), 1);
+    InCart["product"].splice(InCart["product"].indexOf(value), 1);
     this.setState({ itemsInCart: products });
     this.amountToPyay();
+    /*jjjjjjjjjjjjjjjj*/
+    // InCart["product"].push(data);
+    window.localStorage.setItem("InCart", JSON.stringify(InCart));
   };
+
   deleteFromCashCart = (value) => {
     let products = this.state.cashInCart;
+    let InCart = JSON.parse(window.localStorage.getItem("InCart"));
     // products.indexOf(value);
     products.splice(products.indexOf(value), 1);
+    InCart["cash"].splice(InCart["cash"].indexOf(value), 1);
     this.setState({ cashInCart: products });
     this.amountToPyay();
     // this.context.totalCashContributed();
+    window.localStorage.setItem("InCart", JSON.stringify(InCart));
   };
 
   async componentDidMount() {
@@ -260,9 +270,9 @@ export default class CartItem extends Component {
                       onChange={this.handleQuantityChange}
                     />
                   </td>
-                  <td>#{inCart.item["price"]}</td>
+                  <td>&#8358;{inCart.item["price"]}</td>
                   <td>
-                    #
+                    &#8358;
                     {this.state.quantityObject[
                       "quantity" + inCart.item["id"]
                     ] === undefined
@@ -315,8 +325,8 @@ export default class CartItem extends Component {
                     /> */}
                   </td>
 
-                  <td>#{inCart.amountToContribute}</td>
-                  <td>#{inCart.amountToContribute}</td>
+                  <td>&#8358;{inCart.amountToContribute}</td>
+                  <td>&#8358;{inCart.amountToContribute}</td>
                   <td
                     className="pointer"
                     onClick={() => {
@@ -334,7 +344,7 @@ export default class CartItem extends Component {
                 <td></td>
                 <td></td>
                 <td>Total</td>
-                <td>#{this.state.totalSum}</td>
+                <td>&#8358;{this.state.totalSum}</td>
               </tr>
             </tbody>
           </Table>
@@ -344,8 +354,12 @@ export default class CartItem extends Component {
             <Link
               to={`registry/${window.localStorage.slug}`}
               // onClick={this.handleSumbitCart}
-              className="p-3 bg-success text-white pointer text-link mr-4"
-              style={{ border: "1px solid" }}
+              className="p-3 bg-success text-white pointer mr-4"
+              style={{
+                border: "1px solid",
+                color: "#ffffff",
+                textDecoration: "none",
+              }}
             >
               Continue Shopping
             </Link>

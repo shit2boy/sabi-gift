@@ -207,7 +207,7 @@ export class RegistryChecklist extends Component {
                 // style={{ position: "absolute", top: "50%", right: "18px" }}
                 className="d-block px-3 pb-0"
               >
-                #{data.price}
+                &#8358;{data.price}
               </span>
               <small style={{ fontSize: "11px" }} className="d-block px-3">
                 {data.description}
@@ -364,7 +364,7 @@ export class RegistryChecklist extends Component {
                                     />
                                   </td>
                                   <td>{data.name}</td>
-                                  <td>#{data.price}</td>
+                                  <td> &#8358;{data.price}</td>
                                   <td></td>
 
                                   <td>

@@ -43,10 +43,25 @@ export class Product extends Component {
     // console.log(quantityNeeded);
   };
 
+  getIndexOfProductInCart = (id) => {
+    let InCart = this.context.inCart;
+    for (let i = 0; i < InCart["product"].length; i++) {
+      if (InCart["product"][i].item["id"] === id) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+
   addToCart = (data) => {
     // let itemsInCart = this.context.itemsInCart;
     // itemsInCart.push(data);
     let InCart = this.context.inCart;
+    // for (let i = 0; i < InCart['product'].length; i++) {
+    //   if (InCart['product'][i].item["id"] === id) {
+
+    // }
     InCart["product"].push(data);
     window.localStorage.setItem("InCart", JSON.stringify(InCart));
     let selectedIds = this.state.selectedIds;
@@ -95,7 +110,16 @@ export class Product extends Component {
 
   getIndexOfProduct = (id) => {
     for (let i = 0; i < this.state.Products.length; i++) {
-      if (this.state.Products[i].id === id) {
+      if (this.state.Products[i].item["id"] === id) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+  getIndexOfCash = (id) => {
+    for (let i = 0; i < this.state.cashGift.length; i++) {
+      if (this.state.cashGift[i].id === id) {
         return i;
       }
     }
@@ -104,6 +128,7 @@ export class Product extends Component {
   };
 
   notify = () => toast.success("Added to registry!", { autoClose: 2000 });
+
   addGiftToRegistry = (id) => {
     // console.log("clicked" + id);
     // let evtid = this.state.eventId;
@@ -143,32 +168,33 @@ export class Product extends Component {
 
   errorNotify = () =>
     toast.error("Error! request not processed", { autoClose: 2000 });
+
   successNotify = () =>
     toast.success("Removed from registry", { autoClose: 2000 });
+
   removeItemFromRegistry = (id) => {
     // console.log("clicked" + id);
     // let evtid = this.state.eventId;
     let eventId = window.localStorage.eventIID;
     // this.setState({ gift: id });
     let gift = Number(id);
-    let addeditem = {
+    let removedItem = {
       gifts: gift,
       event: Number(eventId),
     };
 
     axios
-      .post(`${util.API_BASE_URL}remove-registry/`, addeditem, {
+      .post(`${util.API_BASE_URL}remove-registry/`, removedItem, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token_id"),
         },
       })
 
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.status === 200) {
-          this.setState({ addSuccessfully: true });
           let products = this.state.Products;
-          products.splice(this.getIndexOfProduct(id), 1);
+          products.splice(this.getIndexOfProduct(gift), 1);
           this.setState({ Products: products });
           this.successNotify();
         }
@@ -184,13 +210,13 @@ export class Product extends Component {
     let eventId = window.localStorage.eventIID;
     // this.setState({ gift: id });
     let gift = Number(id);
-    let addeditem = {
+    let removedItem = {
       cash: gift,
       event: Number(eventId),
     };
 
     axios
-      .post(`${util.API_BASE_URL}remove-registry/`, addeditem, {
+      .post(`${util.API_BASE_URL}remove-registry/`, removedItem, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token_id"),
         },
@@ -200,9 +226,9 @@ export class Product extends Component {
         console.log(res.data);
         if (res.status === 200) {
           this.setState({ addSuccessfully: true });
-          let products = this.state.Products;
-          products.splice(this.getIndexOfProduct(id), 1);
-          this.setState({ Products: products });
+          let removedItem = this.state.cashGift;
+          removedItem.splice(this.getIndexOfCash(id), 1);
+          this.setState({ cashGift: removedItem });
           this.successNotify();
         }
       })
@@ -229,7 +255,11 @@ export class Product extends Component {
       return null;
     }).map((data, index) => {
       return (
-        <Card key={index} className="productCards col-sm-3 m-4">
+        <Card
+          key={index}
+          className="productCards col-sm-3 m-4"
+          // hidden={data.item.qty[0] <= 0}
+        >
           <div className=" p-4 ">
             <img
               className="card-img center grow"
@@ -251,7 +281,7 @@ export class Product extends Component {
               {data.item["name"]}
             </strong>
             <span className="px-3 py-0 mb-0 d-block">
-              #{data.item["price"]}
+              &#8358; {data.item["price"]}
             </span>
             <small className=" d-block px-3" style={{ fontSize: "11px" }}>
               {data.item["description"]}
@@ -355,7 +385,11 @@ export class Product extends Component {
 
     const cashItem = this.state.cashGift.map((data, index) => {
       return (
-        <Card key={index} className="productCards col-sm-3 m-4">
+        <Card
+          key={index}
+          className="productCards col-sm-3 m-4"
+          hidden={data.completed}
+        >
           <div className="p-3">
             <img
               className="card-img center grow"
@@ -385,7 +419,7 @@ export class Product extends Component {
                 className="d-block ml-auto "
                 style={{ position: "absolute", top: "50%", left: "18px" }}
               >
-                #{data.balance} <small>Needed </small>
+                &#8358; {data.balance} <small>Needed </small>
               </span>
             </div>
           </Card.Body>

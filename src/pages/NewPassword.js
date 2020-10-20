@@ -3,6 +3,8 @@ import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import util from "../util/util";
 // import Home from "./Home";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import NavBar from "../components/NavigationBar";
 
 export default class NewPassword extends Component {
@@ -14,9 +16,35 @@ export default class NewPassword extends Component {
       signature: "",
       password: "",
       confirmPassword: "",
+      errors: {},
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
+  }
+
+  notifyPass = () => {
+    toast.success("Password reset succesfull, Proceed to Login", {
+      autoClose: 2000,
+    });
+  };
+
+  validateForm() {
+    // let formField = this.state.formField;
+    let errors = {};
+    let formIsValid = true;
+
+    if (!this.state.password) {
+      formIsValid = false;
+      errors["password"] = "*Please enter your password.";
+    }
+
+    if (this.state.password !== this.state.confirmPassword) {
+      formIsValid = false;
+      errors["confirmPassword"] = "*password mismatch.";
+    }
+
+    this.setState({ errors: errors });
+    return formIsValid;
   }
 
   changeHandler(e) {
@@ -24,28 +52,33 @@ export default class NewPassword extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    const { user_id, timestamp, signature, password } = this.state;
-    axios
-      .post(
-        `${util.API_BASE_URL}accounts/reset-password/`,
-        { user_id, timestamp, signature, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((data) => {
-        if (data.status === 200) {
-          window.localStorage.setItem("token_id", data.data.token);
-          window.localStorage.setItem("username", data.data.email);
-          window.location.href = "/login";
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.status === 400) window.location.href = "/";
-      });
+    if (this.validateForm()) {
+      const { user_id, timestamp, signature, password } = this.state;
+      axios
+        .post(
+          `${util.API_BASE_URL}accounts/reset-password/`,
+          { user_id, timestamp, signature, password },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((data) => {
+          if (data.status === 200 || data !== undefined) {
+            console.log(data.status);
+            this.notifyPass();
+            this.setState({ password: "", confirmPassword: "" });
+            //   window.localStorage.setItem("token_id", data.data.token);
+            //   window.localStorage.setItem("username", data.data.email);
+            //   window.location.href = "/login";
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          // if (error.status === 400) window.location.href = "/";
+        });
+    }
   }
 
   componentDidMount() {
@@ -79,7 +112,7 @@ export default class NewPassword extends Component {
               <h4 className="p-2 text-center mb-4">
                 Please input new password
               </h4>
-              <Form noValidate onSubmit={this.onSubmit}>
+              <Form onSubmit={this.onSubmit}>
                 <Form.Group>
                   {/* <Form.Label>User Id</Form.Label> */}
                   <Form.Control
@@ -129,6 +162,9 @@ export default class NewPassword extends Component {
                     placeholder="New Password"
                   />
                 </Form.Group>
+                <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
+                  {this.state.errors["password"]}
+                </span>
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Confirm new Password</Form.Label>
                   <Form.Control
@@ -140,6 +176,9 @@ export default class NewPassword extends Component {
                     placeholder="Confirm Password"
                   />
                 </Form.Group>
+                <span style={{ color: "#dd2b0e", fontSize: "0.875rem" }}>
+                  {this.state.errors["confirmPassword"]}
+                </span>
                 <Button
                   className="w-100 mt-5"
                   variant="success"
@@ -148,6 +187,7 @@ export default class NewPassword extends Component {
                 >
                   Send
                 </Button>
+                <ToastContainer />
               </Form>
             </div>
           </div>

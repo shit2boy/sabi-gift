@@ -99,21 +99,38 @@ class EventType extends Component {
     // console.log("reset", this.state.products);
   };
 
+  // sortByCategory = (cat) => {
+  //   console.log("call me");
+  //   console.log(cat);
+  //   let sortedProduct = [];
+  //   const { products } = this.state;
+  //   // let sortedProduct;
+  //   products.map((data) => {
+  //     if (cat === data.item["cat"]) {
+  //       console.log(data);
+  //       sortedProduct.push(data);
+  //       // return sortedProduct;
+  //     }
+  //     console.log(sortedProduct);
+  //     return sortedProduct;
+  //   });
+  //   this.setState({ products: sortedProduct });
+  //   console.log(this.state.products);
+  // };
+
   sortByCategory = (cat) => {
-    const { products } = this.state;
-    // let sortedProduct;
-    products.filter((data) => {
-      if (cat === data.item["cat"]) {
-        console.log(data);
-        this.setState({ products: data });
-        console.log(this.state.products);
-        // return data;
+    console.log("call me");
+    // let sortedProduct = [];
+    const products = this.state.products.filter((data) => {
+      if (cat == null) {
+        return data.item;
+      } else if (data.item["cat"].toLowerCase() === cat.toLowerCase()) {
+        return data.item;
       }
-      return this.state.products;
+      return null;
     });
-    // this.setState({ products: newList });
-    // console.log(newList);
-    // return event === item.item["cat"];
+    this.setState({ products: products });
+    console.log(this.state.products);
   };
 
   // sortByPrice=(cat)=>{
@@ -196,9 +213,9 @@ class EventType extends Component {
           <div className="row ml-auto">
             <div className="col-3 d-none d-lg-block availableItem">
               <AvailableItems
-              // sort={this.sortByPrice}
-              // default={this.resetSortToDefault}
-              // sortByCat={this.sortByCategory}
+                // sort={this.sortByPrice}
+                // default={this.resetSortToDefault}
+                sortByCat={this.sortByCategory}
               />
             </div>
             <div className=" col">

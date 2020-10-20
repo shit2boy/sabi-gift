@@ -395,15 +395,15 @@ export default class CheckoutForm extends Component {
                 <tbody className="p-3 mt-3">
                   <tr>
                     <td>Sub-total</td>
-                    <td>#{window.localStorage.totalSum}</td>
+                    <td>&#8358;{window.localStorage.totalSum}</td>
                   </tr>
                   <tr>
                     <td>Shipping</td>
-                    <td>#0</td>
+                    <td>&#8358;0</td>
                   </tr>
                   <tr>
                     <td>Total</td>
-                    <td>#{window.localStorage.totalSum}</td>
+                    <td>&#8358;{window.localStorage.totalSum}</td>
                   </tr>
                 </tbody>
               </Table>

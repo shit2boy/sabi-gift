@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import account from "../images/landing/accountIcon.svg";
+import account from "../images/landing/userAvatar.png";
 // import image from "../images/Sabi-storepage/image.png";
 import settingIcon from "../images/Sabi-storepage/settingIcon.svg";
 import previewIcon from "../images/Sabi-storepage/previewIcon.svg";
@@ -116,6 +116,7 @@ export class DashboardNav extends Component {
                 <img
                   className="rounded-circle"
                   width="70px"
+                  height="60px"
                   src={
                     this.context.profileImage === "" ||
                     this.context.profileImage === null
@@ -129,6 +130,7 @@ export class DashboardNav extends Component {
                 <img
                   className="rounded-circle"
                   width="70px"
+                  height="60px"
                   src={
                     this.state.uploading
                       ? URL.createObjectURL(this.state.selectedFile)

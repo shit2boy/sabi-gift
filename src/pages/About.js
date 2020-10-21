@@ -397,7 +397,7 @@ export class About extends Component {
   };
   render() {
     const containerStyle = {
-      // border: "1px solid",
+      border: "1px solid",
       backgroundColor: "#ffffff",
       cursor: "pointer",
     };

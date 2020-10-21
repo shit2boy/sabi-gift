@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // import image from "../images/Sabi-storepage/image.png";
 import home from "../images/sabi-icons/home.svg";
 import tracker from "../images/sabi-icons/track.png";
-import file from "../images/sabi-icons/file.svg";
+// import file from "../images/sabi-icons/file.svg";
 import manage from "../images/sabi-icons/manag.png";
 import checklist from "../images/sabi-icons/check.png";
 import notification from "../images/sabi-icons/notification.svg";
@@ -113,9 +113,9 @@ export class SideBar extends Component {
               </Link>
             </Tooltip>
           </div>
-          <div className="py-4">
+          {/* <div className="py-4">
             <img src={file} width="35px" alt="icon" />
-          </div>
+          </div> */}
         </div>
       </div>
     );

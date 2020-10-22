@@ -363,8 +363,8 @@ export class ManageRegistry extends Component {
               <h5>Your Registry Checklist</h5>
             </div>
             <div className="mt-4 row">
-              <div className="col">
-                <CheckList />
+              <div>
+                <CheckList className="col-sm-6" />
               </div>
             </div>
 

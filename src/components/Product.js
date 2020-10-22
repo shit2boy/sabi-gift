@@ -481,7 +481,7 @@ export class Product extends Component {
     return (
       <div className="container-fluid mb-5">
         <div className="row ml-auto mb-3 ">
-          <div className="col-8 ">
+          <div className="col-8  d-none d-lg-block">
             <small>7,618 results found in 5ms</small>
           </div>
           <div className="col d-none d-lg-block">

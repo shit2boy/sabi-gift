@@ -27,7 +27,7 @@ body {
   font-family: helveticaneue !important;
 }
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -37,13 +37,21 @@ h6 {
   color: #545871 !important;
   font-weight: bolder;
   opacity: 1 !important;
-}
+} */
 
 [contenteditable]:focus {
   outline: 1px solid rgb(113, 126, 120);
 }
 .pointer {
   cursor: pointer;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fffbfb !important;
+  border-color: #fffbfb !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem #f5f5f5 !important;
 }
 
 input:focus::placeholder {
@@ -54,16 +62,14 @@ input:focus::placeholder {
 input::placeholder {
   opacity: 0.2 !important;
   font-size: 12px;
-
-  /* color: #888888; */
 }
 input:focus {
   /* border: none; */
   outline: 0;
   border-color: #fffbfb;
+  box-shadow: 0 0 0 0.2rem #f5f5f5;
 }
 input {
-  /* border-color: #cbcbcb; */
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;

@@ -79,7 +79,7 @@ class CheckList extends Component {
               button={
                 <Card
                   id="myCards"
-                  className="col-sm m-3"
+                  className="col m-lg-2 m-sm"
                   style={{ width: "8rem", cursor: "pointer" }}
                 >
                   <Card.Body>

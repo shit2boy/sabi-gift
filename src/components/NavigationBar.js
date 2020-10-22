@@ -7,7 +7,7 @@ export class NavigationBar extends Component {
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" className="bg-white">
-        <Navbar.Brand href="/">
+        <Navbar.Brand className="d-none d-lg-inline" href="/">
           <img src={logo} alt="SabigiftLogo" width="65px" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

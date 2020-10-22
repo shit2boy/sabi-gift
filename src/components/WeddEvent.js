@@ -322,7 +322,7 @@ export default class getstarted extends Component {
             </div>
             <div className="col">
               <div
-                className="d-flex align-items-center justify-content-center"
+                className=" d-flex align-items-center justify-content-center"
                 style={{
                   color: "#888888",
                   height: "90vh",
@@ -352,8 +352,8 @@ export default class getstarted extends Component {
                         )
                           .split("\n")
                           .map((text, index) => <h2 key={index}>{text}</h2>)}
-                    <div className="mt-4">
-                      <form>
+                    <div className=" mt-4">
+                      <form className="">
                         <DatePicker
                           required
                           onChange={this.dateChange}

@@ -349,12 +349,12 @@ export default class CartItem extends Component {
             </tbody>
           </Table>
 
-          <div className=" mt-4 mb-5 text-center ">
+          <div className="row mt-4 mb-5 ">
             {/* <Link className="text-link" to="/checkout"> */}
             <Link
               to={`registry/${window.localStorage.slug}`}
               // onClick={this.handleSumbitCart}
-              className="p-3 bg-success text-white pointer mr-4"
+              className="p-3 m-auto bg-success text-white pointer "
               style={{
                 border: "1px solid",
                 color: "#ffffff",
@@ -365,7 +365,7 @@ export default class CartItem extends Component {
             </Link>
             <span
               onClick={this.handleSumbitCart}
-              className="p-3 bg-success text-white pointer"
+              className="p-3 m-auto bg-success text-white pointer"
               style={{ border: "1px solid" }}
             >
               Proceed to check out

@@ -397,33 +397,33 @@ class ProductProvider extends Component {
         if (res.status === 200) {
           this.notify(res.data.success);
 
-          // axios
-          //   .get(
-          //     `${util.API_BASE_URL}events/?user=${window.localStorage.userId}`,
-          //     {
-          //       headers: {
-          //         Authorization: "Token " + localStorage.getItem("token_id"),
-          //       },
-          //     }
-          //   )
-          //   .then((res) => {
-          //     if (res.data !== undefined && res.data.length > 0) {
-          //       let returndata = res.data;
-          //       let data = returndata.sort((a, b) => a.id - b.id);
-          //       // console.log(this.state.userAllEvent);
-          //       for (let i = 0; i < data.length; i++) {
-          //         this.setState({ userRegistry: data[data.length - 1].items });
-          //       }
-          //     }
-          //   });
+          axios
+            .get(`${util.API_BASE_URL}events/${window.localStorage.slug}`, {
+              headers: {
+                Authorization: "Token " + localStorage.getItem("token_id"),
+              },
+            })
+            .then((res) => {
+              console.log(res.data.items);
+              if (res.data !== undefined) {
+                this.setState({ userRegistry: res.data.items });
+                // let returndata = res.data;
+                // let data = returndata.sort((a, b) => a.id - b.id);
+                // console.log(this.state.userAllEvent);
+                // for (let i = 0; i < data.length; i++) {
+                //   this.setState({ userRegistry: data[i].items });
+                //   console.log(data[i].items);
+                // }
+              }
+            });
 
-          let arrObj = {};
-          let itemSelected = this.state.userRegistry;
-          arrObj["item"] = item;
-          if (this.getIndexOfProduct(name) === -1) {
-            itemSelected.push(arrObj);
-            this.setState({ userRegistry: itemSelected });
-          }
+          // let arrObj = {};
+          // let itemSelected = this.state.userRegistry;
+          // arrObj["item"] = item;
+          // if (this.getIndexOfProduct(name) === -1) {
+          //   itemSelected.push(arrObj);
+          //   this.setState({ userRegistry: itemSelected });
+          // }
 
           // console.log(this.state.userRegistry);
         }

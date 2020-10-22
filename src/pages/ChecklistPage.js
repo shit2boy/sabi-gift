@@ -277,7 +277,7 @@ export class RegistryChecklist extends Component {
                 </div>
                 <div className="container-fluid">
                   <div className="row mb-2">
-                    <div className="col-8">
+                    <div className="col-8 d-none d-lg-block">
                       <small>7,618 results found in 5ms</small>
                     </div>
                     <div className="col d-none d-lg-block">
@@ -307,7 +307,7 @@ export class RegistryChecklist extends Component {
                     </div>
                   </div>
                   <div className="row mb-2">
-                    <div className="col-sm-10">
+                    <div className="col-lg-10">
                       <Search
                         placeholder="Search here"
                         onChange={(e) => this.onSearch(e)}

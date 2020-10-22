@@ -22,12 +22,16 @@ function CardlistSection() {
           </h2>
         </div>
 
-        <div className="text-center  mt-5">
-          <p className=" offset-3 text-justify">
-            Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
+        <div className="  mt-5">
+          <p
+            className="text-center"
+            style={{ paddingLeft: "20px", paddingRight: "20px" }}
+          >
+            Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
             <br />
-            ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem Lorem ipsum <br />{" "}
-            Lorem ipsum Lorem Lorem ipsum Lorem
+            ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+            <br />
+            lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
           </p>
         </div>
         <div className="row mt-5 card-row" data-aos="fade-left">

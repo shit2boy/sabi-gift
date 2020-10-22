@@ -329,6 +329,7 @@ export default class getstarted extends Component {
                     <div className="mt-4">
                       <form>
                         <DatePicker
+                          className="registryInput"
                           required
                           onChange={this.dateChange}
                           disabledDate={this.disabledDate}
@@ -382,7 +383,7 @@ export default class getstarted extends Component {
                           onChange={(e) =>
                             this.setState({ formValue: e.target.value })
                           }
-                          className="p-2"
+                          className="p-2 registryInput"
                           type="text"
                           required
                           name="firstName"
@@ -431,7 +432,7 @@ export default class getstarted extends Component {
                           onChange={(e) =>
                             this.setState({ formValue: e.target.value })
                           }
-                          className="p-2"
+                          className="p-2 registryInput"
                           required
                           name="firstName"
                           type="number"
@@ -525,6 +526,7 @@ export default class getstarted extends Component {
                       </Form.Row>
                       <Form.Group id="formGridCheckbox">
                         <Form.Check
+                          style={{ fontSize: "0.85rem" }}
                           onChange={this.handleChange}
                           name="checked"
                           type="checkbox"
@@ -582,21 +584,22 @@ export default class getstarted extends Component {
                 )}
                 {this.state.currentIndex === 3 && (
                   <div className=" d-flex justify-content-between">
-                    <div>
+                    <span>
                       Already a member?
                       <Login signup={<span>Log in</span>} />
-                    </div>
+                    </span>
                     <Button
                       onClick={this.handleSubmit}
                       className="px-5 py-2"
                       style={{
                         cursor: "pointer",
+                        fontSize: "0.25 rem",
                         background: "#AAAAAA",
                         border: "1px solid #DDDDDD",
                         borderRadius: "50px",
                       }}
                     >
-                      SIGN UP
+                      Sign Up
                     </Button>
                   </div>
                 )}

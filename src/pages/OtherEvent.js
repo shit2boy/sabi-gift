@@ -351,6 +351,7 @@ export default class OtherEvent extends Component {
                     <div className="mt-4">
                       <form>
                         <DatePicker
+                          className="registryInput"
                           required
                           onChange={this.dateChange}
                           disabledDate={this.disabledDate}
@@ -403,7 +404,7 @@ export default class OtherEvent extends Component {
                           onChange={(e) =>
                             this.setState({ formValue: e.target.value })
                           }
-                          className="p-2"
+                          className="p-2 registryInput"
                           name="firstName"
                           type="text"
                           placeholder="Enter Name"
@@ -454,7 +455,7 @@ export default class OtherEvent extends Component {
                             this.setState({ formValue: e.target.value })
                           }
                           name="firstName"
-                          className="p-2"
+                          className="p-2 registryInput"
                           type="number"
                           placeholder="Enter Number of Guest"
                           pattern="[0-9]"
@@ -618,22 +619,23 @@ export default class OtherEvent extends Component {
                 )}
                 {this.state.currentIndex === 4 && (
                   <div className=" d-flex justify-content-around">
-                    <div>
+                    <span>
                       Already a member?
                       <Login signup={<span>Log in</span>} />
-                    </div>
+                    </span>
                     <Button
                       type="submit"
                       onClick={this.handleSubmit}
                       className="px-5 py-2"
                       style={{
                         cursor: "pointer",
+                        fontSize: "0.25 rem",
                         background: "#AAAAAA",
                         border: "1px solid #DDDDDD",
                         borderRadius: "50px",
                       }}
                     >
-                      SIGN UP
+                      Sign Up
                     </Button>
                   </div>
                 )}

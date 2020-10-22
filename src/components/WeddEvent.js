@@ -322,11 +322,10 @@ export default class getstarted extends Component {
             </div>
             <div className="col">
               <div
-                className=" d-flex align-items-center justify-content-center"
+                className="d-flex align-items-center justify-content-center"
                 style={{
                   color: "#888888",
                   height: "90vh",
-                  fontFamily: "arial",
                 }}
               >
                 {this.state.currentIndex === 2 && (
@@ -352,9 +351,10 @@ export default class getstarted extends Component {
                         )
                           .split("\n")
                           .map((text, index) => <h2 key={index}>{text}</h2>)}
-                    <div className=" mt-4">
-                      <form className="">
+                    <div className="mt-4">
+                      <form>
                         <DatePicker
+                          className="registryInput"
                           required
                           onChange={this.dateChange}
                           disabledDate={this.disabledDate}
@@ -408,7 +408,7 @@ export default class getstarted extends Component {
                           onChange={(e) =>
                             this.setState({ formValue: e.target.value })
                           }
-                          className="p-2"
+                          className="p-2 registryInput"
                           name="firstName"
                           type="text"
                           placeholder="Enter Name"
@@ -459,7 +459,7 @@ export default class getstarted extends Component {
                             this.setState({ formValue: e.target.value })
                           }
                           name="firstName"
-                          className="p-2"
+                          className="p-2 registryInput"
                           type="number"
                           placeholder="Enter Number of Guest"
                           pattern="[0-9]"
@@ -622,22 +622,23 @@ export default class getstarted extends Component {
                 )}
                 {this.state.currentIndex === 4 && (
                   <div className=" d-flex justify-content-around">
-                    <div>
+                    <span>
                       Already a member?
                       <Login signup={<span>Log in</span>} />
-                    </div>
+                    </span>
                     <Button
                       type="submit"
                       onClick={this.handleSubmit}
                       className="px-5 py-2 "
                       style={{
+                        fontSize: "0.25 rem",
                         cursor: "pointer",
                         background: "#AAAAAA",
                         border: "1px solid #DDDDDD",
                         borderRadius: "50px",
                       }}
                     >
-                      SIGN UP
+                      Sign Up
                     </Button>
                   </div>
                 )}

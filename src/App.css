@@ -333,6 +333,16 @@ Nav.Link {
 .registryBtn {
   margin-left: 35px !important;
 }
+@media screen and (max-width: 425px) {
+  .registryBtn {
+    margin-top: 20px !important;
+    width: 100% !important;
+    margin-left: 0px !important;
+  }
+  .registryInput {
+    width: 100% !important;
+  }
+}
 
 .btn-primary {
   color: #fff;

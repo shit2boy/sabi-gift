@@ -217,7 +217,7 @@ class CashGift extends Component {
                       <InputGroup>
                         <InputGroup.Prepend>
                           <InputGroup.Text id="btnGroupAddon">
-                            #
+                            &#8358;
                           </InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl

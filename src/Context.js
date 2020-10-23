@@ -236,8 +236,10 @@ class ProductProvider extends Component {
         headers: { Authorization: "Token " + localStorage.getItem("token_id") },
       }
     );
-    this.setState({ notification: res.data.success });
-    console.log(res.data.success);
+    if (Array.isArray(res.data.success)) {
+      this.setState({ notification: res.data.success });
+      // console.log(res.data.success);
+    }
   }
 
   eventSelected = (reg) => {

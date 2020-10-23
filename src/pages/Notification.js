@@ -37,12 +37,12 @@ class Notification extends Component {
   }
   render() {
     const { notification, removeNotification } = this.context;
-    const unreadStyle = {
-      background: "#ddd",
-    };
-    const readStyle = {
-      background: "#ffffff",
-    };
+    // const unreadStyle = {
+    //   background: "#ddd",
+    // };
+    // const readStyle = {
+    //   background: "#ffffff",
+    // };
     return (
       <div>
         <DashboardNav />
@@ -52,50 +52,56 @@ class Notification extends Component {
             <SideBar />
           </div>
           {/* <div> */}
-          <table className=" table table-hover">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Gifter</th>
-                <th scope="col">Items</th>
-                <th scope="col">Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Remove</th>
-              </tr>
-            </thead>
-            <tbody>
-              {notification.map((message, index) => (
-                <tr
-                  className="pointer"
-                  style={
-                    message.read || notification.indexOf("k" + message.id) > -1
-                      ? readStyle
-                      : unreadStyle
-                  }
-                  key={index}
-                >
-                  <th scope="row">&#8680;</th>
-                  <td>{message.sender}</td>
-                  <td>{message.message}</td>
-                  <td>{message.date}</td>
-                  <td
-                    onClick={() => {
-                      this.markAsRead(message.id);
-                    }}
-                  >
-                    {message.read ? "Read" : "Mark as read"}
-                  </td>
-                  <td
-                    onClick={() => {
-                      removeNotification(message.id);
-                    }}
-                  >
-                    Delete
-                  </td>
+          {notification.length > 1 ? (
+            <table className=" table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Gifter</th>
+                  <th scope="col">Items</th>
+                  <th scope="col">Date</th>
+                  {/* <th scope="col">Status</th> */}
+                  <th scope="col">Remove</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {notification.map((message, index) => (
+                  <tr
+                    className="pointer"
+                    // style={
+                    //   message.read
+                    //     ? readStyle
+                    //     : unreadStyle
+                    // }
+                    key={index}
+                  >
+                    <th scope="row">&#8680;</th>
+                    <td>{message.sender}</td>
+                    <td>{message.message}</td>
+                    <td>{message.date}</td>
+                    {/* <td
+                      onClick={() => {
+                        this.markAsRead(message.id);
+                      }}
+                    >
+                      {message.read ? "Read" : "Mark as read"}
+                    </td> */}
+                    <td
+                      onClick={() => {
+                        removeNotification(message.id);
+                      }}
+                    >
+                      Delete
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div>
+              <p className="p-5">Event has no notification yet. </p>
+            </div>
+          )}
           {/* </div> */}
         </div>
       </div>

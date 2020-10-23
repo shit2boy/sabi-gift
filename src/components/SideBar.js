@@ -15,7 +15,7 @@ export class SideBar extends Component {
   static contextType = StateContext;
   render() {
     const { isChecklist, isManage, isOverview, isTracker } = this.props;
-    // const notify = this.context.notification;
+    const notify = this.context.notification;
     return (
       <div className="sidebarMenu">
         <div className="mt-3 text-center" style={{ position: "relative" }}>
@@ -26,12 +26,14 @@ export class SideBar extends Component {
             color="#5F619F"
           >
             <Link to="/notification">
-              <span
-                className=" badge badge-danger"
-                style={{ position: "absolute" }}
-              >
-                .{/* <img src={indicator} width="5px" alt="icon" /> */}
-              </span>
+              {notify.length > 1 && (
+                <span
+                  className=" badge badge-danger"
+                  style={{ position: "absolute" }}
+                >
+                  {notify.length}
+                </span>
+              )}
               <img src={notification} width="30px" alt="icon" />
             </Link>
           </Tooltip>

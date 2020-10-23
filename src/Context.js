@@ -44,6 +44,7 @@ class ProductProvider extends Component {
     answers: ["", "", ""],
     currentIndex: 0,
     userRegistries: [],
+    notification: [],
   };
 
   // updateContextState = (key, val) => {
@@ -228,6 +229,15 @@ class ProductProvider extends Component {
       .catch((err) => {
         console.log(err);
       });
+
+    const res = await axios.get(
+      `${util.API_BASE_URL}notifications/?event=${window.localStorage.eventIID}`,
+      {
+        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+      }
+    );
+    this.setState({ notification: res.data.success });
+    console.log(res.data.success);
   }
 
   eventSelected = (reg) => {
@@ -265,7 +275,7 @@ class ProductProvider extends Component {
         backgroundImage: poster,
         // isPosterImg: true,
       });
-      console.log(this.state.backgroundImage);
+      // console.log(this.state.backgroundImage);
     }
 
     // console.log(regEvent);
@@ -433,10 +443,42 @@ class ProductProvider extends Component {
       });
   };
 
-  getItemId = (id) => {
-    const product = this.state.products.find((item) => item.id === id);
-    return product;
+  removeNotification = (id) => {
+    axios
+      .delete(`${util.API_BASE_URL}notifications/?id=${id}`, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token_id"),
+        },
+      })
+
+      .then((response) => {
+        // console.log(response.data);
+        if (response.data !== undefined) {
+          let { notification } = this.state;
+          // console.log(id);
+
+          notification.splice(this.getIndexOfMessage(id), 1);
+          this.setState({ notification });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  getIndexOfMessage = (id) => {
+    for (let i = 0; i < this.state.notification.length; i++) {
+      if (this.state.notification[i].id === id) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+  // getItemId = (id) => {
+  //   const notification = this.state.notification.find((item) => item.id === id);
+  //   return notification;
+  // };
 
   render() {
     return (
@@ -452,6 +494,8 @@ class ProductProvider extends Component {
           resetSortToDefault: this.resetSortToDefault,
           sortByCategory: this.sortByCategory,
           // sortByCategry: this.sortByCategry,
+          removeNotification: this.removeNotification,
+          getIndexOfMessage: this.getIndexOfMessage,
           handleCashDonated: this.handleCashDonated,
           mapValueForLoggedUser: this.mapValueForLoggedUser,
         }}

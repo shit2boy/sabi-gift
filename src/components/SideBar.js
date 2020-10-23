@@ -3,41 +3,37 @@ import { Link } from "react-router-dom";
 // import image from "../images/Sabi-storepage/image.png";
 import home from "../images/sabi-icons/home.svg";
 import tracker from "../images/sabi-icons/track.png";
-// import file from "../images/sabi-icons/file.svg";
+// import indicator from "../images/sabi-icons/indicator.svg";
 import manage from "../images/sabi-icons/manag.png";
 import checklist from "../images/sabi-icons/check.png";
 import notification from "../images/sabi-icons/notification.svg";
 import { StateContext } from "../Context";
 
-// import { GrHome, GrFolder, GrBarChart } from "react-icons/gr";
-// import { BsFolder, BsAlarm, BsBell } from "react-icons/bs";
 import { Tooltip } from "antd";
 
 export class SideBar extends Component {
   static contextType = StateContext;
-  // state = {
-  //   active: false,
-  // };
-  // activeOnclick = () => {
-  //   const { active } = this.state;
-  //   this.setState({ active: !active });
-  //   console.log("see me");
-  // };
   render() {
     const { isChecklist, isManage, isOverview, isTracker } = this.props;
-    // const active = {
-    //   border: "2px solid grey",
-    // };
+    // const notify = this.context.notification;
     return (
       <div className="sidebarMenu">
-        <div className="mt-3 text-center">
+        <div className="mt-3 text-center" style={{ position: "relative" }}>
           <Tooltip
             className="mt-5 mb-2"
             placement="left"
             title="notification"
             color="#5F619F"
           >
-            <img src={notification} width="25px" alt="icon" />
+            <Link to="/notification">
+              <span
+                className=" badge badge-danger"
+                style={{ position: "absolute" }}
+              >
+                .{/* <img src={indicator} width="5px" alt="icon" /> */}
+              </span>
+              <img src={notification} width="30px" alt="icon" />
+            </Link>
           </Tooltip>
         </div>
         {/* <div className="text-center mb-4">

@@ -25,6 +25,7 @@ import CartItem from "./pages/CartItem";
 import EditRegistryUrl from "./pages/EditRegistryUrl";
 import CashGift from "./pages/CashGiftPage";
 import OtherEvent from "./pages/OtherEvent";
+import Notification from "./pages/Notification";
 import Spinner from "./components/spinner";
 import VerifyPartner from "./pages/verify_coSabiPartner";
 
@@ -67,6 +68,7 @@ function App() {
             <Route path="/editprofile" component={Setting} />
             <Route path="/sign in" component={Login} />
             <Route path="/notlisted-event" component={OtherEvent} />
+            <Route path="/notification" component={Notification} />
             <Route path="/editurl" component={EditRegistryUrl} />
             <Route path="/cash-funds" component={CashGift} />
             <Route path="/cart" component={CartItem} />

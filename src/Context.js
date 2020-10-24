@@ -162,6 +162,10 @@ class ProductProvider extends Component {
           for (let i = 0; i < data.length; i++) {
             window.localStorage.setItem("slug", data[data.length - 1].slug);
             window.localStorage.setItem("eventIID", data[data.length - 1].id);
+            window.localStorage.setItem(
+              "event_date",
+              data[data.length - 1].start_date
+            );
             this.setState({ userRegistry: data[data.length - 1].items });
             this.setState({ titles: data[data.length - 1].title });
             this.setState({ startDate: data[data.length - 1].start_date });
@@ -259,6 +263,7 @@ class ProductProvider extends Component {
     for (let i = 0; i < regEvent.length; i++) {
       window.localStorage.setItem("slug", regEvent[i].slug);
       window.localStorage.setItem("eventIID", regEvent[i].id);
+      window.localStorage.setItem("event_date", regEvent[i].start_date);
       this.setState({ userRegistry: regEvent[i].items });
       this.setState({ titles: regEvent[i].title });
       this.setState({ startDate: regEvent[i].start_date });
@@ -269,6 +274,13 @@ class ProductProvider extends Component {
         backgroundImage: regEvent[i].poster,
         // isPosterImg: true,
       });
+
+      let event_date = regEvent[i].start_date;
+      let dateDifference =
+        new Date(event_date).getTime() - new Date().getTime(); //Future date - current date
+      let dayLeftToEvent = Math.floor(dateDifference / (1000 * 60 * 60 * 24));
+      // console.log(daysTillEventday);
+      window.localStorage.setItem("dayLeftToEvent", dayLeftToEvent);
       // console.log(this.state.backgroundImage);
       if (this.state.backgroundImage !== null) {
         poster = this.state.backgroundImage.replace("image/upload/", "");

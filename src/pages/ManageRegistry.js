@@ -98,18 +98,17 @@ export class ManageRegistry extends Component {
           // window.localStorage.setItem("userId", res.data.id);
           window.localStorage.setItem("name", res.data.first_name);
           // window.localStorage.setItem("spouseName", res.data.spouse_name);
-          window.localStorage.setItem("event_date", res.data.event_date);
+          // window.localStorage.setItem("event_date", res.data.event_date);
           window.localStorage.setItem("username", res.data.username);
         }
         this.setState({ title: res.data.spouse_name });
         let event_date = window.localStorage.event_date;
         let dateDifference =
           new Date(event_date).getTime() - new Date().getTime(); //Future date - current date
-        let daysTillEventday = Math.floor(
-          dateDifference / (1000 * 60 * 60 * 24)
-        );
+        let dayLeftToEvent = Math.floor(dateDifference / (1000 * 60 * 60 * 24));
         // console.log(daysTillEventday);
-        this.setState({ dayLeftToEvent: daysTillEventday });
+        window.localStorage.setItem("dayLeftToEvent", dayLeftToEvent);
+        // this.setState({ dayLeftToEvent });
       })
       .catch((err) => {
         console.log(err);
@@ -354,7 +353,7 @@ export class ManageRegistry extends Component {
                   )} */}
                   <h5 className="py-4 text-white">
                     {window.localStorage.event_date} (
-                    {this.state.dayLeftToEvent} days Left)
+                    {window.localStorage.dayLeftToEvent} days Left)
                   </h5>
                 </div>
               </div>

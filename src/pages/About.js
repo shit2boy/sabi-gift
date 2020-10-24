@@ -288,7 +288,7 @@ export class About extends Component {
         event_owner: window.localStorage.userId,
         start_date: window.localStorage.evnt_date,
         start_time: "07:00:00",
-        event_type: window.localStorage.Type_Event,
+        event_type: window.localStorage.eventTypeId,
         spouse_name: window.localStorage.spouse_Nam,
         poster: "",
         title: `${window.localStorage.name}'s ${window.localStorage.title}`,
@@ -331,7 +331,7 @@ export class About extends Component {
             .then((res) => {
               if (res.status === 200) {
                 window.localStorage.removeItem("evnt_date");
-                window.localStorage.removeItem("Type_Event");
+                window.localStorage.removeItem("eventTypeId");
                 window.localStorage.removeItem("spouse_Nam");
                 window.localStorage.removeItem("evnt_date");
                 window.localStorage.removeItem("title");
@@ -767,7 +767,6 @@ export class About extends Component {
                     Back
                   </button>
                   <button
-                    to=""
                     onClick={this.createEvent}
                     className="btn btn-dark rounded-pill px-5"
                   >

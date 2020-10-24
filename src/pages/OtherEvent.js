@@ -143,7 +143,6 @@ export default class OtherEvent extends Component {
     }
     if (this.state.isLogged) {
       window.localStorage.setItem("title", this.state.answers[1]);
-      window.localStorage.setItem("Type_Event", 6);
     }
   };
 
@@ -222,7 +221,10 @@ export default class OtherEvent extends Component {
       newUserInfo.append("first_name", this.state.answers[0]);
       newUserInfo.append("email", formField["email"]);
       newUserInfo.append("password", formField["password"]);
-      newUserInfo.append("event_type", 6);
+      newUserInfo.append(
+        "event_type",
+        window.localStorage.getItem("eventTypeId")
+      );
       newUserInfo.append(
         "title",
         `${this.state.answers[0]}'s ${this.state.answers[1]}`

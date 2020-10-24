@@ -17,6 +17,8 @@ export class CreateRegistry extends Component {
     this.state = {
       eventType: "",
       eventTypeList: [],
+      selectedEvent: [],
+      selectedEventId: "",
       loading: false,
     };
   }
@@ -49,22 +51,13 @@ export class CreateRegistry extends Component {
     // console.log(this.state.eventType);
   };
 
+  handleEventType = (id, name) => {
+    this.setState({ eventType: name, selectedEventId: id });
+    window.localStorage.setItem("eventTypeId", id);
+    console.log(id);
+  };
+
   render() {
-    // style={
-    //   this.context.selected.indexOf(
-    //     "ddd" + category.id
-    //   ) > -1
-    //     ? containerStyle
-    //     : unmarkedStyle
-    // }
-    // const containerStyle = {
-    //   backgroundColor: "#ffffff",
-    //   cursor: "pointer",
-    // };
-    // const unmarkedStyle = {
-    //   backgroundColor: "#f7f7f7",
-    //   cursor: "pointer",
-    // };
     const { loading } = this.state;
 
     if (!loading) return <Spinner />;
@@ -108,18 +101,20 @@ export class CreateRegistry extends Component {
                       <div className="row col-lg-10 col-sm">
                         {this.state.eventTypeList.map((type) => (
                           <button
-                            onClick={this.handleEvent}
+                            onClick={() => {
+                              this.handleEventType(type.id, type.name);
+                            }}
                             key={type.id}
-                            id={type.name}
+                            // id={type.id}
                             className="eventItem"
                           >
                             <img
                               src={type.image}
                               width="40px"
                               alt={type.slug}
-                              id={type.name}
+                              id={type.id}
                             />
-                            <p id={type.name}>{type.name}</p>
+                            <p id={type.id}>{type.name}</p>
                           </button>
                         ))}
 

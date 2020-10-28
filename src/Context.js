@@ -217,14 +217,19 @@ class ProductProvider extends Component {
         console.log(err);
       });
     await axios
-      .get(`${util.API_BASE_URL}categories/`, {
-        headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-      })
+      .get(
+        `${util.API_BASE_URL}user-cats/?user=${window.localStorage.userId}`,
+        {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
+          },
+        }
+      )
 
       .then((response) => {
         // console.log(res.data);
         if (response.data !== undefined) {
-          let data = response.data.results;
+          let data = response.data.success;
 
           this.setState({ regCategory: data });
           //   console.log(this.state.itemCategory);
@@ -368,23 +373,57 @@ class ProductProvider extends Component {
     });
   };
 
-  handleSelectOpt = (e) => {
+  //  notify = (response) => toast.success(response, { autoClose: 2000 });
+
+  handleSelectOpt = (id) => {
     let selectedArrr = this.state.selected;
-    if (this.state.selected.indexOf(e.target.id) === -1) {
-      selectedArrr.push(e.target.id);
+    const selectedCategory = new FormData();
+    selectedCategory.append("cat_id", id);
+    selectedCategory.append("user_id", window.localStorage.userId);
+    if (this.state.selected.indexOf(id) === -1) {
+      selectedArrr.push(id);
+      axios
+        .post(`${util.API_BASE_URL}user-cat/create/`, selectedCategory, {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
+          },
+        })
+        .then((response) => {
+          if (response.data !== undefined) {
+            console.log(response.data);
+            this.notify(response.data.succes);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          // notify = (err) => toast.error(err, { autoClose: 2000 });
+        });
       this.setState({ selected: selectedArrr });
     } else {
-      selectedArrr.splice(this.state.selected.indexOf(e.target.id), 1);
+      selectedArrr.splice(this.state.selected.indexOf(id), 1);
+      axios
+        .post(`${util.API_BASE_URL}user-cat/delete/`, selectedCategory, {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
+          },
+        })
+        .then((response) => {
+          if (response.data !== undefined) {
+            console.log(response.data);
+            this.notify(response.data.succes);
+            console.log(id);
+            // notify = (response) => toast.success(response, { autoClose: 2000 });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          // notify = (err) => toast.error(err, { autoClose: 2000 });
+        });
       this.setState({ selected: selectedArrr });
     }
     // console.log(this.state.selected);
     this.setState({ clicked: true });
   };
-  // handleEventType = (e) => {
-  //   this.setState({ eventType: e.target.id });
-  //   // let type = this.state.eventType
-  //   console.log(this.state.eventType);
-  // };
 
   notify = (res) => toast.success(res, { autoClose: 2000 });
 

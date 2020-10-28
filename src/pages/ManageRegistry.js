@@ -213,6 +213,7 @@ export class ManageRegistry extends Component {
       userEvent_link,
       cashGift,
       titles,
+      regCategory,
       backgroundImage,
       isPosterImg,
       loading,
@@ -358,23 +359,36 @@ export class ManageRegistry extends Component {
                 </div>
               </div>
             </div>
-            <div className=" row col" style={{ marginTop: "25px" }}>
-              <h5>Your Registry Checklist</h5>
-            </div>
+            {regCategory.length > 0 && (
+              <div className=" row col" style={{ marginTop: "25px" }}>
+                <h5>Your Registry Checklist</h5>
+              </div>
+            )}
             <div className="mt-4 row">
               <div>
                 <CheckList className="col-sm-6" />
               </div>
             </div>
 
-            <h5 className="mt-5 mb-4">Add items to your registry</h5>
-            <Product
-              Products={userRegistry}
-              showWishList={false}
-              inRegistry={true}
-              cashItem={cashGift}
-              cashNeeded={cashNeeded}
-            />
+            {userRegistry.length > 0 ? (
+              <h5 className="mb-4" style={{ marginTop: "25px" }}>
+                Add items to your registry
+              </h5>
+            ) : (
+              <h5 className="mb-5" style={{ marginTop: "25px" }}>
+                No items in your registry Proceed to Checklist to add Items
+              </h5>
+            )}
+
+            {userRegistry.length > 0 && (
+              <Product
+                Products={userRegistry}
+                showWishList={false}
+                inRegistry={true}
+                cashItem={cashGift}
+                cashNeeded={cashNeeded}
+              />
+            )}
 
             <ToastContainer />
           </div>

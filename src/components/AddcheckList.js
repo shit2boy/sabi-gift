@@ -20,51 +20,56 @@ class CheckList extends Component {
 
   // componentDidMount() {
   //   axios
-  //     .get(`${util.API_BASE_URL}categories/`, {
-  //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-  //     })
+  //     .get(
+  //       `${util.API_BASE_URL}user-cats/?user=${window.localStorage.userId}`,
+  //       {
+  //         headers: {
+  //           Authorization: "Token " + localStorage.getItem("token_id"),
+  //         },
+  //       }
+  //     )
 
   //     .then((res) => {
-  //       // console.log(res.data);
-  //       if (res.data !== undefined) {
-  //         let data = res.data.results;
-  //         let categoryId;
-  //         for (let i = 0; i < data.length; i++) {
-  //           categoryId = data[i].id;
-  //           this.setState({ categoryId: categoryId });
+  // console.log(res.data);
+  // if (res.data !== undefined) {
+  // let data = res.data.success;
+  // let categoryId;
+  // for (let i = 0; i < data.length; i++) {
+  //   categoryId = data[i].id;
+  //   this.setState({ categoryId: categoryId });
+  // }
+  // console.log(this.state.categoryId);
+  // this.setState({ itemCategories: data });
+  // }
+  // })
+  // .catch((err) => {
+  // console.log(err);
+  // });
+  // axios
+  //   .get(`${util.API_BASE_URL}registries/`, {
+  //     headers: { Authorization: "Token " + localStorage.getItem("token_id") },
+  //   })
+
+  //   .then((res) => {
+  //     // console.log(res.data);
+  //     if (res.data !== undefined) {
+  //       let data = res.data;
+  //       let category = [];
+
+  //       for (let i = 0; i < data.length; i++) {
+  //         data[i].picture = data[i].picture.replace("image/upload/", "");
+  //         if (data[i].cat === "Cooking") {
+  //           category.push(data[i].picture);
   //         }
-  //         // console.log(this.state.categoryId);
-  //         this.setState({ itemCategories: data });
   //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //   axios
-  //     .get(`${util.API_BASE_URL}registries/`, {
-  //       headers: { Authorization: "Token " + localStorage.getItem("token_id") },
-  //     })
 
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       if (res.data !== undefined) {
-  //         let data = res.data;
-  //         let category = [];
-
-  //         for (let i = 0; i < data.length; i++) {
-  //           data[i].picture = data[i].picture.replace("image/upload/", "");
-  //           if (data[i].cat === "Cooking") {
-  //             category.push(data[i].picture);
-  //           }
-  //         }
-
-  //         this.setState({ registryItem: res.data });
-  //         // console.log(this.state.registryItem);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
+  //       this.setState({ registryItem: res.data });
+  //       // console.log(this.state.registryItem);
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
   // }
 
   render() {
@@ -75,7 +80,7 @@ class CheckList extends Component {
           {regCategory.map((item) => (
             <AddCategory
               key={item.id}
-              category={item.name}
+              category={item.cat}
               button={
                 <Card
                   id="myCards"
@@ -93,7 +98,7 @@ class CheckList extends Component {
                     </div>
                   </Card.Body>
                   <Card.Text className="text-center">
-                    <small className="">{item.name}</small>
+                    <small className="">{item.cat}</small>
                     <strong className="p-1 d-block">
                       {/* <AddCategory button="+" /> */}+
                     </strong>

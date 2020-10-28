@@ -695,21 +695,22 @@ export class About extends Component {
                     >
                       {this.state.registryCategories.map((category) => (
                         <div
-                          id={"ddd" + category.id}
+                          // id={"ddd" + category.id}
                           key={category.id}
                           style={
-                            this.context.selected.indexOf("ddd" + category.id) >
-                            -1
+                            this.context.selected.indexOf(category.id) > -1
                               ? containerStyle
                               : unmarkedStyle
                           }
                           className="eventItem col-lg-3"
-                          onClick={this.context.handleSelectOpt}
+                          onClick={() => {
+                            this.context.handleSelectOpt(category.id);
+                          }}
                         >
                           <p></p>
                           {/* <div className='text-center'><img src={category.image} alt='weddingIcon' /> </div> */}
                           <p
-                            id={"ddd" + category.id}
+                            id={category.id}
                             // onClick={this.context.handleSelectOpt}
                             className="text-center"
                           >

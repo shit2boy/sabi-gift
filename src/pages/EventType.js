@@ -119,7 +119,7 @@ class EventType extends Component {
   // };
 
   sortByCategory = (cat) => {
-    console.log("call me");
+    // console.log("call me");
     // let sortedProduct = [];
     const products = this.state.products.filter((data) => {
       if (cat == null) {

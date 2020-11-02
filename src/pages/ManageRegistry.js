@@ -11,6 +11,7 @@ import util from "../util/util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "../components/spinner";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { StateContext } from "../Context";
 
 // import { Button } from "antd";
@@ -33,7 +34,7 @@ export class ManageRegistry extends Component {
       fileSelected: false,
       uploading: false,
       progress: null,
-
+      copied: false,
       loading: false,
     };
   }
@@ -214,6 +215,7 @@ export class ManageRegistry extends Component {
       cashGift,
       titles,
       regCategory,
+      coUserEvent,
       backgroundImage,
       isPosterImg,
       loading,
@@ -275,45 +277,54 @@ export class ManageRegistry extends Component {
                 </span>
               </div>
             )}
-            {/* {userAllEvent.length > 0 && (
+            {coUserEvent.length > 0 && (
               <div className="row">
-                <span className="mx-auto">
-                  <small>select the event to view</small>
-                  {userAllEvent.map((event, index) => (
-                    <span
-                      className="d-block pointer"
+                <div className="mx-auto">
+                  <strong className="d-block p-3">
+                    Select and manage event for a friend
+                  </strong>
+                  {coUserEvent.map((event, index) => (
+                    <Button
+                      variant="outline-success"
+                      className=""
+                      size="sm"
                       onClick={() => {
-                        this.context.eventSelected(event);
+                        this.context.coManageEvent(event);
                       }}
                       id={event.id}
                       key={index}
                     >
-                      {event.title}
-                    </span>
+                      {event.event_owner}
+                    </Button>
                   ))}
-                </span>
+                </div>
               </div>
-            )} */}
-            <div className="row mt-5 ">
+            )}
+            <div className="row mt-5 border shadow-hover ">
               <div
-                className="col-12 text-center shadow"
+                className="col-lg-12 p-2 col-sm text-center "
                 style={{
                   height: "100px",
                   // border: "1px solid",
                   background: "#FFFFFF",
                 }}
               >
-                <h6 className="py-2">YOUR REGISTRY URL</h6>
-                <p>
-                  {/* https://sabigift.netlify.app/registry/
-                  {window.localStorage.slug}{" "} */}
-                  <span>{userEvent_link}</span>
-                  <Link to="/editurl">
-                    <BsPencil className="ml-2" color="black" size="25px" />
-                  </Link>
-                </p>
+                <h6 className="">YOUR REGISTRY URL</h6>
+                <CopyToClipboard
+                  text={userEvent_link}
+                  onCopy={() => this.setState({ copied: true })}
+                >
+                  <span className="border p-1 mr-1 pointer">
+                    {this.state.copied ? "Copied" : "Copy"}
+                  </span>
+                </CopyToClipboard>
+                <small> {userEvent_link}</small>
+                <Link to="/editurl">
+                  <BsPencil className="ml-2" color="black" size="20px" />
+                </Link>
               </div>
-
+            </div>
+            <div className="row mt-3">
               <div className=" text-center mt-4" style={manageReg}>
                 {this.state.uploading && (
                   <ProgressBar

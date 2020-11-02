@@ -5,6 +5,8 @@ import "antd/dist/antd.css";
 import { Radio } from "antd";
 // import Slider from "./Slider";
 import { StateContext } from "../Context";
+import util from "../util/util";
+import axios from "axios";
 
 export class AvailableItems extends Component {
   static contextType = StateContext;
@@ -19,6 +21,12 @@ export class AvailableItems extends Component {
     });
   };
 
+  async componentDidMount() {
+    const response = await axios.get(`${util.API_BASE_URL}categories/`);
+    console.log(response.data.results);
+    this.setState({ itemsCategory: response.data.results });
+  }
+
   render() {
     const radioStyle = {
       display: "block",
@@ -26,12 +34,12 @@ export class AvailableItems extends Component {
       lineHeight: "30px",
     };
     const { value } = this.state;
-    const {
-      regCategory,
-      // resetSortToDefault,
-      // sortByPrice,
-      // sortByCategory,
-    } = this.context;
+    // const {
+    // regCategory,
+    // resetSortToDefault,
+    // sortByPrice,
+    // sortByCategory,
+    // } = this.context;
 
     return (
       <>
@@ -80,7 +88,7 @@ export class AvailableItems extends Component {
           <p className="pt-4">Category</p>
           <div className="row col-10">
             <Radio.Group onChange={this.onChange} value={value}>
-              {regCategory.map((item) => (
+              {this.state.itemsCategory.map((item) => (
                 <Radio
                   onClick={() => {
                     this.props.sortByCat(item.name);

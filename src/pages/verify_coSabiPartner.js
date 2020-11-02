@@ -39,8 +39,8 @@ class VerifyPartner extends Component {
       )
       .then((response) => {
         if (response !== undefined) {
-          console.log(response.data.error);
-          console.log(response.data.not_authenticated);
+          // console.log(response.data.error);
+          // console.log(response.data.not_authenticated);
           if (response.data.success === "Invite accepted successfully.") {
             this.setState({ expiredLink: true });
             // this.setState({ notRegister: false });

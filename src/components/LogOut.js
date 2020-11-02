@@ -32,6 +32,7 @@ export class LogOut extends Component {
           window.localStorage.removeItem("slug");
           window.localStorage.removeItem("event_owner");
           window.localStorage.removeItem("isLoggedIn");
+          window.localStorage.removeItem("userActive");
           window.localStorage.removeItem("event_id");
           window.localStorage.removeItem("eventIID");
           window.location.href = "/";

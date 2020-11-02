@@ -45,11 +45,8 @@ class ProductProvider extends Component {
     currentIndex: 0,
     userRegistries: [],
     notification: [],
+    coUserEvent: [],
   };
-
-  // updateContextState = (key, val) => {
-  //   this.setState({ [key]: val });
-  // };
 
   mapValueForLoggedUser = (e) => {
     e.preventDefault();
@@ -80,48 +77,6 @@ class ProductProvider extends Component {
     // this.totalCashContributed();
     // console.log(cashDonated);
   };
-
-  // handleQuantityChange = (e) => {
-  //   let quantityObject = this.state.quantityObject;
-  //   quantityObject[e.target.name] = isNaN(e.target.value) ? 1 : e.target.value;
-  //   this.setState({ quantityObject: quantityObject });
-  //   this.amountToPyay();
-  //   // console.log(e.target.value);
-  // };
-
-  // totalCashContributed = () => {
-  //   let sum = 0;
-  //   let cashIdInCart = [];
-  //   let price;
-  //   // let cart = {};
-  //   for (let i = 0; i < this.state.inCart["cash"].length; i++) {
-  //     this.setState({ allcashGift: this.state.inCart["cash"].length });
-  //     let cart = this.state.inCart["cash"][i];
-
-  //     // this.setState({ cashIdInCart: cashIdInCart });
-  //     // console.log(this.state.productIdInCart);
-  //     // let quantity =
-  //     //   this.state.quantityObject["quantity" + cart.item["id"]] === undefined
-  //     //     ? 1
-  //     //     : parseInt(this.state.quantityObject["quantity" + cart.item["id"]]);
-  //     price = parseFloat(cart.amountToContribute);
-  //     sum = sum + price;
-  //     cart = {
-  //       custom_item: cart.id,
-  //       item: "",
-  //       quantity: "",
-  //       item_price: price,
-  //       evt: Number(window.localStorage.event_id),
-  //     };
-  //     cashIdInCart.push(cart);
-  //     this.setState({ cashIdInCart: cashIdInCart });
-  //     // console.log(this.state.cashIdInCart);
-  //     // console.log(cart);
-  //   }
-  //   this.setState({ cashSum: sum });
-  //   console.log(this.state.cashSum);
-  //   window.localStorage.setItem("cashSum", this.state.cashSum);
-  // };
 
   async componentDidMount() {
     await axios
@@ -188,9 +143,6 @@ class ProductProvider extends Component {
               this.setState({ cashNeeded: true });
             }
           }
-          // } else {
-          //   window.location.href = "/updateprofile";
-          // }
         }
       })
       .catch((err) => {
@@ -238,6 +190,31 @@ class ProductProvider extends Component {
       .catch((err) => {
         console.log(err);
       });
+    await axios
+      .get(
+        `${util.API_BASE_URL}events/?co_user=${window.localStorage.userId}`,
+        {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token_id"),
+          },
+        }
+      )
+
+      .then((response) => {
+        // console.log(res.data);
+        if (response.data !== undefined) {
+          let data = response.data;
+          for (let i = 0; i < data.length; i++) {
+            const element = data[i];
+
+            this.setState({ coUserEvent: element });
+          }
+          console.log(this.state.coUserEvent);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     const res = await axios.get(
       `${util.API_BASE_URL}notifications/?event=${window.localStorage.eventIID}`,
@@ -256,6 +233,55 @@ class ProductProvider extends Component {
     let regEvent = [];
     let poster;
     userAllEvent.map((event) => {
+      if (reg === event) {
+        // item.push(e.target.id);
+        regEvent.push(event);
+      }
+      return regEvent;
+    });
+    this.setState({ userRegistries: regEvent });
+    // data = this.state.userRegistries;
+    // data = regEvent;
+    for (let i = 0; i < regEvent.length; i++) {
+      window.localStorage.setItem("slug", regEvent[i].slug);
+      window.localStorage.setItem("eventIID", regEvent[i].id);
+      window.localStorage.setItem("event_date", regEvent[i].start_date);
+      this.setState({ userRegistry: regEvent[i].items });
+      this.setState({ titles: regEvent[i].title });
+      this.setState({ startDate: regEvent[i].start_date });
+      this.setState({ userEvent_link: regEvent[i].event_link });
+      this.setState({ cashGift: regEvent[i].cash_item });
+      this.setState({ loading: true });
+      this.setState({
+        backgroundImage: regEvent[i].poster,
+        // isPosterImg: true,
+      });
+
+      let event_date = regEvent[i].start_date;
+      let dateDifference =
+        new Date(event_date).getTime() - new Date().getTime(); //Future date - current date
+      let dayLeftToEvent = Math.floor(dateDifference / (1000 * 60 * 60 * 24));
+      // console.log(daysTillEventday);
+      window.localStorage.setItem("dayLeftToEvent", dayLeftToEvent);
+      // console.log(this.state.backgroundImage);
+      if (this.state.backgroundImage !== null) {
+        poster = this.state.backgroundImage.replace("image/upload/", "");
+      }
+      this.setState({
+        backgroundImage: poster,
+        // isPosterImg: true,
+      });
+      // console.log(this.state.backgroundImage);
+    }
+
+    // console.log(regEvent);
+    // console.log(this.state.userRegistry);
+  };
+  coManageEvent = (reg) => {
+    const { coUserEvent } = this.state;
+    let regEvent = [];
+    let poster;
+    coUserEvent.map((event) => {
       if (reg === event) {
         // item.push(e.target.id);
         regEvent.push(event);
@@ -542,6 +568,7 @@ class ProductProvider extends Component {
           // totalCashContributed: this.totalCashContributed,
           handleQuantityChange: this.handleQuantityChange,
           eventSelected: this.eventSelected,
+          coManageEvent: this.coManageEvent,
           addGiftToRegistryFromCategory: this.addGiftToRegistryFromCategory,
           sortByPrice: this.sortByPrice,
           resetSortToDefault: this.resetSortToDefault,

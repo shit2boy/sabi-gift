@@ -27,18 +27,6 @@ body {
   font-family: helveticaneue !important;
 }
 
-/* h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: trebuchet-ms, Tahoma, sans-serif !important;
-  color: #545871 !important;
-  font-weight: bolder;
-  opacity: 1 !important;
-} */
-
 [contenteditable]:focus {
   outline: 1px solid rgb(113, 126, 120);
 }

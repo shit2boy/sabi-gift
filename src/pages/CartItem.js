@@ -128,26 +128,43 @@ export default class CartItem extends Component {
     // console.log(e.target.value);
   };
 
-  removeFromCart = (value) => {
-    let products = this.state.itemsInCart;
+  getIndexofItem = (id) => {
     let InCart = JSON.parse(window.localStorage.getItem("InCart"));
+    for (let i = 0; i < InCart["product"].length; i++) {
+      if (InCart["product"][i].item["id"] === id) {
+        return i;
+      }
+    }
 
-    // products.indexOf(value);
-    products.splice(products.indexOf(value), 1);
-    InCart["product"].splice(InCart["product"].indexOf(value), 1);
-    this.setState({ itemsInCart: products });
-    this.amountToPyay();
-    /*jjjjjjjjjjjjjjjj*/
-    // InCart["product"].push(data);
-    window.localStorage.setItem("InCart", JSON.stringify(InCart));
+    return -1;
   };
 
-  deleteFromCashCart = (value) => {
+  removeFromCart = (value, id) => {
+    let products = this.state.itemsInCart;
+    let InCart = JSON.parse(window.localStorage.getItem("InCart"));
+    products.splice(products.indexOf(value), 1);
+    InCart["product"].splice(this.getIndexofItem(id), 1);
+    this.setState({ itemsInCart: products });
+    this.amountToPyay();
+    window.localStorage.setItem("InCart", JSON.stringify(InCart));
+  };
+  getIndexForCash = (id) => {
+    let InCart = JSON.parse(window.localStorage.getItem("InCart"));
+    for (let i = 0; i < InCart["cash"].length; i++) {
+      if (InCart["cash"][i].id === id) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+
+  deleteFromCashCart = (value, id) => {
     let products = this.state.cashInCart;
     let InCart = JSON.parse(window.localStorage.getItem("InCart"));
     // products.indexOf(value);
     products.splice(products.indexOf(value), 1);
-    InCart["cash"].splice(InCart["cash"].indexOf(value), 1);
+    InCart["cash"].splice(this.getIndexForCash(id), 1);
     this.setState({ cashInCart: products });
     this.amountToPyay();
     // this.context.totalCashContributed();
@@ -155,7 +172,6 @@ export default class CartItem extends Component {
   };
 
   async componentDidMount() {
-    // console.log(props.Products);
     let cartItems = JSON.parse(window.localStorage.getItem("InCart"));
     // console.log(cartItems);
     this.setState({
@@ -213,7 +229,8 @@ export default class CartItem extends Component {
                 className=" badge badge-danger"
                 style={{ color: "white", font: "16px", position: "absolute" }}
               >
-                {this.state.Itemsquantity + this.state.cashQty}
+                {/* {this.state.Itemsquantity + this.state.cashQty} */}
+                {this.state.itemsInCart.length + this.state.cashInCart.length}
               </span>
               <GrCart size="40px" />
             </Link>
@@ -221,7 +238,7 @@ export default class CartItem extends Component {
         </div>
         <hr />
         <div className="row mt-5 mb-3 justify-content-center">
-          <Table hover>
+          <Table hover responsive>
             <thead>
               <tr>
                 <th>#</th>
@@ -284,7 +301,7 @@ export default class CartItem extends Component {
                   <td
                     className="pointer"
                     onClick={() => {
-                      this.removeFromCart(inCart);
+                      this.removeFromCart(inCart, inCart.item["id"]);
                     }}
                   >
                     delete Item
@@ -330,7 +347,7 @@ export default class CartItem extends Component {
                   <td
                     className="pointer"
                     onClick={() => {
-                      this.deleteFromCashCart(inCart);
+                      this.deleteFromCashCart(inCart, inCart.id);
                     }}
                   >
                     delete Item

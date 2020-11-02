@@ -253,7 +253,7 @@ export default class CheckoutForm extends Component {
       <>
         <div className=" container-fluid mb-5">
           <div className="row">
-            <Link to="/cart" className="mt-3">
+            <Link to="/cart" className="p-2">
               <img src={sabigift} width="70px" alt="logo" />
             </Link>
           </div>
@@ -262,8 +262,11 @@ export default class CheckoutForm extends Component {
           </div>
           <div className="row justify-content-center">
             <div
-              className="col-7 mx-auto p-4"
-              style={{ border: "1px solid #707070", borderRadius: "30px" }}
+              className="col-lg-7 col-sm-9 mx-auto p-4"
+              style={{
+                border: "1px solid #707070",
+                borderRadius: "30px",
+              }}
             >
               <Form onSubmit={this.handleSubmit}>
                 <Form.Row>
@@ -382,57 +385,61 @@ export default class CheckoutForm extends Component {
                 </Form.Group>
               </Form>
             </div>
-            <div
-              className="col-sm-3 mx-auto"
-              style={{
-                border: "2px solid #e6e6e6",
-                background: "#f2f2f2",
-                height: "300px",
-                opacity: "1",
-              }}
-            >
-              <Table className="p-2 center ">
-                <tbody className="p-3 mt-3">
-                  <tr>
-                    <td>Sub-total</td>
-                    <td>&#8358;{window.localStorage.totalSum}</td>
-                  </tr>
-                  <tr>
-                    <td>Shipping</td>
-                    <td>&#8358;0</td>
-                  </tr>
-                  <tr>
-                    <td>Total</td>
-                    <td>&#8358;{window.localStorage.totalSum}</td>
-                  </tr>
-                </tbody>
-              </Table>
-              <div className="text-center">
-                {!this.state.loading && (
-                  <span
-                    onClick={this.handleSubmit}
-                    type="button"
-                    className="p-3 orderBtn"
-                  >
-                    Place Order
-                  </span>
-                )}
-                {this.state.loading && (
-                  <span
-                    type="button"
-                    style={{ fontSize: "0.875rem" }}
-                    className="p-3 orderBtn"
-                  >
-                    <Spinner
-                      as="span"
-                      animation="grow"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                    Loading...
-                  </span>
-                )}
+            <div className="col-sm-3 mx-auto text-center">
+              <div
+                className="mt-3"
+                style={{
+                  border: "1px solid #e6e6e6",
+                  background: "#f2f2f2",
+                  height: "300px",
+                  opacity: "1",
+                }}
+              >
+                <Table className="p-2 center ">
+                  <tbody className="p-3 mt-3">
+                    <tr>
+                      <td>Sub-total</td>
+                      <td>&#8358;{window.localStorage.totalSum}</td>
+                    </tr>
+                    <tr>
+                      <td>Shipping</td>
+                      <td>&#8358;0</td>
+                    </tr>
+                    <tr>
+                      <td>Total</td>
+                      <td>&#8358;{window.localStorage.totalSum}</td>
+                    </tr>
+                  </tbody>
+                </Table>
+                <div>
+                  <div className="text-center">
+                    {!this.state.loading && (
+                      <span
+                        onClick={this.handleSubmit}
+                        type="button"
+                        className="p-3 orderBtn"
+                      >
+                        Place Order
+                      </span>
+                    )}
+                    {this.state.loading && (
+                      <span
+                        type="button"
+                        style={{ fontSize: "0.875rem" }}
+                        className="p-3 orderBtn"
+                      >
+                        <Spinner
+                          as="span"
+                          animation="grow"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                        Loading...
+                      </span>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

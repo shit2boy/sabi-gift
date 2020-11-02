@@ -209,7 +209,7 @@ class ProductProvider extends Component {
 
             this.setState({ coUserEvent: element });
           }
-          console.log(this.state.coUserEvent);
+          // console.log(this.state.coUserEvent);
         }
       })
       .catch((err) => {
@@ -273,10 +273,8 @@ class ProductProvider extends Component {
       });
       // console.log(this.state.backgroundImage);
     }
-
-    // console.log(regEvent);
-    // console.log(this.state.userRegistry);
   };
+
   coManageEvent = (reg) => {
     const { coUserEvent } = this.state;
     let regEvent = [];

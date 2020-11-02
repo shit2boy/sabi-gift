@@ -6,7 +6,7 @@ import axios from "axios";
 import util from "../util/util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Input } from "antd";
+import { Input, Tooltip } from "antd";
 import { BsFillGridFill, BsListUl } from "react-icons/bs";
 import { Card, Form, Table, ListGroup, Button } from "react-bootstrap";
 import CashGift from "../pages/CashGiftPage";
@@ -217,23 +217,27 @@ export class RegistryChecklist extends Component {
 
             <ListGroup className="list-group-flush ">
               <Form.Row>
-                <Form.Control
-                  type="number"
-                  className="col-4 p-2"
-                  id={data.id}
-                  name="quantity"
-                  min="1"
-                  onChange={this.handleQuantity}
-                />
+                <Tooltip placement="top" title="Qty" color="#5F619F">
+                  <Form.Control
+                    type="number"
+                    className="col-4 p-2"
+                    id={data.id}
+                    name="quantity"
+                    min="1"
+                    onChange={this.handleQuantity}
+                  />
+                </Tooltip>
 
-                <Form.Control
+                <span
                   onClick={() => this.addGiftToRegistry(data.id)}
                   // id={data.id}
                   type="button"
-                  className="col-8 text-center"
+                  className="col-8 p-1 text-center"
                   style={{ background: "#6F64F8", color: "#FFFFFF" }}
-                  value="Add to Registry"
-                />
+                  // value="Add to Registry"
+                >
+                  Add to Registry
+                </span>
               </Form.Row>
             </ListGroup>
           </Card>
@@ -253,7 +257,7 @@ export class RegistryChecklist extends Component {
           <div className="col ml-5">
             <h1> Registry Checklist</h1>
             <p>This is where you manage your registry items.</p>
-            <div className="row mt-5">
+            <div className="row mt-lg-5 mt-sm-2">
               <div className=" col-3 d-none d-md-block d-lg-block availableItem">
                 <AvailableItems
                   sort={sortByPrice}
@@ -266,7 +270,7 @@ export class RegistryChecklist extends Component {
                   Products={this.state.allRegistryItem}
                   showWishList={false}
                 /> */}
-                <div className="mt-2">
+                <div className=" container-fluid">
                   <CashGift
                     button={
                       <Button className="btn-outline-success" variant="default">
@@ -323,7 +327,7 @@ export class RegistryChecklist extends Component {
 
                   {this.state.listDisplay && (
                     <div className="row">
-                      <Table hover>
+                      <Table hover responsive>
                         <thead>
                           <tr>
                             <th></th>
@@ -334,7 +338,7 @@ export class RegistryChecklist extends Component {
                             <th></th>
                           </tr>
                         </thead>
-                        {this.state.allRegistryItem
+                        {this.context.storeproduct
                           .filter((data) => {
                             if (this.state.search == null) {
                               return data;
@@ -369,27 +373,35 @@ export class RegistryChecklist extends Component {
 
                                   <td>
                                     <Form.Row>
-                                      <Form.Control
-                                        type="number"
-                                        className="col-3 p-2"
-                                        id={data.id}
-                                        name="quantity"
-                                        min="1"
-                                        onChange={this.handleQuantity}
-                                      />
-                                      <Form.Control
+                                      <Tooltip
+                                        placement="top"
+                                        title="Qty"
+                                        color="#5F619F"
+                                      >
+                                        <Form.Control
+                                          type="number"
+                                          className="col-3 p-2"
+                                          id={data.id}
+                                          name="quantity"
+                                          min="1"
+                                          onChange={this.handleQuantity}
+                                        />
+                                      </Tooltip>
+                                      <span
                                         onClick={() =>
                                           this.addGiftToRegistry(data.id)
                                         }
                                         // id={data.id}
                                         type="button"
-                                        className="col-7 p-2 mr-0 text-center"
+                                        className="col-7 ml-3 p-2 mr-0 text-center"
                                         style={{
                                           background: "#6F64F8",
                                           color: "#FFFFFF",
                                         }}
                                         value="Add to Registry"
-                                      />
+                                      >
+                                        Add to Registry
+                                      </span>
                                     </Form.Row>
                                   </td>
                                 </tr>

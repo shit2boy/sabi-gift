@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import sabigift from "../images/landing/sabigift.png";
-import account from "../images/landing/userAvatar.png";
+import account from "../images/landing/avaataar.jpg";
 // import image from "../images/Sabi-storepage/image.png";
 import settingIcon from "../images/Sabi-storepage/settingIcon.svg";
 import previewIcon from "../images/Sabi-storepage/previewIcon.svg";

@@ -108,12 +108,6 @@ export default class OtherEvent extends Component {
       fieldIsValid = false;
       errors["firstName"] = "*This field is required.";
     }
-    // if (typeof this.state.formValue !== "undefined") {
-    //   if (!this.state.formValue.match(/^[a-zA-Z ]*$/)) {
-    //     fieldIsValid = false;
-    //     errors["firstName"] = "*Please enter alphabet characters only.";
-    //   }
-    // }
 
     this.setState({ errors: errors });
     console.log(fieldIsValid);
@@ -147,11 +141,6 @@ export default class OtherEvent extends Component {
   };
 
   goBack = () => {
-    // // console.log(this.state);
-    // console.log("current index " + this.state.currentIndex);
-    // console.log(
-    //   "current index " + this.state.answers[this.state.currentIndex - 1]
-    // );
     let formValue = this.state.answers[this.state.currentIndex - 1];
     if (this.state.currentIndex <= 0) {
       return;
@@ -192,16 +181,6 @@ export default class OtherEvent extends Component {
       errors["checked"] = "*Check the box.";
     }
 
-    // if (typeof formField["password"] !== "undefined") {
-    //   if (
-    //     !formField["password"].match(
-    //       /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/
-    //     )
-    //   ) {
-    //     formIsValid = false;
-    //     errors["password"] = "*Please enter secure and strong password.";
-    //   }
-    // }
     if (formField["password"] !== formField["confirm_password"]) {
       formIsValid = false;
       errors["confirm_password"] = "*Password mismatch.";

@@ -145,66 +145,7 @@ export class ManageRegistry extends Component {
       .catch((err) => {
         console.log(err);
       });
-
-    // await axios
-    //   .get(`${util.API_BASE_URL}events/?user=${window.localStorage.userId}`, {
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then((res) => {
-    //     // console.log(res.data);
-
-    //     if (res.data !== undefined && res.data.length > 0) {
-    //       let data = res.data;
-    //       for (let i = 0; i < data.length; i++) {
-    //         // console.log(data[data.length - 1].slug);
-    //         window.localStorage.setItem("slug", data[data.length - 1].slug);
-    //         window.localStorage.setItem("eventIID", data[data.length - 1].id);
-    //         this.setState({ registryItem: data[data.length - 1].items });
-    //         this.setState({ cashGift: data[data.length - 1].cash_item });
-    //         this.setState({ loading: true });
-
-    //         // console.log(this.state.registryItem);
-    //         // console.log(this.state.cashGift);
-    //         data[i].poster = data[data.length - 1].poster.replace(
-    //           "image/upload/",
-    //           ""
-    //         );
-    //         // console.log(data[i].poster);
-    //         this.setState({
-    //           backgroundImage: data[i].poster,
-    //           isPosterImg: true,
-    //         });
-    //         if (this.state.cashGift.length > 0) {
-    //           this.setState({ cashNeeded: true });
-    //         }
-    //       }
-    //     } else {
-    //       window.location.href = "/updateprofile";
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     // console.log(err);
-    //     this.setState({ emptyRegistry: true });
-    //   });
   };
-
-  // addToReg = (e) => {
-  //   let item = [];
-  //   if (this.state.Registry.indexOf(e.target.id) === -1) {
-  //     item.push(e.target.id);
-  //     this.setState({ Registry: item, itemChecked: true });
-  //     for (let i = 0; i < item.length; i++) {
-  //       item[i] = item[i].replace("ddd", "");
-  //     }
-  //   }
-  //   let items = item.map(Number);
-  //   let addeditem = {
-  //     gifts: items,
-  //   }
-  // }
 
   render() {
     const {

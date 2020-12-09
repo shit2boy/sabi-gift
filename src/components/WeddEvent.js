@@ -108,12 +108,6 @@ export default class getstarted extends Component {
       fieldIsValid = false;
       errors["firstName"] = "*This field is required.";
     }
-    // if (typeof this.state.formValue !== "undefined") {
-    //   if (!this.state.formValue.match(/^[a-zA-Z ]*$/)) {
-    //     fieldIsValid = false;
-    //     errors["firstName"] = "*Please enter alphabet characters only.";
-    //   }
-    // }
 
     this.setState({ errors: errors });
     // console.log(fieldIsValid);
